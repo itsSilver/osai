@@ -14,7 +14,7 @@
     <p class="side-menu-title">CONTENT</p>
     <ul class="list-unstyled components">
       <li class="active">
-        <nuxt-link tag="a" to="/" class="text-white"
+        <nuxt-link tag="a" to="/signals" class="text-white"
           ><i class="fa-regular fa-gem mr-3"></i> Segnalazioni</nuxt-link
         >
       </li>
