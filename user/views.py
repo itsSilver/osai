@@ -51,7 +51,6 @@ def login_user(request):
         data = {}
         reqBody = json.loads(request.body)
         email1 = reqBody['email']
-        print(email1)
         password = reqBody['password']
         try:
 
@@ -60,13 +59,11 @@ def login_user(request):
             raise ValidationError({"400": f'{str(e)}'})
 
         token = Token.objects.get_or_create(user=Account)[0].key
-        print(token)
         if not check_password(password, Account.password):
             raise ValidationError({"message": "Incorrect Login credentials"})
 
         if Account:
             if Account.is_active:
-                print(request.user)
                 login(request, Account)
                 data["message"] = "user logged in"
                 data["email"] = Account.email
