@@ -11,3 +11,4 @@ sqlparse==0.4.2
 tzdata==2022.1
 django-rest-swagger
 pyyaml
+django-cors-headers
