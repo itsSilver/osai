@@ -17,15 +17,16 @@
                     <h4 class="mt-1 mb-5 pb-1">We are The Team</h4>
                   </div>
 
-                  <form>
+                  <b-form @submit.prevent="submitForm">
                     <p>Please login to your account</p>
 
                     <div class="form-outline mb-4">
-                      <input
+                      <b-form-input
                         type="email"
                         id="form2Example11"
                         class="form-control"
                         placeholder="Phone number or email address"
+                        v-model="form.email"
                       />
                       <label class="form-label" for="form2Example11"
                         >Username</label
@@ -33,10 +34,12 @@
                     </div>
 
                     <div class="form-outline mb-4">
-                      <input
+                      <b-form-input
                         type="password"
                         id="form2Example22"
                         class="form-control"
+                        placeholder="Password"
+                        v-model="form.password"
                       />
                       <label class="form-label" for="form2Example22"
                         >Password</label
@@ -52,13 +55,13 @@
                           mb-3
                           login-button
                         "
-                        type="button"
+                        type="submit"
                       >
                         Log in
                       </button>
                       <a class="text-muted" href="#!">Forgot password?</a>
                     </div>
-                  </form>
+                  </b-form>
                 </div>
               </div>
               <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
@@ -79,6 +82,55 @@
     </div>
   </section>
 </template>
+<script>
+export default {
+  middleware: 'auth',
+  auth: 'guest',
+  layout: 'login',
+  name: 'login',
+  data() {
+    return {
+      form: {
+        email: null,
+        password: null,
+      },
+      errors: {
+        email: false,
+        password: false,
+      },
+      token: null,
+    }
+  },
+  methods: {
+    async submitForm() {
+      await this.$axios
+        .post('/user/login', this.form)
+        .then((response) => {
+          this.token = response.data.token
+          this.$auth.strategy.token.set(this.token)
+          this.redirectPage()
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    redirectPage() {
+      this.$router.go(this.$router.currentRoute)
+    },
+    // await this.$axios
+    //     .post('/login', this.form)
+    //     .then((response) => {
+    //       this.token = response.data.token
+    //       this.$auth.strategy.token.set(this.token)
+    //       this.showModalCompany = true
+    //     })
+    //     .catch((err) => {
+    //       this.show = false
+    //       this.error_server = err.response.data.error
+    //     })
+  },
+}
+</script>
 <style scoped>
 .login-button {
   width: 100%;

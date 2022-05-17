@@ -38,10 +38,76 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:8000',
+  },
+  // Authentication logic here
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       token: {
+  //         property: 'token',
+  //         required: true,
+  //         type: 'Token',
+  //       },
+  //       user: {
+  //         property: '',
+  //         autoFetch: true,
+  //       },
+  //       endpoints: {
+  //         login: {
+  //           url: 'auth/local',
+  //           method: 'post',
+  //           propertyName: 'token',
+  //         },
+  //         logout: { url: '/logout', method: 'post' },
+  //         user: {
+  //           url: 'user/detail',
+  //           method: 'get',
+  //         },
+  //       },
+  //       redirect: {
+  //         login: '/login',
+  //         logout: '/',
+  //         callback: '/login',
+  //         home: '/',
+  //       },
+  //       watchLoggedIn: true,
+  //     },
+  //   },
+  // },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          type: 'Token',
+        },
+        user: {
+          property: '',
+          autoFetch: true,
+        },
+        endpoints: {
+          login: {
+            url: 'auth/local',
+            method: 'post',
+            propertyName: 'token',
+          },
+          user: {
+            url: 'user/detail',
+            method: 'get',
+          },
+          logout: false,
+        },
+      },
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

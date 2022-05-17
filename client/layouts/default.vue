@@ -10,8 +10,13 @@
 <script>
 import Nav from '~/components/Nav'
 export default {
+  middleware: 'auth',
   components: {
     Nav,
   },
+  // user: {
+  //   email: 'admin@gmail.com',
+  //   password: 'admin123456',
+  // },
 }
 </script>
