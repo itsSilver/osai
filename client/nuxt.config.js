@@ -46,7 +46,6 @@ export default {
     baseURL: 'http://localhost:8000',
   },
   // Authentication logic here
-
   auth: {
     strategies: {
       local: {
@@ -60,16 +59,23 @@ export default {
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/login', method: 'post' },
+          login: {
+            url: 'auth/local',
+            method: 'post',
+            propertyName: 'token',
+          },
           logout: { url: '/logout', method: 'post' },
-          user: { url: '/user', method: 'get' },
+          user: {
+            url: 'user/detail',
+            method: 'get',
+          },
         },
-        redirect: {
-          login: '/login',
-          logout: '/',
-          callback: '/login',
-          home: '/',
-        },
+        // redirect: {
+        //   login: '/login',
+        //   logout: '/',
+        //   callback: '/login',
+        //   home: '/',
+        // },
         watchLoggedIn: true,
       },
     },

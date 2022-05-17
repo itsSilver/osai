@@ -38,6 +38,7 @@
                         type="password"
                         id="form2Example22"
                         class="form-control"
+                        placeholder="Password"
                         v-model="form.password"
                       />
                       <label class="form-label" for="form2Example22"
@@ -103,30 +104,26 @@ export default {
   methods: {
     async submitForm() {
       await this.$axios
-        .post('/user/login', this.form, {
-          headers: {
-            //login
-          },
-        })
-        .then((res) => {
-          console.log(res)
+        .post('/user/login', this.form)
+        .then((response) => {
+          this.token = response.data.token
+          this.$auth.strategy.token.set(this.token)
         })
         .catch((err) => {
           console.log(err.response)
         })
     },
-    // async submitForm() {
-    //   await this.$axios
-    //     .post('/api/login', this.form)
+    // await this.$axios
+    //     .post('/login', this.form)
     //     .then((response) => {
-    //       // this.token = response.data.token
-    //       // this.$auth.strategy.token.set(this.token)
-    //       console.log(response)
+    //       this.token = response.data.token
+    //       this.$auth.strategy.token.set(this.token)
+    //       this.showModalCompany = true
     //     })
     //     .catch((err) => {
-    //       // console.log('Error post')
+    //       this.show = false
+    //       this.error_server = err.response.data.error
     //     })
-    // },
   },
 }
 </script>
