@@ -108,10 +108,14 @@ export default {
         .then((response) => {
           this.token = response.data.token
           this.$auth.strategy.token.set(this.token)
+          this.redirectPage()
         })
         .catch((err) => {
           console.log(err.response)
         })
+    },
+    redirectPage() {
+      this.$router.go(this.$router.currentRoute)
     },
     // await this.$axios
     //     .post('/login', this.form)
