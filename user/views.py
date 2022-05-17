@@ -92,5 +92,5 @@ def User_logout(request):
 def user_detail(request):
     user = User.objects.get(pk=request.user.pk)
     if request.method == 'GET':
-        tutorial_serializer = UserSerializer(user)
-        return JsonResponse(tutorial_serializer.data)
+        user_serializer = UserSerializer(user)
+        return JsonResponse(user_serializer.data)
