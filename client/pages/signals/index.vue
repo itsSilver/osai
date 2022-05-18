@@ -30,7 +30,6 @@
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
                   Segnalazioni
                 </li>
-                <b-button @click="test()">click me </b-button>
               </ul>
             </div>
             <ul
