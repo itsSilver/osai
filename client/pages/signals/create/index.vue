@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New Segnalazioni
+                  New reports
                 </li>
               </ul>
             </div>
@@ -43,8 +43,7 @@
           <form class="create-solution-form">
             <div class="form-group row">
               <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Titolo Segnalazione</label
-              >
+                >REPORTS</label>              >
               <div class="col-sm-10">
                 <input
                   type="text"

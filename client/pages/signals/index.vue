@@ -28,9 +28,8 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
-                  Segnalazioni
+                  REPORTS
                 </li>
-                <b-button @click="test()">click me </b-button>
               </ul>
             </div>
             <ul
@@ -43,8 +42,9 @@
                 @click="redirectCreate()"
               >
                 <i class="fas fa-plus pr-2"></i>
-                New Segnalazioni
-              </li>
+                New Reports
+              </li> 
+                <b-button @click="test()"><b>DELETE</b></b-button>
             </ul>
             <!-- End here -->
           </div>
