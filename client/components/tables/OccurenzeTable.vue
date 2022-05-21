@@ -7,15 +7,15 @@
         <b-th>
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
-        <b-th>Id occorrenza </b-th>
-        <b-th>Id segnalazione </b-th>
+        <b-th>Id occurrence </b-th>
+        <b-th>Id signal </b-th>
         <b-th>Id soluzione </b-th>
-        <b-th>Titolo </b-th>
-        <b-th>Commessa macchina </b-th>
-        <b-th>Versione sw 1 </b-th>
-        <b-th>Versione sw 2 </b-th>
-        <b-th>Data occorrenza </b-th>
-        <b-th>Stato occorrenza </b-th>
+        <b-th>Title </b-th>
+        <b-th>Machine order </b-th>
+        <b-th>Version sw 1 </b-th>
+        <b-th>Version sw 2 </b-th>
+        <b-th>Occurrence date </b-th>
+        <b-th>Occurrence status </b-th>
         <b-th>Creation date </b-th>
         <b-th>Update date </b-th>
       </b-thead>
@@ -64,11 +64,11 @@
             /></b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id occorrenza</b-td>
+            <b-td class="td-respo-title">Id occurrence</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id segnalazione</b-td>
+            <b-td class="td-respo-title">Id signal</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -76,7 +76,7 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Titolo</b-td>
+            <b-td class="td-respo-title">Title</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -84,23 +84,23 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Commessa macchina</b-td>
+            <b-td class="td-respo-title">Machine order</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Versione sw 1</b-td>
+            <b-td class="td-respo-title">Version sw 1</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Versione sw 2</b-td>
+            <b-td class="td-respo-title">Version sw 2</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Data occorrenza</b-td>
+            <b-td class="td-respo-title">Occurrence date</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Stato occorrenza</b-td>
+            <b-td class="td-respo-title">Occurrence status</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -120,11 +120,11 @@
             /></b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id occorrenza</b-td>
+            <b-td class="td-respo-title">Id occurrence</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id segnalazione</b-td>
+            <b-td class="td-respo-title">Id signal</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -132,7 +132,7 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Titolo</b-td>
+            <b-td class="td-respo-title">Title</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -140,23 +140,23 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Commessa macchina</b-td>
+            <b-td class="td-respo-title">Machine order</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Versione sw 1</b-td>
+            <b-td class="td-respo-title">Version sw 1</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Versione sw 2</b-td>
+            <b-td class="td-respo-title">Version sw 2</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Data occorrenza</b-td>
+            <b-td class="td-respo-title">Occurrence date</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Stato occorrenza</b-td>
+            <b-td class="td-respo-title">Occurrence status</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">

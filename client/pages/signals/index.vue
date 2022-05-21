@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
-                  Segnalazioni
+                  Signals
                 </li>
               </ul>
             </div>
@@ -42,7 +42,7 @@
                 @click="redirectCreate()"
               >
                 <i class="fas fa-plus pr-2"></i>
-                New Segnalazioni
+                New Signal
               </li>
             </ul>
             <!-- End here -->
@@ -124,6 +124,9 @@ export default {
   methods: {
     redirectCreate() {
       this.$router.push(`/signals/create`)
+    },
+    test() {
+      this.$router.push('/solutions')
     },
   },
 }

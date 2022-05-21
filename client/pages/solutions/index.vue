@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
-                  Soluzioni
+                  Solutions
                 </li>
               </ul>
             </div>
@@ -42,7 +42,7 @@
                 @click="redirectCreate()"
               >
                 <i class="fas fa-plus pr-2"></i>
-                New Soluzioni
+                New Solution
               </li>
             </ul>
             <!-- End here -->

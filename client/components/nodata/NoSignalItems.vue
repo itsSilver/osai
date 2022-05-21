@@ -6,7 +6,7 @@
       <p>Try changing the filters or add a new one</p>
       <b-button class="mx-2 button-format" @click="redirectCreate()">
         <i class="fas fa-plus pr-2"></i>
-        New Segnalazioni
+        New Signal
       </b-button>
     </div>
   </div>

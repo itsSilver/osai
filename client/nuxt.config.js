@@ -46,31 +46,65 @@ export default {
     baseURL: 'http://localhost:8000',
   },
   // Authentication logic here
-
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       token: {
+  //         property: 'token',
+  //         required: true,
+  //         type: 'Token',
+  //       },
+  //       user: {
+  //         property: '',
+  //         autoFetch: true,
+  //       },
+  //       endpoints: {
+  //         login: {
+  //           url: 'auth/local',
+  //           method: 'post',
+  //           propertyName: 'token',
+  //         },
+  //         logout: { url: '/logout', method: 'post' },
+  //         user: {
+  //           url: 'user/detail',
+  //           method: 'get',
+  //         },
+  //       },
+  //       redirect: {
+  //         login: '/login',
+  //         logout: '/',
+  //         callback: '/login',
+  //         home: '/',
+  //       },
+  //       watchLoggedIn: true,
+  //     },
+  //   },
+  // },
   auth: {
     strategies: {
       local: {
         token: {
           property: 'token',
-          required: true,
-          type: 'Bearer',
+          global: true,
+          // required: true,
+          type: 'Token',
         },
         user: {
           property: '',
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/login', method: 'post' },
-          logout: { url: '/logout', method: 'post' },
-          user: { url: '/user', method: 'get' },
+          login: {
+            url: 'auth/local',
+            method: 'post',
+            propertyName: 'token',
+          },
+          user: {
+            url: 'user/detail',
+            method: 'get',
+          },
+          logout: false,
         },
-        redirect: {
-          login: '/login',
-          logout: '/',
-          callback: '/login',
-          home: '/',
-        },
-        watchLoggedIn: true,
       },
     },
   },
