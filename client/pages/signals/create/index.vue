@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New reports
+                  New Signal
                 </li>
               </ul>
             </div>
@@ -43,13 +43,14 @@
           <form class="create-solution-form">
             <div class="form-group row">
               <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >REPORTS</label>              >
+                >Title Signal</label
+              >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="tittle"
-                  placeholder="Titolo Segnalazione"
+                  placeholder="Title Signal"
                 />
               </div>
             </div>
@@ -86,7 +87,7 @@
             </div>
             <div class="form-group row">
               <label for="immag1" class="col-sm-2 col-form-label create-label"
-                >Immagine 1</label
+                >Image 1</label
               >
               <div class="col-sm-10">
                 <input
@@ -98,7 +99,7 @@
             </div>
             <div class="form-group row">
               <label for="immag2" class="col-sm-2 col-form-label create-label"
-                >Immagine 2</label
+                >Image 2</label
               >
               <div class="col-sm-10">
                 <input
@@ -110,7 +111,7 @@
             </div>
             <div class="form-group row">
               <label for="immag3" class="col-sm-2 col-form-label create-label"
-                >Immagine 3</label
+                >Image 3</label
               >
               <div class="col-sm-10">
                 <input
@@ -122,27 +123,27 @@
             </div>
             <div class="form-group row">
               <label for="sector" class="col-sm-2 col-form-label create-label"
-                >Settore riferimento</label
+                >Reference sector</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="sector"
-                  placeholder="Settore riferimento"
+                  placeholder="Reference sector"
                 />
               </div>
             </div>
             <div class="form-group row">
               <label for="solution" class="col-sm-2 col-form-label create-label"
-                >Id stato soluzione</label
+                >Id status solution</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="solution"
-                  placeholder="Id stato soluzione"
+                  placeholder="Id status solution"
                 />
               </div>
             </div>
@@ -165,8 +166,8 @@
             <div class="form-group row">
               <div class="col-sm-10">
                 <b-button class="mx-2 button-format">
-                  <i class="fas fa-plus pr-2"></i>
-                  Crea Segnalazioni
+                  <i class="fas fa-download pr-2"></i>
+                  Save
                 </b-button>
               </div>
             </div>

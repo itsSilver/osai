@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New Occorrenze
+                  New Occurrence
                 </li>
               </ul>
             </div>
@@ -45,14 +45,14 @@
               <label
                 for="id-occorrenza"
                 class="col-sm-2 col-form-label create-label"
-                >Id occorrenza</label
+                >Id occurrence</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="id-occorrenza"
-                  placeholder="Id occorrenza"
+                  placeholder="Id occurrence"
                 />
               </div>
             </div>
@@ -60,14 +60,14 @@
               <label
                 for="id-segnalazione"
                 class="col-sm-2 col-form-label create-label"
-                >Id segnalazione</label
+                >Id signal</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="id-segnalazione"
-                  placeholder="Id segnalazione"
+                  placeholder="Id signal"
                 />
               </div>
             </div>
@@ -75,27 +75,27 @@
               <label
                 for="id-soluzione"
                 class="col-sm-2 col-form-label create-label"
-                >Id soluzione</label
+                >Id solution</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="id-soluzione"
-                  placeholder="Id soluzione"
+                  placeholder="Id solution"
                 />
               </div>
             </div>
             <div class="form-group row">
               <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Titolo</label
+                >Title</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="tittle"
-                  placeholder="Titolo"
+                  placeholder="Title"
                 />
               </div>
             </div>
@@ -103,7 +103,7 @@
               <label
                 for="textarea-small"
                 class="col-sm-2 col-form-label create-label"
-                >Descrizione</label
+                >Description</label
               >
               <div class="col-sm-10">
                 <b-form-textarea
@@ -117,14 +117,14 @@
             </div>
             <div class="form-group row">
               <label for="machine" class="col-sm-2 col-form-label create-label"
-                >Commessa macchina</label
+                >Machine order</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="machine"
-                  placeholder="Commessa macchina"
+                  placeholder="Machine order"
                 />
               </div>
             </div>
@@ -132,14 +132,14 @@
               <label
                 for="version-1"
                 class="col-sm-2 col-form-label create-label"
-                >Versione sw 1</label
+                >Version sw 1</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="version-1"
-                  placeholder="Versione sw 1"
+                  placeholder="Version sw 1"
                 />
               </div>
             </div>
@@ -147,14 +147,14 @@
               <label
                 for="version-2"
                 class="col-sm-2 col-form-label create-label"
-                >Versione sw 2</label
+                >Version sw 2</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="version-2"
-                  placeholder="Versione sw 2"
+                  placeholder="Version sw 2"
                 />
               </div>
             </div>
@@ -162,14 +162,14 @@
               <label
                 for="data-occorrenza"
                 class="col-sm-2 col-form-label create-label"
-                >Data occorrenza</label
+                >Occurrence date</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="data-occorrenza"
-                  placeholder="Data occorrenza"
+                  placeholder="Occurrence date"
                 />
               </div>
             </div>
@@ -177,14 +177,14 @@
               <label
                 for="status-occorrenza"
                 class="col-sm-2 col-form-label create-label"
-                >Stato occorrenza</label
+                >Occurrence status</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="status-occorrenza"
-                  placeholder="Stato occorrenza"
+                  placeholder="Occurrence status"
                 />
               </div>
             </div>

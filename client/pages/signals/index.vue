@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
-                  REPORTS
+                  Signals
                 </li>
               </ul>
             </div>
@@ -42,9 +42,8 @@
                 @click="redirectCreate()"
               >
                 <i class="fas fa-plus pr-2"></i>
-                New Reports
-              </li> 
-                <b-button @click="test()"><b>DELETE</b></b-button>
+                New Signal
+              </li>
             </ul>
             <!-- End here -->
           </div>
