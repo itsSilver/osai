@@ -19,7 +19,7 @@ from rest_framework.schemas import get_schema_view
 
 
 urlpatterns = [
-    path('api', get_schema_view(
+    path('api-schema', get_schema_view(
         title="OSAI API",
         description="API for all things …"
     ), name='api-schema'),

@@ -28,7 +28,7 @@ urlpatterns = [
     path("stati_soluzioni/create", create_stati_soluzione),
     path("stati_soluzioni/update/<int:id>", update_stati_soluzione),
     path("stati_soluzioni/<int:id>/delete", remove_stati_soluzione),
-
+    
     path("stati_segnalazione/create", create_stati_segnalazione),
     path("stati_segnalazione/update/<int:id>", update_stati_segnalazione),
     path("stati_segnalazione/<int:id>/delete", remove_stati_segnalazione),
