@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.utils.translation import gettext as _
 
 from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Soluzione, Stati_Segnalazione
 
@@ -97,10 +96,6 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
-    # segnalazione = serializers.PrimaryKeyRelatedField(
-    #     source='Segnalazioni', read_only=True)
-    # soluzione = serializers.CharField(
-    #     source='Soluzioni', read_only=True)
     titolo = serializers.CharField(max_length=255)
     descrizione = serializers.CharField()
     commessa_macchina = serializers.CharField(max_length=255)

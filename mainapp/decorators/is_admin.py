@@ -1,5 +1,5 @@
 from functools import wraps
-from django.http import HttpResponseRedirect
+
 from django.http import JsonResponse
 
 
@@ -14,5 +14,3 @@ def is_admin(function):
             return JsonResponse({'message': 'You must be admin to proceed'})
 
     return wrap
-
-

@@ -1,27 +1,15 @@
-from email import message
-import re
-from django.shortcuts import get_object_or_404, render
-from rest_framework.renderers import JSONRenderer
 # Create your views here.
-from rest_framework.permissions import AllowAny
-from rest_framework.views import APIView
-from rest_framework.generics import RetrieveAPIView
-from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import check_password
-from rest_framework.authentication import TokenAuthentication
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
-from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-import json
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+# Create your views here.
+from rest_framework.response import Response
+
 from mainapp.decorators.is_admin import is_admin
 from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Segnalazione, Stati_Soluzione
-
-from mainapp.serializers import OccorrenzeDisplaySerializer, SegnalazioniDisplaySerializer,  \
-    SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer,  \
+from mainapp.serializers import OccorrenzeDisplaySerializer, SegnalazioniDisplaySerializer, \
+    SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer, \
     StatiSegnalazioneSerializer, StatiSoluzioneSerializer
 
 
@@ -143,7 +131,7 @@ def remove_segnalazioni(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to remove Segnalazioni"})
 
     segnalazioni = get_object_or_404(Segnalazioni, pk=id)
-    if(segnalazioni.user_id == request.user.id):
+    if (segnalazioni.user_id == request.user.id):
         segnalazioni.delete()
         return JsonResponse({"status": 200, "message": "Segnalazioni Removed successfully"})
     return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
@@ -165,7 +153,7 @@ def update_segnalazioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to update Segnalazioni"})
     seg = Segnalazioni.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
+    if (seg.user_id == request.user.id):
         data = SegnalazioniDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -260,7 +248,7 @@ def remove_soluzioni(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to remove Soluzioni"})
 
     soluzioni = get_object_or_404(Soluzioni, pk=id)
-    if(soluzioni.user_id == request.user.id):
+    if (soluzioni.user_id == request.user.id):
         soluzioni.delete()
         return JsonResponse({"status": 200, "message": "Soluzioni Removed successfully"})
     return JsonResponse({"status": 404, "message": "Soluzioni not found"})
@@ -302,7 +290,7 @@ def update_soluzioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
     seg = Soluzioni.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
+    if (seg.user_id == request.user.id):
         data = SoluzioniDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -330,6 +318,7 @@ def retrive_all_soluzioni(request):
     queryset = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
+
 
 # Soluzioni Endpoints
 
@@ -405,7 +394,7 @@ def remove_occorrenze(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to Remove Occurrenze"})
 
     occorrenze = get_object_or_404(Occorrenze, pk=id)
-    if(occorrenze.user_id == request.user.id):
+    if (occorrenze.user_id == request.user.id):
         occorrenze.delete()
         return JsonResponse({"status": 200, "message": "Occorrenze Removed successfully"})
     return JsonResponse({"status": 404, "message": "Occorrenze not found"})
@@ -449,7 +438,7 @@ def update_occurrenze(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Occurrenze"})
 
     seg = Occorrenze.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
+    if (seg.user_id == request.user.id):
         data = OccorrenzeDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -510,7 +499,7 @@ def create_stati_soluzione(request):
 @permission_classes([IsAuthenticated])
 def update_stati_soluzione(request, id):
     seg = Stati_Soluzione.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
+    if (seg.user_id == request.user.id):
         data = StatiSoluzioneSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -525,7 +514,7 @@ def update_stati_soluzione(request, id):
 @permission_classes([IsAuthenticated])
 def remove_stati_soluzione(request, id):
     stati = get_object_or_404(Stati_Soluzione, pk=id)
-    if(stati.user_id == request.user.id):
+    if (stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Soluzione Removed successfully"})
     return JsonResponse({"status": 404, "message": "Stati_Soluzione not found"})
@@ -552,7 +541,7 @@ def create_stati_segnalazione(request):
 @permission_classes([IsAuthenticated])
 def update_stati_segnalazione(request, id):
     seg = Stati_Segnalazione.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
+    if (seg.user_id == request.user.id):
         data = StatiSegnalazioneSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -576,7 +565,7 @@ def retrieve_all_stati_segnalazione(request):
 @permission_classes([IsAuthenticated])
 def remove_stati_segnalazione(request, id):
     stati = get_object_or_404(Stati_Segnalazione, pk=id)
-    if(stati.user_id == request.user.id):
+    if (stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Segnalazione Removed successfully"})
     return JsonResponse({"status": 404, "message": "Stati_Segnalazione not found"})
