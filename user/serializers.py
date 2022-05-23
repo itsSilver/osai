@@ -48,9 +48,9 @@ class PermissionsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    permissions = PermissionsSerializer(many=True, source='user_permissions')
+    permissions = PermissionsSerializer(many=True)
 
     class Meta:
         model = User
         fields = ('id', 'name', 'email', 'created_at',
-                  'updated_at', 'is_admin', 'is_active', 'is_superuser', 'user_permissions', "permissions")
+                  'updated_at', 'is_admin', 'is_active', 'is_superuser', "permissions")
