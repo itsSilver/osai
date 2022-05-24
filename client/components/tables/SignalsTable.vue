@@ -9,7 +9,7 @@
         </b-th>
         <b-th><i class="fa-solid fa-arrow-down-short-wide"></i>Id Signal</b-th>
 
-        <b-th>Rank</b-th>
+        <b-th>Ticket</b-th>
         <b-th>Reference sector</b-th>
         <b-th>Id status solution</b-th>
         <b-th>Creation date</b-th>
@@ -40,7 +40,7 @@
           ><i class="fa-solid fa-arrow-down-short-wide"></i>Id Signal</b-th
         >
 
-        <b-th>Rank</b-th>
+        <b-th>Ticket</b-th>
         <b-th>Reference sector</b-th>
         <b-th>Id status solution</b-th>
         <b-th>Creation date</b-th>
@@ -59,7 +59,7 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Rank</b-td>
+            <b-td class="td-respo-title">Ticket</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -91,7 +91,7 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Rank</b-td>
+            <b-td class="td-respo-title">Ticket</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
@@ -123,7 +123,7 @@
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">
-            <b-td class="td-respo-title">Rank</b-td>
+            <b-td class="td-respo-title">Ticket</b-td>
             <b-td class="td-respo-data">test</b-td>
           </div>
           <div class="respo-after-tr">

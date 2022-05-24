@@ -50,20 +50,24 @@
                   type="text"
                   class="form-control input-create"
                   id="tittle"
+                  v-model="form.titolo"
                   placeholder="Title Signal"
                 />
+                <div class="error-show" v-if="showTitleSignalError">
+                  Please enter the Title Signal!
+                </div>
               </div>
             </div>
             <div class="form-group row">
-              <label for="rank" class="col-sm-2 col-form-label create-label"
-                >Rank</label
+              <label for="ticket" class="col-sm-2 col-form-label create-label"
+                >Ticket</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
-                  id="rank"
-                  placeholder="Rank"
+                  id="ticket"
+                  placeholder="Ticket"
                 />
               </div>
             </div>
@@ -81,7 +85,7 @@
                   :tagName="tagName"
                   :disabled="disabled"
                   @input="(event) => $emit('input', event)"
-                  v-model="description"
+                  v-model="form.descrizione"
                 />
               </div>
             </div>
@@ -131,35 +135,6 @@
                   class="form-control input-create"
                   id="sector"
                   placeholder="Reference sector"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="solution" class="col-sm-2 col-form-label create-label"
-                >Id status solution</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="solution"
-                  placeholder="Id status solution"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="note" class="col-sm-2 col-form-label create-label"
-                >Note</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="note"
                 />
               </div>
             </div>
@@ -223,6 +198,15 @@ export default {
       editor: ClassicEditor,
       description: '',
       note: '',
+      form: {
+        titolo: null,
+        descrizione: '',
+        id_allarme: null,
+        descrizione_allarme: null,
+        famiglia_macchina: null,
+        sottofamiglia_macchina: null,
+        id_stato_segnalazione: null,
+      },
     }
   },
 }

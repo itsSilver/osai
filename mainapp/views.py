@@ -58,9 +58,8 @@ def create_segnalazioni(request):
                 famiglia_macchina=serializer.data["famiglia_macchina"],
                 sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"],
                 id_stato_segnalazione=stati,
-                user_id=request.user.id,
-
-            )
+                rif_ticket=serializer.data["rif_ticket"],
+                user_id=request.user.id            )
 
             segnalazioni.save()
 
@@ -362,6 +361,8 @@ def create_occorrenze(request):
                 data_occorrenza=serializer.data["data_occorrenza"],
                 stato_occorrenza=serializer.data["stato_occorrenza"],
                 note=serializer.data["note"],
+                rif_ticket=serializer.data["rif_ticket"],
+
                 user_id=request.user.id
             )
             occorrenze.segnalazione_id = request.data["segnalazione"]

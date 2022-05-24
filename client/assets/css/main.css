@@ -11076,7 +11076,17 @@ textarea {
 .ck-content {
   min-height: 200px !important;
 }
+.ck-file-dialog-button {
+  display: none !important;
+}
 /* End here */
+.error-show {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #e3342f;
+  float: left !important;
+}
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;

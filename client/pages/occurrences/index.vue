@@ -44,6 +44,22 @@
                 <i class="fas fa-plus pr-2"></i>
                 New Occurrence
               </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="updateDocument()"
+              >
+                <i class="fas fa-edit pr-2"></i>
+                Update Occurrence
+              </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="deleteDocument()"
+              >
+                <i class="fas fa-trash pr-2"></i>
+                Delete Occurrence
+              </li>
             </ul>
             <!-- End here -->
           </div>
@@ -124,6 +140,12 @@ export default {
   methods: {
     redirectCreate() {
       this.$router.push(`/occurrences/create`)
+    },
+    updateDocument() {
+      console.log('Update button works!')
+    },
+    deleteDocument() {
+      console.log('Delete button works!')
     },
   },
 }
