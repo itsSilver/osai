@@ -24,7 +24,7 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
         model = Segnalazioni
 
         fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione")
+                  "famiglia_macchina", "sottofamiglia_macchina", "rif_ticket","id_stato_segnalazione")
 
 
 class SegnalazioniSerializer(serializers.ModelSerializer):
@@ -35,6 +35,7 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
     descrizione_allarme = serializers.CharField()
     famiglia_macchina = serializers.CharField(max_length=255)
     sottofamiglia_macchina = serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField(max_length=255)
     id_stato_segnalazione = serializers.CharField(
         allow_blank=True, required=False)
 
@@ -42,7 +43,7 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
         model = Segnalazioni
 
         fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione")
+                  "famiglia_macchina", "sottofamiglia_macchina","rif_ticket", "id_stato_segnalazione")
 
     def create(self, validated_data):
         """
@@ -92,7 +93,7 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
         model = Occorrenze
 
         fields = ("segnalazione", "soluzione", "titolo", "descrizione", "commessa_macchina",
-                  "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "stato_occorrenza")
+                  "versione_sw_1", "versione_sw_2", "data_occorrenza","rif_ticket", "note", "stato_occorrenza")
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
@@ -104,12 +105,13 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
     data_occorrenza = serializers.CharField(max_length=255)
     stato_occorrenza = serializers.IntegerField()
     note = serializers.CharField()
+    rif_ticket = serializers.CharField(max_length=255)
 
     class Meta:
         model = Occorrenze
 
         fields = ("segnalazione", "soluzione", "titolo", "descrizione", "commessa_macchina",
-                  "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "stato_occorrenza")
+                  "versione_sw_1", "versione_sw_2", "data_occorrenza","rif_ticket",  "note", "stato_occorrenza")
 
     def create(self, validated_data):
         """
