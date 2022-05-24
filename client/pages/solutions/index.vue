@@ -12,6 +12,7 @@
               align-items-center
               mb-2
               navtop
+              respo-nav-top
             "
           >
             <!-- First Nav -->
@@ -43,6 +44,22 @@
               >
                 <i class="fas fa-plus pr-2"></i>
                 New Solution
+              </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="updateDocument()"
+              >
+                <i class="fas fa-edit pr-2"></i>
+                Update Solution
+              </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="deleteDocument()"
+              >
+                <i class="fas fa-trash pr-2"></i>
+                Delete Solution
               </li>
             </ul>
             <!-- End here -->

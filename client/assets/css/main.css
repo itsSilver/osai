@@ -10798,6 +10798,12 @@ h5,
     margin-right: -59px !important;
     top: 10px !important;
   }
+  .respo-nav-top {
+    display: unset !important;
+  }
+  .respo-nav-top > ul > li{
+    font-size: 12px !important;
+  }
 }
 #sidebar .custom-menu {
   display: inline-block;

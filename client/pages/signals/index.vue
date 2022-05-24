@@ -12,6 +12,7 @@
               align-items-center
               mb-2
               navtop
+              respo-nav-top
             "
           >
             <!-- First Nav -->
@@ -24,7 +25,7 @@
                   m-0
                   p-0
                 "
-                style="list-style: none"
+                style="list-style: none; padding-bottom: 10px"
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-bars pr-2 fas-main-color"></i>
@@ -43,6 +44,22 @@
               >
                 <i class="fas fa-plus pr-2"></i>
                 New Signal
+              </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="updateDocument()"
+              >
+                <i class="fas fa-edit pr-2"></i>
+                Update Signal
+              </li>
+              <li
+                role="button"
+                class="mx-2 button-format"
+                @click="deleteDocument()"
+              >
+                <i class="fas fa-trash pr-2"></i>
+                Delete Signal
               </li>
             </ul>
             <!-- End here -->
