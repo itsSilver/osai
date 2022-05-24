@@ -162,6 +162,43 @@ export default {
     redirectCreate() {
       this.$router.push(`/signals/create`)
     },
+    updateDocument() {
+      // this.$router.push(`/signals/update/2`)
+      console.log('Val here to be deleted!', this.selectedId)
+      if (this.selectedId.length === 0) {
+        this.$bvModal.msgBoxOk(
+          `Please select one of the Signals for updating!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+      if (this.selectedId.length > 1) {
+        this.$bvModal.msgBoxOk(
+          `Please select only one of the Signals for updating!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+      this.$router.push(`/signals/update/${this.selectedId[0]}`)
+    },
     deleteDocument() {
       console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
