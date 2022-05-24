@@ -17,9 +17,16 @@
       <b-tbody v-if="dataTable">
         <b-tr v-for="data in dataTable" :key="data.id">
           <b-td>
-            <input type="checkbox" class="checkthis" />
+            <input
+              type="checkbox"
+              class="checkthis"
+              v-model="selectedId"
+              :id="data.id"
+              :value="data.id"
+              @change="changeValue"
+            />
           </b-td>
-          <b-td>{{ data.id_stato_segnalazione }}</b-td>
+          <b-td>{{ data.id }}</b-td>
           <b-td>{{ data.rif_ticket }}</b-td>
           <b-td></b-td>
           <b-td>{{ data.created_at }}</b-td>
@@ -49,12 +56,18 @@
           <div class="respo-after-tr">
             <b-td class="td-respo-title"></b-td>
             <b-td class="td-respo-data">
-              <input type="checkbox" class="checkthis" id="checkall"
+              <input
+                type="checkbox"
+                class="checkthis"
+                v-model="selectedId"
+                :id="data.id"
+                :value="data.id"
+                @change="changeValue"
             /></b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Id Signal</b-td>
-            <b-td class="td-respo-data">{{ data.id_stato_segnalazione }}</b-td>
+            <b-td class="td-respo-data">{{ data.id }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Ticket</b-td>
@@ -96,7 +109,13 @@ export default {
     return {
       showNoItem: true,
       show: false,
+      selectedId: [],
     }
+  },
+  methods: {
+    changeValue() {
+      this.$emit('get-new-delete-id', this.selectedId)
+    },
   },
   props: ['dataTable'],
 }

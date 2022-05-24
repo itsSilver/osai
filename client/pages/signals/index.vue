@@ -111,11 +111,22 @@
           </div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <SignalsTable :dataTable="dataTable" />
+              <SignalsTable
+                :dataTable="dataTable"
+                @get-new-delete-id="idToDelete"
+              />
             </b-overlay>
           </div>
         </div>
       </div>
+      <b-toast id="deleted" :variant="variant" solid>
+        <template #toast-title>
+          <div class="d-flex flex-grow-1 align-items-baseline">
+            <strong class="mr-auto">Notification!</strong>
+          </div>
+        </template>
+        {{ dataCreated }}
+      </b-toast>
     </client-only>
   </div>
 </template>
@@ -131,6 +142,9 @@ export default {
   data() {
     return {
       selected: null,
+      selectedId: [],
+      dataCreated: '',
+      variant: '',
       show: false,
       options: [
         { value: null, text: '10' },
@@ -142,8 +156,94 @@ export default {
     }
   },
   methods: {
+    idToDelete(val) {
+      this.selectedId = val
+    },
     redirectCreate() {
       this.$router.push(`/signals/create`)
+    },
+    deleteDocument() {
+      console.log('Val here to be deleted!', this.selectedId)
+      if (this.selectedId.length === 0) {
+        this.$bvModal.msgBoxOk(
+          `Please select one of the Signals for deleting!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+      if (this.selectedId.length > 1) {
+        this.$bvModal.msgBoxOk(
+          `Please select only one of the Signals for deleting!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+
+      this.$bvModal
+        .msgBoxConfirm('Are you sure you want to delete this Signal?', {
+          title: `Attention`,
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          okTitle: `Yes`,
+          cancelTitle: `No`,
+          footerClass: 'p-2',
+          hideHeaderClose: true,
+          centered: true,
+        })
+        .then((value) => {
+          if (value === true) {
+            this.show = true
+            this.$axios
+              .post(`/api/segnalazioni/${this.selectedId[0]}/delete`, {
+                headers: {
+                  Authorization: `Token ${this.$auth.strategy.token.get()}`,
+                  'Content-Type': 'application/json',
+                },
+              })
+              .then(() => {
+                this.variant = 'danger'
+                this.dataCreated = 'Signal deleted Succesfully'
+                this.toggleToaster()
+                this.$nuxt.refresh()
+                this.show = false
+              })
+              .catch((error) => {
+                this.show = false
+                this.variant = 'danger'
+                this.toggleToaster()
+              })
+          } else {
+            // Empty do nothing
+          }
+        })
+        .catch((err) => {
+          // An error occurred
+        })
+    },
+    toggleToaster() {
+      this.$bvToast.show('deleted')
+      setTimeout(() => {
+        this.$bvToast.hide('deleted')
+      }, 4000)
     },
   },
   async asyncData({ store, $axios }) {

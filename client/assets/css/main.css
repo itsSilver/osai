@@ -10801,7 +10801,7 @@ h5,
   .respo-nav-top {
     display: unset !important;
   }
-  .respo-nav-top > ul > li{
+  .respo-nav-top > ul > li {
     font-size: 12px !important;
   }
 }
@@ -10814,6 +10814,14 @@ h5,
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+}
+.btn-danger:hover {
+  background-color: #4373fb !important;
+  border-color: #4373fb;
+}
+.btn-danger {
+  background-color: #4373fb !important;
+  border-color: #4373fb;
 }
 @media (prefers-reduced-motion: reduce) {
   #sidebar .custom-menu {
@@ -11093,7 +11101,7 @@ textarea {
   color: #e3342f;
   float: left !important;
 }
-#created {
+#created, #deleted {
   display: block !important;
 }
 @media only screen and (max-width: 991.98px) {
