@@ -295,6 +295,25 @@ def retrive_user_soluzioni(request):
         user_soluzioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def retrive_user_soluzioni_by_id(request,id):
+    """
+    It takes the user id from the request, then it filters the Soluzioni model by the user id, then it
+    serializes the data and returns it as a JsonResponse
+
+    :param request: The request object
+    :return: A list of dictionaries.
+    """
+    check_permission = __check_if_has_permission(request, "view_soluzioni")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to View Soluzioni"})
+
+    user_id = request.user.id
+    user_soluzioni = Soluzioni.objects.filter(user=user_id,id=id)
+    serializer_class = SoluzioniDisplaySerializer(
+        user_soluzioni, many=True).data
+    return JsonResponse(serializer_class, safe=False)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -443,6 +462,25 @@ def retrive_user_occurrenze(request):
         user_occurrenze, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def retrive_user_occurrenze_by_id(request,id):
+    """
+    It takes the user id from the request, then it filters the Occorrenze model by the user id, then it
+    serializes the data and returns it as a JsonResponse
+
+    :param request: The request object
+    :return: A list of dictionaries.
+    """
+    check_permission = __check_if_has_permission(request, "view_occorrenze")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to View Occurrenze"})
+
+    user_id = request.user.id
+    user_occurrenze = Occorrenze.objects.filter(user=user_id,id=id)
+    serializer_class = OccorrenzeDisplaySerializer(
+        user_occurrenze, many=True).data
+    return JsonResponse(serializer_class, safe=False)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
