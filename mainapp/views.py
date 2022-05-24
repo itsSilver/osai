@@ -95,6 +95,27 @@ def retrive_user_segnalazioni(request):
         user_segnalazioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def retrive_user_segnalazioni_by_id(request,id):
+    """
+    It takes the user id from the request, then it filters the Segnalazioni model by the user id, then
+    it serializes the data and returns it as a JsonResponse.
+
+    :param request: The request object
+    :return: A list of dictionaries.
+    """
+    check_permission = __check_if_has_permission(request, "view_segnalazioni")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to view Segnalazioni"})
+
+    user_id = request.user.id
+    user_segnalazioni = Segnalazioni.objects.filter(
+        user=user_id,id=id).prefetch_related('id_stato_segnalazione')
+    serializer_class = SegnalazioniDisplaySerializer(
+        user_segnalazioni, many=True).data
+    return JsonResponse(serializer_class, safe=False)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
