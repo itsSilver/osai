@@ -290,7 +290,6 @@ export default {
         note: '',
         descrizione_allarme: '',
         id_allarme: null,
-        descrizione_allarme: null,
         famiglia_macchina: null,
         sottofamiglia_macchina: null,
         rif_ticket: null,
@@ -313,6 +312,21 @@ export default {
   methods: {
     onSubmit() {
       this.show = true
+      if (
+        this.form.titolo === null &&
+        this.form.descrizione === '' &&
+        this.form.descrizione_allarme === '' &&
+        this.form.id_allarme === null &&
+        this.form.famiglia_macchina === null &&
+        this.form.sottofamiglia_macchina === null &&
+        this.form.rif_ticket === null
+      ) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.toggleToaster()
+        return
+      }
       this.$axios
         .post(`/api/segnalazioni/create`, this.form, {
           headers: {
@@ -329,13 +343,15 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          console.log(error)
+          this.variant = 'danger'
+          this.toggleToaster()
         })
     },
     toggleToaster() {
       this.$bvToast.show('created')
       setTimeout(() => {
         this.$bvToast.hide('created')
+        this.variant = 'info'
       }, 4000)
     },
   },
