@@ -2,6 +2,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 from rest_framework.response import Response
@@ -59,7 +60,7 @@ def create_segnalazioni(request):
                 sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"],
                 id_stato_segnalazione=stati,
                 rif_ticket=serializer.data["rif_ticket"],
-                user_id=request.user.id            )
+                user_id=request.user.id)
 
             segnalazioni.save()
 
