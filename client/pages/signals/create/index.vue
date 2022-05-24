@@ -40,117 +40,201 @@
           </div>
           <div class="vertical-line"></div>
           <!-- Form start here -->
-          <form class="create-solution-form">
-            <div class="form-group row">
-              <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Title Signal</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="tittle"
-                  v-model="form.titolo"
-                  placeholder="Title Signal"
-                />
-                <div class="error-show" v-if="showTitleSignalError">
-                  Please enter the Title Signal!
+          <b-overlay :show="show" rounded="sm">
+            <b-form @submit.prevent="onSubmit" class="create-solution-form">
+              <div class="form-group row">
+                <label for="tittle" class="col-sm-2 col-form-label create-label"
+                  >Title Signal</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="tittle"
+                    v-model="form.titolo"
+                    placeholder="Title Signal"
+                  />
+                  <div class="error-show" v-if="showTitleSignalError">
+                    Please enter the Title Signal!
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="ticket" class="col-sm-2 col-form-label create-label"
-                >Ticket</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="ticket"
-                  placeholder="Ticket"
-                />
+              <div class="form-group row">
+                <label for="ticket" class="col-sm-2 col-form-label create-label"
+                  >Ticket</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="ticket"
+                    v-model="form.rif_ticket"
+                    placeholder="Ticket"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="description"
-                class="col-sm-2 col-form-label create-label"
-                >Description</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="form.descrizione"
-                />
+              <div class="form-group row">
+                <label
+                  for="description"
+                  class="col-sm-2 col-form-label create-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.descrizione"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="immag1" class="col-sm-2 col-form-label create-label"
-                >Image 1</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="immag1"
-                />
+
+              <div class="form-group row">
+                <label
+                  for="id_alarme"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id alarm</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="id_alarme"
+                    v-model="form.id_allarme"
+                    placeholder="Id alarm"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="immag2" class="col-sm-2 col-form-label create-label"
-                >Image 2</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="immag2"
-                />
+              <div class="form-group row">
+                <label
+                  for="description"
+                  class="col-sm-2 col-form-label create-label"
+                  >Description Alarm</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.descrizione_allarme"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="immag3" class="col-sm-2 col-form-label create-label"
-                >Image 3</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="immag3"
-                />
+              <div class="form-group row">
+                <label for="immag1" class="col-sm-2 col-form-label create-label"
+                  >Image 1</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="immag1"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="sector" class="col-sm-2 col-form-label create-label"
-                >Reference sector</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="sector"
-                  placeholder="Reference sector"
-                />
+              <div class="form-group row">
+                <label for="immag2" class="col-sm-2 col-form-label create-label"
+                  >Image 2</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="immag2"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-10">
-                <b-button class="mx-2 button-format">
-                  <i class="fas fa-download pr-2"></i>
-                  Save
-                </b-button>
+              <div class="form-group row">
+                <label for="immag3" class="col-sm-2 col-form-label create-label"
+                  >Image 3</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="immag3"
+                  />
+                </div>
               </div>
-            </div>
-          </form>
+              <div class="form-group row">
+                <label for="sector" class="col-sm-2 col-form-label create-label"
+                  >Reference sector</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="sector"
+                    placeholder="Reference sector"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="note" class="col-sm-2 col-form-label create-label"
+                  >Note</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.note"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label create-label"
+                  >Family machine</label
+                >
+                <div class="col-sm-10">
+                  <b-form-select
+                    v-model="form.famiglia_macchina"
+                    :options="famiglia_macchina_options"
+                  ></b-form-select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label create-label"
+                  >Under Family machine</label
+                >
+                <div class="col-sm-10">
+                  <b-form-select
+                    v-model="form.sottofamiglia_macchina"
+                    :options="sottofamiglia_macchina_options"
+                  ></b-form-select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <b-button type="submit" class="mx-2 button-format">
+                    <i class="fas fa-download pr-2"></i>
+                    Save
+                  </b-button>
+                </div>
+              </div>
+            </b-form>
+          </b-overlay>
           <!-- End here -->
         </div>
       </div>
     </client-only>
+    <b-toast id="created" :variant="variant" solid>
+      <template #toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">Notification!</strong>
+        </div>
+      </template>
+      {{ dataCreated }}
+    </b-toast>
   </div>
 </template>
 
@@ -195,19 +279,65 @@ export default {
   },
   data() {
     return {
+      show: false,
       editor: ClassicEditor,
-      description: '',
-      note: '',
+      dataCreated: '',
+      variant: 'info',
+      showTitleSignalError: null,
       form: {
         titolo: null,
         descrizione: '',
+        note: '',
+        descrizione_allarme: '',
         id_allarme: null,
         descrizione_allarme: null,
         famiglia_macchina: null,
         sottofamiglia_macchina: null,
-        id_stato_segnalazione: null,
+        rif_ticket: null,
+        // id_stato_segnalazione: null,
       },
+      famiglia_macchina_options: [
+        { value: null, text: 'Select' },
+        { value: 'Modula', text: 'Modula' },
+        { value: 'Easy2', text: 'Easy2' },
+        { value: 'Twin Shape 3', text: 'Twin Shape 3' },
+      ],
+      sottofamiglia_macchina_options: [
+        { value: null, text: 'Select' },
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+      ],
     }
+  },
+  methods: {
+    onSubmit() {
+      this.show = true
+      this.$axios
+        .post(`/api/segnalazioni/create`, this.form, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'Signal created Succesfully'
+          this.toggleToaster()
+          setTimeout(() => {
+            this.$router.push('/signals')
+          }, 3000)
+        })
+        .catch((error) => {
+          this.show = false
+          console.log(error)
+        })
+    },
+    toggleToaster() {
+      this.$bvToast.show('created')
+      setTimeout(() => {
+        this.$bvToast.hide('created')
+      }, 4000)
+    },
   },
 }
 </script>

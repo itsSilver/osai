@@ -4,7 +4,7 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <h2 class="mb-4">Sidebar #04</h2>
+          <h2 class="mb-4">Lorem ipsum</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
