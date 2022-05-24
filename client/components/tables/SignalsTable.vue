@@ -11,21 +11,19 @@
 
         <b-th>Ticket</b-th>
         <b-th>Reference sector</b-th>
-        <b-th>Id status solution</b-th>
         <b-th>Creation date</b-th>
         <b-th>Update date</b-th>
       </b-thead>
-      <b-tbody v-if="!showNoItem">
-        <b-tr>
+      <b-tbody v-if="dataTable">
+        <b-tr v-for="data in dataTable" :key="data.id">
           <b-td>
             <input type="checkbox" class="checkthis" />
           </b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
+          <b-td>{{ data.id_stato_segnalazione }}</b-td>
+          <b-td>{{ data.rif_ticket }}</b-td>
+          <b-td></b-td>
+          <b-td>{{ data.created_at }}</b-td>
+          <b-td>{{ data.updated_at }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -46,8 +44,8 @@
         <b-th>Creation date</b-th>
         <b-th>Update date</b-th>
       </b-thead> -->
-      <b-tbody v-if="!showNoItem">
-        <b-tr class="respo-tr">
+      <b-tbody v-if="dataTable">
+        <b-tr class="respo-tr" v-for="data in dataTable" :key="data.id">
           <div class="respo-after-tr">
             <b-td class="td-respo-title"></b-td>
             <b-td class="td-respo-data">
@@ -56,91 +54,23 @@
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Id Signal</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.id_stato_segnalazione }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Ticket</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.rif_ticket }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Reference sector</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id status solution</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data"></b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.created_at }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-        </b-tr>
-        <b-tr class="respo-tr">
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title"></b-td>
-            <b-td class="td-respo-data">
-              <input type="checkbox" class="checkthis" id="checkall"
-            /></b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id Signal</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Ticket</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Reference sector</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id status solution</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-        </b-tr>
-        <b-tr class="respo-tr">
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title"></b-td>
-            <b-td class="td-respo-data">
-              <input type="checkbox" class="checkthis" id="checkall"
-            /></b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id Signal</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Ticket</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Reference sector</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id status solution</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.updated_at }}</b-td>
           </div>
         </b-tr>
         <b-tr>
@@ -151,7 +81,7 @@
         </b-tr>
       </b-tbody>
     </b-table-simple>
-    <div class="no-data">
+    <div class="no-data" v-if="!dataTable">
       <NoSignalItems v-if="showNoItem" />
     </div>
   </b-overlay>
@@ -168,6 +98,7 @@ export default {
       show: false,
     }
   },
+  props: ['dataTable'],
 }
 </script>
 <style scoped>

@@ -93,7 +93,9 @@
             <!-- End here -->
           </div>
           <div class="table-space">
-            <SignalsTable />
+            <b-overlay :show="show" rounded="sm">
+              <SignalsTable :dataTable="dataTable" />
+            </b-overlay>
           </div>
         </div>
       </div>
@@ -112,6 +114,7 @@ export default {
   data() {
     return {
       selected: null,
+      show: false,
       options: [
         { value: null, text: '10' },
         { value: '15', text: '15' },
@@ -125,9 +128,13 @@ export default {
     redirectCreate() {
       this.$router.push(`/signals/create`)
     },
-    test() {
-      this.$router.push('/solutions')
-    },
+  },
+  async asyncData({ store, $axios }) {
+    let response = await $axios.post(`/api/segnalazioni/retrive_segnalazioni`)
+    let dataTable = response.data
+    return {
+      dataTable,
+    }
   },
 }
 </script>
