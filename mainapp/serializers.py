@@ -23,7 +23,7 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Segnalazioni
 
-        fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
+        fields = ("id","titolo", "descrizione", "id_allarme", "descrizione_allarme",
                   "famiglia_macchina", "sottofamiglia_macchina", "rif_ticket","id_stato_segnalazione","created_at","updated_at")
 
 
@@ -59,7 +59,7 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Soluzioni
 
-        fields = ("titolo", "rank", "descrizione", "immagine_1",
+        fields = ("id","titolo", "rank", "descrizione", "immagine_1",
                   "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione","created_at","updated_at")
 
 
@@ -94,7 +94,7 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Occorrenze
 
-        fields = ("segnalazione", "soluzione", "titolo", "descrizione", "commessa_macchina",
+        fields = ("id","segnalazione", "soluzione", "titolo", "descrizione", "commessa_macchina",
                   "versione_sw_1", "versione_sw_2", "data_occorrenza","rif_ticket", "note", "stato_occorrenza","created_at","updated_at")
 
 
