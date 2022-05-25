@@ -10,7 +10,10 @@
         <b-th><i class="fa-solid fa-arrow-down-short-wide"></i>Id Signal</b-th>
 
         <b-th>Ticket</b-th>
+        <b-th>Id Alarm</b-th>
         <b-th>Reference sector</b-th>
+        <b-th>Family machine</b-th>
+        <b-th>Under Family machine</b-th>
         <b-th>Creation date</b-th>
         <b-th>Update date</b-th>
       </b-thead>
@@ -28,7 +31,10 @@
           </b-td>
           <b-td>{{ data.id }}</b-td>
           <b-td>{{ data.rif_ticket }}</b-td>
+          <b-td>{{ data.id_allarme }}</b-td>
           <b-td></b-td>
+          <b-td>{{ data.famiglia_macchina }}</b-td>
+          <b-td>{{ data.sottofamiglia_macchina }}</b-td>
           <b-td>{{ data.created_at }}</b-td>
           <b-td>{{ data.updated_at }}</b-td>
         </b-tr>
