@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New Signal
+                  Update Signal
                 </li>
               </ul>
             </div>
