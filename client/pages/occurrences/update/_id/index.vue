@@ -349,6 +349,15 @@ export default {
       }, 2000)
     },
   },
+  async asyncData({ store, $axios, params }) {
+    let response = await $axios.post(
+      `/api/occorrenze/retrive_occorrenze/${params.id}`
+    )
+    let dataTable = response.data[0]
+    return {
+      dataTable,
+    }
+  },
 }
 </script>
 <style scoped>

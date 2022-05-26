@@ -288,6 +288,7 @@ export default {
         })
         .catch((error) => {
           this.show = false
+          this.dataCreated = 'Something went wrong!'
           this.variant = 'danger'
           this.toggleToaster()
         })
