@@ -101,6 +101,71 @@
                 second-d-flex-right
               "
             >
+              <b-dropdown
+                class="m-2 table-filter-cols"
+                id="dropdown-form"
+                text="Select fields to display"
+                ref="dropdown"
+              >
+                <b-dropdown-form>
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdsignal"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Signal</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusTicket"
+                    value="1"
+                    unchecked-value="0"
+                    >Ticket</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusAlarm"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Alarm</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusSector"
+                    value="1"
+                    unchecked-value="0"
+                    >Reference Sector</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusMachine"
+                    value="1"
+                    unchecked-value="0"
+                    >Family machine</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusUnderMachine"
+                    value="1"
+                    unchecked-value="0"
+                    >Under Family machine</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusCreationDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Creation date</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusUpdateDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Update date</b-form-checkbox
+                  >
+                </b-dropdown-form>
+              </b-dropdown>
               <b-form-select
                 class="number-rows"
                 v-model="selected"
@@ -113,6 +178,14 @@
             <b-overlay :show="show" rounded="sm">
               <SignalsTable
                 :dataTable="dataTable"
+                :statusTicket="statusTicket"
+                :statusIdsignal="statusIdsignal"
+                :statusAlarm="statusAlarm"
+                :statusMachine="statusMachine"
+                :statusSector="statusSector"
+                :statusUnderMachine="statusUnderMachine"
+                :statusCreationDate="statusCreationDate"
+                :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
               />
             </b-overlay>
@@ -153,6 +226,14 @@ export default {
         { value: '25', text: '25' },
         { value: '30', text: '30', disabled: true },
       ],
+      statusIdsignal: '1',
+      statusTicket: '1',
+      statusAlarm: '0',
+      statusMachine: '0',
+      statusSector: '1',
+      statusUnderMachine: '0',
+      statusCreationDate: '1',
+      statusUpdateDate: '1',
     }
   },
   methods: {

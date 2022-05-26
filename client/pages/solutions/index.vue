@@ -101,6 +101,64 @@
                 second-d-flex-right
               "
             >
+              <b-dropdown
+                class="m-2 table-filter-cols"
+                id="dropdown-form"
+                text="Select fields to display"
+                ref="dropdown"
+              >
+                <b-dropdown-form>
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdsolution"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Solution</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusTitle"
+                    value="1"
+                    unchecked-value="0"
+                    >Title</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusRank"
+                    value="1"
+                    unchecked-value="0"
+                    >Rank</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusSector"
+                    value="1"
+                    unchecked-value="0"
+                    >Reference Sector</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdStSolutions"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Status Solutions</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusCreationDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Creation date</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusUpdateDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Update date</b-form-checkbox
+                  >
+                </b-dropdown-form>
+              </b-dropdown>
               <b-form-select
                 class="number-rows"
                 v-model="selected"
@@ -113,6 +171,13 @@
             <b-overlay :show="show" rounded="sm">
               <SolutionsTable
                 :dataTable="dataTable"
+                :statusIdsolution="statusIdsolution"
+                :statusTitle="statusTitle"
+                :statusRank="statusRank"
+                :statusSector="statusSector"
+                :statusIdStSolutions="statusIdStSolutions"
+                :statusCreationDate="statusCreationDate"
+                :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
               />
             </b-overlay>
@@ -153,6 +218,13 @@ export default {
         { value: '25', text: '25' },
         { value: '30', text: '30', disabled: true },
       ],
+      statusIdsolution: '1',
+      statusTitle: '1',
+      statusRank: '1',
+      statusSector: '1',
+      statusIdStSolutions: '0',
+      statusCreationDate: '1',
+      statusUpdateDate: '1',
     }
   },
   methods: {

@@ -11104,6 +11104,19 @@ textarea {
 #created, #deleted {
   display: block !important;
 }
+.table-filter-cols > button {
+  background-color: #4373fb !important;
+  border-color: #4373fb !important;
+  border-radius: 0.25rem !important;
+  padding-right: 15px !important;
+}
+
+.dropdown-toggle::after {
+  right: 2px !important;
+}
+.table-checkbox {
+  padding-left: 1rem !important;
+}
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;
