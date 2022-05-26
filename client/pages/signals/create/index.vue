@@ -214,6 +214,21 @@
                 </div>
               </div>
               <div class="form-group row">
+                <label class="col-sm-2 col-form-label create-label"
+                  >Find or create Occurrence</label
+                >
+                <div class="col-sm-10 find-create-occurrence">
+                  <b-button class="mx-2 button-format">
+                    <i class="fas fa-search pr-2"></i>
+                    Find Occurrence
+                  </b-button>
+                  <b-button class="mx-2 button-format">
+                    <i class="fas fa-plus pr-2"></i>
+                    Create new Occurrence
+                  </b-button>
+                </div>
+              </div>
+              <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
                     <i class="fas fa-download pr-2"></i>

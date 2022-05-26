@@ -11142,4 +11142,10 @@ textarea {
   .table-desktop {
     display: none !important;
   }
+  .find-create-occurrence {
+    display: flex !important;
+  }
+  .find-create-occurrence > button{
+    padding: 2px !important;
+  }
 }
