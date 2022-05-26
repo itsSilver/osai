@@ -257,13 +257,13 @@ export default {
     onSubmit() {
       this.show = true
       if (
-        this.form.titolo === null &&
-        this.form.descrizione === '' &&
-        this.form.note === '' &&
-        this.form.rank === null &&
-        this.form.immagine_1 === null &&
-        this.form.immagine_2 === null &&
-        this.form.immagine_3 === null &&
+        this.form.titolo === null ||
+        this.form.descrizione === '' ||
+        this.form.note === '' ||
+        this.form.rank === null ||
+        this.form.immagine_1 === null ||
+        this.form.immagine_2 === null ||
+        this.form.immagine_3 === null ||
         this.form.settore_riferimento === null
       ) {
         this.show = false

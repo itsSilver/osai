@@ -19,22 +19,29 @@
         <b-th>Creation date </b-th>
         <b-th>Update date </b-th>
       </b-thead>
-      <b-tbody v-if="!showNoItem">
-        <b-tr>
+      <b-tbody v-if="dataTable">
+        <b-tr v-for="data in dataTable" :key="data.id">
           <b-td>
-            <input type="checkbox" class="checkthis" />
+            <input
+              type="checkbox"
+              class="checkthis"
+              v-model="selectedId"
+              :id="data.id"
+              :value="data.id"
+              @change="changeValue"
+            />
           </b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
-          <b-td>test</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.id }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -177,7 +184,7 @@
         </b-tr>
       </b-tbody>
     </b-table-simple>
-    <div class="no-data">
+    <div class="no-data" v-if="dataTable.length === 0">
       <NoOccorrenzeItems v-if="showNoItem" />
     </div>
   </b-overlay>
@@ -192,8 +199,16 @@ export default {
     return {
       showNoItem: true,
       show: false,
+      selectedId: [],
     }
   },
+  methods: {
+    changeValue() {
+      this.$emit('get-new-delete-id', this.selectedId)
+      this.selectedId = []
+    },
+  },
+  props: ['dataTable'],
 }
 </script>
 <style scoped>
