@@ -218,7 +218,10 @@
                   >Find or create Occurrence</label
                 >
                 <div class="col-sm-10 find-create-occurrence">
-                  <b-button class="mx-2 button-format">
+                  <b-button
+                    class="mx-2 button-format"
+                    @click="findOccurrence()"
+                  >
                     <i class="fas fa-search pr-2"></i>
                     Find Occurrence
                   </b-button>
@@ -241,6 +244,7 @@
           <!-- End here -->
         </div>
       </div>
+      <FindOccurrence v-if="showFindOccurrence" @close="hideModal()" />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -255,6 +259,7 @@
 
 <script>
 import Nav from '~/components/Nav'
+import FindOccurrence from '~/components/popup/FindOccurrence'
 let ClassicEditor
 let CKEditor
 if (process.client) {
@@ -267,6 +272,7 @@ export default {
   components: {
     Nav,
     ckeditor: CKEditor.component,
+    FindOccurrence,
   },
   props: {
     value: {
@@ -295,6 +301,7 @@ export default {
   data() {
     return {
       show: false,
+      showFindOccurrence: false,
       editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
@@ -361,6 +368,12 @@ export default {
           this.variant = 'danger'
           this.toggleToaster()
         })
+    },
+    findOccurrence() {
+      this.showFindOccurrence = true
+    },
+    hideModal() {
+      this.showFindOccurrence = false
     },
     toggleToaster() {
       this.$bvToast.show('created')

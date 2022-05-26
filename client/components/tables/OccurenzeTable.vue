@@ -32,16 +32,16 @@
             />
           </b-td>
           <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.id }}</b-td>
+          <b-td>{{ data.segnalazione }}</b-td>
+          <b-td>{{ data.soluzione }}</b-td>
+          <b-td>{{ data.titolo }}</b-td>
+          <b-td>{{ data.commessa_macchina }}</b-td>
+          <b-td>{{ data.versione_sw_1 }}</b-td>
+          <b-td>{{ data.versione_sw_2 }}</b-td>
+          <b-td>{{ data.data_occorrenza }}</b-td>
+          <b-td>{{ data.stato_occorrenza }}</b-td>
+          <b-td>{{ data.created_at }}</b-td>
+          <b-td>{{ data.updated_at }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -62,120 +62,65 @@
         <b-th>Creation date</b-th>
         <b-th>Update date</b-th>
       </b-thead> -->
-      <b-tbody v-if="!showNoItem">
-        <b-tr class="respo-tr">
+      <b-tbody v-if="dataTable">
+        <b-tr class="respo-tr" v-for="data in dataTable" :key="data.id">
           <div class="respo-after-tr">
             <b-td class="td-respo-title"></b-td>
             <b-td class="td-respo-data">
-              <input type="checkbox" class="checkthis" id="checkall"
+              <input
+                type="checkbox"
+                class="checkthis"
+                v-model="selectedId"
+                :id="data.id"
+                :value="data.id"
+                @change="changeValue"
             /></b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Id occurrence</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.id }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Id signal</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.segnalazione }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Id soluzione</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.soluzione }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Title</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.titolo }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Machine order</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.commessa_macchina }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Version sw 1</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.versione_sw_1 }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Version sw 2</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.versione_sw_2 }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Occurrence date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.data_occorrenza }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Occurrence status</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.stato_occorrenza }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.created_at }}</b-td>
           </div>
           <div class="respo-after-tr">
             <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">test</b-td>
+            <b-td class="td-respo-data">{{ data.updated_at }}</b-td>
           </div>
         </b-tr>
-        <b-tr class="respo-tr">
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title"></b-td>
-            <b-td class="td-respo-data">
-              <input type="checkbox" class="checkthis" id="checkall"
-            /></b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id occurrence</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id signal</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id soluzione</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Title</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Machine order</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Version sw 1</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Version sw 2</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Occurrence date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Occurrence status</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">test</b-td>
-          </div>
-        </b-tr>
-
         <b-tr>
           <b-td style="width: 1000px !important">
             <!-- <b-td style="float: left">test</b-td>
