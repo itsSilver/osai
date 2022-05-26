@@ -339,7 +339,7 @@ export default {
           this.toggleToaster()
           setTimeout(() => {
             this.$router.push('/signals')
-          }, 3000)
+          }, 2000)
         })
         .catch((error) => {
           this.show = false
@@ -352,7 +352,7 @@ export default {
       setTimeout(() => {
         this.$bvToast.hide('created')
         this.variant = 'info'
-      }, 4000)
+      }, 2000)
     },
   },
 }

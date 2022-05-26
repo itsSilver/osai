@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  Update Signal
+                  New Solution
                 </li>
               </ul>
             </div>
@@ -44,7 +44,7 @@
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
                 <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title Signal</label
+                  >Title Solution</label
                 >
                 <div class="col-sm-10">
                   <input
@@ -52,24 +52,21 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title Signal"
+                    placeholder="Title Solution"
                   />
-                  <div class="error-show" v-if="showTitleSignalError">
-                    Please enter the Title Signal!
-                  </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Ticket</label
+                <label for="rank" class="col-sm-2 col-form-label create-label"
+                  >Rank</label
                 >
                 <div class="col-sm-10">
                   <input
                     type="text"
                     class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
+                    id="rank"
+                    v-model="dataTable.rank"
+                    placeholder="Rank"
                   />
                 </div>
               </div>
@@ -91,41 +88,6 @@
                   />
                 </div>
               </div>
-
-              <div class="form-group row">
-                <label
-                  for="id_alarme"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id alarm</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="id_alarme"
-                    v-model="dataTable.id_allarme"
-                    placeholder="Id alarm"
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description Alarm</label
-                >
-                <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
-                    v-model="dataTable.descrizione_allarme"
-                  />
-                </div>
-              </div>
               <div class="form-group row">
                 <label for="immag1" class="col-sm-2 col-form-label create-label"
                   >Image 1</label
@@ -135,6 +97,7 @@
                     type="text"
                     class="form-control input-create"
                     id="immag1"
+                    v-model="dataTable.immagine_1"
                   />
                 </div>
               </div>
@@ -147,6 +110,7 @@
                     type="text"
                     class="form-control input-create"
                     id="immag2"
+                    v-model="dataTable.immagine_2"
                   />
                 </div>
               </div>
@@ -159,6 +123,7 @@
                     type="text"
                     class="form-control input-create"
                     id="immag3"
+                    v-model="dataTable.immagine_3"
                   />
                 </div>
               </div>
@@ -171,10 +136,24 @@
                     type="text"
                     class="form-control input-create"
                     id="sector"
+                    v-model="dataTable.settore_riferimento"
                     placeholder="Reference sector"
                   />
                 </div>
               </div>
+              <!-- <div class="form-group row">
+              <label for="solution" class="col-sm-2 col-form-label create-label"
+                >Id state solution</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control input-create"
+                  id="solution"
+                  placeholder="Id state solution"
+                />
+              </div>
+            </div> -->
               <div class="form-group row">
                 <label for="note" class="col-sm-2 col-form-label create-label"
                   >Note</label
@@ -189,28 +168,6 @@
                     @input="(event) => $emit('input', event)"
                     v-model="dataTable.note"
                   />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Family machine</label
-                >
-                <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.famiglia_macchina"
-                    :options="famiglia_macchina_options"
-                  ></b-form-select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Under Family machine</label
-                >
-                <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.sottofamiglia_macchina"
-                    :options="sottofamiglia_macchina_options"
-                  ></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -284,18 +241,16 @@ export default {
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,
-      famiglia_macchina_options: [
-        { value: null, text: 'Select' },
-        { value: 'Modula', text: 'Modula' },
-        { value: 'Easy2', text: 'Easy2' },
-        { value: 'Twin Shape 3', text: 'Twin Shape 3' },
-      ],
-      sottofamiglia_macchina_options: [
-        { value: null, text: 'Select' },
-        { value: '1', text: '1' },
-        { value: '2', text: '2' },
-        { value: '3', text: '3' },
-      ],
+      form: {
+        titolo: null,
+        descrizione: '',
+        rank: null,
+        note: '',
+        immagine_1: null,
+        immagine_2: null,
+        immagine_3: null,
+        settore_riferimento: null,
+      },
     }
   },
   methods: {
@@ -304,11 +259,12 @@ export default {
       if (
         this.dataTable.titolo === null &&
         this.dataTable.descrizione === '' &&
-        this.dataTable.descrizione_allarme === '' &&
-        this.dataTable.id_allarme === null &&
-        this.dataTable.famiglia_macchina === null &&
-        this.dataTable.sottofamiglia_macchina === null &&
-        this.dataTable.rif_ticket === null
+        this.dataTable.note === '' &&
+        this.dataTable.rank === null &&
+        this.dataTable.immagine_1 === null &&
+        this.dataTable.immagine_2 === null &&
+        this.dataTable.immagine_3 === null &&
+        this.dataTable.settore_riferimento === null
       ) {
         this.show = false
         this.variant = 'danger'
@@ -319,24 +275,25 @@ export default {
       let payload = {
         titolo: this.dataTable.titolo,
         descrizione: this.dataTable.descrizione,
-        id_allarme: this.dataTable.id_allarme,
-        descrizione_allarme: this.dataTable.descrizione_allarme,
-        famiglia_macchina: this.dataTable.famiglia_macchina,
-        sottofamiglia_macchina: this.dataTable.sottofamiglia_macchina,
-        rif_ticket: this.dataTable.rif_ticket,
+        rank: this.dataTable.rank,
+        note: this.dataTable.note,
+        immagine_1: this.dataTable.immagine_1,
+        immagine_2: this.dataTable.immagine_2,
+        immagine_3: this.dataTable.immagine_3,
+        settore_riferimento: this.dataTable.settore_riferimento,
       }
       this.$axios
-        .post(`/api/segnalazioni/update/${this.$route.params.id}`, payload, {
+        .post(`/api/soluzioni/update/${this.$route.params.id}`, payload, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
           },
         })
         .then(() => {
-          this.dataCreated = 'Signal Updated Succesfully'
+          this.dataCreated = 'Solution Updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
-            this.$router.push('/signals')
+            this.$router.push('/solutions')
           }, 3000)
         })
         .catch((error) => {
@@ -354,8 +311,8 @@ export default {
     },
   },
   async asyncData({ store, $axios, params }) {
-    let response = await $axios.post(
-      `/api/segnalazioni/retrive_segnalazioni/${params.id}`
+    let response = await $axios.get(
+      `/api/soluzioni/retrive_soluzioni/${params.id}`
     )
     let dataTable = response.data[0]
     return {

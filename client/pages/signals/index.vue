@@ -262,11 +262,13 @@ export default {
                 this.toggleToaster()
                 this.$nuxt.refresh()
                 this.show = false
+                this.selectedId = []
               })
               .catch((error) => {
                 this.show = false
                 this.variant = 'danger'
                 this.toggleToaster()
+                this.selectedId = []
               })
           } else {
             // Empty do nothing
@@ -280,7 +282,7 @@ export default {
       this.$bvToast.show('deleted')
       setTimeout(() => {
         this.$bvToast.hide('deleted')
-      }, 4000)
+      }, 2000)
     },
   },
   async asyncData({ store, $axios }) {

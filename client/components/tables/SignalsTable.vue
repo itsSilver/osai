@@ -100,7 +100,7 @@
         </b-tr>
       </b-tbody>
     </b-table-simple>
-    <div class="no-data" v-if="!dataTable">
+    <div class="no-data" v-if="dataTable.length === 0">
       <NoSignalItems v-if="showNoItem" />
     </div>
   </b-overlay>
@@ -121,6 +121,7 @@ export default {
   methods: {
     changeValue() {
       this.$emit('get-new-delete-id', this.selectedId)
+      this.selectedId = []
     },
   },
   props: ['dataTable'],
