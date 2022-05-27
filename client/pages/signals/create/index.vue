@@ -225,7 +225,7 @@
                     <i class="fas fa-search pr-2"></i>
                     Find Occurrence
                   </b-button>
-                  <b-button class="mx-2 button-format">
+                  <b-button class="mx-2 button-format" @click="newOccurrence()">
                     <i class="fas fa-plus pr-2"></i>
                     Create new Occurrence
                   </b-button>
@@ -372,6 +372,9 @@ export default {
     },
     findOccurrence() {
       this.showFindOccurrence = true
+    },
+    newOccurrence() {
+      this.$router.push(`/occurrences/create`)
     },
     hideModal() {
       this.showFindOccurrence = false
