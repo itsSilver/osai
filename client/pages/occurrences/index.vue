@@ -101,6 +101,92 @@
                 second-d-flex-right
               "
             >
+              <b-dropdown
+                class="m-2 table-filter-cols"
+                id="dropdown-form"
+                text="Select fields to display"
+                ref="dropdown"
+              >
+                <b-dropdown-form>
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdoccurrence"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Occurrence</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdsignal"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Signal</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusIdsolution"
+                    value="1"
+                    unchecked-value="0"
+                    >Id Solution
+                  </b-form-checkbox>
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusTitle"
+                    value="1"
+                    unchecked-value="0"
+                    >Title</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusMachine"
+                    value="1"
+                    unchecked-value="0"
+                    >Machine order</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusVersion1"
+                    value="1"
+                    unchecked-value="0"
+                    >Version sw 1</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusVersion2"
+                    value="1"
+                    unchecked-value="0"
+                    >Version sw 2</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusOccurrenceDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Occurrence date</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusOccurrenceStatus"
+                    value="1"
+                    unchecked-value="0"
+                    >Occurrence status</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusCreationDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Creation date</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusUpdateDate"
+                    value="1"
+                    unchecked-value="0"
+                    >Update date</b-form-checkbox
+                  >
+                </b-dropdown-form>
+              </b-dropdown>
               <b-form-select
                 class="number-rows"
                 v-model="selected"
@@ -113,6 +199,17 @@
             <b-overlay :show="show" rounded="sm">
               <OccurenzeTable
                 :dataTable="dataTable"
+                :statusIdoccurrence="statusIdoccurrence"
+                :statusIdsignal="statusIdsignal"
+                :statusIdsolution="statusIdsolution"
+                :statusTitle="statusTitle"
+                :statusMachine="statusMachine"
+                :statusVersion1="statusVersion1"
+                :statusVersion2="statusVersion2"
+                :statusOccurrenceDate="statusOccurrenceDate"
+                :statusOccurrenceStatus="statusOccurrenceStatus"
+                :statusCreationDate="statusCreationDate"
+                :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
               />
             </b-overlay>
@@ -142,6 +239,7 @@ export default {
   data() {
     return {
       selected: null,
+      dataTable: [],
       selectedId: [],
       dataCreated: '',
       variant: '',
@@ -153,6 +251,17 @@ export default {
         { value: '25', text: '25' },
         { value: '30', text: '30', disabled: true },
       ],
+      statusIdoccurrence: '1',
+      statusIdsignal: '1',
+      statusIdsolution: '1',
+      statusTitle: '1',
+      statusMachine: '0',
+      statusVersion1: '0',
+      statusVersion2: '0',
+      statusOccurrenceDate: '1',
+      statusOccurrenceStatus: '1',
+      statusCreationDate: '1',
+      statusUpdateDate: '1',
     }
   },
   methods: {

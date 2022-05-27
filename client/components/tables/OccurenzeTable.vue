@@ -7,17 +7,17 @@
         <b-th>
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
-        <b-th>Id occurrence </b-th>
-        <b-th>Id signal </b-th>
-        <b-th>Id soluzione </b-th>
-        <b-th>Title </b-th>
-        <b-th>Machine order </b-th>
-        <b-th>Version sw 1 </b-th>
-        <b-th>Version sw 2 </b-th>
-        <b-th>Occurrence date </b-th>
-        <b-th>Occurrence status </b-th>
-        <b-th>Creation date </b-th>
-        <b-th>Update date </b-th>
+        <b-th v-if="statusIdoccurrence === '1'">Id occurrence </b-th>
+        <b-th v-if="statusIdsignal === '1'">Id signal </b-th>
+        <b-th v-if="statusIdsolution === '1'">Id solution </b-th>
+        <b-th v-if="statusTitle === '1'">Title </b-th>
+        <b-th v-if="statusMachine === '1'">Machine order </b-th>
+        <b-th v-if="statusVersion1 === '1'">Version sw 1 </b-th>
+        <b-th v-if="statusVersion2 === '1'">Version sw 2 </b-th>
+        <b-th v-if="statusOccurrenceDate === '1'">Occurrence date </b-th>
+        <b-th v-if="statusOccurrenceStatus === '1'">Occurrence status </b-th>
+        <b-th v-if="statusCreationDate === '1'">Creation date </b-th>
+        <b-th v-if="statusUpdateDate === '1'">Update date </b-th>
       </b-thead>
       <b-tbody v-if="dataTable">
         <b-tr v-for="data in dataTable" :key="data.id">
@@ -31,17 +31,21 @@
               @change="changeValue"
             />
           </b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.segnalazione }}</b-td>
-          <b-td>{{ data.soluzione }}</b-td>
-          <b-td>{{ data.titolo }}</b-td>
-          <b-td>{{ data.commessa_macchina }}</b-td>
-          <b-td>{{ data.versione_sw_1 }}</b-td>
-          <b-td>{{ data.versione_sw_2 }}</b-td>
-          <b-td>{{ data.data_occorrenza }}</b-td>
-          <b-td>{{ data.stato_occorrenza }}</b-td>
-          <b-td>{{ data.created_at }}</b-td>
-          <b-td>{{ data.updated_at }}</b-td>
+          <b-td v-if="statusIdoccurrence === '1'">{{ data.id }}</b-td>
+          <b-td v-if="statusIdsignal === '1'">{{ data.segnalazione }}</b-td>
+          <b-td v-if="statusIdsolution === '1'">{{ data.soluzione }}</b-td>
+          <b-td v-if="statusTitle === '1'">{{ data.titolo }}</b-td>
+          <b-td v-if="statusMachine === '1'">{{ data.commessa_macchina }}</b-td>
+          <b-td v-if="statusVersion1 === '1'">{{ data.versione_sw_1 }}</b-td>
+          <b-td v-if="statusVersion2 === '1'">{{ data.versione_sw_2 }}</b-td>
+          <b-td v-if="statusOccurrenceDate === '1'">{{
+            data.data_occorrenza
+          }}</b-td>
+          <b-td v-if="statusOccurrenceStatus === '1'">{{
+            data.stato_occorrenza
+          }}</b-td>
+          <b-td v-if="statusCreationDate === '1'">{{ data.created_at }}</b-td>
+          <b-td v-if="statusUpdateDate === '1'">{{ data.updated_at }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -53,7 +57,7 @@
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
         <b-th
-          >Id soluzione</b-th
+          >Id solution</b-th
         >
 
         <b-th>Rank</b-th>
@@ -76,47 +80,47 @@
                 @change="changeValue"
             /></b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusIdoccurrence === '1'">
             <b-td class="td-respo-title">Id occurrence</b-td>
             <b-td class="td-respo-data">{{ data.id }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusIdsignal === '1'">
             <b-td class="td-respo-title">Id signal</b-td>
             <b-td class="td-respo-data">{{ data.segnalazione }}</b-td>
           </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id soluzione</b-td>
+          <div class="respo-after-tr" v-if="statusIdsolution === '1'">
+            <b-td class="td-respo-title">Id solution</b-td>
             <b-td class="td-respo-data">{{ data.soluzione }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusTitle === '1'">
             <b-td class="td-respo-title">Title</b-td>
             <b-td class="td-respo-data">{{ data.titolo }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusMachine === '1'">
             <b-td class="td-respo-title">Machine order</b-td>
             <b-td class="td-respo-data">{{ data.commessa_macchina }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusVersion1 === '1'">
             <b-td class="td-respo-title">Version sw 1</b-td>
             <b-td class="td-respo-data">{{ data.versione_sw_1 }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusVersion2 === '1'">
             <b-td class="td-respo-title">Version sw 2</b-td>
             <b-td class="td-respo-data">{{ data.versione_sw_2 }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusOccurrenceDate === '1'">
             <b-td class="td-respo-title">Occurrence date</b-td>
             <b-td class="td-respo-data">{{ data.data_occorrenza }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusOccurrenceStatus === '1'">
             <b-td class="td-respo-title">Occurrence status</b-td>
             <b-td class="td-respo-data">{{ data.stato_occorrenza }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusCreationDate === '1'">
             <b-td class="td-respo-title">Creation date</b-td>
             <b-td class="td-respo-data">{{ data.created_at }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusUpdateDate === '1'">
             <b-td class="td-respo-title">Update date</b-td>
             <b-td class="td-respo-data">{{ data.updated_at }}</b-td>
           </div>
@@ -153,7 +157,20 @@ export default {
       this.selectedId = []
     },
   },
-  props: ['dataTable'],
+  props: [
+    'dataTable',
+    'statusIdoccurrence',
+    'statusIdsignal',
+    'statusTitle',
+    'statusIdsolution',
+    'statusMachine',
+    'statusVersion1',
+    'statusVersion2',
+    'statusOccurrenceDate',
+    'statusOccurrenceStatus',
+    'statusCreationDate',
+    'statusUpdateDate',
+  ],
 }
 </script>
 <style scoped>
