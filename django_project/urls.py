@@ -14,22 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-
 from django.urls import include, path
-from rest_framework import permissions
 from rest_framework.schemas import get_schema_view
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('api-schema/', get_schema_view(
+    path('api-schema', get_schema_view(
         title="OSAI API",
-        description="API for all things …",
-        urlconf='mainapp.urls',
-        permission_classes=(permissions.AllowAny,),
+        description="API for all things …"
     ), name='api-schema'),
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    path('api/', include('mainapp.urls'))
-    # path('api-token-auth', views.obtain_auth_token)
+    path('api/', include('mainapp.urls')),
+    path('mail/', include('mail.urls'))
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

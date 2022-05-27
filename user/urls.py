@@ -1,4 +1,5 @@
 from django.urls import path
+
 from user.views import login_user, Register_Users, User_logout, user_detail, permissions_list, get_users, \
     add_permission, user_delete, remove_permission, get_segnalazioni, update_user, add_permission_to_user
 

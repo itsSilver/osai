@@ -102,7 +102,7 @@ def user_delete(request, id):
 @permission_classes([IsAuthenticated])
 def update_user(request, id):
     seg = User.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = UserSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -128,35 +128,35 @@ def add_permission_to_user(request, id):
         return JsonResponse({"status": 404, "message": "User not found"})
 
 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-@is_admin
+@ api_view(["GET"])
+@ permission_classes([IsAuthenticated])
+@ is_admin
 def get_users(request):
     queryset = Users.objects.all()
     serializer_class = UserSerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@ api_view(['GET'])
+@ permission_classes([IsAuthenticated])
 def user_detail(request):
     user = User.objects.get(pk=request.user.pk)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-@is_admin
+@ api_view(['GET'])
+@ permission_classes([AllowAny])
+@ is_admin
 def permissions_list(request):
     permissions = Permission.objects.all()
     permissions_serializer = PermissionsSerializer(permissions, many=True)
     return JsonResponse(permissions_serializer.data, safe=False)
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-@is_admin
+@ api_view(["POST"])
+@ permission_classes([IsAuthenticated])
+@ is_admin
 def add_permission(request, id):
     permissions = request.data['permissions']
 
@@ -167,9 +167,9 @@ def add_permission(request, id):
     return Response({"200": f'Added'})
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-@is_admin
+@ api_view(["POST"])
+@ permission_classes([IsAuthenticated])
+@ is_admin
 def remove_permission(request, id):
     permissions = request.data['permissions']
 
@@ -179,9 +179,11 @@ def remove_permission(request, id):
         u.user_permissions.remove(permission)
     return Response({"200": f'Removed'})
 
+    return JsonResponse(serializer, safe=False)
 
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
+
+@ api_view(["GET"])
+@ permission_classes([IsAuthenticated])
 def get_segnalazioni(request):
     if not request.user.is_admin:
         if not 'mainapp.view_segnalazioni' in request.user.get_all_permissions():
@@ -189,9 +191,22 @@ def get_segnalazioni(request):
     return Response({"200": f'Show info'})
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-@is_admin
+#
+# @api_view(["GET"])
+# @permission_classes([IsAuthenticated])
+# def get_segnalazioni(request):
+#     if not request.user.is_admin:
+#         #kur ben migrate modelin dalin keto add/view/change/delete per cdo model...
+#         #duhet nje menyre qe te fshijme permissions qe mer user-i kur krijohet dhe 2 endpoint add/remove permission
+#         if not request.user.has_permission('view_segnalizioni'):
+#             print("# permission error")
+#     print(" #display  segnalizioni")
+#
+
+
+@ api_view(["POST"])
+@ permission_classes([IsAuthenticated])
+@ is_admin
 def create_permission(request):
     serializer = PermissionsSerializer(data=request.data)
     if serializer.is_valid():

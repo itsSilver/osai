@@ -14,3 +14,5 @@ def is_admin(function):
             return JsonResponse({'message': 'You must be admin to proceed'})
 
     return wrap
+
+

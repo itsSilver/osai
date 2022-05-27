@@ -1,8 +1,11 @@
+from django.core.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
 # Create your views here.
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.exceptions import ValidationError
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 from rest_framework.response import Response
@@ -25,6 +28,63 @@ def __check_if_has_permission(request, permission):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
+def create_soluzioni(request):
+    """
+    It takes a request, validates it, and creates a new Soluzioni object
+
+    :param request: The request object
+    :return: The data is being returned as a dictionary.
+    """
+    check_permission = __check_if_has_permission(request, "add_soluzioni")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to create Soluzioni"})
+
+    try:
+        data = {}
+        stati = None
+        if "stato_soluzione" in request.data:
+            stati_serializer = StatiSoluzioneSerializer(
+                request.data["stato_soluzione"])
+
+            stati = Stati_Soluzione.objects.create(
+                stato_soluzione=stati_serializer.data["stato_soluzione"],
+                note=stati_serializer.data["note"]
+            )
+            stati.save()
+
+        serializer = SoluzioniSerializer(
+            data=request.data)
+        if serializer.is_valid():
+            soluzioni = Soluzioni.objects.create(
+                titolo=serializer.data["titolo"],
+                rank=serializer.data["rank"],
+                descrizione=serializer.data["descrizione"],
+                immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
+                immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
+                immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
+                settore_riferimento=serializer.data["settore_riferimento"],
+                note=serializer.data["note"],
+                occorrenze=request.data['occurrenze'],
+                id_stato_soluzione=stati,
+                user_id=request.user.id
+            )
+
+            soluzioni.save()
+
+            data["message"] = "Soluzioni Created successfully"
+        else:
+            data = serializer.errors
+
+        return Response(data)
+    except KeyError as e:
+        print(e)
+        raise ValidationError({"400": f'Field {str(e)} missing'})
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def create_segnalazioni(request):
     """
     It creates a new Segnalazioni object, and saves it to the database.
@@ -58,9 +118,13 @@ def create_segnalazioni(request):
                 descrizione_allarme=serializer.data["descrizione_allarme"],
                 famiglia_macchina=serializer.data["famiglia_macchina"],
                 sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"],
+                immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
+                immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
+                immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 id_stato_segnalazione=stati,
-                rif_ticket=serializer.data["rif_ticket"],
-                user_id=request.user.id)
+                user_id=request.user.id,
+
+            )
 
             segnalazioni.save()
 
@@ -73,8 +137,52 @@ def create_segnalazioni(request):
         print(e)
         raise ValidationError({"400": f'Field {str(e)} missing'})
 
+# Soluzioni Occorrenze
+
 
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def create_occorrenze(request):
+    """
+    It takes a request, validates it, and saves it to the database.
+
+    :param request: The request object
+    :return: The data is being returned as a dictionary.
+    """
+    check_permission = __check_if_has_permission(request, "add_occorrenze")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to Create Occurrenze"})
+
+    try:
+        data = {}
+        serializer = OccorrenzeSerializer(
+            data=request.data)
+        if serializer.is_valid():
+            occorrenze = Occorrenze(
+                titolo=serializer.data["titolo"],
+                descrizione=serializer.data["descrizione"],
+                commessa_macchina=serializer.data["commessa_macchina"],
+                versione_sw_1=serializer.data["versione_sw_1"],
+                versione_sw_2=serializer.data["versione_sw_2"],
+                data_occorrenza=serializer.data["data_occorrenza"],
+                stato_occorrenza=serializer.data["stato_occorrenza"],
+                note=serializer.data["note"],
+                user_id=request.user.id
+            )
+            occorrenze.segnalazione_id = request.data["segnalazione"] if "segnalazione" in request.data else ""
+            occorrenze.save()
+
+            data["message"] = "Occurrenze Created successfully"
+        else:
+            data = serializer.errors
+
+        return Response(data)
+    except KeyError as e:
+        print(e)
+        raise ValidationError({"400": f'Field {str(e)} missing'})
+
+
+@api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def retrive_user_segnalazioni(request):
     """
@@ -95,26 +203,22 @@ def retrive_user_segnalazioni(request):
         user_segnalazioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def retrive_user_segnalazioni_by_id(request,id):
-    """
-    It takes the user id from the request, then it filters the Segnalazioni model by the user id, then
-    it serializes the data and returns it as a JsonResponse.
 
-    :param request: The request object
-    :return: A list of dictionaries.
-    """
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_segnalazioni_by_id(request, id):
+
     check_permission = __check_if_has_permission(request, "view_segnalazioni")
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to view Segnalazioni"})
-
-    user_id = request.user.id
     user_segnalazioni = Segnalazioni.objects.filter(
-        user=user_id,id=id).prefetch_related('id_stato_segnalazione')
-    serializer_class = SegnalazioniDisplaySerializer(
-        user_segnalazioni, many=True).data
-    return JsonResponse(serializer_class, safe=False)
+        pk=id).prefetch_related('id_stato_segnalazione')
+    if user_segnalazioni[0].user.id == request.user.id or user_segnalazioni[0].user.is_admin:
+        serializer_class = SegnalazioniDisplaySerializer(
+            user_segnalazioni, many=True).data
+        return JsonResponse(serializer_class, safe=False)
+    else:
+        return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
 
 
 @api_view(["GET"])
@@ -152,7 +256,7 @@ def remove_segnalazioni(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to remove Segnalazioni"})
 
     segnalazioni = get_object_or_404(Segnalazioni, pk=id)
-    if (segnalazioni.user_id == request.user.id):
+    if(segnalazioni.user_id == request.user.id):
         segnalazioni.delete()
         return JsonResponse({"status": 200, "message": "Segnalazioni Removed successfully"})
     return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
@@ -174,7 +278,7 @@ def update_segnalazioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to update Segnalazioni"})
     seg = Segnalazioni.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = SegnalazioniDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -186,69 +290,6 @@ def update_segnalazioni(request, id):
 
 
 # Soluzioni Endpoints
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def create_soluzioni(request):
-    """
-    It takes a request, validates it, and creates a new Soluzioni object
-
-    :param request: The request object
-    :return: The data is being returned as a dictionary.
-    """
-    #     {
-    #     "titolo": "test title",
-    #     "rank": 3,
-    #     "descrizione": "test allarmante id",
-    #     "immagine_1": "test description alarm",
-    #     "immagine_2": "test family machine",
-    #     "immagine_3": "test test",
-    #     "settore_riferimento": "test test",
-    #     "note": "test test"
-    # }
-    check_permission = __check_if_has_permission(request, "add_soluzioni")
-    if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to create Soluzioni"})
-
-    try:
-        data = {}
-        stati = None
-        if "stato_soluzione" in request.data:
-            stati_serializer = StatiSoluzioneSerializer(
-                request.data["stato_soluzione"])
-
-            stati = Stati_Soluzione.objects.create(
-                stato_soluzione=stati_serializer.data["stato_soluzione"],
-                note=stati_serializer.data["note"]
-            )
-            stati.save()
-
-        serializer = SoluzioniSerializer(
-            data=request.data)
-        if serializer.is_valid():
-            soluzioni = Soluzioni.objects.create(
-                titolo=serializer.data["titolo"],
-                rank=serializer.data["rank"],
-                descrizione=serializer.data["descrizione"],
-                immagine_1=serializer.data["immagine_1"],
-                immagine_2=serializer.data["immagine_2"],
-                immagine_3=serializer.data["immagine_3"],
-                settore_riferimento=serializer.data["settore_riferimento"],
-                note=serializer.data["note"],
-                id_stato_soluzione=stati,
-                user_id=request.user.id
-            )
-
-            soluzioni.save()
-
-            data["message"] = "Soluzioni Created successfully"
-        else:
-            data = serializer.errors
-
-        return Response(data)
-    except KeyError as e:
-        print(e)
-        raise ValidationError({"400": f'Field {str(e)} missing'})
-
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
@@ -269,7 +310,7 @@ def remove_soluzioni(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to remove Soluzioni"})
 
     soluzioni = get_object_or_404(Soluzioni, pk=id)
-    if (soluzioni.user_id == request.user.id):
+    if(soluzioni.user_id == request.user.id):
         soluzioni.delete()
         return JsonResponse({"status": 200, "message": "Soluzioni Removed successfully"})
     return JsonResponse({"status": 404, "message": "Soluzioni not found"})
@@ -289,31 +330,26 @@ def retrive_user_soluzioni(request):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to View Soluzioni"})
 
-    user_id = request.user.id
-    user_soluzioni = Soluzioni.objects.filter(user=user_id)
+    #user_id = request.user.id
+    # user_soluzioni = Soluzioni.objects.filter(user=user_id)
+    user_soluzioni = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer(
         user_soluzioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def retrive_user_soluzioni_by_id(request,id):
-    """
-    It takes the user id from the request, then it filters the Soluzioni model by the user id, then it
-    serializes the data and returns it as a JsonResponse
-
-    :param request: The request object
-    :return: A list of dictionaries.
-    """
+def get_soluzioni_by_id(request, id):
     check_permission = __check_if_has_permission(request, "view_soluzioni")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to View Soluzioni"})
-
-    user_id = request.user.id
-    user_soluzioni = Soluzioni.objects.filter(user=user_id,id=id)
+        return JsonResponse({"status": 403, "message": "You do not have permission to view Soluzioni"})
+    user_soluzioni = Soluzioni.objects.filter(
+        pk=id).prefetch_related('id_stato_soluzione')
     serializer_class = SoluzioniDisplaySerializer(
         user_soluzioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -330,7 +366,7 @@ def update_soluzioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
     seg = Soluzioni.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = SoluzioniDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -359,65 +395,7 @@ def retrive_all_soluzioni(request):
     serializer_class = SoluzioniDisplaySerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
-
 # Soluzioni Endpoints
-
-
-# Soluzioni Occorrenze
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def create_occorrenze(request):
-    """
-    It takes a request, validates it, and saves it to the database.
-
-    :param request: The request object
-    :return: The data is being returned as a dictionary.
-    """
-    check_permission = __check_if_has_permission(request, "add_occorrenze")
-    if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to Create Occurrenze"})
-
-    # {
-    #     "titolo": "test title",
-    #     "descrizione": "test allarmante id",
-    #     "commessa_macchina": "test description alarm",
-    #     "versione_sw_1": "test family machine",
-    #     "versione_sw_2": "test test",
-    #     "data_occorrenza": "test test",
-    #     "stato_occorrenza": "test test",
-    #     "note": "test test"
-    # }
-
-    try:
-        data = {}
-        serializer = OccorrenzeSerializer(
-            data=request.data)
-        if serializer.is_valid():
-            occorrenze = Occorrenze(
-                titolo=serializer.data["titolo"],
-                descrizione=serializer.data["descrizione"],
-                commessa_macchina=serializer.data["commessa_macchina"],
-                versione_sw_1=serializer.data["versione_sw_1"],
-                versione_sw_2=serializer.data["versione_sw_2"],
-                data_occorrenza=serializer.data["data_occorrenza"],
-                stato_occorrenza=serializer.data["stato_occorrenza"],
-                note=serializer.data["note"],
-                rif_ticket=serializer.data["rif_ticket"],
-
-                user_id=request.user.id
-            )
-            occorrenze.segnalazione_id = request.data["segnalazione"]
-            occorrenze.soluzione_id = request.data["soluzione"]
-            occorrenze.save()
-
-            data["message"] = "Soluzioni Created successfully"
-        else:
-            data = serializer.errors
-
-        return Response(data)
-    except KeyError as e:
-        print(e)
-        raise ValidationError({"400": f'Field {str(e)} missing'})
 
 
 @api_view(["POST"])
@@ -436,7 +414,7 @@ def remove_occorrenze(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to Remove Occurrenze"})
 
     occorrenze = get_object_or_404(Occorrenze, pk=id)
-    if (occorrenze.user_id == request.user.id):
+    if(occorrenze.user_id == request.user.id):
         occorrenze.delete()
         return JsonResponse({"status": 200, "message": "Occorrenze Removed successfully"})
     return JsonResponse({"status": 404, "message": "Occorrenze not found"})
@@ -457,30 +435,27 @@ def retrive_user_occurrenze(request):
         return JsonResponse({"status": 403, "message": "You do not have permission to View Occurrenze"})
 
     user_id = request.user.id
-    user_occurrenze = Occorrenze.objects.filter(user=user_id)
+    # user_occurrenze = Occorrenze.objects.filter(user=user_id)
+    user_occurrenze = Occorrenze.objects.all()
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data
     return JsonResponse(serializer_class, safe=False)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-def retrive_user_occurrenze_by_id(request,id):
-    """
-    It takes the user id from the request, then it filters the Occorrenze model by the user id, then it
-    serializes the data and returns it as a JsonResponse
-
-    :param request: The request object
-    :return: A list of dictionaries.
-    """
+def get_occurrenze_by_id(request, id):
     check_permission = __check_if_has_permission(request, "view_occorrenze")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to View Occurrenze"})
-
-    user_id = request.user.id
-    user_occurrenze = Occorrenze.objects.filter(user=user_id,id=id)
+        return JsonResponse({"status": 403, "message": "You do not have permission to view Occurrenze"})
+    user_occurrenze = Occorrenze.objects.filter(pk=id)
+    # if user_occurrenze[0].user.id == request.user.id or user_occurrenze[0].user.is_admin:
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data
     return JsonResponse(serializer_class, safe=False)
+    # else:
+    #     return JsonResponse({"status": 404, "message": "Occurrenze not found"})
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -499,7 +474,7 @@ def update_occurrenze(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Occurrenze"})
 
     seg = Occorrenze.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = OccorrenzeDisplaySerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -508,6 +483,45 @@ def update_occurrenze(request, id):
         else:
             return JsonResponse({"status": 200, "message": "Occorrenze not found"})
     return JsonResponse({"status": 404, "message": "Occorrenze not found"})
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def connect_occorrenze_to_segnalazioni(request, id):
+    check_permission = __check_if_has_permission(request, "change_occorrenze")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to Update Occurrenze"})
+
+    occ = Occorrenze.objects.get(pk=id)
+    seg = Segnalazioni.objects.get(pk=request.data['segnalazioni_id'])
+    occ.segnalazione = seg
+    occ.save(update_fields=['segnalazione'])
+    data = OccorrenzeDisplaySerializer(
+        instance=occ, data=occ.__dict__)
+    if data.is_valid():
+        return JsonResponse(data.data, status=200, safe=False)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def connect_soluzioni_to_occorrenze(request, id):
+    check_permission = __check_if_has_permission(request, "change_soluzioni")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
+
+    sol = Soluzioni.objects.get(pk=id)
+    occ = Occorrenze.objects.get(pk=request.data['occorrenze_id'])
+
+    sol.occorrenze = occ
+    sol.save(update_fields=['occorrenze'])
+    return JsonResponse({"message": "Connected successfully",
+                             "status": 500}, status=200, safe=False)
+    # data = SoluzioniDisplaySerializer(instance=sol, data=sol.__dict__)
+    # if data.is_valid():
+    #     return JsonResponse(sol, status=200, safe=False)
+    # else:
+    #     return JsonResponse({"message": "Something went wrong please try again laters",
+    #                          "status": 500}, status=200, safe=False)
 
 
 @api_view(["GET"])
@@ -550,7 +564,7 @@ def create_stati_soluzione(request):
                 note=serializer.data["note"],
             )
         serializer.save()
-        return JsonResponse(data)
+        return JsonResponse(serializer)
     except KeyError as e:
         print(e)
         raise ValidationError({"400": f'Field {str(e)} missing'})
@@ -560,7 +574,7 @@ def create_stati_soluzione(request):
 @permission_classes([IsAuthenticated])
 def update_stati_soluzione(request, id):
     seg = Stati_Soluzione.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = StatiSoluzioneSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -575,7 +589,7 @@ def update_stati_soluzione(request, id):
 @permission_classes([IsAuthenticated])
 def remove_stati_soluzione(request, id):
     stati = get_object_or_404(Stati_Soluzione, pk=id)
-    if (stati.user_id == request.user.id):
+    if(stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Soluzione Removed successfully"})
     return JsonResponse({"status": 404, "message": "Stati_Soluzione not found"})
@@ -592,7 +606,7 @@ def create_stati_segnalazione(request):
                 note=serializer.data["note"],
             )
         serializer.save()
-        return JsonResponse(data)
+        return JsonResponse(serializer)
     except KeyError as e:
         print(e)
         raise ValidationError({"400": f'Field {str(e)} missing'})
@@ -602,7 +616,7 @@ def create_stati_segnalazione(request):
 @permission_classes([IsAuthenticated])
 def update_stati_segnalazione(request, id):
     seg = Stati_Segnalazione.objects.get(pk=id)
-    if (seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id):
         data = StatiSegnalazioneSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
@@ -626,7 +640,7 @@ def retrieve_all_stati_segnalazione(request):
 @permission_classes([IsAuthenticated])
 def remove_stati_segnalazione(request, id):
     stati = get_object_or_404(Stati_Segnalazione, pk=id)
-    if (stati.user_id == request.user.id):
+    if(stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Segnalazione Removed successfully"})
     return JsonResponse({"status": 404, "message": "Stati_Segnalazione not found"})
