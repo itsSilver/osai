@@ -65,7 +65,7 @@ def create_soluzioni(request):
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 settore_riferimento=serializer.data["settore_riferimento"],
                 note=serializer.data["note"],
-                occorrenze=request.data['occurrenze'],
+                occorrenze_id=request.data['occurrenze'],
                 id_stato_soluzione=stati,
                 user_id=request.user.id
             )
