@@ -37,7 +37,7 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
     sottofamiglia_macchina = serializers.CharField(max_length=255)
     id_stato_segnalazione = serializers.CharField(
         allow_blank=True, required=False)
-    rif_ticker = serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField(max_length=255)
 
     class Meta:
         model = Segnalazioni
@@ -96,7 +96,7 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
     data_occorrenza = serializers.CharField(max_length=255)
     stato_occorrenza = serializers.IntegerField()
     note = serializers.CharField()
-    rif_ticker = serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField(max_length=255)
     class Meta:
         model = Occorrenze
 
