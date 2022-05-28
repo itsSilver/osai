@@ -26,9 +26,19 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li
+                  class="nav-actions-color mx-2"
+                  v-if="showPermissionList === false"
+                >
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New User
+                </li>
+                <li
+                  class="nav-actions-color mx-2"
+                  v-if="showPermissionList === true"
+                >
+                  <i class="fas fa-plus pr-2 fas-main-color"></i>
+                  Add the permissions to User
                 </li>
               </ul>
             </div>
@@ -53,6 +63,7 @@
                     id="tittle"
                     v-model="form.name"
                     placeholder="Name"
+                    :disabled="showPermissionList === true"
                   />
                   <div class="error-show" v-if="showTitleSignalError">
                     Please enter the Title Signal!
@@ -70,6 +81,7 @@
                     id="ticket"
                     v-model="form.email"
                     placeholder="Email"
+                    :disabled="showPermissionList === true"
                   />
                 </div>
               </div>
@@ -84,9 +96,31 @@
                     id="ticket"
                     v-model="form.password"
                     placeholder="Password"
+                    :disabled="showPermissionList === true"
                   />
                 </div>
               </div>
+              <div class="form-group row" v-if="showPermissionList === false">
+                <div class="col-sm-10">
+                  <b-button type="submit" class="mx-2 button-format">
+                    <i class="fas fa-download pr-2"></i>
+                    Save
+                  </b-button>
+                </div>
+              </div>
+            </b-form>
+            <b-form
+              @submit.prevent="onSubmitPermission"
+              class="create-solution-form"
+              v-if="showPermissionList === true"
+            >
+              <h5 class="text-center">
+                Check all the permissions for this user!
+              </h5>
+              <div class="form-group row">
+                <PermissionsList :dataTable="dataPermission" />
+              </div>
+
               <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
@@ -114,14 +148,16 @@
 
 <script>
 import Nav from '~/components/Nav'
-
+import PermissionsList from '~/components/PermissionsList'
 export default {
   components: {
     Nav,
+    PermissionsList,
   },
   data() {
     return {
       show: false,
+      dataPermission: [],
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,
@@ -130,7 +166,11 @@ export default {
         email: null,
         password: null,
       },
+      showPermissionList: false,
     }
+  },
+  mounted() {
+    this.getPermissionData()
   },
   methods: {
     onSubmit() {
@@ -157,10 +197,12 @@ export default {
         })
         .then(() => {
           this.dataCreated = 'User created Succesfully'
-          this.toggleToaster()
-          setTimeout(() => {
-            this.$router.push('/manage-access')
-          }, 2000)
+          //   this.toggleToaster()
+          //   setTimeout(() => {
+          //     this.$router.push('/manage-access')
+          //   }, 2000)
+          this.showPermissionList = true
+          this.getPermissionData()
         })
         .catch((error) => {
           this.show = false
@@ -168,6 +210,28 @@ export default {
           this.variant = 'danger'
           this.toggleToaster()
         })
+    },
+    async getPermissionData() {
+      this.show = true
+      await this.$axios
+        .get(`/user/permissions`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          this.dataPermission = response.data
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    onSubmitPermission() {
+      console.log('Permission function works!')
     },
     hideModal() {
       this.showFindOccurrence = false

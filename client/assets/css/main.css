@@ -11117,6 +11117,9 @@ textarea {
 .table-checkbox {
   padding-left: 1rem !important;
 }
+.checkPermission {
+  padding-right: 20px !important;
+}
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;
