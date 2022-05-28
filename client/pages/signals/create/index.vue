@@ -131,37 +131,35 @@
                   >Image 1</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag1"
-                  />
+                  <input type="file" @change="fileChange" />
                 </div>
               </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label for="immag2" class="col-sm-2 col-form-label create-label"
                   >Image 2</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag2"
-                  />
+                  <b-form-file
+                    v-model="form.file2"
+                    :state="Boolean(form.file2)"
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                  ></b-form-file>
                 </div>
-              </div>
-              <div class="form-group row">
+              </div> -->
+              <!-- <div class="form-group row">
                 <label for="immag3" class="col-sm-2 col-form-label create-label"
                   >Image 3</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag3"
-                  />
+                  <b-form-file
+                    v-model="form.file3"
+                    :state="Boolean(form.file3)"
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                  ></b-form-file>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <label for="sector" class="col-sm-2 col-form-label create-label"
                   >Reference sector</label
@@ -211,24 +209,6 @@
                     v-model="form.sottofamiglia_macchina"
                     :options="sottofamiglia_macchina_options"
                   ></b-form-select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Find or create Occurrence</label
-                >
-                <div class="col-sm-10 find-create-occurrence">
-                  <b-button
-                    class="mx-2 button-format"
-                    @click="findOccurrence()"
-                  >
-                    <i class="fas fa-search pr-2"></i>
-                    Find Occurrence
-                  </b-button>
-                  <b-button class="mx-2 button-format" @click="newOccurrence()">
-                    <i class="fas fa-plus pr-2"></i>
-                    Create new Occurrence
-                  </b-button>
                 </div>
               </div>
               <div class="form-group row">
@@ -301,6 +281,9 @@ export default {
   data() {
     return {
       show: false,
+      file1: null,
+      file2: null,
+      file3: null,
       showFindOccurrence: false,
       editor: ClassicEditor,
       dataCreated: '',
@@ -315,8 +298,12 @@ export default {
         famiglia_macchina: null,
         sottofamiglia_macchina: null,
         rif_ticket: null,
+        immagine_1: null,
+        // file2: null,
+        // file3: null,
         // id_stato_segnalazione: null,
       },
+      tempimmagine_1: null,
       famiglia_macchina_options: [
         { value: null, text: 'Select' },
         { value: 'Modula', text: 'Modula' },
@@ -332,7 +319,25 @@ export default {
     }
   },
   methods: {
+    fileChange(event) {
+      this.form.immagine_1 = event.target.files[0]
+      this.tempimmagine_1 = new FormData()
+      this.tempimmagine_1.append('image', this.form.immagine_1)
+    },
     onSubmit() {
+      let payload = {
+        titolo: this.form.titolo,
+        descrizione: this.form.descrizione,
+        id_allarme: this.form.id_allarme,
+        immagine_1: this.tempimmagine_1,
+        descrizione_allarme: this.form.descrizione_allarme,
+        famiglia_macchina: this.form.famiglia_macchina,
+        sottofamiglia_macchina: this.form.sottofamiglia_macchina,
+        rif_ticket: this.form.rif_ticket,
+      }
+
+      console.log(payload)
+
       this.show = true
       if (
         this.form.titolo === null ||
@@ -350,10 +355,10 @@ export default {
         return
       }
       this.$axios
-        .post(`/api/segnalazioni/create`, this.form, {
+        .post(`/api/segnalazioni/create`, payload, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then(() => {
@@ -369,12 +374,6 @@ export default {
           this.variant = 'danger'
           this.toggleToaster()
         })
-    },
-    findOccurrence() {
-      this.showFindOccurrence = true
-    },
-    newOccurrence() {
-      this.$router.push(`/occurrences/create`)
     },
     hideModal() {
       this.showFindOccurrence = false
