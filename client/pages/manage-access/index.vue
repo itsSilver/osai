@@ -232,7 +232,7 @@ export default {
       this.selectedId = val
     },
     redirectCreate() {
-      //   this.$router.push(`/manage-access/create`)
+      this.$router.push(`/manage-access/create`)
     },
     updateDocument() {
       // this.$router.push(`/solutions/update/2`)
