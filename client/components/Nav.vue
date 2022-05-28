@@ -42,9 +42,9 @@
     </ul>
     <p class="side-menu-title">SETTINGS</p>
     <ul class="list-unstyled components">
-      <li class="active">
-        <a class="text-white" href="#"
-          ><i class="fa fa-user mr-3"></i> Manage access</a
+      <li>
+        <nuxt-link tag="a" to="/manage-access" class="text-white"
+          ><i class="fa fa-ghost mr-3"></i> Manage access</nuxt-link
         >
       </li>
       <li>
