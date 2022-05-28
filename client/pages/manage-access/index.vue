@@ -110,38 +110,24 @@
                 <b-dropdown-form>
                   <b-form-checkbox
                     class="table-checkbox mb-3"
-                    v-model="statusIdsolution"
+                    v-model="statusUserId"
                     value="1"
                     unchecked-value="0"
-                    >Id Solution</b-form-checkbox
+                    >Id User</b-form-checkbox
                   >
                   <b-form-checkbox
                     class="table-checkbox mb-3"
-                    v-model="statusTitle"
+                    v-model="statusName"
                     value="1"
                     unchecked-value="0"
-                    >Title</b-form-checkbox
+                    >Name</b-form-checkbox
                   >
                   <b-form-checkbox
                     class="table-checkbox mb-3"
-                    v-model="statusRank"
+                    v-model="statusEmail"
                     value="1"
                     unchecked-value="0"
-                    >Rank</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusSector"
-                    value="1"
-                    unchecked-value="0"
-                    >Reference Sector</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusIdStSolutions"
-                    value="1"
-                    unchecked-value="0"
-                    >Id Status Solutions</b-form-checkbox
+                    >Email</b-form-checkbox
                   >
                   <b-form-checkbox
                     class="table-checkbox mb-3"
@@ -171,11 +157,9 @@
             <b-overlay :show="show" rounded="sm">
               <UsersTable
                 :dataTable="dataTable"
-                :statusIdsolution="statusIdsolution"
-                :statusTitle="statusTitle"
-                :statusRank="statusRank"
-                :statusSector="statusSector"
-                :statusIdStSolutions="statusIdStSolutions"
+                :statusUserId="statusUserId"
+                :statusName="statusName"
+                :statusEmail="statusEmail"
                 :statusCreationDate="statusCreationDate"
                 :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
@@ -218,13 +202,11 @@ export default {
         { value: '25', text: '25' },
         { value: '30', text: '30', disabled: true },
       ],
-      statusIdsolution: '1',
-      statusTitle: '1',
-      statusRank: '1',
-      statusSector: '1',
-      statusIdStSolutions: '0',
+      statusUserId: '1',
+      statusName: '1',
+      statusEmail: '1',
       statusCreationDate: '1',
-      statusUpdateDate: '1',
+      statusUpdateDate: '0',
     }
   },
   methods: {

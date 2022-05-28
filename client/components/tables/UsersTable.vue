@@ -7,11 +7,13 @@
         <b-th>
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
-        <b-th><i class="fa-solid fa-arrow-down-short-wide"></i>Id User</b-th>
-        <b-th>Name</b-th>
-        <b-th>Email</b-th>
-        <b-th>Creation date</b-th>
-        <b-th>Update date</b-th>
+        <b-th v-if="statusUserId === '1'"
+          ><i class="fa-solid fa-arrow-down-short-wide"></i>Id User</b-th
+        >
+        <b-th v-if="statusName === '1'">Name</b-th>
+        <b-th v-if="statusEmail === '1'">Email</b-th>
+        <b-th v-if="statusCreationDate === '1'">Creation date</b-th>
+        <b-th v-if="statusUpdateDate === '1'">Update date</b-th>
       </b-thead>
       <b-tbody v-if="dataTable">
         <b-tr v-for="data in dataTable" :key="data.id">
@@ -25,11 +27,11 @@
               @change="changeValue"
             />
           </b-td>
-          <b-td>{{ data.id }}</b-td>
-          <b-td>{{ data.name }}</b-td>
-          <b-td>{{ data.email }}</b-td>
-          <b-td>{{ data.created_at }}</b-td>
-          <b-td>{{ data.updated_at }}</b-td>
+          <b-td v-if="statusUserId === '1'">{{ data.id }}</b-td>
+          <b-td v-if="statusName === '1'">{{ data.name }}</b-td>
+          <b-td v-if="statusEmail === '1'">{{ data.email }}</b-td>
+          <b-td v-if="statusCreationDate === '1'">{{ data.created_at }}</b-td>
+          <b-td v-if="statusUpdateDate === '1'">{{ data.updated_at }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -64,23 +66,25 @@
                 @change="changeValue"
             /></b-td>
           </div>
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title">Id User</b-td>
+          <div class="respo-after-tr" v-if="statusUserId === '1'">
+            <b-td class="td-respo-title" v-if="statusUserId === '1'"
+              >Id User</b-td
+            >
             <b-td class="td-respo-data">{{ data.id }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusName === '1'">
             <b-td class="td-respo-title">Name</b-td>
             <b-td class="td-respo-data">{{ data.name }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusEmail === '1'">
             <b-td class="td-respo-title">Email</b-td>
             <b-td class="td-respo-data">{{ data.email }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusCreationDate === '1'">
             <b-td class="td-respo-title">Creation date</b-td>
             <b-td class="td-respo-data">{{ data.created_at }}</b-td>
           </div>
-          <div class="respo-after-tr">
+          <div class="respo-after-tr" v-if="statusUpdateDate === '1'">
             <b-td class="td-respo-title">Update date</b-td>
             <b-td class="td-respo-data">{{ data.updated_at }}</b-td>
           </div>
@@ -116,11 +120,9 @@ export default {
   },
   props: [
     'dataTable',
-    'statusIdsolution',
-    'statusTitle',
-    'statusRank',
-    'statusSector',
-    'statusIdStSolutions',
+    'statusUserId',
+    'statusName',
+    'statusEmail',
     'statusCreationDate',
     'statusUpdateDate',
   ],
