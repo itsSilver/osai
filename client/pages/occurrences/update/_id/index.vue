@@ -350,7 +350,7 @@ export default {
     },
   },
   async asyncData({ store, $axios, params }) {
-    let response = await $axios.post(
+    let response = await $axios.get(
       `/api/occorrenze/retrive_occorrenze/${params.id}`
     )
     let dataTable = response.data[0]

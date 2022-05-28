@@ -354,7 +354,7 @@ export default {
     },
   },
   async asyncData({ store, $axios, params }) {
-    let response = await $axios.post(
+    let response = await $axios.get(
       `/api/segnalazioni/retrive_segnalazioni/${params.id}`
     )
     let dataTable = response.data[0]
