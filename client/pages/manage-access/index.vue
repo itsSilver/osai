@@ -169,7 +169,7 @@
           </div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <!-- <SolutionsTable
+              <UsersTable
                 :dataTable="dataTable"
                 :statusIdsolution="statusIdsolution"
                 :statusTitle="statusTitle"
@@ -179,7 +179,7 @@
                 :statusCreationDate="statusCreationDate"
                 :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
-              /> -->
+              />
             </b-overlay>
           </div>
         </div>
@@ -198,11 +198,11 @@
 
 <script>
 import Nav from '~/components/Nav'
-import SolutionsTable from '~/components/tables/SolutionsTable.vue'
+import UsersTable from '~/components/tables/UsersTable.vue'
 export default {
   components: {
     Nav,
-    SolutionsTable,
+    UsersTable,
   },
   data() {
     return {
@@ -358,13 +358,13 @@ export default {
       }, 2000)
     },
   },
-  //   async asyncData({ store, $axios }) {
-  //     let response = await $axios.get(`/api/soluzioni/retrive_soluzioni`)
-  //     let dataTable = response.data
-  //     return {
-  //       dataTable,
-  //     }
-  //   },
+  async asyncData({ store, $axios }) {
+    let response = await $axios.get(`/user/users-list`)
+    let dataTable = response.data
+    return {
+      dataTable,
+    }
+  },
 }
 </script>
 <style scoped>
