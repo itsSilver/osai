@@ -52,7 +52,7 @@
                   type="text"
                   class="form-control input-create"
                   id="id-segnalazione"
-                  v-model="form.segnalazione"
+                  v-model="dataTable.segnalazione"
                   placeholder="Id signal"
                 />
               </div>
@@ -68,7 +68,7 @@
                   type="text"
                   class="form-control input-create"
                   id="id-soluzione"
-                  v-model="form.soluzione"
+                  v-model="dataTable.soluzione"
                   placeholder="Id solution"
                 />
               </div>
@@ -82,7 +82,7 @@
                   type="text"
                   class="form-control input-create"
                   id="tittle"
-                  v-model="form.titolo"
+                  v-model="dataTable.titolo"
                   placeholder="Title"
                 />
               </div>
@@ -96,7 +96,7 @@
                   type="text"
                   class="form-control input-create"
                   id="ticket"
-                  v-model="form.rif_ticket"
+                  v-model="dataTable.rif_ticket"
                   placeholder="Ticket"
                 />
               </div>
@@ -115,7 +115,7 @@
                   :tagName="tagName"
                   :disabled="disabled"
                   @input="(event) => $emit('input', event)"
-                  v-model="form.descrizione"
+                  v-model="dataTable.descrizione"
                 />
               </div>
             </div>
@@ -128,7 +128,7 @@
                   type="text"
                   class="form-control input-create"
                   id="machine"
-                  v-model="form.commessa_macchina"
+                  v-model="dataTable.commessa_macchina"
                   placeholder="Machine order"
                 />
               </div>
@@ -144,7 +144,7 @@
                   type="text"
                   class="form-control input-create"
                   id="version-1"
-                  v-model="form.versione_sw_1"
+                  v-model="dataTable.versione_sw_1"
                   placeholder="Version sw 1"
                 />
               </div>
@@ -160,7 +160,7 @@
                   type="text"
                   class="form-control input-create"
                   id="version-2"
-                  v-model="form.versione_sw_2"
+                  v-model="dataTable.versione_sw_2"
                   placeholder="Version sw 2"
                 />
               </div>
@@ -174,7 +174,7 @@
               <div class="col-sm-10">
                 <b-form-datepicker
                   id="example-datepicker"
-                  v-model="form.data_occorrenza"
+                  v-model="dataTable.data_occorrenza"
                   class="mb-2 date-choose"
                 ></b-form-datepicker>
               </div>
@@ -190,7 +190,7 @@
                   type="text"
                   class="form-control input-create"
                   id="status-occorrenza"
-                  v-model="form.stato_occorrenza"
+                  v-model="dataTable.stato_occorrenza"
                   placeholder="Occurrence status"
                 />
               </div>
@@ -207,7 +207,7 @@
                   :tagName="tagName"
                   :disabled="disabled"
                   @input="(event) => $emit('input', event)"
-                  v-model="form.note"
+                  v-model="dataTable.note"
                 />
               </div>
             </div>
@@ -301,17 +301,17 @@ export default {
     onSubmit() {
       this.show = true
       if (
-        this.form.segnalazione === null ||
-        this.form.soluzione === null ||
-        this.form.titolo === null ||
-        this.form.commessa_macchina === null ||
-        this.form.versione_sw_1 === null ||
-        this.form.versione_sw_2 === null ||
-        this.form.rif_ticket === null ||
-        this.form.data_occorrenza === '' ||
-        this.form.descrizione === '' ||
-        this.form.note === '' ||
-        this.form.stato_occorrenza === null
+        this.dataTable.segnalazione === null ||
+        this.dataTable.soluzione === null ||
+        this.dataTable.titolo === null ||
+        this.dataTable.commessa_macchina === null ||
+        this.dataTable.versione_sw_1 === null ||
+        this.dataTable.versione_sw_2 === null ||
+        this.dataTable.rif_ticket === null ||
+        this.dataTable.data_occorrenza === '' ||
+        this.dataTable.descrizione === '' ||
+        this.dataTable.note === '' ||
+        this.dataTable.stato_occorrenza === null
       ) {
         this.show = false
         this.variant = 'danger'
@@ -320,23 +320,36 @@ export default {
         return
       }
 
+      let payload = {
+        segnalazione: this.dataTable.segnalazione,
+        soluzione: this.dataTable.soluzione,
+        titolo: this.dataTable.titolo,
+        descrizione: this.dataTable.descrizione,
+        commessa_macchina: this.dataTable.commessa_macchina,
+        versione_sw_1: this.dataTable.versione_sw_1,
+        versione_sw_2: this.dataTable.versione_sw_2,
+        data_occorrenza: this.dataTable.data_occorrenza,
+        stato_occorrenza: this.dataTable.stato_occorrenza,
+        rif_ticket: this.dataTable.rif_ticket,
+        note: this.dataTable.note,
+      }
+
       this.$axios
-        .post(`/api/occorrenze/create`, this.form, {
+        .post(`/api/occorrenze/update/${this.$route.params.id}`, payload, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
           },
         })
         .then(() => {
-          this.dataCreated = 'Occurrence created Succesfully'
+          this.dataCreated = 'Occurrence Updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
-            this.$router.push('/occurrences')
-          }, 2000)
+            // this.$router.push('/occurrences')
+          }, 3000)
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = 'Something went wrong!'
           this.variant = 'danger'
           this.toggleToaster()
         })
