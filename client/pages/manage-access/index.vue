@@ -290,7 +290,7 @@ export default {
       }
 
       this.$bvModal
-        .msgBoxConfirm('Are you sure you want to delete this Solution?', {
+        .msgBoxConfirm('Are you sure you want to delete this User?', {
           title: `Attention`,
           size: 'sm',
           buttonSize: 'sm',
@@ -305,7 +305,7 @@ export default {
           if (value === true) {
             this.show = true
             this.$axios
-              .post(`/api/soluzioni/${this.selectedId[0]}/delete`, {
+              .post(`/user/remove/${this.selectedId[0]}`, {
                 headers: {
                   Authorization: `Token ${this.$auth.strategy.token.get()}`,
                   'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ export default {
               })
               .then(() => {
                 this.variant = 'danger'
-                this.dataCreated = 'Solution deleted Succesfully'
+                this.dataCreated = 'User deleted Succesfully'
                 this.toggleToaster()
                 this.$nuxt.refresh()
                 this.show = false
