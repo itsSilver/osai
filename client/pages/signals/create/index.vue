@@ -344,20 +344,6 @@ export default {
       this.tempimmagine_3 = event.target.files[0]
     },
     onSubmit() {
-      const data = new FormData()
-      data.append('titolo', this.form.titolo)
-      data.append('descrizione', this.form.descrizione)
-      data.append('immagine_1', this.tempimmagine_1)
-      data.append('immagine_2', this.tempimmagine_2)
-      data.append('immagine_3', this.tempimmagine_3)
-      data.append('settore_riferimento', 'test test')
-      data.append('note', this.form.note)
-      data.append('rif_ticket', this.form.rif_ticket)
-      data.append('descrizione_allarme', this.form.descrizione_allarme)
-      data.append('id_allarme', this.form.id_allarme)
-      data.append('famiglia_macchina', this.form.famiglia_macchina)
-      data.append('sottofamiglia_macchina', this.form.sottofamiglia_macchina)
-
       // let payload = {
       //   titolo: titolo,
       //   descrizione: descrizione,
@@ -372,21 +358,35 @@ export default {
       // console.log(payload)
 
       this.show = true
-      // if (
-      //   this.form.titolo === null ||
-      //   this.form.descrizione === '' ||
-      //   this.form.descrizione_allarme === '' ||
-      //   this.form.id_allarme === null ||
-      //   this.form.famiglia_macchina === null ||
-      //   this.form.sottofamiglia_macchina === null ||
-      //   this.form.rif_ticket === null
-      // ) {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please make sure all the fields are filled!'
-      //   this.toggleToaster()
-      //   return
-      // }
+      if (
+        this.form.titolo === null ||
+        this.form.descrizione === '' ||
+        this.form.descrizione_allarme === '' ||
+        this.form.id_allarme === null ||
+        this.form.famiglia_macchina === null ||
+        this.form.sottofamiglia_macchina === null ||
+        this.form.rif_ticket === null
+      ) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.toggleToaster()
+        return
+      }
+      const data = new FormData()
+      data.append('titolo', this.form.titolo)
+      data.append('descrizione', this.form.descrizione)
+      data.append('immagine_1', this.tempimmagine_1)
+      data.append('immagine_2', this.tempimmagine_2)
+      data.append('immagine_3', this.tempimmagine_3)
+      data.append('settore_riferimento', 'test test')
+      data.append('note', this.form.note)
+      data.append('rif_ticket', this.form.rif_ticket)
+      data.append('descrizione_allarme', this.form.descrizione_allarme)
+      data.append('id_allarme', this.form.id_allarme)
+      data.append('famiglia_macchina', this.form.famiglia_macchina)
+      data.append('sottofamiglia_macchina', this.form.sottofamiglia_macchina)
+
       this.$axios
         .post(`/api/segnalazioni/create`, data, {
           headers: {
