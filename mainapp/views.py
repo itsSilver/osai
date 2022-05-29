@@ -137,7 +137,7 @@ def create_segnalazioni(request):
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 id_stato_segnalazione=stati,
                 user_id=request.user.id,
-note=serializer.data["note"]
+                note=serializer.data["note"]
 
             )
 
