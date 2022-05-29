@@ -11120,6 +11120,12 @@ textarea {
 .checkPermission {
   padding-right: 20px !important;
 }
+.img-100 {
+  width: 100% !important;
+}
+.file-button {
+  min-width: 81px !important;
+}
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;
