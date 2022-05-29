@@ -1,19 +1,31 @@
-from django.core.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
-# Create your views here.
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from email import message
+import re
+from django.shortcuts import get_object_or_404, render
+from rest_framework.renderers import JSONRenderer
+from rest_framework import filters
+from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
+from django.core.exceptions import ValidationError
+from django.http import JsonResponse
+import json
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.permissions import IsAuthenticated
-# Create your views here.
-from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
 from mainapp.decorators.is_admin import is_admin
 from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Segnalazione, Stati_Soluzione
-from mainapp.serializers import OccorrenzeDisplaySerializer, SegnalazioniDisplaySerializer, \
-    SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer, \
+
+from mainapp.serializers import OccorrenzeDisplaySerializer, SegnalazioniDisplaySerializer,  \
+    SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer,  \
     StatiSegnalazioneSerializer, StatiSoluzioneSerializer
 
 
@@ -52,7 +64,9 @@ def create_soluzioni(request):
                 note=stati_serializer.data["note"]
             )
             stati.save()
-
+        occ = None
+        if "occorrenze" in request.data:
+            occ = Occorrenze.objects.get(pk=request.data["occorrenze"])
         serializer = SoluzioniSerializer(
             data=request.data)
         if serializer.is_valid():
@@ -65,7 +79,7 @@ def create_soluzioni(request):
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 settore_riferimento=serializer.data["settore_riferimento"],
                 note=serializer.data["note"],
-                occorrenze_id=request.data['occurrenze'],
+                occorrenze=occ,
                 id_stato_soluzione=stati,
                 user_id=request.user.id
             )
@@ -218,7 +232,7 @@ def get_segnalazioni_by_id(request, id):
             user_segnalazioni, many=True).data
         return JsonResponse(serializer_class, safe=False)
     else:
-        return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
+        raise NotFound("Segnalazioni not found")
 
 
 @api_view(["GET"])
@@ -259,7 +273,7 @@ def remove_segnalazioni(request, id):
     if(segnalazioni.user_id == request.user.id):
         segnalazioni.delete()
         return JsonResponse({"status": 200, "message": "Segnalazioni Removed successfully"})
-    return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
+    raise NotFound("Segnalazioni not found")
 
 
 @api_view(['POST'])
@@ -285,8 +299,8 @@ def update_segnalazioni(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "Segnalazioni not found"})
-    return JsonResponse({"status": 404, "message": "Segnalazioni not found"})
+            raise NotFound("Segnalazioni not found")
+    raise NotFound("Segnalazioni not found")
 
 
 # Soluzioni Endpoints
@@ -313,7 +327,7 @@ def remove_soluzioni(request, id):
     if(soluzioni.user_id == request.user.id):
         soluzioni.delete()
         return JsonResponse({"status": 200, "message": "Soluzioni Removed successfully"})
-    return JsonResponse({"status": 404, "message": "Soluzioni not found"})
+    raise NotFound("Soluzioni not found")
 
 
 @api_view(["GET"])
@@ -373,8 +387,8 @@ def update_soluzioni(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "Soluzioni not found"})
-    return JsonResponse({"status": 404, "message": "Soluzioni not found"})
+            raise NotFound("Soluzioni not found")
+    raise NotFound("Soluzioni not found")
 
 
 @api_view(["GET"])
@@ -417,7 +431,7 @@ def remove_occorrenze(request, id):
     if(occorrenze.user_id == request.user.id):
         occorrenze.delete()
         return JsonResponse({"status": 200, "message": "Occorrenze Removed successfully"})
-    return JsonResponse({"status": 404, "message": "Occorrenze not found"})
+    raise NotFound("Occorrenze not found")
 
 
 @api_view(["GET"])
@@ -481,8 +495,8 @@ def update_occurrenze(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "Occorrenze not found"})
-    return JsonResponse({"status": 404, "message": "Occorrenze not found"})
+            raise NotFound("Occorrenze not found")
+    raise NotFound("Occorrenze not found")
 
 
 @api_view(['POST'])
@@ -581,8 +595,8 @@ def update_stati_soluzione(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "Occorrenze not found"})
-    return JsonResponse({"status": 404, "message": "Occorrenze not found"})
+            raise NotFound("Not found")
+    raise NotFound("Not found")
 
 
 @api_view(["POST"])
@@ -592,7 +606,7 @@ def remove_stati_soluzione(request, id):
     if(stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Soluzione Removed successfully"})
-    return JsonResponse({"status": 404, "message": "Stati_Soluzione not found"})
+    raise NotFound("Not found")
 
 
 @api_view(["POST"])
@@ -623,8 +637,8 @@ def update_stati_segnalazione(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "Occorrenze not found"})
-    return JsonResponse({"status": 404, "message": "Occorrenze not found"})
+            raise NotFound("Not found")
+    raise NotFound("Not found")
 
 
 @api_view(["GET"])
@@ -643,4 +657,25 @@ def remove_stati_segnalazione(request, id):
     if(stati.user_id == request.user.id):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Segnalazione Removed successfully"})
-    return JsonResponse({"status": 404, "message": "Stati_Segnalazione not found"})
+    raise NotFound("Not found")
+
+
+
+class SoluzioniListView(generics.ListAPIView):
+    queryset = Soluzioni.objects.all()
+    serializer_class = SoluzioniDisplaySerializer
+    filter_backends = [filters.SearchFilter]
+    
+
+
+class SegnalazioneListView(generics.ListAPIView):
+    queryset = Segnalazioni.objects.all().prefetch_related('id_stato_segnalazione')
+    serializer_class = SegnalazioniDisplaySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields =  [ 'titolo', 'id_allarme', 'descrizione', 'descrizione_allarme', 'famiglia_macchina']
+
+class OccorrenzeListView(generics.ListAPIView):
+    queryset = Occorrenze.objects.all()
+    serializer_class = OccorrenzeDisplaySerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields =  [ 'titolo', 'commessa_macchina', 'descrizione', 'versione_sw_1', '=stato_occorrenza']

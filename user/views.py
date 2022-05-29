@@ -1,18 +1,23 @@
 from django.contrib.auth import get_user_model
+from django.shortcuts import get_object_or_404
+from mainapp.decorators.is_admin import is_admin
+from user.models import Users
+from user.serializers import RegistrationSerializer, UserSerializer, PermissionsSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import Permission
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound, ValidationError, ParseError
 
-from mainapp.decorators.is_admin import is_admin
 from user.models import Users
 from user.serializers import RegistrationSerializer, UserSerializer, PermissionsSerializer
 
@@ -101,7 +106,7 @@ def user_delete(request, id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def update_user(request, id):
-    seg = User.objects.get(pk=id)
+    user = get_object_or_404(User, pk=id)
     if(seg.user_id == request.user.id):
         data = UserSerializer(
             instance=seg, data=request.data)
@@ -110,14 +115,14 @@ def update_user(request, id):
             return JsonResponse(data.data, status=200)
         else:
             return JsonResponse({"status": 200, "message": "User not found"})
-    return JsonResponse({"status": 404, "message": "User not found"})
+    raise NotFound("User not found")
 
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @is_admin
 def add_permission_to_user(request, id):
-    user = User.objects.get(pk=id)
+    user = get_object_or_404(User, pk=id)
     permissions = request.data["permission_id"]
     for per in permissions:
         user.permissions.add(per)
@@ -125,7 +130,7 @@ def add_permission_to_user(request, id):
     if user:
         return JsonResponse({"status": 200, "message": "User permission updated successfully"})
     else:
-        return JsonResponse({"status": 404, "message": "User not found"})
+        raise NotFound("User not found")
 
 
 @ api_view(["GET"])
@@ -172,14 +177,13 @@ def add_permission(request, id):
 @ is_admin
 def remove_permission(request, id):
     permissions = request.data['permissions']
-
-    u = User.objects.get(id=id)
+    u = get_object_or_404(User, pk=id)
     permission_to_add = Permission.objects.filter(codename__in=permissions)
     for permission in permission_to_add:
         u.user_permissions.remove(permission)
     return Response({"200": f'Removed'})
 
-    return JsonResponse(serializer, safe=False)
+    # return JsonResponse(serializer, safe=False)
 
 
 @ api_view(["GET"])
@@ -213,3 +217,14 @@ def create_permission(request):
         per = serializer.save()
         per.save()
         return JsonResponse(per, safe=False)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+@is_admin
+def retrieve_user_by_id(request):
+    if 'user_id' not in request.data:
+        raise ParseError("User id is missing")
+    queryset = get_object_or_404(User, pk=request.data["user_id"])
+    serializer_class = UserSerializer(queryset).data
+    return JsonResponse(serializer_class, safe=False)
