@@ -334,20 +334,14 @@ export default {
     fileChange(event) {
       console.log(event)
       this.tempimmagine_1 = event.target.files[0]
-      // this.tempimmagine_1 = new FormData()
-      // this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     fileChange2(event) {
       console.log(event)
       this.tempimmagine_2 = event.target.files[0]
-      // this.tempimmagine_1 = new FormData()
-      // this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     fileChange3(event) {
       console.log(event)
       this.tempimmagine_3 = event.target.files[0]
-      // this.tempimmagine_1 = new FormData()
-      // this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     onSubmit() {
       const data = new FormData()
