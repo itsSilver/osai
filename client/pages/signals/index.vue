@@ -81,11 +81,16 @@
               <b-input-group class="mt-3">
                 <b-form-input
                   class="input-search"
+                  v-model="filterName"
                   placeholder="Search"
                   style="height: 40px !important"
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button class="button-format">
+                  <b-button
+                    type="submit"
+                    class="button-format"
+                    @click="onSubmitSearch()"
+                  >
                     <i class="fas fa-search pr-2"></i>Search</b-button
                   >
                 </b-input-group-append>
@@ -216,6 +221,7 @@ export default {
     return {
       selected: null,
       selectedId: [],
+      dataTable: [],
       dataCreated: '',
       variant: '',
       show: false,
@@ -234,9 +240,33 @@ export default {
       statusUnderMachine: '0',
       statusCreationDate: '1',
       statusUpdateDate: '1',
+      filterName: null,
     }
   },
   methods: {
+    onSubmitSearch() {
+      this.show = true
+      this.$axios
+        .get('/api/segnalazioni/filter', {
+          params: {
+            search: this.filterName,
+          },
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '#',
+          },
+        })
+        .then((response) => {
+          // this.dataTable = response.data
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
     idToDelete(val) {
       this.selectedId = val
     },
