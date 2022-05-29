@@ -107,7 +107,7 @@ def user_delete(request, id):
 @permission_classes([IsAuthenticated])
 def update_user(request, id):
     seg = get_object_or_404(User, pk=id)
-    if(seg.user_id == request.user.id):
+    if(seg.id == request.user.id):
         data = UserSerializer(
             instance=seg, data=request.data)
         if data.is_valid():
