@@ -67,7 +67,8 @@ class Soluzioni(models.Model):
     settore_riferimento = models.CharField(max_length=255)
     note = models.TextField()
     occorrenze = models.ForeignKey(
-        "Occorrenze", on_delete=models.CASCADE, blank=True, null=True)
+        "Occorrenze", related_name='soluzioni_id', on_delete=models.CASCADE, blank=True, null=True)
+
     user = models.ForeignKey(Users, models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)

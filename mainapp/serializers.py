@@ -67,13 +67,25 @@ class SoluzioniSerializer(serializers.ModelSerializer):
     #     return SoluzioniSerializer.objects.create(**validated_data)
 
 
+class SoluzioniForOcc(serializers.ModelSerializer):
+    id_stato_soluzione = StatiSoluzioneSerializer(required=False)
+
+    class Meta:
+        model = Soluzioni
+
+        fields = ("id", "titolo", "rank", "descrizione", "immagine_1",
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at")
+
+
+
 class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     # segnalazione = SegnalazioniDisplaySerializer(read_only=True)
+    soluzioni = SoluzioniForOcc(read_only=True)
 
     class Meta:
         model = Occorrenze
 
-        fields = ("id","segnalazione", "titolo", "descrizione", "commessa_macchina",
+        fields = ("id","segnalazione", "soluzioni","titolo", "descrizione", "commessa_macchina",
                   "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "stato_occorrenza","id","created_at","updated_at","rif_ticket")
 
 

@@ -452,7 +452,7 @@ def retrive_user_occurrenze(request):
 
     user_id = request.user.id
     # user_occurrenze = Occorrenze.objects.filter(user=user_id)
-    user_occurrenze = Occorrenze.objects.all()
+    user_occurrenze = Occorrenze.objects.all().prefetch_related('soluzioni_id')
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data
     return JsonResponse(serializer_class, safe=False)
