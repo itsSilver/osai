@@ -5,12 +5,25 @@
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
           <div
-            class="nav-actions d-flex justify-content-between align-items-center mb-2 navtop"
+            class="
+              nav-actions
+              d-flex
+              justify-content-between
+              align-items-center
+              mb-2
+              navtop
+            "
           >
             <!-- First Nav -->
             <div class="d-flex gap-4">
               <ul
-                class="d-flex justify-content-around align-content-center m-0 p-0"
+                class="
+                  d-flex
+                  justify-content-around
+                  align-content-center
+                  m-0
+                  p-0
+                "
                 style="list-style: none"
               >
                 <li class="nav-actions-color mx-2">
@@ -113,41 +126,51 @@
                   />
                 </div>
               </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label for="immag1" class="col-sm-2 col-form-label create-label"
                   >Image 1</label
                 >
                 <div class="col-sm-10">
                   <input type="file" @change="fileChange" />
                 </div>
+              </div> -->
+              <div class="form-group row">
+                <label for="immag2" class="col-sm-2 col-form-label create-label"
+                  >Image 1</label
+                >
+                <div class="col-sm-10">
+                  <b-form-file
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange"
+                  ></b-form-file>
+                </div>
               </div>
-              <!-- <div class="form-group row">
+              <div class="form-group row">
                 <label for="immag2" class="col-sm-2 col-form-label create-label"
                   >Image 2</label
                 >
                 <div class="col-sm-10">
                   <b-form-file
-                    v-model="form.file2"
-                    :state="Boolean(form.file2)"
                     placeholder="Choose a file or drop it here..."
                     drop-placeholder="Drop file here..."
+                    @change="fileChange2"
                   ></b-form-file>
                 </div>
-              </div> -->
-              <!-- <div class="form-group row">
+              </div>
+              <div class="form-group row">
                 <label for="immag3" class="col-sm-2 col-form-label create-label"
                   >Image 3</label
                 >
                 <div class="col-sm-10">
                   <b-form-file
-                    v-model="form.file3"
-                    :state="Boolean(form.file3)"
                     placeholder="Choose a file or drop it here..."
                     drop-placeholder="Drop file here..."
+                    @change="fileChange3"
                   ></b-form-file>
                 </div>
-              </div> -->
-              <div class="form-group row">
+              </div>
+              <!-- <div class="form-group row">
                 <label for="sector" class="col-sm-2 col-form-label create-label"
                   >Reference sector</label
                 >
@@ -159,7 +182,7 @@
                     placeholder="Reference sector"
                   />
                 </div>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <label for="note" class="col-sm-2 col-form-label create-label"
                   >Note</label
@@ -291,6 +314,8 @@ export default {
         // id_stato_segnalazione: null,
       },
       tempimmagine_1: null,
+      tempimmagine_2: null,
+      tempimmagine_3: null,
       famiglia_macchina_options: [
         { value: null, text: 'Select' },
         { value: 'Modula', text: 'Modula' },
@@ -307,21 +332,37 @@ export default {
   },
   methods: {
     fileChange(event) {
+      console.log(event)
       this.tempimmagine_1 = event.target.files[0]
+      // this.tempimmagine_1 = new FormData()
+      // this.tempimmagine_1.append('images', this.form.immagine_1)
+    },
+    fileChange2(event) {
+      console.log(event)
+      this.tempimmagine_2 = event.target.files[0]
+      // this.tempimmagine_1 = new FormData()
+      // this.tempimmagine_1.append('images', this.form.immagine_1)
+    },
+    fileChange3(event) {
+      console.log(event)
+      this.tempimmagine_3 = event.target.files[0]
+      // this.tempimmagine_1 = new FormData()
+      // this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     onSubmit() {
       const data = new FormData()
-      data.append('titolo', 'test title')
-      data.append('rank', ' 3')
-      data.append('descrizione', 'test allarmante id')
+      data.append('titolo', this.form.titolo)
+      data.append('descrizione', this.form.descrizione)
       data.append('immagine_1', this.tempimmagine_1)
+      data.append('immagine_2', this.tempimmagine_2)
+      data.append('immagine_3', this.tempimmagine_3)
       data.append('settore_riferimento', 'test test')
-      data.append('note', 'test test')
-      data.append('rif_ticket', '1')
-      data.append('descrizione_allarme', '1')
-      data.append('id_allarme', '1')
-      data.append('famiglia_macchina', '1')
-      data.append('sottofamiglia_macchina', '1')
+      data.append('note', this.form.note)
+      data.append('rif_ticket', this.form.rif_ticket)
+      data.append('descrizione_allarme', this.form.descrizione_allarme)
+      data.append('id_allarme', this.form.id_allarme)
+      data.append('famiglia_macchina', this.form.famiglia_macchina)
+      data.append('sottofamiglia_macchina', this.form.sottofamiglia_macchina)
 
       // let payload = {
       //   titolo: titolo,
