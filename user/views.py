@@ -152,7 +152,7 @@ def user_detail(request):
 
 @ api_view(['GET'])
 @ permission_classes([IsAuthenticated])
-def user_by_id(request):
+def user_by_id(request,id):
     user = User.objects.get(id=id)
     user_serializer = UserSerializer(user)
     return JsonResponse(uuser_serializer.data)
