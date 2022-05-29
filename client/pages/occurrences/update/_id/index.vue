@@ -176,6 +176,15 @@
                   id="example-datepicker"
                   v-model="dataTable.data_occorrenza"
                   class="mb-2 date-choose"
+                  today-button
+                  reset-button
+                  close-button
+                  selected-variant="primary"
+                  today-variant="primary"
+                  hide-header
+                  label-close-button="Close"
+                  label-today-button="Today"
+                  label-reset-button="Reset"
                 ></b-form-datepicker>
               </div>
             </div>
