@@ -40,7 +40,7 @@ def Register_Users(request):
             data["email"] = account.email
             data["username"] = account.username
             data["token"] = token
-            data["id"] account.id
+            data["id"] = account.id
 
         else:
             data = serializer.errors
