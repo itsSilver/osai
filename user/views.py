@@ -147,7 +147,7 @@ def get_users(request):
 def user_detail(request):
     user = User.objects.get(pk=request.user.pk)
     user_serializer = UserSerializer(user)
-    return JsonResponse(uuser_serializer.data)
+    return JsonResponse(user_serializer.data)
 
 
 @ api_view(['GET'])
@@ -155,7 +155,7 @@ def user_detail(request):
 def user_by_id(request,id):
     user = User.objects.get(id=id)
     user_serializer = UserSerializer(user)
-    return JsonResponse(uuser_serializer.data)
+    return JsonResponse(user_serializer.data)
 
 @ api_view(['GET'])
 @ permission_classes([AllowAny])
