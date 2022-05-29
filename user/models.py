@@ -1,18 +1,18 @@
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permission
 from django.db import models
 
 
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, fullname=None, password=None
-                    ):
+    def create_user(self, email, name=None, password=None):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
-            name=self.normalize_email(email),
+            name=self.normalize_email(name),
+            username=self.normalize_email(email),
         )
 
         user.set_password(password)
@@ -32,16 +32,22 @@ class MyAccountManager(BaseUserManager):
 
 class Users(AbstractBaseUser):
     id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True, default=None)
+    name = models.CharField(max_length=255, default=None)
+    username = models.CharField(max_length=255, unique=True, default=None)
+    email = models.EmailField(verbose_name="email",
+                              max_length=60, unique=True, default=None)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    permissions = models.ManyToManyField(
+        Permission, 'user_permissions')
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+
+    EMAIL_FIELD = "email"
 
     objects = MyAccountManager()
 
@@ -55,57 +61,34 @@ class Users(AbstractBaseUser):
 
     def has_module_perms(self, app_label): return self.is_superuser
 
+# class Roles(models.Model):
+#     id = models.BigAutoField(primary_key=True)
+#     name = models.CharField(max_length=255)
+#     guard_name = models.CharField(max_length=255)
+#     created_at = models.DateTimeField(blank=True, null=True)
+#     updated_at = models.DateTimeField(blank=True, null=True)
 
-class Permissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    guard_name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        db_table = 'permissions'
-
-
-class ModelHasPermissions(models.Model):
-    permission = models.OneToOneField(
-        'Permissions', models.DO_NOTHING, primary_key=True)
-    model_type = models.CharField(max_length=255)
-    model_id = models.PositiveBigIntegerField()
-
-    class Meta:
-        db_table = 'model_has_permissions'
-        unique_together = (('permission', 'model_id', 'model_type'),)
+#     class Meta:
+#         db_table = 'roles'
 
 
-class Roles(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    guard_name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(blank=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+# class ModelHasRoles(models.Model):
+#     role = models.OneToOneField('Roles', models.DO_NOTHING, primary_key=True)
+#     model_type = models.CharField(max_length=255)
+#     model_id = models.PositiveBigIntegerField()
 
-    class Meta:
-        db_table = 'roles'
-
-
-class ModelHasRoles(models.Model):
-    role = models.OneToOneField('Roles', models.DO_NOTHING, primary_key=True)
-    model_type = models.CharField(max_length=255)
-    model_id = models.PositiveBigIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'model_has_roles'
-        unique_together = (('role', 'model_id', 'model_type'),)
+#     class Meta:
+#         managed = False
+#         db_table = 'model_has_roles'
+#         unique_together = (('role', 'model_id', 'model_type'),)
 
 
-class RoleHasPermissions(models.Model):
-    permission = models.OneToOneField(
-        Permissions, models.DO_NOTHING, primary_key=True)
-    role = models.ForeignKey('Roles', models.DO_NOTHING)
+# class RoleHasPermissions(models.Model):
+#     permission = models.OneToOneField(
+#         Permissions, models.DO_NOTHING, primary_key=True)
+#     role = models.ForeignKey('Roles', models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'role_has_permissions'
-        unique_together = (('permission', 'role'),)
+#     class Meta:
+#         managed = False
+#         db_table = 'role_has_permissions'
+#         unique_together = (('permission', 'role'),)

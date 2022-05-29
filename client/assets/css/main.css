@@ -10795,8 +10795,14 @@ h5,
     margin-left: 0;
   }
   #sidebar .custom-menu {
-    margin-right: -60px !important;
+    margin-right: -59px !important;
     top: 10px !important;
+  }
+  .respo-nav-top {
+    display: unset !important;
+  }
+  .respo-nav-top > ul > li {
+    font-size: 12px !important;
   }
 }
 #sidebar .custom-menu {
@@ -10808,6 +10814,14 @@ h5,
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+}
+.btn-danger:hover {
+  background-color: #4373fb !important;
+  border-color: #4373fb;
+}
+.btn-danger {
+  background-color: #4373fb !important;
+  border-color: #4373fb;
 }
 @media (prefers-reduced-motion: reduce) {
   #sidebar .custom-menu {
@@ -11076,7 +11090,36 @@ textarea {
 .ck-content {
   min-height: 200px !important;
 }
+.ck-file-dialog-button {
+  display: none !important;
+}
 /* End here */
+.error-show {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #e3342f;
+  float: left !important;
+}
+#created, #deleted {
+  display: block !important;
+}
+.table-filter-cols > button {
+  background-color: #4373fb !important;
+  border-color: #4373fb !important;
+  border-radius: 0.25rem !important;
+  padding-right: 15px !important;
+}
+
+.dropdown-toggle::after {
+  right: 2px !important;
+}
+.table-checkbox {
+  padding-left: 1rem !important;
+}
+.checkPermission {
+  padding-right: 20px !important;
+}
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;
@@ -11101,5 +11144,11 @@ textarea {
   }
   .table-desktop {
     display: none !important;
+  }
+  .find-create-occurrence {
+    display: flex !important;
+  }
+  .find-create-occurrence > button{
+    padding: 2px !important;
   }
 }

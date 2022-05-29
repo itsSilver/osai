@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New Occorrenze
+                  New Occurrence
                 </li>
               </ul>
             </div>
@@ -40,34 +40,20 @@
           </div>
           <div class="vertical-line"></div>
           <!-- Form start here -->
-          <form class="create-solution-form">
-            <div class="form-group row">
-              <label
-                for="id-occorrenza"
-                class="col-sm-2 col-form-label create-label"
-                >Id occorrenza</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="id-occorrenza"
-                  placeholder="Id occorrenza"
-                />
-              </div>
-            </div>
+          <b-form @submit.prevent="onSubmit" class="create-solution-form">
             <div class="form-group row">
               <label
                 for="id-segnalazione"
                 class="col-sm-2 col-form-label create-label"
-                >Id segnalazione</label
+                >Id signal</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="id-segnalazione"
-                  placeholder="Id segnalazione"
+                  v-model="form.segnalazione"
+                  placeholder="Id signal"
                 />
               </div>
             </div>
@@ -75,27 +61,43 @@
               <label
                 for="id-soluzione"
                 class="col-sm-2 col-form-label create-label"
-                >Id soluzione</label
+                >Id solution</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="id-soluzione"
-                  placeholder="Id soluzione"
+                  v-model="form.soluzione"
+                  placeholder="Id solution"
                 />
               </div>
             </div>
             <div class="form-group row">
               <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Titolo</label
+                >Title</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="tittle"
-                  placeholder="Titolo"
+                  v-model="form.titolo"
+                  placeholder="Title"
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="ticket" class="col-sm-2 col-form-label create-label"
+                >Ticket</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  class="form-control input-create"
+                  id="ticket"
+                  v-model="form.rif_ticket"
+                  placeholder="Ticket"
                 />
               </div>
             </div>
@@ -103,28 +105,31 @@
               <label
                 for="textarea-small"
                 class="col-sm-2 col-form-label create-label"
-                >Descrizione</label
+                >Description</label
               >
               <div class="col-sm-10">
-                <b-form-textarea
-                  class="input-create"
-                  id="textarea-small"
-                  size="lg"
-                  rows="10"
-                  max-rows="11"
-                ></b-form-textarea>
+                <ckeditor
+                  :editor="editor"
+                  :value="value"
+                  :config="config"
+                  :tagName="tagName"
+                  :disabled="disabled"
+                  @input="(event) => $emit('input', event)"
+                  v-model="form.descrizione"
+                />
               </div>
             </div>
             <div class="form-group row">
               <label for="machine" class="col-sm-2 col-form-label create-label"
-                >Commessa macchina</label
+                >Machine order</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="machine"
-                  placeholder="Commessa macchina"
+                  v-model="form.commessa_macchina"
+                  placeholder="Machine order"
                 />
               </div>
             </div>
@@ -132,14 +137,15 @@
               <label
                 for="version-1"
                 class="col-sm-2 col-form-label create-label"
-                >Versione sw 1</label
+                >Version sw 1</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="version-1"
-                  placeholder="Versione sw 1"
+                  v-model="form.versione_sw_1"
+                  placeholder="Version sw 1"
                 />
               </div>
             </div>
@@ -147,14 +153,15 @@
               <label
                 for="version-2"
                 class="col-sm-2 col-form-label create-label"
-                >Versione sw 2</label
+                >Version sw 2</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="version-2"
-                  placeholder="Versione sw 2"
+                  v-model="form.versione_sw_2"
+                  placeholder="Version sw 2"
                 />
               </div>
             </div>
@@ -162,29 +169,29 @@
               <label
                 for="data-occorrenza"
                 class="col-sm-2 col-form-label create-label"
-                >Data occorrenza</label
+                >Occurrence date</label
               >
               <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="data-occorrenza"
-                  placeholder="Data occorrenza"
-                />
+                <b-form-datepicker
+                  id="example-datepicker"
+                  v-model="form.data_occorrenza"
+                  class="mb-2 date-choose"
+                ></b-form-datepicker>
               </div>
             </div>
             <div class="form-group row">
               <label
                 for="status-occorrenza"
                 class="col-sm-2 col-form-label create-label"
-                >Stato occorrenza</label
+                >Occurrence status</label
               >
               <div class="col-sm-10">
                 <input
                   type="text"
                   class="form-control input-create"
                   id="status-occorrenza"
-                  placeholder="Stato occorrenza"
+                  v-model="form.stato_occorrenza"
+                  placeholder="Occurrence status"
                 />
               </div>
             </div>
@@ -193,52 +200,38 @@
                 >Note</label
               >
               <div class="col-sm-10">
-                <b-form-textarea
-                  class="input-create"
-                  id="note"
-                  size="lg"
-                  rows="10"
-                  max-rows="11"
-                ></b-form-textarea>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label create-label"
-                >Creation Date</label
-              >
-              <div class="col-sm-10">
-                <b-form-datepicker
-                  id="example-datepicker"
-                  v-model="creationDate"
-                  class="mb-2 date-choose"
-                ></b-form-datepicker>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label create-label"
-                >Update Date</label
-              >
-              <div class="col-sm-10">
-                <b-form-datepicker
-                  id="example-datepicker"
-                  v-model="updateDate"
-                  class="mb-2 date-choose"
-                ></b-form-datepicker>
+                <ckeditor
+                  :editor="editor"
+                  :value="value"
+                  :config="config"
+                  :tagName="tagName"
+                  :disabled="disabled"
+                  @input="(event) => $emit('input', event)"
+                  v-model="form.note"
+                />
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-10">
-                <b-button class="mx-2 button-format">
+                <b-button type="submit" class="mx-2 button-format">
                   <i class="fas fa-download pr-2"></i>
                   Save
                 </b-button>
               </div>
             </div>
-          </form>
+          </b-form>
           <!-- End here -->
         </div>
       </div>
     </client-only>
+    <b-toast id="created" :variant="variant" solid>
+      <template #toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">Notification!</strong>
+        </div>
+      </template>
+      {{ dataCreated }}
+    </b-toast>
   </div>
 </template>
 
@@ -283,12 +276,78 @@ export default {
   },
   data() {
     return {
+      show: false,
       editor: ClassicEditor,
-      description: '',
-      note: '',
+      dataCreated: '',
+      variant: 'info',
       creationDate: '',
       updateDate: '',
+      form: {
+        segnalazione: null,
+        soluzione: null,
+        titolo: null,
+        descrizione: '',
+        note: '',
+        commessa_macchina: null,
+        versione_sw_1: null,
+        versione_sw_1: null,
+        data_occorrenza: '',
+        rif_ticket: null,
+        stato_occorrenza: null,
+      },
     }
+  },
+  methods: {
+    onSubmit() {
+      this.show = true
+      if (
+        this.form.segnalazione === null ||
+        this.form.soluzione === null ||
+        this.form.titolo === null ||
+        this.form.commessa_macchina === null ||
+        this.form.versione_sw_1 === null ||
+        this.form.versione_sw_2 === null ||
+        this.form.rif_ticket === null ||
+        this.form.data_occorrenza === '' ||
+        this.form.descrizione === '' ||
+        this.form.note === '' ||
+        this.form.stato_occorrenza === null
+      ) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.toggleToaster()
+        return
+      }
+
+      this.$axios
+        .post(`/api/occorrenze/create`, this.form, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'Occurrence created Succesfully'
+          this.toggleToaster()
+          setTimeout(() => {
+            this.$router.push('/occurrences')
+          }, 2000)
+        })
+        .catch((error) => {
+          this.show = false
+          this.dataCreated = 'Something went wrong!'
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    toggleToaster() {
+      this.$bvToast.show('created')
+      setTimeout(() => {
+        this.$bvToast.hide('created')
+        this.variant = 'info'
+      }, 2000)
+    },
   },
 }
 </script>

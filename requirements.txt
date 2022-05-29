@@ -12,3 +12,5 @@ tzdata==2022.1
 django-rest-swagger
 pyyaml
 django-cors-headers
+django-environ
+

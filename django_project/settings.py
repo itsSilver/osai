@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -42,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'mainapp',
     'user',
+    'mail'
 
 ]
 MIDDLEWARE = [
@@ -74,8 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
-
-# Database
+# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -89,7 +95,6 @@ DATABASES = {
         }
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 CORS_ALLOWED_ORIGINS = [
@@ -144,3 +149,19 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.Users'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = env('EMAIL_HOST')
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# Custom setting. To email
+# RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
+
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
+
+# URL used to access the media
+MEDIA_URL = '/media/'
