@@ -73,7 +73,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class PermissionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
-        fields = ('name', 'codename')
+        fields = ('id','name', 'codename')
 
 
 class UserSerializer(serializers.ModelSerializer):
