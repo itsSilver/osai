@@ -664,7 +664,7 @@ class SoluzioniListView(generics.ListAPIView):
     queryset = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    ordering_fields = ['titolo', 'rank']
+    ordering_fields = ['id','titolo', 'rank']
     search_fields = ['titolo', '=rank', 'descrizione']
 
 

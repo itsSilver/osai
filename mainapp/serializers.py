@@ -24,8 +24,8 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Segnalazioni
 
-        fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione","id","created_at","updated_at","rif_ticket")
+        fields = ("id","titolo", "descrizione", "id_allarme", "descrizione_allarme",
+                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione")
 
 
 class SegnalazioniSerializer(serializers.ModelSerializer):
@@ -38,13 +38,13 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
     sottofamiglia_macchina = serializers.CharField(max_length=255)
     id_stato_segnalazione = serializers.CharField(
         allow_blank=True, required=False)
-    rif_ticker = serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField(max_length=255)
 
     class Meta:
         model = Segnalazioni
 
         fields = ("rif_ticket","titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione")
+                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione","id","created_at","updated_at","rif_ticket")
 
     def create(self, validated_data):
         """
@@ -58,7 +58,7 @@ class SoluzioniSerializer(serializers.ModelSerializer):
         model = Soluzioni
 
         fields = ("rif_ticket","occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione")
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione","id","created_at","updated_at","rif_ticket")
 
     # def create(self, validated_data):
     #     """
@@ -73,7 +73,7 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Occorrenze
 
-        fields = ("segnalazione", "titolo", "descrizione", "commessa_macchina",
+        fields = ("id","segnalazione", "titolo", "descrizione", "commessa_macchina",
                   "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "stato_occorrenza","id","created_at","updated_at","rif_ticket")
 
 
@@ -84,8 +84,8 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Soluzioni
 
-        fields = ("occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione","id","created_at","updated_at","rif_ticket")
+        fields = ("id","occorrenze", "titolo", "rank", "descrizione", "immagine_1",
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione")
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
@@ -97,7 +97,7 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
     data_occorrenza = serializers.CharField(max_length=255)
     stato_occorrenza = serializers.IntegerField()
     note = serializers.CharField()
-    rif_ticker = serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField(max_length=255)
     class Meta:
         model = Occorrenze
 
