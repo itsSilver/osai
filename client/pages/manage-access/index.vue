@@ -217,48 +217,24 @@ export default {
       this.$router.push(`/manage-access/create`)
     },
     updateDocument() {
-      // this.$router.push(`/solutions/update/2`)
       console.log('Val here to be deleted!', this.selectedId)
 
-      //   if (this.selectedId.length === 0) {
-      //     this.$bvModal.msgBoxOk(
-      //       `Please select one of the Solutions for updating!`,
-      //       {
-      //         title: `Attention`,
-      //         size: 'md',
-      //         buttonSize: 'md',
-      //         okVariant: 'danger',
-      //         okTitle: `Ok`,
-      //         headerClass: 'p-2 border-bottom-0',
-      //         footerClass: 'p-2 border-top-0',
-      //         centered: true,
-      //       }
-      //     )
-      //     return
-      //   }
-      //   if (this.selectedId.length > 1) {
-      //     this.$bvModal.msgBoxOk(
-      //       `Please select only one of the Solutions for updating!`,
-      //       {
-      //         title: `Attention`,
-      //         size: 'md',
-      //         buttonSize: 'md',
-      //         okVariant: 'danger',
-      //         okTitle: `Ok`,
-      //         headerClass: 'p-2 border-bottom-0',
-      //         footerClass: 'p-2 border-top-0',
-      //         centered: true,
-      //       }
-      //     )
-      //     return
-      //   }
-      //   this.$router.push(`/solutions/update/${this.selectedId[0]}`)
-    },
-    deleteDocument() {
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
+        this.$bvModal.msgBoxOk(`Please select one of the Users for updating!`, {
+          title: `Attention`,
+          size: 'md',
+          buttonSize: 'md',
+          okVariant: 'danger',
+          okTitle: `Ok`,
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true,
+        })
+        return
+      }
+      if (this.selectedId.length > 1) {
         this.$bvModal.msgBoxOk(
-          `Please select one of the Solutions for deleting!`,
+          `Please select only one of the Users for updating!`,
           {
             title: `Attention`,
             size: 'md',
@@ -272,9 +248,26 @@ export default {
         )
         return
       }
+      this.$router.push(`/manage-access/update/${this.selectedId[0]}`)
+    },
+    deleteDocument() {
+      console.log('Val here to be deleted!', this.selectedId)
+      if (this.selectedId.length === 0) {
+        this.$bvModal.msgBoxOk(`Please select one of the Users for deleting!`, {
+          title: `Attention`,
+          size: 'md',
+          buttonSize: 'md',
+          okVariant: 'danger',
+          okTitle: `Ok`,
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true,
+        })
+        return
+      }
       if (this.selectedId.length > 1) {
         this.$bvModal.msgBoxOk(
-          `Please select only one of the Solutions for deleting!`,
+          `Please select only one of the Users for deleting!`,
           {
             title: `Attention`,
             size: 'md',

@@ -118,7 +118,10 @@
                 Check all the permissions for this user!
               </h5>
               <div class="form-group row">
-                <PermissionsList :dataTable="dataPermission" />
+                <PermissionsList
+                  :dataTable="dataPermission"
+                  @data-send="dataSend"
+                />
               </div>
 
               <div class="form-group row">
@@ -158,7 +161,9 @@ export default {
     return {
       show: false,
       dataPermission: [],
+      selected: [],
       dataCreated: '',
+      accountCreated: null,
       variant: 'info',
       showTitleSignalError: null,
       form: {
@@ -173,6 +178,9 @@ export default {
     this.getPermissionData()
   },
   methods: {
+    dataSend(val) {
+      this.selected = val
+    },
     onSubmit() {
       this.show = true
       console.log(this.form.password.length)
@@ -195,7 +203,7 @@ export default {
             'Content-Type': 'application/json',
           },
         })
-        .then(() => {
+        .then((response) => {
           this.dataCreated = 'User created Succesfully'
           //   this.toggleToaster()
           //   setTimeout(() => {
@@ -203,6 +211,8 @@ export default {
           //   }, 2000)
           this.showPermissionList = true
           this.getPermissionData()
+          this.accountCreated = response.data.id
+          console.log(this.accountCreated)
         })
         .catch((error) => {
           this.show = false
@@ -231,7 +241,35 @@ export default {
         })
     },
     onSubmitPermission() {
-      console.log('Permission function works!')
+      const datapayload = {
+        permission_id: this.selected,
+      }
+
+      console.log(this.selected)
+
+      this.show = true
+      this.$axios
+        .post(`/user/add/permission/${this.accountCreated}`, datapayload, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'User created Succesfully'
+          this.toggleToaster()
+          setTimeout(() => {
+            this.$router.push('/manage-access')
+          }, 2000)
+          // this.showPermissionList = true
+          // this.getPermissionData()
+        })
+        .catch((error) => {
+          this.show = false
+          this.dataCreated = 'Something went wrong!'
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
     },
     hideModal() {
       this.showFindOccurrence = false
