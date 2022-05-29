@@ -6,3 +6,6 @@ search_fields =  [ 'titolo', 'commessa_macchina', 'descrizione', 'versione_sw_1'
 
 api/soluzioni/filter/?search=descrizione
  search_fields =  [ 'titolo', 'rank', 'descrizione']
+
+ordering=-rank desc
+ordering=rank asc

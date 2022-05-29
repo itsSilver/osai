@@ -344,7 +344,7 @@ def retrive_user_soluzioni(request):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to View Soluzioni"})
 
-    #user_id = request.user.id
+    # user_id = request.user.id
     # user_soluzioni = Soluzioni.objects.filter(user=user_id)
     user_soluzioni = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer(
@@ -529,7 +529,7 @@ def connect_soluzioni_to_occorrenze(request, id):
     sol.occorrenze = occ
     sol.save(update_fields=['occorrenze'])
     return JsonResponse({"message": "Connected successfully",
-                             "status": 500}, status=200, safe=False)
+                         "status": 500}, status=200, safe=False)
     # data = SoluzioniDisplaySerializer(instance=sol, data=sol.__dict__)
     # if data.is_valid():
     #     return JsonResponse(sol, status=200, safe=False)
@@ -660,22 +660,28 @@ def remove_stati_segnalazione(request, id):
     raise NotFound("Not found")
 
 
-
 class SoluzioniListView(generics.ListAPIView):
     queryset = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer
-    filter_backends = [filters.SearchFilter]
-    
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    ordering_fields = ['titolo', 'rank']
+    search_fields = ['titolo', '=rank', 'descrizione']
 
 
 class SegnalazioneListView(generics.ListAPIView):
     queryset = Segnalazioni.objects.all().prefetch_related('id_stato_segnalazione')
     serializer_class = SegnalazioniDisplaySerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields =  [ 'titolo', 'id_allarme', 'descrizione', 'descrizione_allarme', 'famiglia_macchina']
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ['titolo', 'id_allarme', 'descrizione',
+                     'descrizione_allarme', 'famiglia_macchina']
+    ordering_fields = ['titolo', 'id_allarme']
+
 
 class OccorrenzeListView(generics.ListAPIView):
     queryset = Occorrenze.objects.all()
     serializer_class = OccorrenzeDisplaySerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields =  [ 'titolo', 'commessa_macchina', 'descrizione', 'versione_sw_1', '=stato_occorrenza']
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ['titolo', 'commessa_macchina',
+                     'descrizione', 'versione_sw_1', '=stato_occorrenza']
+    ordering_fields = ['titolo', 'commessa_macchina', 'versione_sw_1']
+
