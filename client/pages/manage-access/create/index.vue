@@ -114,9 +114,7 @@
               class="create-solution-form"
               v-if="showPermissionList === true"
             >
-              <h5 class="text-center">
-                Check all the permissions for this user!
-              </h5>
+              <h5 class="text-center">Check the permissions for this user!</h5>
               <div class="form-group row">
                 <PermissionsList
                   :dataTable="dataPermission"

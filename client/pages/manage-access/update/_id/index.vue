@@ -51,74 +51,16 @@
           <div class="vertical-line"></div>
           <!-- Form start here -->
           <b-overlay :show="show" rounded="sm">
-            <b-form @submit.prevent="onSubmit" class="create-solution-form">
-              <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Name</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.username"
-                    placeholder="Name"
-                    :disabled="showPermissionList === true"
-                  />
-                  <div class="error-show" v-if="showTitleSignalError">
-                    Please enter the Title Signal!
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Email</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="email"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.email"
-                    placeholder="Email"
-                    :disabled="showPermissionList === true"
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Password</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="password"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.password"
-                    placeholder="Password"
-                    :disabled="showPermissionList === true"
-                  />
-                </div>
-              </div>
-              <div class="form-group row" v-if="showPermissionList === false">
-                <div class="col-sm-10">
-                  <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
-                    Save
-                  </b-button>
-                </div>
-              </div>
-            </b-form>
             <b-form
               @submit.prevent="onSubmitPermission"
               class="create-solution-form"
-              v-if="showPermissionList === true"
             >
-              <h5 class="text-center">
-                Check all the permissions for this user!
-              </h5>
+              <h5 class="text-center">Check the permissions for this user!</h5>
               <div class="form-group row">
-                <PermissionsList :dataTable="dataPermission" />
+                <PermissionsList
+                  :dataTable="dataPermission"
+                  @data-send="dataSend"
+                />
               </div>
 
               <div class="form-group row">
@@ -157,6 +99,7 @@ export default {
   data() {
     return {
       show: false,
+      accountCreated: null,
       dataPermission: [],
       dataCreated: '',
       variant: 'info',
@@ -168,12 +111,16 @@ export default {
       },
       showPermissionList: false,
       dataTable: [],
+      selected: [],
     }
   },
   mounted() {
     this.getPermissionData()
   },
   methods: {
+    dataSend(val) {
+      this.selected = val
+    },
     onSubmit() {
       this.show = true
       console.log(this.dataTable.password.length)
@@ -223,6 +170,7 @@ export default {
         })
         .then((response) => {
           this.dataPermission = response.data
+          console.log(this.dataPermission)
           this.show = false
         })
         .catch((error) => {
@@ -232,7 +180,35 @@ export default {
         })
     },
     onSubmitPermission() {
-      console.log('Permission function works!')
+      const datapayload = {
+        permission_id: this.selected,
+      }
+
+      console.log(this.selected)
+
+      this.show = true
+      this.$axios
+        .post(`/user/add/permission/${this.$route.params.id}`, datapayload, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'User created Succesfully'
+          this.toggleToaster()
+          setTimeout(() => {
+            this.$router.push('/manage-access')
+          }, 2000)
+          // this.showPermissionList = true
+          // this.getPermissionData()
+        })
+        .catch((error) => {
+          this.show = false
+          this.dataCreated = 'Something went wrong!'
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
     },
     hideModal() {
       this.showFindOccurrence = false

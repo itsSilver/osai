@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-list-group v-for="data in dataTable" :key="data.name">
+    <b-list-group v-for="data in dataTable" :key="data.id">
       <b-list-group-item>
         <b-form-checkbox v-model="selected" :value="data.id">{{
           data.name
