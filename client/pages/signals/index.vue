@@ -254,11 +254,11 @@ export default {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '#',
+            'Access-Control-Allow-Origin': '*',
           },
         })
         .then((response) => {
-          // this.dataTable = response.data
+          //this.dataTable = response.data
           this.show = false
         })
         .catch((error) => {
