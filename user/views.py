@@ -106,7 +106,7 @@ def user_delete(request, id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def update_user(request, id):
-    user = get_object_or_404(User, pk=id)
+    seg = get_object_or_404(User, pk=id)
     if(seg.user_id == request.user.id):
         data = UserSerializer(
             instance=seg, data=request.data)
