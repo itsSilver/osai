@@ -165,3 +165,6 @@ MEDIA_ROOT = os.path.join(Path(__file__).resolve().parent.parent, 'media')
 
 # URL used to access the media
 MEDIA_URL = '/media/'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
