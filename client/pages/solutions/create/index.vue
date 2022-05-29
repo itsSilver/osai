@@ -89,16 +89,15 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag1" class="col-sm-2 col-form-label create-label"
+                <label for="immag2" class="col-sm-2 col-form-label create-label"
                   >Image 1</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag1"
-                    v-model="form.immagine_1"
-                  />
+                  <b-form-file
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
@@ -106,12 +105,11 @@
                   >Image 2</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag2"
-                    v-model="form.immagine_2"
-                  />
+                  <b-form-file
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange2"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
@@ -119,12 +117,11 @@
                   >Image 3</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag3"
-                    v-model="form.immagine_3"
-                  />
+                  <b-form-file
+                    placeholder="Choose a file or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange3"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
@@ -251,9 +248,21 @@ export default {
         immagine_3: null,
         settore_riferimento: null,
       },
+      tempimmagine_1: null,
+      tempimmagine_2: null,
+      tempimmagine_3: null,
     }
   },
   methods: {
+    fileChange(event) {
+      this.tempimmagine_1 = event.target.files[0]
+    },
+    fileChange2(event) {
+      this.tempimmagine_2 = event.target.files[0]
+    },
+    fileChange3(event) {
+      this.tempimmagine_3 = event.target.files[0]
+    },
     onSubmit() {
       this.show = true
       if (
@@ -261,9 +270,6 @@ export default {
         this.form.descrizione === '' ||
         this.form.note === '' ||
         this.form.rank === null ||
-        this.form.immagine_1 === null ||
-        this.form.immagine_2 === null ||
-        this.form.immagine_3 === null ||
         this.form.settore_riferimento === null
       ) {
         this.show = false
@@ -272,8 +278,20 @@ export default {
         this.toggleToaster()
         return
       }
+
+      const data = new FormData()
+      data.append('titolo', this.form.titolo)
+      data.append('descrizione', this.form.descrizione)
+      data.append('immagine_1', this.tempimmagine_1)
+      data.append('immagine_2', this.tempimmagine_2)
+      data.append('immagine_3', this.tempimmagine_3)
+      data.append('settore_riferimento', this.form.settore_riferimento)
+      data.append('note', this.form.note)
+      data.append('rif_ticket', this.form.rif_ticket)
+      data.append('rank', this.form.rank)
+
       this.$axios
-        .post(`/api/soluzioni/create`, this.form, {
+        .post(`/api/soluzioni/create`, data, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
