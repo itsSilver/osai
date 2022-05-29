@@ -1,7 +1,7 @@
 from django.urls import path
 from user.views import login_user, Register_Users, User_logout, user_detail, permissions_list, get_users, \
     add_permission, user_delete, remove_permission, get_segnalazioni, update_user, add_permission_to_user, \
-    retrieve_user_by_id
+    retrieve_user_by_id,user_by_id
 
 app_name = 'user'
 
@@ -15,7 +15,7 @@ urlpatterns = [
     path('remove/<int:id>', user_delete, name='delete_user'),
     path('update/<int:id>', update_user, name='update_user'),
     path('retrieve/user', retrieve_user_by_id),
-
+    path('id/<int:id>',user_by_id),
     path('add/permission/<int:id>', add_permission_to_user),
 
     path('permissions', permissions_list, name='permissions_list'),
