@@ -1,6 +1,8 @@
-from django.contrib.auth import get_user_model
+from email.policy import default
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth.password_validation import validate_password
+from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
@@ -75,9 +77,9 @@ class PermissionsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    permissions = PermissionsSerializer(many=True)
+    user_permissions = PermissionsSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'email', 'created_at',
-                  'updated_at', 'is_admin', 'is_active', 'is_superuser', "permissions")
+        fields = ('id', 'username', 'email', 'created_at',
+                  'updated_at', 'is_admin', 'is_active', 'is_superuser', 'user_permissions')

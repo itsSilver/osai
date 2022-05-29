@@ -74,7 +74,7 @@ class Soluzioni(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     id_stato_soluzione = models.ForeignKey(
-        Stati_Soluzione, models.DO_NOTHING, db_column='id_stato_soluzione', blank=True, null=True)
+        Stati_Soluzione,  models.DO_NOTHING, db_column='id_stato_soluzione', blank=True, null=True)
 
     class Meta:
         db_table = 'soluzioni'

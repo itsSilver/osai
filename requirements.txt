@@ -13,4 +13,4 @@ django-rest-swagger
 pyyaml
 django-cors-headers
 django-environ
-
+Pillow

@@ -7,7 +7,8 @@ from mainapp.views import create_segnalazioni, create_soluzioni, \
     update_occurrenze, update_segnalazioni, update_soluzioni, create_stati_soluzione, \
     update_stati_soluzione, remove_stati_soluzione, retrieve_all_stati_soluzioni, create_stati_segnalazione, \
     update_stati_segnalazione, remove_stati_segnalazione, retrieve_all_stati_segnalazione, get_segnalazioni_by_id, \
-    get_occurrenze_by_id, get_soluzioni_by_id, connect_occorrenze_to_segnalazioni, connect_soluzioni_to_occorrenze
+    get_occurrenze_by_id, get_soluzioni_by_id, connect_occorrenze_to_segnalazioni, connect_soluzioni_to_occorrenze, \
+    SoluzioniListView, SegnalazioneListView, OccorrenzeListView
 
 app_name = 'mainapp'
 
@@ -17,6 +18,7 @@ urlpatterns = [
     path("segnalazioni/retrive_segnalazioni/<int:id>", get_segnalazioni_by_id),
     path("segnalazioni/<int:id>/delete", remove_segnalazioni),
     path("segnalazioni/update/<int:id>", update_segnalazioni),
+    path("segnalazioni/filter/", SegnalazioneListView.as_view()),
 
     path("soluzioni/create", create_soluzioni),
     path("soluzioni/retrive_soluzioni", retrive_user_soluzioni),
@@ -24,6 +26,8 @@ urlpatterns = [
     path("soluzioni/update/<int:id>", update_soluzioni),
     path("soluzioni/connect/<int:id>", connect_soluzioni_to_occorrenze),
     path("soluzioni/<int:id>/delete", remove_soluzioni),
+    path("soluzioni/filter/", SoluzioniListView.as_view()),
+
 
     path("occorrenze/create", create_occorrenze),
     path("occorrenze/retrive_occorrenze", retrive_user_occurrenze),
@@ -31,11 +35,13 @@ urlpatterns = [
     path("occorrenze/update/<int:id>", update_occurrenze),
     path("occorrenze/connect/<int:id>", connect_occorrenze_to_segnalazioni),
     path("occorrenze/<int:id>/delete", remove_occorrenze),
+    path("occorrenze/filter/", OccorrenzeListView.as_view()),
+
 
     path("stati_soluzioni/create", create_stati_soluzione),
     path("stati_soluzioni/update/<int:id>", update_stati_soluzione),
     path("stati_soluzioni/<int:id>/delete", remove_stati_soluzione),
-    
+
     path("stati_segnalazione/create", create_stati_segnalazione),
     path("stati_segnalazione/update/<int:id>", update_stati_segnalazione),
     path("stati_segnalazione/<int:id>/delete", remove_stati_segnalazione),
@@ -43,6 +49,8 @@ urlpatterns = [
     path("admin/segnalazioni/retrive_segnalazioni", retrive_all_segnalazioni),
     path("admin/soluzioni/retrive_soluzioni", retrive_all_soluzioni),
     path("admin/occorrenze/retrive_occorrenze", retrive_all_occurrenze),
-    path("admin/stati_soluzioni/retrive_stati_soluzioni", retrieve_all_stati_soluzioni),
-    path("admin/stati_segnalazione/retrieve_stati_segnalazione", retrieve_all_stati_segnalazione),
+    path("admin/stati_soluzioni/retrive_stati_soluzioni",
+         retrieve_all_stati_soluzioni),
+    path("admin/stati_segnalazione/retrieve_stati_segnalazione",
+         retrieve_all_stati_segnalazione),
 ]

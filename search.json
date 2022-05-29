@@ -1,0 +1,11 @@
+api/segnalazioni/filter/?search=criteria
+search_fields =  [ 'titolo', 'id_allarme', 'descrizione', 'descrizione_allarme', 'famiglia_macchina']
+
+api/occorrenze/filter/?search=descrizione
+search_fields =  [ 'titolo', 'commessa_macchina', 'descrizione', 'versione_sw_1', '=stato_occorrenza']
+
+api/soluzioni/filter/?search=descrizione
+ search_fields =  [ 'titolo', 'rank', 'descrizione']
+
+ordering=-rank desc
+ordering=rank asc
