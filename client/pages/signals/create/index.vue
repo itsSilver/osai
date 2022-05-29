@@ -320,45 +320,69 @@ export default {
   },
   methods: {
     fileChange(event) {
+      console.log(event)
       this.form.immagine_1 = event.target.files[0]
+      console.log(this.form.immagine_1)
       this.tempimmagine_1 = new FormData()
-      this.tempimmagine_1.append('image', this.form.immagine_1)
+      this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     onSubmit() {
+      const titolo = new FormData()
+      titolo.append('titolo', this.form.titolo)
+      const descrizione = new FormData()
+      descrizione.append('descrizione', this.form.descrizione)
+      const id_allarme = new FormData()
+      id_allarme.append('id_allarme', this.form.id_allarme)
+      const descrizione_allarme = new FormData()
+      descrizione_allarme.append(
+        'descrizione_allarme',
+        this.form.descrizione_allarme
+      )
+      const famiglia_macchina = new FormData()
+      famiglia_macchina.append('famiglia_macchina', this.form.famiglia_macchina)
+      const sottofamiglia_macchina = new FormData()
+      sottofamiglia_macchina.append(
+        'sottofamiglia_macchina',
+        this.form.sottofamiglia_macchina
+      )
+      const rif_ticket = new FormData()
+      rif_ticket.append('rif_ticket', this.form.rif_ticket)
+
       let payload = {
-        titolo: this.form.titolo,
-        descrizione: this.form.descrizione,
-        id_allarme: this.form.id_allarme,
-        immagine_1: this.tempimmagine_1,
-        descrizione_allarme: this.form.descrizione_allarme,
-        famiglia_macchina: this.form.famiglia_macchina,
-        sottofamiglia_macchina: this.form.sottofamiglia_macchina,
-        rif_ticket: this.form.rif_ticket,
+        titolo: titolo,
+        descrizione: descrizione,
+        id_allarme: id_allarme,
+        // immagine_1: immagine_1,
+        descrizione_allarme: descrizione_allarme,
+        famiglia_macchina: famiglia_macchina,
+        sottofamiglia_macchina: sottofamiglia_macchina,
+        rif_ticket: rif_ticket,
       }
 
       console.log(payload)
 
       this.show = true
-      if (
-        this.form.titolo === null ||
-        this.form.descrizione === '' ||
-        this.form.descrizione_allarme === '' ||
-        this.form.id_allarme === null ||
-        this.form.famiglia_macchina === null ||
-        this.form.sottofamiglia_macchina === null ||
-        this.form.rif_ticket === null
-      ) {
-        this.show = false
-        this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
-        this.toggleToaster()
-        return
-      }
+      // if (
+      //   this.form.titolo === null ||
+      //   this.form.descrizione === '' ||
+      //   this.form.descrizione_allarme === '' ||
+      //   this.form.id_allarme === null ||
+      //   this.form.famiglia_macchina === null ||
+      //   this.form.sottofamiglia_macchina === null ||
+      //   this.form.rif_ticket === null
+      // ) {
+      //   this.show = false
+      //   this.variant = 'danger'
+      //   this.dataCreated = 'Please make sure all the fields are filled!'
+      //   this.toggleToaster()
+      //   return
+      // }
       this.$axios
         .post(`/api/segnalazioni/create`, payload, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'multipart/form-data',
+            'Content-Type':
+              'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
           },
         })
         .then(() => {
