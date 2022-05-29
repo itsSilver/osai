@@ -92,39 +92,51 @@
                 <label for="immag1" class="col-sm-2 col-form-label create-label"
                   >Image 1</label
                 >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag1"
-                    v-model="dataTable.immagine_1"
-                  />
+                <div class="col-sm-10" style="display: flex !important">
+                  <b-button
+                    class="mx-2 button-format file-button"
+                    @click="watchImage(dataTable.immagine_1)"
+                    >Image 1</b-button
+                  >
+                  <b-form-file
+                    placeholder="Add new Image or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange3"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="immag2" class="col-sm-2 col-form-label create-label"
                   >Image 2</label
                 >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag2"
-                    v-model="dataTable.immagine_2"
-                  />
+                <div class="col-sm-10" style="display: flex !important">
+                  <b-button
+                    class="mx-2 button-format file-button"
+                    @click="watchImage(dataTable.immagine_2)"
+                    >Image 2</b-button
+                  >
+                  <b-form-file
+                    placeholder="Add new Image or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange3"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="immag3" class="col-sm-2 col-form-label create-label"
                   >Image 3</label
                 >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="immag3"
-                    v-model="dataTable.immagine_3"
-                  />
+                <div class="col-sm-10" style="display: flex !important">
+                  <b-button
+                    class="mx-2 button-format file-button"
+                    @click="watchImage(dataTable.immagine_3)"
+                    >Image 3</b-button
+                  >
+                  <b-form-file
+                    placeholder="Add new Image or drop it here..."
+                    drop-placeholder="Drop file here..."
+                    @change="fileChange3"
+                  ></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
@@ -183,6 +195,11 @@
           <!-- End here -->
         </div>
       </div>
+      <SeeImage
+        v-if="showImage"
+        :imageValue="imageValue"
+        @close="hideModal()"
+      />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -197,6 +214,7 @@
 
 <script>
 import Nav from '~/components/Nav'
+import SeeImage from '~/components/popup/SeeImage'
 let ClassicEditor
 let CKEditor
 if (process.client) {
@@ -209,6 +227,7 @@ export default {
   components: {
     Nav,
     ckeditor: CKEditor.component,
+    SeeImage,
   },
   props: {
     value: {
@@ -237,6 +256,7 @@ export default {
   data() {
     return {
       show: false,
+      showImage: false,
       editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
@@ -251,9 +271,26 @@ export default {
         immagine_3: null,
         settore_riferimento: null,
       },
+      imageValue: null,
+      tempimmagine_1: null,
+      tempimmagine_2: null,
+      tempimmagine_3: null,
     }
   },
   methods: {
+    fileChange(event) {
+      this.tempimmagine_1 = event.target.files[0]
+    },
+    fileChange2(event) {
+      this.tempimmagine_2 = event.target.files[0]
+    },
+    fileChange3(event) {
+      this.tempimmagine_3 = event.target.files[0]
+    },
+    watchImage(val) {
+      this.imageValue = 'http://localhost:8000' + val
+      this.showImage = true
+    },
     onSubmit() {
       this.show = true
       if (
@@ -308,6 +345,9 @@ export default {
         this.$bvToast.hide('created')
         this.variant = 'info'
       }, 2000)
+    },
+    hideModal() {
+      this.showImage = false
     },
   },
   async asyncData({ store, $axios, params }) {
