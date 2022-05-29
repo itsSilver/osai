@@ -24,8 +24,8 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Segnalazioni
 
-        fields = ("id","titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione")
+        fields = ("id","titolo","note", "descrizione", "id_allarme", "descrizione_allarme",
+                  "famiglia_macchina", "sottofamiglia_macchina","rif_ticket", "id_stato_segnalazione","immagine_1","immagine_2","immagine_3")
 
 
 class SegnalazioniSerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
     class Meta:
         model = Segnalazioni
 
-        fields = ("rif_ticket","titolo", "descrizione", "id_allarme", "descrizione_allarme",
+        fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
                   "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione","id","created_at","updated_at","rif_ticket")
 
     def create(self, validated_data):
