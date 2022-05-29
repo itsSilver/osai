@@ -674,7 +674,7 @@ class SegnalazioneListView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ['titolo', 'id_allarme', 'descrizione',
                      'descrizione_allarme', 'famiglia_macchina']
-    ordering_fields = ['titolo', 'id_allarme']
+    ordering_fields = ['id','titolo', 'id_allarme']
 
 
 class OccorrenzeListView(generics.ListAPIView):
@@ -683,5 +683,5 @@ class OccorrenzeListView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ['titolo', 'commessa_macchina',
                      'descrizione', 'versione_sw_1', '=stato_occorrenza']
-    ordering_fields = ['titolo', 'commessa_macchina', 'versione_sw_1']
+    ordering_fields = ['id','titolo', 'commessa_macchina', 'versione_sw_1']
 
