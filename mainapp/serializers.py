@@ -24,7 +24,7 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Segnalazioni
 
-        fields = ("id","titolo","note", "descrizione", "id_allarme", "descrizione_allarme",
+        fields = ("id","created_at","updated_at","titolo","note", "descrizione", "id_allarme", "descrizione_allarme",
                   "famiglia_macchina", "sottofamiglia_macchina","rif_ticket", "id_stato_segnalazione","immagine_1","immagine_2","immagine_3")
 
 
