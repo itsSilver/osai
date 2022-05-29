@@ -85,7 +85,7 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
         model = Soluzioni
 
         fields = ("id","occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione")
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione","created_at", "updated_at")
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
