@@ -138,6 +138,7 @@ def create_segnalazioni(request):
                 id_stato_segnalazione=stati,
                 user_id=request.user.id,
                 note=serializer.data["note"]
+                rif_ticket=serializer.data["rif_ticket"]
 
             )
 
