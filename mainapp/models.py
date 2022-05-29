@@ -50,7 +50,7 @@ class Segnalazioni(models.Model):
     deleted_at = models.DateTimeField(blank=True, null=True)
     id_stato_segnalazione = models.ForeignKey(
         Stati_Segnalazione, models.CASCADE, db_column='id_stato_segnalazione', blank=True, null=True)
-    note = models.CharField(max_length=255)
+    note = models.CharField(max_length=255,default=None)
     class Meta:
         db_table = 'segnalazioni'
 
