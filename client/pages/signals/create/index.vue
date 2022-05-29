@@ -327,39 +327,31 @@ export default {
       this.tempimmagine_1.append('images', this.form.immagine_1)
     },
     onSubmit() {
-      const titolo = new FormData()
-      titolo.append('titolo', this.form.titolo)
-      const descrizione = new FormData()
-      descrizione.append('descrizione', this.form.descrizione)
-      const id_allarme = new FormData()
-      id_allarme.append('id_allarme', this.form.id_allarme)
-      const descrizione_allarme = new FormData()
-      descrizione_allarme.append(
-        'descrizione_allarme',
-        this.form.descrizione_allarme
-      )
-      const famiglia_macchina = new FormData()
-      famiglia_macchina.append('famiglia_macchina', this.form.famiglia_macchina)
-      const sottofamiglia_macchina = new FormData()
-      sottofamiglia_macchina.append(
-        'sottofamiglia_macchina',
-        this.form.sottofamiglia_macchina
-      )
-      const rif_ticket = new FormData()
-      rif_ticket.append('rif_ticket', this.form.rif_ticket)
+      const data = new FormData()
+      data.append('titolo', 'test title')
+      data.append('rank', ' 3')
+      data.append('descrizione', 'test allarmante id')
+      data.append('immagine_1', this.tempimmagine_1)
+      data.append('settore_riferimento', 'test test')
+      data.append('note', 'test test')
+      data.append('rif_ticket', '1')
+      data.append('descrizione_allarme', '1')
+      data.append('id_allarme', '1')
+      data.append('famiglia_macchina', '1')
+      data.append('sottofamiglia_macchina', '1')
 
-      let payload = {
-        titolo: titolo,
-        descrizione: descrizione,
-        id_allarme: id_allarme,
-        // immagine_1: immagine_1,
-        descrizione_allarme: descrizione_allarme,
-        famiglia_macchina: famiglia_macchina,
-        sottofamiglia_macchina: sottofamiglia_macchina,
-        rif_ticket: rif_ticket,
-      }
+      // let payload = {
+      //   titolo: titolo,
+      //   descrizione: descrizione,
+      //   id_allarme: id_allarme,
+      //   // immagine_1: immagine_1,
+      //   descrizione_allarme: descrizione_allarme,
+      //   famiglia_macchina: famiglia_macchina,
+      //   sottofamiglia_macchina: sottofamiglia_macchina,
+      //   rif_ticket: rif_ticket,
+      // }
 
-      console.log(payload)
+      // console.log(payload)
 
       this.show = true
       // if (
@@ -378,11 +370,10 @@ export default {
       //   return
       // }
       this.$axios
-        .post(`/api/segnalazioni/create`, payload, {
+        .post(`/api/segnalazioni/create`, data, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type':
-              'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then(() => {
