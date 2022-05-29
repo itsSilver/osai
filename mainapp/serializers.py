@@ -39,12 +39,12 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
     id_stato_segnalazione = serializers.CharField(
         allow_blank=True, required=False)
     rif_ticket = serializers.CharField(max_length=255)
-
+    note=serializers.CharField(max_length=255)
     class Meta:
         model = Segnalazioni
 
         fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "id_stato_segnalazione","id","created_at","updated_at","rif_ticket")
+                  "famiglia_macchina", "sottofamiglia_macchina","note", "id_stato_segnalazione","id","created_at","updated_at","rif_ticket")
 
     def create(self, validated_data):
         """
