@@ -5,25 +5,12 @@
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
           <div
-            class="
-              nav-actions
-              d-flex
-              justify-content-between
-              align-items-center
-              mb-2
-              navtop
-            "
+            class="nav-actions d-flex justify-content-between align-items-center mb-2 navtop"
           >
             <!-- First Nav -->
             <div class="d-flex gap-4">
               <ul
-                class="
-                  d-flex
-                  justify-content-around
-                  align-content-center
-                  m-0
-                  p-0
-                "
+                class="d-flex justify-content-around align-content-center m-0 p-0"
                 style="list-style: none"
               >
                 <li class="nav-actions-color mx-2">
@@ -320,11 +307,7 @@ export default {
   },
   methods: {
     fileChange(event) {
-      console.log(event)
-      this.form.immagine_1 = event.target.files[0]
-      console.log(this.form.immagine_1)
-      this.tempimmagine_1 = new FormData()
-      this.tempimmagine_1.append('images', this.form.immagine_1)
+      this.tempimmagine_1 = event.target.files[0]
     },
     onSubmit() {
       const data = new FormData()
