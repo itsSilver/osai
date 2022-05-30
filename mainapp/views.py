@@ -280,6 +280,7 @@ def remove_segnalazioni(request, id):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def update_segnalazioni(request, id):
     """
     If the user is authenticated, get the segnalazioni object with the id passed in the url, if the user
@@ -294,6 +295,7 @@ def update_segnalazioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to update Segnalazioni"})
     seg = Segnalazioni.objects.get(pk=id)
+
     if(seg.user_id == request.user.id):
         data = SegnalazioniDisplaySerializer(
             instance=seg, data=request.data)
@@ -303,6 +305,7 @@ def update_segnalazioni(request, id):
         else:
             raise NotFound("Segnalazioni not found")
     raise NotFound("Segnalazioni not found")
+
 
 
 # Soluzioni Endpoints
@@ -369,6 +372,7 @@ def get_soluzioni_by_id(request, id):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def update_soluzioni(request, id):
     """
     If the user is authenticated, and the user id matches the id of the user who created the object,
@@ -382,6 +386,10 @@ def update_soluzioni(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
     seg = Soluzioni.objects.get(pk=id)
+
+    if "occorrenze" in request.data:
+        occ = Occorrenze.objects.get(pk=request.data["occorrenze"])
+        Soluzioni.objects.filter(pk=id).update(occorrenze=occ)
     if(seg.user_id == request.user.id):
         data = SoluzioniDisplaySerializer(
             instance=seg, data=request.data)

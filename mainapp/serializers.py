@@ -20,6 +20,29 @@ class StatiSegnalazioneSerializer(serializers.ModelSerializer):
 
 class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
     id_stato_segnalazione = StatiSegnalazioneSerializer(required=False)
+    immagine_1 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    immagine_2 = serializers.ImageField(
+        allow_null=True, max_length=None, required=False)
+    immagine_3 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    titolo = serializers.CharField(
+        required=False, allow_blank=True, max_length=100)
+    descrizione = serializers.CharField(required=False, allow_blank=True)
+    id_allarme = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+    descrizione_allarme = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+    famiglia_macchina = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+    sottofamiglia_macchina = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+    rif_ticket = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+    note = serializers.CharField(
+        required=False, allow_blank=True, max_length=255)
+
+
 
     class Meta:
         model = Segnalazioni
@@ -93,6 +116,18 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     id_stato_soluzione = StatiSoluzioneSerializer(required=False)
     occorrenze = OccorrenzeDisplaySerializer(required=False)
 
+    immagine_1 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    immagine_2 = serializers.ImageField(
+        allow_null=True, max_length=None, required=False)
+    immagine_3 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    titolo = serializers.CharField(
+        required=False, allow_blank=True, max_length=100)
+    rank = serializers.IntegerField(required=False)
+    descrizione = serializers.CharField(required=False, allow_blank=True)
+    settore_riferimento = serializers.CharField(required=False, allow_blank=True)
+    note = serializers.CharField(required=False, allow_blank=True)
     class Meta:
         model = Soluzioni
 
