@@ -81,11 +81,12 @@
               <b-input-group class="mt-3">
                 <b-form-input
                   class="input-search"
+                  v-model="filterName"
                   placeholder="Search"
                   style="height: 40px !important"
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button class="button-format">
+                  <b-button class="button-format" @click="onSubmitSearch()">
                     <i class="fas fa-search pr-2"></i>Search</b-button
                   >
                 </b-input-group-append>
@@ -262,6 +263,7 @@ export default {
       statusOccurrenceStatus: '1',
       statusCreationDate: '1',
       statusUpdateDate: '1',
+      filterName: null,
     }
   },
   methods: {
@@ -270,6 +272,29 @@ export default {
     },
     redirectCreate() {
       this.$router.push(`/occurrences/create`)
+    },
+    onSubmitSearch() {
+      this.show = true
+      this.$axios
+        .get('/api/occorrenze/filter', {
+          params: {
+            search: this.filterName,
+          },
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        .then((response) => {
+          this.dataTable = response.data
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
     },
     updateDocument() {
       // this.$router.push(`/occorrences/update/2`)

@@ -258,7 +258,7 @@ export default {
           },
         })
         .then((response) => {
-          //this.dataTable = response.data
+          this.dataTable = response.data
           this.show = false
         })
         .catch((error) => {
