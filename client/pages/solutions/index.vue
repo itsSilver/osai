@@ -261,7 +261,6 @@ export default {
     },
     updateDocument() {
       // this.$router.push(`/solutions/update/2`)
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(
           `Please select one of the Solutions for updating!`,
@@ -297,7 +296,6 @@ export default {
       this.$router.push(`/solutions/update/${this.selectedId[0]}`)
     },
     deleteDocument() {
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(
           `Please select one of the Solutions for deleting!`,

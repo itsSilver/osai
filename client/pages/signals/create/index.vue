@@ -332,31 +332,15 @@ export default {
   },
   methods: {
     fileChange(event) {
-      console.log(event)
       this.tempimmagine_1 = event.target.files[0]
     },
     fileChange2(event) {
-      console.log(event)
       this.tempimmagine_2 = event.target.files[0]
     },
     fileChange3(event) {
-      console.log(event)
       this.tempimmagine_3 = event.target.files[0]
     },
     onSubmit() {
-      // let payload = {
-      //   titolo: titolo,
-      //   descrizione: descrizione,
-      //   id_allarme: id_allarme,
-      //   // immagine_1: immagine_1,
-      //   descrizione_allarme: descrizione_allarme,
-      //   famiglia_macchina: famiglia_macchina,
-      //   sottofamiglia_macchina: sottofamiglia_macchina,
-      //   rif_ticket: rif_ticket,
-      // }
-
-      // console.log(payload)
-
       this.show = true
       if (
         this.form.titolo === null ||

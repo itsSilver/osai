@@ -123,7 +123,6 @@ export default {
     },
     onSubmit() {
       this.show = true
-      console.log(this.dataTable.password.length)
       if (
         this.dataTable.username === null ||
         this.dataTable.email === null ||
@@ -170,7 +169,6 @@ export default {
         })
         .then((response) => {
           this.dataPermission = response.data
-          console.log(this.dataPermission)
           this.show = false
         })
         .catch((error) => {
@@ -183,8 +181,6 @@ export default {
       const datapayload = {
         permission_id: this.selected,
       }
-
-      console.log(this.selected)
 
       this.show = true
       this.$axios

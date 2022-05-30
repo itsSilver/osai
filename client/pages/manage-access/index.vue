@@ -217,8 +217,6 @@ export default {
       this.$router.push(`/manage-access/create`)
     },
     updateDocument() {
-      console.log('Val here to be deleted!', this.selectedId)
-
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(`Please select one of the Users for updating!`, {
           title: `Attention`,
@@ -251,7 +249,6 @@ export default {
       this.$router.push(`/manage-access/update/${this.selectedId[0]}`)
     },
     deleteDocument() {
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(`Please select one of the Users for deleting!`, {
           title: `Attention`,

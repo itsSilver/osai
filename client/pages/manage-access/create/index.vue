@@ -181,7 +181,6 @@ export default {
     },
     onSubmit() {
       this.show = true
-      console.log(this.form.password.length)
       if (
         this.form.name === null ||
         this.form.email === null ||
@@ -210,7 +209,6 @@ export default {
           this.showPermissionList = true
           this.getPermissionData()
           this.accountCreated = response.data.id
-          console.log(this.accountCreated)
         })
         .catch((error) => {
           this.show = false
@@ -242,8 +240,6 @@ export default {
       const datapayload = {
         permission_id: this.selected,
       }
-
-      console.log(this.selected)
 
       this.show = true
       this.$axios

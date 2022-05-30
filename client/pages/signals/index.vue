@@ -275,7 +275,6 @@ export default {
     },
     updateDocument() {
       // this.$router.push(`/signals/update/2`)
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(
           `Please select one of the Signals for updating!`,
@@ -311,7 +310,6 @@ export default {
       this.$router.push(`/signals/update/${this.selectedId[0]}`)
     },
     deleteDocument() {
-      console.log('Val here to be deleted!', this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(
           `Please select one of the Signals for deleting!`,

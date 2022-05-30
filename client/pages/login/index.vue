@@ -105,9 +105,7 @@ export default {
           this.$auth.strategy.token.set(this.token)
           this.redirectPage()
         })
-        .catch((err) => {
-          console.log(err.response)
-        })
+        .catch((err) => {})
     },
     redirectPage() {
       this.$router.go(this.$router.currentRoute)

@@ -55,7 +55,6 @@ export default {
         })
         .then((response) => {
           this.dataTable = response.data
-          console.log(this.dataTable)
           this.show = false
         })
         .catch((error) => {
