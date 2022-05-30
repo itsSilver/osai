@@ -41,7 +41,6 @@ export default {
             permissions.forEach((e) => {
               dataPermissions.push(e.id)
             })
-            // console.log(permissions)
             this.selected = dataPermissions
           }
           this.show = false
