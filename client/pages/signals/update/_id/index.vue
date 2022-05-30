@@ -139,7 +139,7 @@
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
-                    @change="fileChange3"
+                    @change="fileChange"
                   ></b-form-file>
                 </div>
               </div>
@@ -156,7 +156,7 @@
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
-                    @change="fileChange3"
+                    @change="fileChange2"
                   ></b-form-file>
                 </div>
               </div>
@@ -340,7 +340,7 @@ export default {
       this.showImage = true
     },
     onSubmit() {
-      this.show = true
+      // this.show = true
       if (
         this.dataTable.titolo === null &&
         this.dataTable.descrizione === '' &&
@@ -356,17 +356,31 @@ export default {
         this.toggleToaster()
         return
       }
-      let payload = {
-        titolo: this.dataTable.titolo,
-        descrizione: this.dataTable.descrizione,
-        id_allarme: this.dataTable.id_allarme,
-        descrizione_allarme: this.dataTable.descrizione_allarme,
-        famiglia_macchina: this.dataTable.famiglia_macchina,
-        sottofamiglia_macchina: this.dataTable.sottofamiglia_macchina,
-        rif_ticket: this.dataTable.rif_ticket,
+      const data = new FormData()
+
+      if (this.tempimmagine_1 !== null) {
+        data.append('immagine_1', this.tempimmagine_1)
       }
+      if (this.tempimmagine_2 !== null) {
+        data.append('immagine_2', this.tempimmagine_2)
+      }
+      if (this.tempimmagine_3 !== null) {
+        data.append('immagine_3', this.tempimmagine_3)
+      }
+      data.append('titolo', this.dataTable.titolo)
+      data.append('descrizione', this.dataTable.descrizione)
+      data.append('settore_riferimento', 'test test')
+      data.append('note', this.dataTable.note)
+      data.append('rif_ticket', this.dataTable.rif_ticket)
+      data.append('descrizione_allarme', this.dataTable.descrizione_allarme)
+      data.append('id_allarme', this.dataTable.id_allarme)
+      data.append('famiglia_macchina', this.dataTable.famiglia_macchina)
+      data.append(
+        'sottofamiglia_macchina',
+        this.dataTable.sottofamiglia_macchina
+      )
       this.$axios
-        .post(`/api/segnalazioni/update/${this.$route.params.id}`, payload, {
+        .post(`/api/segnalazioni/update/${this.$route.params.id}`, data, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
