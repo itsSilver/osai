@@ -77,20 +77,7 @@
             "
           >
             <!-- Second Nav -->
-            <div class="d-flex gap-4 second-d-flex-left">
-              <b-input-group class="mt-3">
-                <b-form-input
-                  class="input-search"
-                  placeholder="Search"
-                  style="height: 40px !important"
-                ></b-form-input>
-                <b-input-group-append>
-                  <b-button class="button-format">
-                    <i class="fas fa-search pr-2"></i>Search</b-button
-                  >
-                </b-input-group-append>
-              </b-input-group>
-            </div>
+            <div class="d-flex gap-4 second-d-flex-left"></div>
             <div
               class="
                 d-flex
