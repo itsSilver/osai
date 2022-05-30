@@ -211,6 +211,7 @@
                 :statusOccurrenceStatus="statusOccurrenceStatus"
                 :statusCreationDate="statusCreationDate"
                 :statusUpdateDate="statusUpdateDate"
+                @get-new-delete-id="idToDelete"
                 @order-asc-desc="orderAscDesc"
               />
             </b-overlay>
@@ -332,6 +333,7 @@ export default {
     },
     updateDocument() {
       // this.$router.push(`/occorrences/update/2`)
+      console.log(this.selectedId)
       if (this.selectedId.length === 0) {
         this.$bvModal.msgBoxOk(
           `Please select one of the occurrences for updating!`,
