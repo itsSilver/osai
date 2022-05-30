@@ -320,12 +320,12 @@ export default {
         data.append('immagine_3', this.tempimmagine_3)
       }
 
-      data.append('titolo', this.form.titolo)
-      data.append('descrizione', this.form.descrizione)
-      data.append('settore_riferimento', this.form.settore_riferimento)
-      data.append('note', this.form.note)
-      data.append('rif_ticket', this.form.rif_ticket)
-      data.append('rank', this.form.rank)
+      data.append('titolo', this.dataTable.titolo)
+      data.append('descrizione', this.dataTable.descrizione)
+      data.append('settore_riferimento', this.dataTable.settore_riferimento)
+      data.append('note', this.dataTable.note)
+      data.append('rif_ticket', this.dataTable.rif_ticket)
+      data.append('rank', this.dataTable.rank)
 
       this.$axios
         .post(`/api/soluzioni/update/${this.$route.params.id}`, data, {
