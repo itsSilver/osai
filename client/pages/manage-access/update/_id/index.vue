@@ -31,7 +31,7 @@
                   v-if="showPermissionList === false"
                 >
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New User
+                  Update User
                 </li>
                 <li
                   class="nav-actions-color mx-2"

@@ -21,6 +21,38 @@ export default {
       this.$emit('data-send', val)
     },
   },
+  mounted() {
+    this.getDataPermissions()
+  },
+  methods: {
+    getDataPermissions() {
+      this.show = true
+      this.$axios
+        .get(`/user/id/${this.$route.params.id}`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          if (response) {
+            const permissions = response.data.permissions
+            const dataPermissions = []
+            permissions.forEach((e) => {
+              dataPermissions.push(e.id)
+            })
+            // console.log(permissions)
+            this.selected = dataPermissions
+          }
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+  },
   props: ['dataTable'],
 }
 </script>
