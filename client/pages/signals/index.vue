@@ -192,6 +192,7 @@
                 :statusCreationDate="statusCreationDate"
                 :statusUpdateDate="statusUpdateDate"
                 @get-new-delete-id="idToDelete"
+                @order-asc-desc="orderAscDesc"
               />
             </b-overlay>
           </div>
@@ -241,15 +242,49 @@ export default {
       statusCreationDate: '1',
       statusUpdateDate: '1',
       filterName: null,
+      idAscDesc: null,
+      statusAscDesc: false,
     }
   },
   methods: {
+    orderAscDesc() {
+      this.statusAscDesc = !this.statusAscDesc
+      if (this.statusAscDesc === true) {
+        this.idAscDesc = '-id'
+      } else {
+        this.idAscDesc = 'id'
+      }
+      this.onSubmitAscDesc()
+    },
     onSubmitSearch() {
       this.show = true
       this.$axios
         .get('/api/segnalazioni/filter', {
           params: {
             search: this.filterName,
+          },
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        .then((response) => {
+          this.dataTable = response.data
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    onSubmitAscDesc() {
+      this.show = true
+      this.$axios
+        .get('/api/segnalazioni/filter', {
+          params: {
+            ordering: this.idAscDesc,
           },
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,

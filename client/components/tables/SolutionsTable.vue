@@ -8,7 +8,12 @@
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
         <b-th v-if="statusIdsolution === '1'"
-          ><i class="fa-solid fa-arrow-down-short-wide"></i>Id Solution</b-th
+          ><i
+            class="fa-solid fa-arrow-down-short-wide"
+            style="cursor: pointer"
+            @click="orderAscDesc()"
+          ></i
+          >Id Solution</b-th
         >
         <b-th v-if="statusTitle === '1'">Title</b-th>
         <b-th v-if="statusRank === '1'">Rank</b-th>
@@ -131,6 +136,9 @@ export default {
     changeValue() {
       this.$emit('get-new-delete-id', this.selectedId)
       this.selectedId = []
+    },
+    orderAscDesc() {
+      this.$emit('order-asc-desc')
     },
   },
   props: [

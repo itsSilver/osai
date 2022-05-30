@@ -7,7 +7,14 @@
         <b-th>
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
-        <b-th v-if="statusIdoccurrence === '1'">Id occurrence </b-th>
+        <b-th v-if="statusIdoccurrence === '1'"
+          ><i
+            class="fa-solid fa-arrow-down-short-wide"
+            style="cursor: pointer"
+            @click="orderAscDesc()"
+          ></i
+          >Id occurrence
+        </b-th>
         <b-th v-if="statusIdsignal === '1'">Id signal </b-th>
         <b-th v-if="statusIdsolution === '1'">Id solution </b-th>
         <b-th v-if="statusTitle === '1'">Title </b-th>
@@ -155,6 +162,9 @@ export default {
     changeValue() {
       this.$emit('get-new-delete-id', this.selectedId)
       this.selectedId = []
+    },
+    orderAscDesc() {
+      this.$emit('order-asc-desc')
     },
   },
   props: [
