@@ -101,7 +101,7 @@
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
-                    @change="fileChange3"
+                    @change="fileChange"
                   ></b-form-file>
                 </div>
               </div>
@@ -118,7 +118,7 @@
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
-                    @change="fileChange3"
+                    @change="fileChange2"
                   ></b-form-file>
                 </div>
               </div>
@@ -309,18 +309,26 @@ export default {
         this.toggleToaster()
         return
       }
-      let payload = {
-        titolo: this.dataTable.titolo,
-        descrizione: this.dataTable.descrizione,
-        rank: this.dataTable.rank,
-        note: this.dataTable.note,
-        immagine_1: this.dataTable.immagine_1,
-        immagine_2: this.dataTable.immagine_2,
-        immagine_3: this.dataTable.immagine_3,
-        settore_riferimento: this.dataTable.settore_riferimento,
+      const data = new FormData()
+      if (this.tempimmagine_1 !== null) {
+        data.append('immagine_1', this.tempimmagine_1)
       }
+      if (this.tempimmagine_2 !== null) {
+        data.append('immagine_2', this.tempimmagine_2)
+      }
+      if (this.tempimmagine_3 !== null) {
+        data.append('immagine_3', this.tempimmagine_3)
+      }
+
+      data.append('titolo', this.form.titolo)
+      data.append('descrizione', this.form.descrizione)
+      data.append('settore_riferimento', this.form.settore_riferimento)
+      data.append('note', this.form.note)
+      data.append('rif_ticket', this.form.rif_ticket)
+      data.append('rank', this.form.rank)
+
       this.$axios
-        .post(`/api/soluzioni/update/${this.$route.params.id}`, payload, {
+        .post(`/api/soluzioni/update/${this.$route.params.id}`, data, {
           headers: {
             Authorization: `Token ${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
