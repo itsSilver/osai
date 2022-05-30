@@ -29,7 +29,7 @@
           ><i class="fa-regular fa-gem mr-3"></i> Occurrences</nuxt-link
         >
       </li>
-      <li>
+      <!-- <li>
         <a class="text-white" href="#"
           ><i class="fa fa-ghost mr-3"></i> Status Solutions</a
         >
@@ -38,7 +38,7 @@
         <a class="text-white" href="#"
           ><i class="fa fa-droplet mr-3"></i> Status Signals</a
         >
-      </li>
+      </li> -->
     </ul>
     <p class="side-menu-title">SETTINGS</p>
     <ul class="list-unstyled components">
@@ -47,11 +47,11 @@
           ><i class="fa fa-ghost mr-3"></i> Manage access</nuxt-link
         >
       </li>
-      <li>
+      <!-- <li>
         <a class="text-white" href="#"
           ><i class="fa fa-location-dot mr-3"></i> Translations</a
         >
-      </li>
+      </li> -->
     </ul>
   </nav>
 </template>
