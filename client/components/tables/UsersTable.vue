@@ -7,9 +7,7 @@
         <b-th>
           <input type="checkbox" class="checkthis" id="checkall" />
         </b-th>
-        <b-th v-if="statusUserId === '1'"
-          ><i class="fa-solid fa-arrow-down-short-wide"></i>Id User</b-th
-        >
+        <b-th v-if="statusUserId === '1'">Id User</b-th>
         <b-th v-if="statusName === '1'">Name</b-th>
         <b-th v-if="statusEmail === '1'">Email</b-th>
         <b-th v-if="statusCreationDate === '1'">Creation date</b-th>
