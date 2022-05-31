@@ -152,14 +152,14 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
     titolo = serializers.CharField(max_length=255,required=True)
-    descrizione = serializers.CharField(required=False)
-    commessa_macchina = serializers.CharField(max_length=255,required=False)
-    versione_sw_1 = serializers.CharField(max_length=255,required=False)
-    versione_sw_2 = serializers.CharField(max_length=255,required=False)
+    descrizione = serializers.CharField(required=False,allow_blank=True, allow_null=True)
+    commessa_macchina = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
+    versione_sw_1 = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
+    versione_sw_2 = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
     data_occorrenza = serializers.CharField(max_length=255)
-    stato_occorrenza = serializers.IntegerField(required=False)
-    note = serializers.CharField(required=False)
-    rif_ticket = serializers.CharField(max_length=255,required=False)
+    stato_occorrenza = serializers.IntegerField(required=False,allow_blank=True, allow_null=True)
+    note = serializers.CharField(required=False,allow_blank=True, allow_null=True)
+    rif_ticket = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
     class Meta:
         model = Occorrenze
 
