@@ -341,18 +341,20 @@ export default {
     },
     onSubmit() {
       // this.show = true
+      if (this.dataTable.titolo === null || this.dataTable.titolo === '') {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Title Signal!'
+        this.toggleToaster()
+        return
+      }
       if (
-        this.dataTable.titolo === null &&
-        this.dataTable.descrizione === '' &&
-        this.dataTable.descrizione_allarme === '' &&
-        this.dataTable.id_allarme === null &&
-        this.dataTable.famiglia_macchina === null &&
-        this.dataTable.sottofamiglia_macchina === null &&
-        this.dataTable.rif_ticket === null
+        this.dataTable.id_allarme === null ||
+        this.dataTable.id_allarme === ''
       ) {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Alarm Id!'
         this.toggleToaster()
         return
       }

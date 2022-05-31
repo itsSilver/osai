@@ -293,19 +293,10 @@ export default {
     },
     onSubmit() {
       this.show = true
-      if (
-        this.dataTable.titolo === null &&
-        this.dataTable.descrizione === '' &&
-        this.dataTable.note === '' &&
-        this.dataTable.rank === null &&
-        this.dataTable.immagine_1 === null &&
-        this.dataTable.immagine_2 === null &&
-        this.dataTable.immagine_3 === null &&
-        this.dataTable.settore_riferimento === null
-      ) {
+      if (this.dataTable.titolo === null || this.dataTable.titolo === '') {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Title Signal!'
         this.toggleToaster()
         return
       }
