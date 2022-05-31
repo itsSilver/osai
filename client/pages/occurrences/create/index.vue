@@ -339,6 +339,31 @@ export default {
         .then(() => {
           this.dataCreated = 'Occurrence created Succesfully'
           this.toggleToaster()
+          this.sendSolutionId()
+        })
+        .catch((error) => {
+          this.show = false
+          this.dataCreated = 'Something went wrong!'
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    sendSolutionId() {
+      const id = this
+      const dataPayload = {
+        occorrenze_id: '1',
+      }
+      this.$axios
+        .post(`/api/soluzioni/connect/${this.form.soluzione}`, dataPayload, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          // this.dataCreated = 'Occurrence created Succesfully'
+          // this.toggleToaster()
+          // this.sendSolutionId()
           setTimeout(() => {
             this.$router.push('/occurrences')
           }, 2000)
