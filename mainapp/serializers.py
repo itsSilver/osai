@@ -157,7 +157,7 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
     versione_sw_1 = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
     versione_sw_2 = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
     data_occorrenza = serializers.CharField(max_length=255)
-    stato_occorrenza = serializers.IntegerField(required=False,allow_blank=True, allow_null=True)
+    stato_occorrenza = serializers.IntegerField(required=False)
     note = serializers.CharField(required=False,allow_blank=True, allow_null=True)
     rif_ticket = serializers.CharField(max_length=255,required=False,allow_blank=True, allow_null=True)
     class Meta:
