@@ -69,7 +69,7 @@
                     type="text"
                     class="form-control input-create"
                     id="id-soluzione"
-                    v-model="dataTable.soluzione"
+                    v-model="dataTable.soluzioni_id[0]"
                     placeholder="Id solution"
                   />
                 </div>
@@ -370,7 +370,7 @@ export default {
           this.dataCreated = 'Occurrence Updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
-            // this.$router.push('/occurrences')
+            this.$router.push('/occurrences')
           }, 3000)
         })
         .catch((error) => {
