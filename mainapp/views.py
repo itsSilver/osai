@@ -186,8 +186,10 @@ def create_occorrenze(request):
                 user_id=request.user.id
             )
             occorrenze.segnalazione_id = request.data["segnalazione"] if "segnalazione" in request.data else ""
-            occorrenze.save()
 
+            occorrenze.save()
+            if "soluzione" in request.data:
+                Soluzioni.objects.filter(pk=request.data['soluzione']).update(occorrenze_id=occorrenze.id)
             data["message"] = "Occurrenze Created successfully"
         else:
             data = serializer.errors
