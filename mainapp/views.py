@@ -72,7 +72,7 @@ def create_soluzioni(request):
         if serializer.is_valid():
             soluzioni = Soluzioni.objects.create(
                 titolo=serializer.data["titolo"],
-                rank=serializer.data["rank"] if "rank" in serializer.data else '',
+                rank=serializer.data["rank"] if "rank" in serializer.data else 0,
                 descrizione=serializer.data["descrizione"] if "descrizione" in serializer.data else '',
                 immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
                 immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",

@@ -77,6 +77,21 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
 
 
 class SoluzioniSerializer(serializers.ModelSerializer):
+    id_stato_soluzione = StatiSoluzioneSerializer(required=False)
+
+
+    immagine_1 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    immagine_2 = serializers.ImageField(
+        allow_null=True, max_length=None, required=False)
+    immagine_3 = serializers.ImageField(
+        max_length=None, required=False, allow_null=True)
+    titolo = serializers.CharField(
+        required=True, allow_blank=True, max_length=100)
+    rank = serializers.IntegerField(required=False)
+    descrizione = serializers.CharField(required=False, allow_blank=True)
+    settore_riferimento = serializers.CharField(required=False, allow_blank=True)
+    note = serializers.CharField(required=False, allow_blank=True)
     class Meta:
         model = Soluzioni
 
@@ -136,7 +151,7 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
-    titolo = serializers.CharField(max_length=255)
+    titolo = serializers.CharField(max_length=255,required=True)
     descrizione = serializers.CharField(required=False)
     commessa_macchina = serializers.CharField(max_length=255,required=False)
     versione_sw_1 = serializers.CharField(max_length=255,required=False)
