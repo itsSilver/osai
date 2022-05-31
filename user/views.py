@@ -23,6 +23,14 @@ from user.serializers import RegistrationSerializer, UserSerializer, Permissions
 
 User = get_user_model()
 
+def __check_if_has_permission(request, permission):
+    if request.user.is_admin:
+        return True
+    if permission in request.user.permissions.values_list('codename', flat=True):
+        return True
+    else:
+        return False
+
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -97,9 +105,15 @@ def User_logout(request):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-@is_admin
 def user_delete(request, id):
+    check_permission = __check_if_has_permission(request, "delete_users")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to delete_users"})
+
     user = get_object_or_404(User, pk=id)
+    if user.is_admin:
+        return JsonResponse({"status": 403, "message": "You do not have permission to admin"})
+
     user.delete()
     return JsonResponse({"status": 200, "message": "User Removed successfully"})
 
@@ -107,6 +121,9 @@ def user_delete(request, id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def update_user(request, id):
+    check_permission = __check_if_has_permission(request, "update_users")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to update_users"})
     seg = get_object_or_404(User, pk=id)
     if(seg.id == request.user.id):
         data = UserSerializer(
@@ -121,7 +138,6 @@ def update_user(request, id):
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
-@is_admin
 def add_permission_to_user(request, id):
     user = get_object_or_404(User, pk=id)
     permissions = request.data["permission_id"]
@@ -136,8 +152,10 @@ def add_permission_to_user(request, id):
 
 @ api_view(["GET"])
 @ permission_classes([IsAuthenticated])
-@ is_admin
 def get_users(request):
+    check_permission = __check_if_has_permission(request, "view_users")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
     queryset = Users.objects.all()
     serializer_class = UserSerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
@@ -146,6 +164,9 @@ def get_users(request):
 @ api_view(['GET'])
 @ permission_classes([IsAuthenticated])
 def user_detail(request):
+    check_permission = __check_if_has_permission(request, "view_users")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
     user = User.objects.get(pk=request.user.pk)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
@@ -154,13 +175,15 @@ def user_detail(request):
 @ api_view(['GET'])
 @ permission_classes([IsAuthenticated])
 def user_by_id(request,id):
+    check_permission = __check_if_has_permission(request, "view_users")
+    if not check_permission:
+        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
     user = User.objects.get(id=id)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
 
 @ api_view(['GET'])
 @ permission_classes([AllowAny])
-@ is_admin
 def permissions_list(request):
     permissions = Permission.objects.all()
     permissions_serializer = PermissionsSerializer(permissions, many=True)
@@ -169,7 +192,6 @@ def permissions_list(request):
 
 @ api_view(["POST"])
 @ permission_classes([IsAuthenticated])
-@ is_admin
 def add_permission(request, id):
     permissions = request.data['permissions']
 
@@ -182,7 +204,6 @@ def add_permission(request, id):
 
 @ api_view(["POST"])
 @ permission_classes([IsAuthenticated])
-@ is_admin
 def remove_permission(request, id):
     permissions = request.data['permissions']
     u = get_object_or_404(User, pk=id)
@@ -203,22 +224,9 @@ def get_segnalazioni(request):
     return Response({"200": f'Show info'})
 
 
-#
-# @api_view(["GET"])
-# @permission_classes([IsAuthenticated])
-# def get_segnalazioni(request):
-#     if not request.user.is_admin:
-#         #kur ben migrate modelin dalin keto add/view/change/delete per cdo model...
-#         #duhet nje menyre qe te fshijme permissions qe mer user-i kur krijohet dhe 2 endpoint add/remove permission
-#         if not request.user.has_permission('view_segnalizioni'):
-#             print("# permission error")
-#     print(" #display  segnalizioni")
-#
-
 
 @ api_view(["POST"])
 @ permission_classes([IsAuthenticated])
-@ is_admin
 def create_permission(request):
     serializer = PermissionsSerializer(data=request.data)
     if serializer.is_valid():
@@ -229,7 +237,6 @@ def create_permission(request):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
-@is_admin
 def retrieve_user_by_id(request):
     if 'user_id' not in request.data:
         raise ParseError("User id is missing")
