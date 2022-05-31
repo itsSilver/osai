@@ -53,6 +53,28 @@
         >
       </li> -->
     </ul>
+    <div
+      data-v-1165e0b7=""
+      class="
+        infos
+        px-4
+        py-1
+        bg-primary
+        text-right
+        position-absolute
+        bottom-0
+        w-100
+        logout-row
+      "
+    >
+      <a
+        data-v-1165e0b7=""
+        href="/logout"
+        class="text-white text-uppercase font-weight-bold logout-btn"
+      >
+        Logout</a
+      >
+    </div>
   </nav>
 </template>
 <script>
@@ -70,3 +92,13 @@ export default {
   },
 }
 </script>
+<style scoped>
+.logout-row {
+  background-color: #485679 !important;
+}
+.logout-row > a {
+  background-color: #4373fb !important;
+  border-radius: 0.25rem !important;
+  padding: 0.2rem 0.4rem !important;
+}
+</style>

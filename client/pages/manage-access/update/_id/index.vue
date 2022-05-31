@@ -191,7 +191,7 @@ export default {
           },
         })
         .then(() => {
-          this.dataCreated = 'User created Succesfully'
+          this.dataCreated = 'User updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
             this.$router.push('/manage-access')
