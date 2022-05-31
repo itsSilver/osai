@@ -342,21 +342,21 @@ export default {
     },
     onSubmit() {
       this.show = true
-      if (
-        this.form.titolo === null ||
-        this.form.descrizione === '' ||
-        this.form.descrizione_allarme === '' ||
-        this.form.id_allarme === null ||
-        this.form.famiglia_macchina === null ||
-        this.form.sottofamiglia_macchina === null ||
-        this.form.rif_ticket === null
-      ) {
+      if (this.form.titolo === null || this.form.titolo === '') {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Title Signal!'
         this.toggleToaster()
         return
       }
+      if (this.form.id_allarme === null || this.form.id_allarme === '') {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Alarm Id!'
+        this.toggleToaster()
+        return
+      }
+
       const data = new FormData()
       data.append('titolo', this.form.titolo)
       data.append('descrizione', this.form.descrizione)

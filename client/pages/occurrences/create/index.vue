@@ -298,10 +298,10 @@ export default {
         descrizione: '',
         note: '',
         commessa_macchina: null,
-        versione_sw_1: null,
-        versione_sw_1: null,
+        versione_sw_1: '',
+        versione_sw_1: '',
         data_occorrenza: '',
-        rif_ticket: null,
+        rif_ticket: '',
         stato_occorrenza: null,
       },
     }
@@ -329,6 +329,28 @@ export default {
         return
       }
 
+      //  if (this.form.titolo === null || this.form.titolo === '') {
+      //   this.show = false
+      //   this.variant = 'danger'
+      //   this.dataCreated = 'Please enter Title Signal!'
+      //   this.toggleToaster()
+      //   return
+      // }
+      // if (this.form.data_occorrenza === null) {
+      //   this.show = false
+      //   this.variant = 'danger'
+      //   this.dataCreated = 'Please enter Occurrence date!'
+      //   this.toggleToaster()
+      //   return
+      // }
+      // if (this.form.segnalazione === null || this.form.segnalazione === '') {
+      //   this.show = false
+      //   this.variant = 'danger'
+      //   this.dataCreated = 'Please enter Id signal!'
+      //   this.toggleToaster()
+      //   return
+      // }
+
       this.$axios
         .post(`/api/occorrenze/create`, this.form, {
           headers: {
@@ -340,30 +362,6 @@ export default {
           this.dataCreated = 'Occurrence created Succesfully'
           this.toggleToaster()
           this.sendSolutionId()
-        })
-        .catch((error) => {
-          this.show = false
-          this.dataCreated = 'Something went wrong!'
-          this.variant = 'danger'
-          this.toggleToaster()
-        })
-    },
-    sendSolutionId() {
-      const id = this
-      const dataPayload = {
-        occorrenze_id: '1',
-      }
-      this.$axios
-        .post(`/api/soluzioni/connect/${this.form.soluzione}`, dataPayload, {
-          headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {
-          // this.dataCreated = 'Occurrence created Succesfully'
-          // this.toggleToaster()
-          // this.sendSolutionId()
           setTimeout(() => {
             this.$router.push('/occurrences')
           }, 2000)

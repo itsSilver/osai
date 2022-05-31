@@ -265,16 +265,10 @@ export default {
     },
     onSubmit() {
       this.show = true
-      if (
-        this.form.titolo === null ||
-        this.form.descrizione === '' ||
-        this.form.note === '' ||
-        this.form.rank === null ||
-        this.form.settore_riferimento === null
-      ) {
+      if (this.form.titolo === null || this.form.titolo === '') {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Title Signal!'
         this.toggleToaster()
         return
       }
@@ -282,13 +276,21 @@ export default {
       const data = new FormData()
       data.append('titolo', this.form.titolo)
       data.append('descrizione', this.form.descrizione)
-      data.append('immagine_1', this.tempimmagine_1)
-      data.append('immagine_2', this.tempimmagine_2)
-      data.append('immagine_3', this.tempimmagine_3)
+      if (this.tempimmagine_1 !== null) {
+        data.append('immagine_1', this.tempimmagine_1)
+      }
+      if (this.tempimmagine_1 !== null) {
+        data.append('immagine_2', this.tempimmagine_2)
+      }
+      if (this.tempimmagine_1 !== null) {
+        data.append('immagine_3', this.tempimmagine_3)
+      }
+      if (this.form.rank !== null) {
+        data.append('rank', this.form.rank)
+      }
       data.append('settore_riferimento', this.form.settore_riferimento)
       data.append('note', this.form.note)
       data.append('rif_ticket', this.form.rif_ticket)
-      data.append('rank', this.form.rank)
 
       this.$axios
         .post(`/api/soluzioni/create`, data, {
