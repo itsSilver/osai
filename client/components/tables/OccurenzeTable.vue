@@ -40,7 +40,9 @@
           </b-td>
           <b-td v-if="statusIdoccurrence === '1'">{{ data.id }}</b-td>
           <b-td v-if="statusIdsignal === '1'">{{ data.segnalazione }}</b-td>
-          <b-td v-if="statusIdsolution === '1'">{{ data.soluzione }}</b-td>
+          <b-td v-if="statusIdsolution === '1'">{{
+            data.soluzioni_id[0]
+          }}</b-td>
           <b-td v-if="statusTitle === '1'">{{ data.titolo }}</b-td>
           <b-td v-if="statusMachine === '1'">{{ data.commessa_macchina }}</b-td>
           <b-td v-if="statusVersion1 === '1'">{{ data.versione_sw_1 }}</b-td>
@@ -97,7 +99,7 @@
           </div>
           <div class="respo-after-tr" v-if="statusIdsolution === '1'">
             <b-td class="td-respo-title">Id solution</b-td>
-            <b-td class="td-respo-data">{{ data.soluzione }}</b-td>
+            <b-td class="td-respo-data">{{ data.soluzioni_id[0] }}</b-td>
           </div>
           <div class="respo-after-tr" v-if="statusTitle === '1'">
             <b-td class="td-respo-title">Title</b-td>

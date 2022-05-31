@@ -3,9 +3,6 @@
 <script>
 export default {
   created() {
-    if (process.browser) {
-      localStorage.removeItem('company')
-    }
     this.$auth.strategy.token.set(null)
     this.$axios.setHeader('Authorization', false)
     this.$auth.logout({
