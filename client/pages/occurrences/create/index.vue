@@ -40,195 +40,199 @@
           </div>
           <div class="vertical-line"></div>
           <!-- Form start here -->
-          <b-form @submit.prevent="onSubmit" class="create-solution-form">
-            <div class="form-group row">
-              <label
-                for="id-segnalazione"
-                class="col-sm-2 col-form-label create-label"
-                >Id signal</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="id-segnalazione"
-                  v-model="form.segnalazione"
-                  placeholder="Id signal"
-                />
+          <b-overlay :show="show" rounded="sm">
+            <b-form @submit.prevent="onSubmit" class="create-solution-form">
+              <div class="form-group row">
+                <label
+                  for="id-segnalazione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id signal</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="id-segnalazione"
+                    v-model="form.segnalazione"
+                    placeholder="Id signal"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="id-soluzione"
-                class="col-sm-2 col-form-label create-label"
-                >Id solution</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="id-soluzione"
-                  v-model="form.soluzione"
-                  placeholder="Id solution"
-                />
+              <div class="form-group row">
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id solution</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="id-soluzione"
+                    v-model="form.soluzione"
+                    placeholder="Id solution"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Title</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="tittle"
-                  v-model="form.titolo"
-                  placeholder="Title"
-                />
+              <div class="form-group row">
+                <label for="tittle" class="col-sm-2 col-form-label create-label"
+                  >Title</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="tittle"
+                    v-model="form.titolo"
+                    placeholder="Title"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="ticket" class="col-sm-2 col-form-label create-label"
-                >Ticket</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="ticket"
-                  v-model="form.rif_ticket"
-                  placeholder="Ticket"
-                />
+              <div class="form-group row">
+                <label for="ticket" class="col-sm-2 col-form-label create-label"
+                  >Ticket</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="ticket"
+                    v-model="form.rif_ticket"
+                    placeholder="Ticket"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="textarea-small"
-                class="col-sm-2 col-form-label create-label"
-                >Description</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="form.descrizione"
-                />
+              <div class="form-group row">
+                <label
+                  for="textarea-small"
+                  class="col-sm-2 col-form-label create-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.descrizione"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="machine" class="col-sm-2 col-form-label create-label"
-                >Machine order</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="machine"
-                  v-model="form.commessa_macchina"
-                  placeholder="Machine order"
-                />
+              <div class="form-group row">
+                <label
+                  for="machine"
+                  class="col-sm-2 col-form-label create-label"
+                  >Machine order</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="machine"
+                    v-model="form.commessa_macchina"
+                    placeholder="Machine order"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="version-1"
-                class="col-sm-2 col-form-label create-label"
-                >Version sw 1</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="version-1"
-                  v-model="form.versione_sw_1"
-                  placeholder="Version sw 1"
-                />
+              <div class="form-group row">
+                <label
+                  for="version-1"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 1</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-1"
+                    v-model="form.versione_sw_1"
+                    placeholder="Version sw 1"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="version-2"
-                class="col-sm-2 col-form-label create-label"
-                >Version sw 2</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="version-2"
-                  v-model="form.versione_sw_2"
-                  placeholder="Version sw 2"
-                />
+              <div class="form-group row">
+                <label
+                  for="version-2"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 2</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-2"
+                    v-model="form.versione_sw_2"
+                    placeholder="Version sw 2"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="data-occorrenza"
-                class="col-sm-2 col-form-label create-label"
-                >Occurrence date</label
-              >
-              <div class="col-sm-10">
-                <b-form-datepicker
-                  id="example-datepicker"
-                  v-model="form.data_occorrenza"
-                  class="mb-2 date-choose"
-                  today-button
-                  reset-button
-                  close-button
-                  selected-variant="primary"
-                  today-variant="primary"
-                  hide-header
-                  label-close-button="Close"
-                  label-today-button="Today"
-                  label-reset-button="Reset"
-                ></b-form-datepicker>
+              <div class="form-group row">
+                <label
+                  for="data-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence date</label
+                >
+                <div class="col-sm-10">
+                  <b-form-datepicker
+                    id="example-datepicker"
+                    v-model="form.data_occorrenza"
+                    class="mb-2 date-choose"
+                    today-button
+                    reset-button
+                    close-button
+                    selected-variant="primary"
+                    today-variant="primary"
+                    hide-header
+                    label-close-button="Close"
+                    label-today-button="Today"
+                    label-reset-button="Reset"
+                  ></b-form-datepicker>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="status-occorrenza"
-                class="col-sm-2 col-form-label create-label"
-                >Occurrence status</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="status-occorrenza"
-                  v-model="form.stato_occorrenza"
-                  placeholder="Occurrence status"
-                />
+              <div class="form-group row">
+                <label
+                  for="status-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence status</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="status-occorrenza"
+                    v-model="form.stato_occorrenza"
+                    placeholder="Occurrence status"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="note" class="col-sm-2 col-form-label create-label"
-                >Note</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="form.note"
-                />
+              <div class="form-group row">
+                <label for="note" class="col-sm-2 col-form-label create-label"
+                  >Note</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.note"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-10">
-                <b-button type="submit" class="mx-2 button-format">
-                  <i class="fas fa-download pr-2"></i>
-                  Save
-                </b-button>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <b-button type="submit" class="mx-2 button-format">
+                    <i class="fas fa-download pr-2"></i>
+                    Save
+                  </b-button>
+                </div>
               </div>
-            </div>
-          </b-form>
+            </b-form>
+          </b-overlay>
           <!-- End here -->
         </div>
       </div>
@@ -297,10 +301,10 @@ export default {
         titolo: null,
         descrizione: '',
         note: '',
-        commessa_macchina: null,
+        commessa_macchina: '',
         versione_sw_1: '',
-        versione_sw_1: '',
-        data_occorrenza: '',
+        versione_sw_2: '',
+        data_occorrenza: null,
         rif_ticket: '',
         stato_occorrenza: null,
       },
@@ -309,47 +313,34 @@ export default {
   methods: {
     onSubmit() {
       this.show = true
-      if (
-        this.form.segnalazione === null ||
-        this.form.soluzione === null ||
-        this.form.titolo === null ||
-        this.form.commessa_macchina === null ||
-        this.form.versione_sw_1 === null ||
-        this.form.versione_sw_2 === null ||
-        this.form.rif_ticket === null ||
-        this.form.data_occorrenza === '' ||
-        this.form.descrizione === '' ||
-        this.form.note === '' ||
-        this.form.stato_occorrenza === null
-      ) {
+      if (this.form.segnalazione === null || this.form.segnalazione === '') {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Id signal!'
+        this.toggleToaster()
+        return
+      }
+      if (this.form.titolo === null || this.form.titolo === '') {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Title!'
+        this.toggleToaster()
+        return
+      }
+      if (this.form.data_occorrenza === null) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Occurrence date!'
         this.toggleToaster()
         return
       }
 
-      //  if (this.form.titolo === null || this.form.titolo === '') {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please enter Title Signal!'
-      //   this.toggleToaster()
-      //   return
-      // }
-      // if (this.form.data_occorrenza === null) {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please enter Occurrence date!'
-      //   this.toggleToaster()
-      //   return
-      // }
-      // if (this.form.segnalazione === null || this.form.segnalazione === '') {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please enter Id signal!'
-      //   this.toggleToaster()
-      //   return
-      // }
+      if (
+        this.form.stato_occorrenza === null ||
+        this.form.stato_occorrenza === ''
+      ) {
+        this.form.stato_occorrenza = 0
+      }
 
       this.$axios
         .post(`/api/occorrenze/create`, this.form, {
@@ -361,7 +352,7 @@ export default {
         .then(() => {
           this.dataCreated = 'Occurrence created Succesfully'
           this.toggleToaster()
-          this.sendSolutionId()
+          this.show = false
           setTimeout(() => {
             this.$router.push('/occurrences')
           }, 2000)

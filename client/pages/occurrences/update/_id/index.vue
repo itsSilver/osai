@@ -40,195 +40,199 @@
           </div>
           <div class="vertical-line"></div>
           <!-- Form start here -->
-          <b-form @submit.prevent="onSubmit" class="create-solution-form">
-            <div class="form-group row">
-              <label
-                for="id-segnalazione"
-                class="col-sm-2 col-form-label create-label"
-                >Id signal</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="id-segnalazione"
-                  v-model="dataTable.segnalazione"
-                  placeholder="Id signal"
-                />
+          <b-overlay :show="show" rounded="sm">
+            <b-form @submit.prevent="onSubmit" class="create-solution-form">
+              <div class="form-group row">
+                <label
+                  for="id-segnalazione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id signal</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="id-segnalazione"
+                    v-model="dataTable.segnalazione"
+                    placeholder="Id signal"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="id-soluzione"
-                class="col-sm-2 col-form-label create-label"
-                >Id solution</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="id-soluzione"
-                  v-model="dataTable.soluzione"
-                  placeholder="Id solution"
-                />
+              <div class="form-group row">
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id solution</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="id-soluzione"
+                    v-model="dataTable.soluzione"
+                    placeholder="Id solution"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="tittle" class="col-sm-2 col-form-label create-label"
-                >Title</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="tittle"
-                  v-model="dataTable.titolo"
-                  placeholder="Title"
-                />
+              <div class="form-group row">
+                <label for="tittle" class="col-sm-2 col-form-label create-label"
+                  >Title</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="tittle"
+                    v-model="dataTable.titolo"
+                    placeholder="Title"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="ticket" class="col-sm-2 col-form-label create-label"
-                >Ticket</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="ticket"
-                  v-model="dataTable.rif_ticket"
-                  placeholder="Ticket"
-                />
+              <div class="form-group row">
+                <label for="ticket" class="col-sm-2 col-form-label create-label"
+                  >Ticket</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="ticket"
+                    v-model="dataTable.rif_ticket"
+                    placeholder="Ticket"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="textarea-small"
-                class="col-sm-2 col-form-label create-label"
-                >Description</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="dataTable.descrizione"
-                />
+              <div class="form-group row">
+                <label
+                  for="textarea-small"
+                  class="col-sm-2 col-form-label create-label"
+                  >Description</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="dataTable.descrizione"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="machine" class="col-sm-2 col-form-label create-label"
-                >Machine order</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="machine"
-                  v-model="dataTable.commessa_macchina"
-                  placeholder="Machine order"
-                />
+              <div class="form-group row">
+                <label
+                  for="machine"
+                  class="col-sm-2 col-form-label create-label"
+                  >Machine order</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="machine"
+                    v-model="dataTable.commessa_macchina"
+                    placeholder="Machine order"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="version-1"
-                class="col-sm-2 col-form-label create-label"
-                >Version sw 1</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="version-1"
-                  v-model="dataTable.versione_sw_1"
-                  placeholder="Version sw 1"
-                />
+              <div class="form-group row">
+                <label
+                  for="version-1"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 1</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-1"
+                    v-model="dataTable.versione_sw_1"
+                    placeholder="Version sw 1"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="version-2"
-                class="col-sm-2 col-form-label create-label"
-                >Version sw 2</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="version-2"
-                  v-model="dataTable.versione_sw_2"
-                  placeholder="Version sw 2"
-                />
+              <div class="form-group row">
+                <label
+                  for="version-2"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 2</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-2"
+                    v-model="dataTable.versione_sw_2"
+                    placeholder="Version sw 2"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="data-occorrenza"
-                class="col-sm-2 col-form-label create-label"
-                >Occurrence date</label
-              >
-              <div class="col-sm-10">
-                <b-form-datepicker
-                  id="example-datepicker"
-                  v-model="dataTable.data_occorrenza"
-                  class="mb-2 date-choose"
-                  today-button
-                  reset-button
-                  close-button
-                  selected-variant="primary"
-                  today-variant="primary"
-                  hide-header
-                  label-close-button="Close"
-                  label-today-button="Today"
-                  label-reset-button="Reset"
-                ></b-form-datepicker>
+              <div class="form-group row">
+                <label
+                  for="data-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence date</label
+                >
+                <div class="col-sm-10">
+                  <b-form-datepicker
+                    id="example-datepicker"
+                    v-model="dataTable.data_occorrenza"
+                    class="mb-2 date-choose"
+                    today-button
+                    reset-button
+                    close-button
+                    selected-variant="primary"
+                    today-variant="primary"
+                    hide-header
+                    label-close-button="Close"
+                    label-today-button="Today"
+                    label-reset-button="Reset"
+                  ></b-form-datepicker>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label
-                for="status-occorrenza"
-                class="col-sm-2 col-form-label create-label"
-                >Occurrence status</label
-              >
-              <div class="col-sm-10">
-                <input
-                  type="text"
-                  class="form-control input-create"
-                  id="status-occorrenza"
-                  v-model="dataTable.stato_occorrenza"
-                  placeholder="Occurrence status"
-                />
+              <div class="form-group row">
+                <label
+                  for="status-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence status</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="status-occorrenza"
+                    v-model="dataTable.stato_occorrenza"
+                    placeholder="Occurrence status"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="note" class="col-sm-2 col-form-label create-label"
-                >Note</label
-              >
-              <div class="col-sm-10">
-                <ckeditor
-                  :editor="editor"
-                  :value="value"
-                  :config="config"
-                  :tagName="tagName"
-                  :disabled="disabled"
-                  @input="(event) => $emit('input', event)"
-                  v-model="dataTable.note"
-                />
+              <div class="form-group row">
+                <label for="note" class="col-sm-2 col-form-label create-label"
+                  >Note</label
+                >
+                <div class="col-sm-10">
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="dataTable.note"
+                  />
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-10">
-                <b-button type="submit" class="mx-2 button-format">
-                  <i class="fas fa-download pr-2"></i>
-                  Save
-                </b-button>
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <b-button type="submit" class="mx-2 button-format">
+                    <i class="fas fa-download pr-2"></i>
+                    Save
+                  </b-button>
+                </div>
               </div>
-            </div>
-          </b-form>
+            </b-form>
+          </b-overlay>
           <!-- End here -->
         </div>
       </div>
@@ -311,22 +315,34 @@ export default {
       this.show = true
       if (
         this.dataTable.segnalazione === null ||
-        this.dataTable.soluzione === null ||
-        this.dataTable.titolo === null ||
-        this.dataTable.commessa_macchina === null ||
-        this.dataTable.versione_sw_1 === null ||
-        this.dataTable.versione_sw_2 === null ||
-        this.dataTable.rif_ticket === null ||
-        this.dataTable.data_occorrenza === '' ||
-        this.dataTable.descrizione === '' ||
-        this.dataTable.note === '' ||
-        this.dataTable.stato_occorrenza === null
+        this.dataTable.segnalazione === ''
       ) {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.dataCreated = 'Please enter Id signal!'
         this.toggleToaster()
         return
+      }
+      if (this.dataTable.titolo === null || this.dataTable.titolo === '') {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Title!'
+        this.toggleToaster()
+        return
+      }
+      if (this.dataTable.data_occorrenza === null) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please enter Occurrence date!'
+        this.toggleToaster()
+        return
+      }
+
+      if (
+        this.dataTable.stato_occorrenza === null ||
+        this.dataTable.stato_occorrenza === ''
+      ) {
+        this.dataTable.stato_occorrenza = 0
       }
 
       let payload = {
@@ -360,6 +376,7 @@ export default {
         .catch((error) => {
           this.show = false
           this.variant = 'danger'
+          this.dataCreated = 'Something went wrong!'
           this.toggleToaster()
         })
     },
