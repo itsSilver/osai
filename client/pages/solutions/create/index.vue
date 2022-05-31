@@ -265,19 +265,19 @@ export default {
     },
     onSubmit() {
       this.show = true
-      // if (
-      //   this.form.titolo === null ||
-      //   this.form.descrizione === '' ||
-      //   this.form.note === '' ||
-      //   this.form.rank === null ||
-      //   this.form.settore_riferimento === null
-      // ) {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please make sure all the fields are filled!'
-      //   this.toggleToaster()
-      //   return
-      // }
+      if (
+        this.form.titolo === null ||
+        this.form.descrizione === '' ||
+        this.form.note === '' ||
+        this.form.rank === null ||
+        this.form.settore_riferimento === null
+      ) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.toggleToaster()
+        return
+      }
 
       const data = new FormData()
       data.append('titolo', this.form.titolo)

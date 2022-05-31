@@ -309,25 +309,25 @@ export default {
   methods: {
     onSubmit() {
       this.show = true
-      // if (
-      //   this.form.segnalazione === null ||
-      //   this.form.soluzione === null ||
-      //   this.form.titolo === null ||
-      //   this.form.commessa_macchina === null ||
-      //   this.form.versione_sw_1 === null ||
-      //   this.form.versione_sw_2 === null ||
-      //   this.form.rif_ticket === null ||
-      //   this.form.data_occorrenza === '' ||
-      //   this.form.descrizione === '' ||
-      //   this.form.note === '' ||
-      //   this.form.stato_occorrenza === null
-      // ) {
-      //   this.show = false
-      //   this.variant = 'danger'
-      //   this.dataCreated = 'Please make sure all the fields are filled!'
-      //   this.toggleToaster()
-      //   return
-      // }
+      if (
+        this.form.segnalazione === null ||
+        this.form.soluzione === null ||
+        this.form.titolo === null ||
+        this.form.commessa_macchina === null ||
+        this.form.versione_sw_1 === null ||
+        this.form.versione_sw_2 === null ||
+        this.form.rif_ticket === null ||
+        this.form.data_occorrenza === '' ||
+        this.form.descrizione === '' ||
+        this.form.note === '' ||
+        this.form.stato_occorrenza === null
+      ) {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure all the fields are filled!'
+        this.toggleToaster()
+        return
+      }
 
       this.$axios
         .post(`/api/occorrenze/create`, this.form, {
@@ -349,9 +349,9 @@ export default {
         })
     },
     sendSolutionId() {
-      const id = this.$route.params.id
+      const id = this
       const dataPayload = {
-        occorrenze_id: id,
+        occorrenze_id: '1',
       }
       this.$axios
         .post(`/api/soluzioni/connect/${this.form.soluzione}`, dataPayload, {
