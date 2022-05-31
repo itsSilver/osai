@@ -72,13 +72,13 @@ def create_soluzioni(request):
         if serializer.is_valid():
             soluzioni = Soluzioni.objects.create(
                 titolo=serializer.data["titolo"],
-                rank=serializer.data["rank"],
-                descrizione=serializer.data["descrizione"],
+                rank=serializer.data["rank"] if "rank" in serializer.data else '',
+                descrizione=serializer.data["descrizione"] if "descrizione" in serializer.data else '',
                 immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
                 immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
-                settore_riferimento=serializer.data["settore_riferimento"],
-                note=serializer.data["note"],
+                settore_riferimento=serializer.data["settore_riferimento"]  if "settore_riferimento" in serializer.data else '',
+                note=serializer.data["note"]  if "note" in serializer.data else '',
                 occorrenze=occ,
                 id_stato_soluzione=stati,
                 user_id=request.user.id
@@ -127,18 +127,18 @@ def create_segnalazioni(request):
         if serializer.is_valid():
             segnalazioni = Segnalazioni.objects.create(
                 titolo=serializer.data["titolo"],
-                descrizione=serializer.data["descrizione"],
-                id_allarme=serializer.data["id_allarme"],
-                descrizione_allarme=serializer.data["descrizione_allarme"],
-                famiglia_macchina=serializer.data["famiglia_macchina"],
-                sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"],
+                descrizione=serializer.data["descrizione"] if "descrizione" in serializer.data  else '',
+                id_allarme=serializer.data["id_allarme"] if "id_allarme" in serializer.data  else '',
+                descrizione_allarme=serializer.data["descrizione_allarme"] if "descrizione_allarme" in serializer.data  else '',
+                famiglia_macchina=serializer.data["famiglia_macchina"] if "famiglia_macchina" in serializer.data  else '',
+                sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"] if "sottofamiglia_macchina" in serializer.data  else '',
                 immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
                 immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 id_stato_segnalazione=stati,
                 user_id=request.user.id,
-                note=serializer.data["note"],
-                rif_ticket=serializer.data["rif_ticket"]
+                note=serializer.data["note"] if "note" in serializer.data  else '',
+                rif_ticket=serializer.data["rif_ticket"] if "rif_ticket" in serializer.data  else '',
 
             )
 
@@ -176,13 +176,13 @@ def create_occorrenze(request):
         if serializer.is_valid():
             occorrenze = Occorrenze(
                 titolo=serializer.data["titolo"],
-                descrizione=serializer.data["descrizione"],
-                commessa_macchina=serializer.data["commessa_macchina"],
-                versione_sw_1=serializer.data["versione_sw_1"],
-                versione_sw_2=serializer.data["versione_sw_2"],
+                descrizione=serializer.data["descrizione"] if 'descrizione' in serializer.data else '',
+                commessa_macchina=serializer.data["commessa_macchina"]if 'commessa_macchina' in serializer.data else '',
+                versione_sw_1=serializer.data["versione_sw_1"]if 'versione_sw_1' in serializer.data else '',
+                versione_sw_2=serializer.data["versione_sw_2"] if 'versione_sw_2' in serializer.data else '',
                 data_occorrenza=serializer.data["data_occorrenza"],
-                stato_occorrenza=serializer.data["stato_occorrenza"],
-                note=serializer.data["note"],
+                stato_occorrenza=serializer.data["stato_occorrenza"] if 'stato_occorrenza' in serializer.data else '',
+                note=serializer.data["note"] if 'note' in serializer.data else '',
                 user_id=request.user.id
             )
             occorrenze.segnalazione_id = request.data["segnalazione"] if "segnalazione" in request.data else ""

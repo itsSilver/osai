@@ -30,7 +30,7 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
         required=False, allow_blank=True, max_length=100)
     descrizione = serializers.CharField(required=False, allow_blank=True)
     id_allarme = serializers.CharField(
-        required=False, allow_blank=True, max_length=255)
+        required=True, allow_blank=True, max_length=255)
     descrizione_allarme = serializers.CharField(
         required=False, allow_blank=True, max_length=255)
     famiglia_macchina = serializers.CharField(
@@ -53,16 +53,16 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
 
 class SegnalazioniSerializer(serializers.ModelSerializer):
     titolo = serializers.CharField(
-        required=False, allow_blank=True, max_length=100)
-    descrizione = serializers.CharField()
-    id_allarme = serializers.CharField(max_length=255)
-    descrizione_allarme = serializers.CharField()
-    famiglia_macchina = serializers.CharField(max_length=255)
-    sottofamiglia_macchina = serializers.CharField(max_length=255)
+        required=True, allow_blank=True, max_length=100)
+    descrizione = serializers.CharField( required=False, allow_blank=True)
+    id_allarme = serializers.CharField(max_length=255,required=True)
+    descrizione_allarme = serializers.CharField( required=False, allow_blank=True)
+    famiglia_macchina = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    sottofamiglia_macchina = serializers.CharField( required=False, allow_blank=True,max_length=255)
     id_stato_segnalazione = serializers.CharField(
         allow_blank=True, required=False)
-    rif_ticket = serializers.CharField(max_length=255)
-    note=serializers.CharField(max_length=255)
+    rif_ticket = serializers.CharField( required=False, allow_blank=True,max_length=255)
+    note=serializers.CharField( required=False, allow_blank=True,max_length=255)
     class Meta:
         model = Segnalazioni
 
