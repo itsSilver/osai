@@ -57,17 +57,34 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="rank" class="col-sm-2 col-form-label create-label"
-                  >Rank</label
+                <label for="tittle" class="col-sm-2 col-form-label create-label"
+                  >Id Solution</label
                 >
                 <div class="col-sm-10">
                   <input
                     type="text"
                     class="form-control input-create"
+                    id="tittle"
+                    placeholder="Id Solution"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="rank" class="col-sm-2 col-form-label create-label"
+                  >Rank</label
+                >
+                <div class="col-sm-10">
+                  <!-- <input
+                    type="text"
+                    class="form-control input-create"
                     id="rank"
                     v-model="form.rank"
                     placeholder="Rank"
-                  />
+                  /> -->
+                  <b-form-select
+                    v-model="form.rank"
+                    :options="rank_options"
+                  ></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -248,6 +265,13 @@ export default {
         immagine_3: null,
         settore_riferimento: '',
       },
+      rank_options: [
+        { value: null, text: 'Select' },
+        { value: '0', text: '0' },
+        { value: '1', text: '1' },
+        { value: '2', text: '2' },
+        { value: '3', text: '3' },
+      ],
       tempimmagine_1: null,
       tempimmagine_2: null,
       tempimmagine_3: null,
