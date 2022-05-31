@@ -1,6 +1,7 @@
 from email import message
 import re
 from django.shortcuts import get_object_or_404, render
+from rest_framework.exceptions import NotFound
 from rest_framework.renderers import JSONRenderer
 from rest_framework import filters
 from rest_framework.permissions import AllowAny
@@ -20,6 +21,7 @@ import json
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import NotFound, ValidationError, ParseError
 
 from mainapp.decorators.is_admin import is_admin
 from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Segnalazione, Stati_Soluzione
@@ -77,8 +79,8 @@ def create_soluzioni(request):
                 immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
                 immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
-                settore_riferimento=serializer.data["settore_riferimento"]  if "settore_riferimento" in serializer.data else '',
-                note=serializer.data["note"]  if "note" in serializer.data else '',
+                settore_riferimento=serializer.data["settore_riferimento"] if "settore_riferimento" in serializer.data else '',
+                note=serializer.data["note"] if "note" in serializer.data else '',
                 occorrenze=occ,
                 id_stato_soluzione=stati,
                 user_id=request.user.id
@@ -127,18 +129,19 @@ def create_segnalazioni(request):
         if serializer.is_valid():
             segnalazioni = Segnalazioni.objects.create(
                 titolo=serializer.data["titolo"],
-                descrizione=serializer.data["descrizione"] if "descrizione" in serializer.data  else '',
-                id_allarme=serializer.data["id_allarme"] if "id_allarme" in serializer.data  else '',
-                descrizione_allarme=serializer.data["descrizione_allarme"] if "descrizione_allarme" in serializer.data  else '',
-                famiglia_macchina=serializer.data["famiglia_macchina"] if "famiglia_macchina" in serializer.data  else '',
-                sottofamiglia_macchina=serializer.data["sottofamiglia_macchina"] if "sottofamiglia_macchina" in serializer.data  else '',
+                descrizione=serializer.data["descrizione"] if "descrizione" in serializer.data else '',
+                id_allarme=serializer.data["id_allarme"] if "id_allarme" in serializer.data else '',
+                descrizione_allarme=serializer.data["descrizione_allarme"] if "descrizione_allarme" in serializer.data else '',
+                famiglia_macchina=serializer.data["famiglia_macchina"] if "famiglia_macchina" in serializer.data else '',
+                sottofamiglia_macchina=serializer.data[
+                    "sottofamiglia_macchina"] if "sottofamiglia_macchina" in serializer.data else '',
                 immagine_1=request.data["immagine_1"] if "immagine_1" in request.data else "",
                 immagine_2=request.data["immagine_2"] if "immagine_2" in request.data else "",
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 id_stato_segnalazione=stati,
                 user_id=request.user.id,
-                note=serializer.data["note"] if "note" in serializer.data  else '',
-                rif_ticket=serializer.data["rif_ticket"] if "rif_ticket" in serializer.data  else '',
+                note=serializer.data["note"] if "note" in serializer.data else '',
+                rif_ticket=serializer.data["rif_ticket"] if "rif_ticket" in serializer.data else '',
 
             )
 
@@ -186,12 +189,13 @@ def create_occorrenze(request):
                 user_id=request.user.id
             )
             if not "segnalazione" in request.data:
-               return JsonResponse({"status": 400, "message": "segnalazione_id is missing"})
+                return JsonResponse({"status": 400, "message": "segnalazione_id is missing"})
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
             occorrenze.save()
             if "soluzione" in request.data:
-                Soluzioni.objects.filter(pk=request.data['soluzione']).update(occorrenze_id=occorrenze.id)
+                Soluzioni.objects.filter(pk=request.data['soluzione']).update(
+                    occorrenze_id=occorrenze.id)
             data["message"] = "Occurrenze Created successfully"
         else:
             data = serializer.errors
@@ -309,7 +313,6 @@ def update_segnalazioni(request, id):
         else:
             raise NotFound("Segnalazioni not found")
     raise NotFound("Segnalazioni not found")
-
 
 
 # Soluzioni Endpoints
@@ -463,7 +466,6 @@ def retrive_user_occurrenze(request):
         return JsonResponse({"status": 403, "message": "You do not have permission to View Occurrenze"})
 
     user_id = request.user.id
-    # user_occurrenze = Occorrenze.objects.filter(user=user_id)
     user_occurrenze = Occorrenze.objects.all().prefetch_related('soluzioni_id')
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data
@@ -501,17 +503,19 @@ def update_occurrenze(request, id):
     if not check_permission:
         return JsonResponse({"status": 403, "message": "You do not have permission to Update Occurrenze"})
 
-    seg = Occorrenze.objects.get(pk=id)
-    if(seg.user_id == request.user.id):
-        data = OccorrenzeDisplaySerializer(
-            instance=seg, data=request.data)
-        if data.is_valid():
-            data.save()
-            return JsonResponse(data.data, status=200)
-        else:
-            raise NotFound("Occorrenze not found")
-    raise NotFound("Occorrenze not found")
+    occ = Occorrenze.objects.get(id=id)
+    copy_data = {**request.data}
+    if 'soluzioni_id' not in copy_data:
+        copy_data['soluzioni_id'] = occ.soluzioni_id
 
+
+    data = OccorrenzeDisplaySerializer(
+        instance=occ, data=request.data)
+    if data.is_valid():
+        data.save()
+        return JsonResponse(data.data, status=200)
+    else:
+        raise NotFound("Occorrenze not found")
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -543,13 +547,7 @@ def connect_soluzioni_to_occorrenze(request, id):
     sol.occorrenze = occ
     sol.save(update_fields=['occorrenze'])
     return JsonResponse({"message": "Connected successfully",
-                         "status": 500}, status=200, safe=False)
-    # data = SoluzioniDisplaySerializer(instance=sol, data=sol.__dict__)
-    # if data.is_valid():
-    #     return JsonResponse(sol, status=200, safe=False)
-    # else:
-    #     return JsonResponse({"message": "Something went wrong please try again laters",
-    #                          "status": 500}, status=200, safe=False)
+                         "status": 200}, status=200, safe=False)
 
 
 @api_view(["GET"])
@@ -678,7 +676,7 @@ class SoluzioniListView(generics.ListAPIView):
     queryset = Soluzioni.objects.all()
     serializer_class = SoluzioniDisplaySerializer
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
-    ordering_fields = ['id','titolo', 'rank']
+    ordering_fields = ['id', 'titolo', 'rank']
     search_fields = ['titolo', '=rank', 'descrizione']
 
 
@@ -688,7 +686,7 @@ class SegnalazioneListView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ['titolo', 'id_allarme', 'descrizione',
                      'descrizione_allarme', 'famiglia_macchina']
-    ordering_fields = ['id','titolo', 'id_allarme']
+    ordering_fields = ['id', 'titolo', 'id_allarme']
 
 
 class OccorrenzeListView(generics.ListAPIView):
@@ -697,5 +695,4 @@ class OccorrenzeListView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ['titolo', 'commessa_macchina',
                      'descrizione', 'versione_sw_1', '=stato_occorrenza']
-    ordering_fields = ['id','titolo', 'commessa_macchina', 'versione_sw_1']
-
+    ordering_fields = ['id', 'titolo', 'commessa_macchina', 'versione_sw_1']
