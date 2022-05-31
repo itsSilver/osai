@@ -181,11 +181,13 @@ def create_occorrenze(request):
                 versione_sw_1=serializer.data["versione_sw_1"]if 'versione_sw_1' in serializer.data else '',
                 versione_sw_2=serializer.data["versione_sw_2"] if 'versione_sw_2' in serializer.data else '',
                 data_occorrenza=serializer.data["data_occorrenza"],
-                stato_occorrenza=serializer.data["stato_occorrenza"] if 'stato_occorrenza' in serializer.data else '',
+                stato_occorrenza=serializer.data["stato_occorrenza"] if 'stato_occorrenza' in serializer.data else 0,
                 note=serializer.data["note"] if 'note' in serializer.data else '',
                 user_id=request.user.id
             )
-            occorrenze.segnalazione_id = request.data["segnalazione"] if "segnalazione" in request.data else ""
+            if not "segnalazione" in request.data:
+               return JsonResponse({"status": 400, "message": "segnalazione_id is missing"})
+            occorrenze.segnalazione_id = request.data["segnalazione"]
 
             occorrenze.save()
             if "soluzione" in request.data:

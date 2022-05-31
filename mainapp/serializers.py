@@ -137,14 +137,14 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
     titolo = serializers.CharField(max_length=255)
-    descrizione = serializers.CharField()
-    commessa_macchina = serializers.CharField(max_length=255)
-    versione_sw_1 = serializers.CharField(max_length=255)
-    versione_sw_2 = serializers.CharField(max_length=255)
+    descrizione = serializers.CharField(required=False)
+    commessa_macchina = serializers.CharField(max_length=255,required=False)
+    versione_sw_1 = serializers.CharField(max_length=255,required=False)
+    versione_sw_2 = serializers.CharField(max_length=255,required=False)
     data_occorrenza = serializers.CharField(max_length=255)
-    stato_occorrenza = serializers.IntegerField()
-    note = serializers.CharField()
-    rif_ticket = serializers.CharField(max_length=255)
+    stato_occorrenza = serializers.IntegerField(required=False)
+    note = serializers.CharField(required=False)
+    rif_ticket = serializers.CharField(max_length=255,required=False)
     class Meta:
         model = Occorrenze
 
