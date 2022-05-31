@@ -113,12 +113,13 @@ class SoluzioniSerializer(serializers.ModelSerializer):
 
 
 class SoluzioniForOcc(serializers.ModelSerializer):
-    # id_stato_soluzione = StatiSoluzioneSerializer(required=False)
+    id_stato_soluzione = StatiSoluzioneSerializer(required=False)
 
     class Meta:
         model = Soluzioni
 
-        fields = ("id",)
+        fields = ("id", "titolo", "rank", "descrizione", "immagine_1",
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at")
 
 
 class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
