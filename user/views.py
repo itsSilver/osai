@@ -112,10 +112,12 @@ def user_delete(request, id):
 
     user = get_object_or_404(User, pk=id)
     if user.is_admin:
-        return JsonResponse({"status": 403, "message": "You do not have permission to admin"})
 
-    user.delete()
-    return JsonResponse({"status": 200, "message": "User Removed successfully"})
+        return JsonResponse({"status": 403, "message": "You do not have permission to admin"})
+    else:
+        user.delete()
+
+        return JsonResponse({"status": 200, "message": "User Removed successfully"})
 
 
 @api_view(["POST"])
