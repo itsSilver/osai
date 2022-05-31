@@ -246,7 +246,7 @@ export default {
         immagine_1: null,
         immagine_2: null,
         immagine_3: null,
-        settore_riferimento: null,
+        settore_riferimento: '',
       },
       tempimmagine_1: null,
       tempimmagine_2: null,
