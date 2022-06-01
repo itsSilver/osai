@@ -34,9 +34,9 @@ def upload_to(instance, filename):
 class Segnalazioni(models.Model):
     id = models.AutoField(primary_key=True)
     titolo = models.CharField(max_length=255, default=None, null=False)
-    descrizione = models.TextField(null=True)
+    descrizione = models.TextField(null=True,default=None,)
     id_allarme = models.CharField(max_length=255, null=False)
-    descrizione_allarme = models.TextField(null=True)
+    descrizione_allarme = models.TextField(default=None,null=True)
     famiglia_macchina = models.CharField(max_length=255,null=True)
     rif_ticket = models.CharField(max_length=255,blank=True,null=True)
     immagine_1 = models.ImageField(upload_to=upload_to, blank=True, null=True)
@@ -46,7 +46,7 @@ class Segnalazioni(models.Model):
     user = models.ForeignKey(Users, models.DO_NOTHING)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
     id_stato_segnalazione = models.ForeignKey(
         Stati_Segnalazione, models.CASCADE, db_column='id_stato_segnalazione', blank=True, null=True)
@@ -71,7 +71,7 @@ class Soluzioni(models.Model):
 
     user = models.ForeignKey(Users, models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     id_stato_soluzione = models.ForeignKey(
@@ -84,20 +84,20 @@ class Soluzioni(models.Model):
 class Occorrenze(models.Model):
     id = models.AutoField(primary_key=True)
     titolo = models.CharField(max_length=255,default=None,null=False)
-    descrizione = models.TextField()
-    commessa_macchina = models.CharField(max_length=255)
-    versione_sw_1 = models.CharField(max_length=255)
-    versione_sw_2 = models.CharField(max_length=255)
+    descrizione = models.TextField(default=None)
+    commessa_macchina = models.CharField(default=None,max_length=255)
+    versione_sw_1 = models.CharField(default=None,max_length=255)
+    versione_sw_2 = models.CharField(default=None,max_length=255)
     data_occorrenza = models.CharField(max_length=255,null=False)
     stato_occorrenza = models.IntegerField()
     rif_ticket = models.CharField(max_length=255,blank=True,null=True)
-    note = models.TextField()
+    note = models.TextField(default=None)
     user = models.ForeignKey(Users, models.DO_NOTHING)
     segnalazione = models.ForeignKey(
         "Segnalazioni", on_delete=models.CASCADE, blank=True,default=None, null=False)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
