@@ -288,7 +288,14 @@ export default {
                   'Content-Type': 'application/json',
                 },
               })
-              .then(() => {
+              .then((response) => {
+                if (response.data.status === 403) {
+                  this.variant = 'danger'
+                  this.dataCreated = 'The super admin user cannot be deleted!'
+                  this.toggleToaster()
+                  this.show = false
+                  return
+                }
                 this.variant = 'danger'
                 this.dataCreated = 'User deleted Succesfully'
                 this.toggleToaster()
