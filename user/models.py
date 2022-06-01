@@ -38,7 +38,7 @@ class Users(AbstractBaseUser):
                               max_length=60, unique=True, default=None)
     password = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
