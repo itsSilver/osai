@@ -19,6 +19,9 @@
         <b-th v-if="statusRank === '1'">Rank</b-th>
         <b-th v-if="statusSector === '1'">Reference sector</b-th>
         <b-th v-if="statusIdStSolutions === '1'">Id Status Solution</b-th>
+        <b-th v-if="statusImage1 === '1'">Image 1</b-th>
+        <b-th v-if="statusImage2 === '1'">Image 2</b-th>
+        <b-th v-if="statusImage3 === '1'">Image 3</b-th>
         <b-th v-if="statusCreationDate === '1'">Creation date</b-th>
         <b-th v-if="statusUpdateDate === '1'">Update date</b-th>
       </b-thead>
@@ -41,6 +44,27 @@
             data.settore_riferimento
           }}</b-td>
           <b-td v-if="statusIdStSolutions === '1'"></b-td>
+          <b-td v-if="statusImage1 === '1'"
+            ><b-button
+              class="mx-2 button-format file-button"
+              @click="watchImage(data.immagine_1)"
+              >Image 1</b-button
+            ></b-td
+          >
+          <b-td v-if="statusImage2 === '1'"
+            ><b-button
+              class="mx-2 button-format file-button"
+              @click="watchImage(data.immagine_2)"
+              >Image 2</b-button
+            ></b-td
+          >
+          <b-td v-if="statusImage3 === '1'"
+            ><b-button
+              class="mx-2 button-format file-button"
+              @click="watchImage(data.immagine_3)"
+              >Image 3</b-button
+            ></b-td
+          >
           <b-td v-if="statusCreationDate === '1'">{{ data.created_at }}</b-td>
           <b-td v-if="statusUpdateDate === '1'">{{ data.updated_at }}</b-td>
         </b-tr>
@@ -97,6 +121,36 @@
             <b-td class="td-respo-title">Id Status Solution</b-td>
             <b-td class="td-respo-data"></b-td>
           </div>
+          <div class="respo-after-tr" v-if="statusImage1 === '1'">
+            <b-td class="td-respo-title">Image 1</b-td>
+            <b-td class="td-respo-data"
+              ><b-button
+                class="mx-2 button-format file-button"
+                @click="watchImage(data.immagine_1)"
+                >Image 1</b-button
+              ></b-td
+            >
+          </div>
+          <div class="respo-after-tr" v-if="statusImage2 === '1'">
+            <b-td class="td-respo-title">Image 2</b-td>
+            <b-td class="td-respo-data"
+              ><b-button
+                class="mx-2 button-format file-button"
+                @click="watchImage(data.immagine_2)"
+                >Image 2</b-button
+              ></b-td
+            >
+          </div>
+          <div class="respo-after-tr" v-if="statusImage3 === '1'">
+            <b-td class="td-respo-title">Image 3</b-td>
+            <b-td class="td-respo-data"
+              ><b-button
+                class="mx-2 button-format file-button"
+                @click="watchImage(data.immagine_3)"
+                >Image 3</b-button
+              ></b-td
+            >
+          </div>
           <div class="respo-after-tr" v-if="statusCreationDate === '1'">
             <b-td class="td-respo-title">Creation date</b-td>
             <b-td class="td-respo-data">{{ data.created_at }}</b-td>
@@ -117,18 +171,22 @@
     <div class="no-data" v-if="dataTable.length === 0">
       <NoSolutionItems v-if="showNoItem" />
     </div>
+    <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
   </b-overlay>
 </template>
 <script>
 import NoSolutionItems from '~/components/nodata/NoSolutionItems'
+import SeeImage from '~/components/popup/SeeImage'
 export default {
   components: {
     NoSolutionItems,
+    SeeImage,
   },
   data() {
     return {
       showNoItem: true,
       show: false,
+      showImage: false,
       selectedId: [],
     }
   },
@@ -140,6 +198,13 @@ export default {
     orderAscDesc() {
       this.$emit('order-asc-desc')
     },
+    watchImage(val) {
+      this.imageValue = 'http://localhost:8000' + val
+      this.showImage = true
+    },
+    hideModal() {
+      this.showImage = false
+    },
   },
   props: [
     'dataTable',
@@ -150,6 +215,9 @@ export default {
     'statusIdStSolutions',
     'statusCreationDate',
     'statusUpdateDate',
+    'statusImage1',
+    'statusImage2',
+    'statusImage3',
   ],
 }
 </script>

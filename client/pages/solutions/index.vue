@@ -146,6 +146,27 @@
                   >
                   <b-form-checkbox
                     class="table-checkbox mb-3"
+                    v-model="statusImage1"
+                    value="1"
+                    unchecked-value="0"
+                    >Image 1</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusImage2"
+                    value="1"
+                    unchecked-value="0"
+                    >Image 2</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
+                    v-model="statusImage3"
+                    value="1"
+                    unchecked-value="0"
+                    >Image 3</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
                     v-model="statusCreationDate"
                     value="1"
                     unchecked-value="0"
@@ -179,6 +200,9 @@
                 :statusIdStSolutions="statusIdStSolutions"
                 :statusCreationDate="statusCreationDate"
                 :statusUpdateDate="statusUpdateDate"
+                :statusImage1="statusImage1"
+                :statusImage2="statusImage2"
+                :statusImage3="statusImage3"
                 @get-new-delete-id="idToDelete"
                 @order-asc-desc="orderAscDesc"
               />
@@ -227,6 +251,9 @@ export default {
       statusIdStSolutions: '0',
       statusCreationDate: '1',
       statusUpdateDate: '1',
+      statusImage1: '0',
+      statusImage2: '0',
+      statusImage3: '0',
       filterName: null,
       idAscDesc: null,
       statusAscDesc: false,

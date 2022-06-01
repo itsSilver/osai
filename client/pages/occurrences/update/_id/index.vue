@@ -367,6 +367,35 @@ export default {
           },
         })
         .then(() => {
+          this.connectNewSolutionID()
+          // this.dataCreated = 'Occurrence Updated Succesfully'
+          // this.toggleToaster()
+
+          // setTimeout(() => {
+          //   this.$router.push('/occurrences')
+          // }, 3000)
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.dataCreated = 'Something went wrong!'
+          this.toggleToaster()
+        })
+    },
+    connectNewSolutionID() {
+      const value = this.dataTable.soluzioni_id[0]
+      const id = this.$route.params.id
+      const payload = {
+        occorrenze_id: id,
+      }
+      this.$axios
+        .post(`/api/soluzioni/connect/${value}`, payload, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
           this.dataCreated = 'Occurrence Updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
