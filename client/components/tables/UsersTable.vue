@@ -28,8 +28,12 @@
           <b-td v-if="statusUserId === '1'">{{ data.id }}</b-td>
           <b-td v-if="statusName === '1'">{{ data.name }}</b-td>
           <b-td v-if="statusEmail === '1'">{{ data.email }}</b-td>
-          <b-td v-if="statusCreationDate === '1'">{{ data.created_at }}</b-td>
-          <b-td v-if="statusUpdateDate === '1'">{{ data.updated_at }}</b-td>
+          <b-td v-if="statusCreationDate === '1'">{{
+            formatDate(data.created_at)
+          }}</b-td>
+          <b-td v-if="statusUpdateDate === '1'">{{
+            formatDate(data.updated_at)
+          }}</b-td>
         </b-tr>
       </b-tbody>
     </b-table-simple>
@@ -80,11 +84,11 @@
           </div>
           <div class="respo-after-tr" v-if="statusCreationDate === '1'">
             <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">{{ data.created_at }}</b-td>
+            <b-td class="td-respo-data">{{ formatDate(data.created_at) }}</b-td>
           </div>
           <div class="respo-after-tr" v-if="statusUpdateDate === '1'">
             <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">{{ data.updated_at }}</b-td>
+            <b-td class="td-respo-data">{{ formatDate(data.updated_at) }}</b-td>
           </div>
         </b-tr>
         <b-tr>
@@ -99,6 +103,7 @@
 </template>
 <script>
 import NoUserItem from '~/components/nodata/NoUserItem'
+import { format, parseISO } from 'date-fns'
 export default {
   components: {
     NoUserItem,
@@ -111,6 +116,11 @@ export default {
     }
   },
   methods: {
+    formatDate(val) {
+      if (val) {
+        return format(parseISO(val), 'dd-MM-yyyy')
+      }
+    },
     changeValue() {
       this.$emit('get-new-delete-id', this.selectedId)
       this.selectedId = []
