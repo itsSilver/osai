@@ -537,15 +537,16 @@ def connect_occorrenze_to_segnalazioni(request, id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def connect_soluzioni_to_occorrenze(request, id):
-    check_permission = __check_if_has_permission(request, "change_soluzioni")
-    if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
+    if id:
+        check_permission = __check_if_has_permission(request, "change_soluzioni")
+        if not check_permission:
+            return JsonResponse({"status": 403, "message": "You do not have permission to Update Soluzioni"})
 
-    sol = Soluzioni.objects.get(pk=id)
-    occ = Occorrenze.objects.get(pk=request.data['occorrenze_id'])
+        sol = Soluzioni.objects.get(pk=id)
+        occ = Occorrenze.objects.get(pk=request.data['occorrenze_id'])
 
-    sol.occorrenze = occ
-    sol.save(update_fields=['occorrenze'])
+        sol.occorrenze = occ
+        sol.save(update_fields=['occorrenze'])
     return JsonResponse({"message": "Connected successfully",
                          "status": 200}, status=200, safe=False)
 
