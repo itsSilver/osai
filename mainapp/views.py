@@ -180,6 +180,7 @@ def create_occorrenze(request):
             occorrenze = Occorrenze(
                 titolo=serializer.data["titolo"],
                 descrizione=serializer.data["descrizione"] if 'descrizione' in serializer.data else '',
+                rif_ticket=serializer.data["rif_ticket"] if 'rif_ticket' in serializer.data else '',
                 commessa_macchina=serializer.data["commessa_macchina"]if 'commessa_macchina' in serializer.data else '',
                 versione_sw_1=serializer.data["versione_sw_1"]if 'versione_sw_1' in serializer.data else '',
                 versione_sw_2=serializer.data["versione_sw_2"] if 'versione_sw_2' in serializer.data else '',
@@ -445,10 +446,11 @@ def remove_occorrenze(request, id):
         return JsonResponse({"status": 403, "message": "You do not have permission to Remove Occurrenze"})
 
     occorrenze = get_object_or_404(Occorrenze, pk=id)
-    if(occorrenze.user_id == request.user.id):
-        occorrenze.delete()
-        return JsonResponse({"status": 200, "message": "Occorrenze Removed successfully"})
-    raise NotFound("Occorrenze not found")
+    occorrenze.delete()
+        
+    # if(occorrenze.user_id == request.user.id):
+    # raise NotFound("Occorrenze not found")
+    return JsonResponse({"status": 200, "message": "Occorrenze Removed successfully"})
 
 
 @api_view(["GET"])

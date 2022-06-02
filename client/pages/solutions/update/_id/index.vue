@@ -56,7 +56,7 @@
                   />
                 </div>
               </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label for="tittle" class="col-sm-2 col-form-label create-label"
                   >Id Solution</label
                 >
@@ -65,10 +65,12 @@
                     type="text"
                     class="form-control input-create"
                     id="tittle"
+                    v-model="dataTable.id"
                     placeholder="Id Solution"
+                    disabled
                   />
                 </div>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <label for="rank" class="col-sm-2 col-form-label create-label"
                   >Rank</label
