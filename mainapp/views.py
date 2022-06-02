@@ -539,28 +539,32 @@ def update_occurrenze(request, id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def connect_occorrenze_to_segnalazioni(request, id):
-    check_permission = __check_if_has_permission(request, "change_occorrenze")
+    if id:
+        check_permission = __check_if_has_permission(request, "change_occorrenze")
 
-    if not check_permission:
-        raise PermissionDenied(
-            {"message": "This user do not have permission to Update Occurrenze"})
+        if not check_permission:
+            raise PermissionDenied(
+                {"message": "This user do not have permission to Update Occurrenze"})
 
-    if 'segnalazioni_id' not in request.data:
-        raise ValidationError("segnalazioni_id is missing")
+        if 'segnalazioni_id' not in request.data:
+            raise ValidationError("segnalazioni_id is missing")
 
-    if not isinstance(request.data['segnalazioni_id'], int):
-        raise ValidationError(
-            "Field 'segnalazioni_id' expected a number but got String.")
+        if not isinstance(request.data['segnalazioni_id'], int):
+            raise ValidationError(
+                "Field 'segnalazioni_id' expected a number but got String.")
 
-    occ = Occorrenze.objects.get(pk=id)
-    seg = Segnalazioni.objects.get(pk=request.data['segnalazioni_id'])
-    occ.segnalazione = seg
-    occ.save(update_fields=['segnalazione'])
-    data = OccorrenzeDisplaySerializer(
-        instance=occ, data=occ.__dict__)
-    if data.is_valid():
-        return JsonResponse(data.data, status=200, safe=False)
+        occ = Occorrenze.objects.get(pk=id)
+        seg = Segnalazioni.objects.get(pk=request.data['segnalazioni_id'])
+        occ.segnalazione = seg
+        occ.save(update_fields=['segnalazione'])
+        data = OccorrenzeDisplaySerializer(
+            instance=occ, data=occ.__dict__)
+        if data.is_valid():
+            return JsonResponse(data.data, status=200, safe=False)
 
+    else:
+        return JsonResponse({"message": "Occorrenze ID missing",
+                             "status": 400}, status=400, safe=False)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -585,9 +589,11 @@ def connect_soluzioni_to_occorrenze(request, id):
 
         sol.occorrenze = occ
         sol.save(update_fields=['occorrenze'])
-    return JsonResponse({"message": "Connected successfully",
-                         "status": 200}, status=200, safe=False)
-
+        return JsonResponse({"message": "Connected successfully",
+                             "status": 200}, status=200, safe=False)
+    else:
+        return JsonResponse({"message": "Soluzione ID missing",
+                             "status": 400}, status=400, safe=False)
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
