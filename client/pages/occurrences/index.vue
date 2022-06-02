@@ -139,6 +139,13 @@
                   >
                   <b-form-checkbox
                     class="table-checkbox mb-3"
+                    v-model="statusTicket"
+                    value="1"
+                    unchecked-value="0"
+                    >Ticket</b-form-checkbox
+                  >
+                  <b-form-checkbox
+                    class="table-checkbox mb-3"
                     v-model="statusMachine"
                     value="1"
                     unchecked-value="0"
@@ -205,6 +212,7 @@
                 :statusIdsolution="statusIdsolution"
                 :statusTitle="statusTitle"
                 :statusMachine="statusMachine"
+                :statusTicket="statusTicket"
                 :statusVersion1="statusVersion1"
                 :statusVersion2="statusVersion2"
                 :statusOccurrenceDate="statusOccurrenceDate"
@@ -258,6 +266,7 @@ export default {
       statusIdsolution: '1',
       statusTitle: '1',
       statusMachine: '0',
+      statusTicket: '0',
       statusVersion1: '0',
       statusVersion2: '0',
       statusOccurrenceDate: '1',

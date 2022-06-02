@@ -19,6 +19,7 @@
         <b-th v-if="statusIdsolution === '1'">Id solution </b-th>
         <b-th v-if="statusTitle === '1'">Title </b-th>
         <b-th v-if="statusMachine === '1'">Machine order </b-th>
+        <b-th v-if="statusTicket === '1'">Ticket </b-th>
         <b-th v-if="statusVersion1 === '1'">Version sw 1 </b-th>
         <b-th v-if="statusVersion2 === '1'">Version sw 2 </b-th>
         <b-th v-if="statusOccurrenceDate === '1'">Occurrence date </b-th>
@@ -45,6 +46,7 @@
           }}</b-td>
           <b-td v-if="statusTitle === '1'">{{ data.titolo }}</b-td>
           <b-td v-if="statusMachine === '1'">{{ data.commessa_macchina }}</b-td>
+          <b-td v-if="statusTicket === '1'">{{ data.rif_ticket }}</b-td>
           <b-td v-if="statusVersion1 === '1'">{{ data.versione_sw_1 }}</b-td>
           <b-td v-if="statusVersion2 === '1'">{{ data.versione_sw_2 }}</b-td>
           <b-td v-if="statusOccurrenceDate === '1'">{{
@@ -112,6 +114,10 @@
           <div class="respo-after-tr" v-if="statusMachine === '1'">
             <b-td class="td-respo-title">Machine order</b-td>
             <b-td class="td-respo-data">{{ data.commessa_macchina }}</b-td>
+          </div>
+          <div class="respo-after-tr" v-if="statusTicket === '1'">
+            <b-td class="td-respo-title">Machine order</b-td>
+            <b-td class="td-respo-data">{{ data.rif_ticket }}</b-td>
           </div>
           <div class="respo-after-tr" v-if="statusVersion1 === '1'">
             <b-td class="td-respo-title">Version sw 1</b-td>
@@ -186,6 +192,7 @@ export default {
     'statusTitle',
     'statusIdsolution',
     'statusMachine',
+    'statusTicket',
     'statusVersion1',
     'statusVersion2',
     'statusOccurrenceDate',
