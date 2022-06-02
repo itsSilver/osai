@@ -394,7 +394,7 @@ export default {
     },
     connectNewSolutionID() {
       const value = this.dataTable.soluzioni_id[0]
-      const id = this.$route.params.id
+      const id = parseInt(this.$route.params.id)
       const payload = {
         occorrenze_id: id,
       }
