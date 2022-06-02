@@ -304,6 +304,10 @@ export default {
                 this.selectedId = []
               })
               .catch((error) => {
+                this.variant = 'danger'
+                this.dataCreated = 'The super admin user cannot be deleted!'
+                this.toggleToaster()
+                this.show = false
                 this.show = false
                 this.variant = 'danger'
                 this.toggleToaster()
