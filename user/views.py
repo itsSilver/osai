@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound, ValidationError, ParseError
+from rest_framework.exceptions import NotFound, ValidationError, ParseError, PermissionDenied
 
 from user.models import Users
 from user.serializers import RegistrationSerializer, UserSerializer, PermissionsSerializer
@@ -108,12 +108,13 @@ def User_logout(request):
 def user_delete(request, id):
     check_permission = __check_if_has_permission(request, "delete_users")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to delete_users"})
+        raise PermissionDenied(
+            {"message": "You do not have permission to delete_users"})
 
     user = get_object_or_404(User, pk=id)
     if user.is_admin:
-
-        return JsonResponse({"status": 403, "message": "You do not have permission to admin"})
+        raise PermissionDenied(
+                    {"message": "You do not have permission to admin"})
     else:
         user.delete()
 
@@ -125,7 +126,8 @@ def user_delete(request, id):
 def update_user(request, id):
     check_permission = __check_if_has_permission(request, "update_users")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to update_users"})
+        raise PermissionDenied(
+                    {"message": "You do not have permission to update_users"})
     seg = get_object_or_404(User, pk=id)
     if(seg.id == request.user.id):
         data = UserSerializer(
@@ -134,7 +136,7 @@ def update_user(request, id):
             data.save()
             return JsonResponse(data.data, status=200)
         else:
-            return JsonResponse({"status": 200, "message": "User not found"})
+            raise ValidationError(data.errors)
     raise NotFound("User not found")
 
 
@@ -157,7 +159,8 @@ def add_permission_to_user(request, id):
 def get_users(request):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
+        raise PermissionDenied(
+                    {"message": "You do not have permission to view_users"})
     queryset = Users.objects.all()
     serializer_class = UserSerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
@@ -168,7 +171,8 @@ def get_users(request):
 def user_detail(request):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
+        raise PermissionDenied(
+                    {"message": "You do not have permission to view_users"})
     user = User.objects.get(pk=request.user.pk)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
@@ -179,7 +183,8 @@ def user_detail(request):
 def user_by_id(request,id):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
-        return JsonResponse({"status": 403, "message": "You do not have permission to view_users"})
+        raise PermissionDenied(
+                    {"message": "You do not have permission to view_users"})
     user = User.objects.get(id=id)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
