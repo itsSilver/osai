@@ -100,7 +100,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="id_alarme"
                     v-model="dataTable.id_allarme"

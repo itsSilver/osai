@@ -50,7 +50,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="id-segnalazione"
                     v-model="dataTable.segnalazione"
@@ -66,7 +66,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="id-soluzione"
                     v-model="dataTable.soluzioni_id[0]"

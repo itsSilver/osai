@@ -50,7 +50,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="id-segnalazione"
                     v-model="form.segnalazione"
@@ -66,7 +66,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="id-soluzione"
                     v-model="form.soluzione"
@@ -199,7 +199,7 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control input-create"
                     id="status-occorrenza"
                     v-model="form.stato_occorrenza"
