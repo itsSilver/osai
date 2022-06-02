@@ -8,7 +8,7 @@ from mainapp.views import create_segnalazioni, create_soluzioni, \
     update_stati_soluzione, remove_stati_soluzione, retrieve_all_stati_soluzioni, create_stati_segnalazione, \
     update_stati_segnalazione, remove_stati_segnalazione, retrieve_all_stati_segnalazione, get_segnalazioni_by_id, \
     get_occurrenze_by_id, get_soluzioni_by_id, connect_occorrenze_to_segnalazioni, connect_soluzioni_to_occorrenze, \
-    SoluzioniListView, SegnalazioneListView, OccorrenzeListView
+    SoluzioniListView, SegnalazioneListView, OccorrenzeListView, disconnect_soluzioni_to_occorrenze
 
 app_name = 'mainapp'
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path("soluzioni/retrive_soluzioni/<int:id>", get_soluzioni_by_id),
     path("soluzioni/update/<int:id>", update_soluzioni),
     path("soluzioni/connect/<int:id>", connect_soluzioni_to_occorrenze),
+    path("soluzioni/disconnect/<int:id>", disconnect_soluzioni_to_occorrenze),
     path("soluzioni/<int:id>/delete", remove_soluzioni),
     path("soluzioni/filter/", SoluzioniListView.as_view()),
 

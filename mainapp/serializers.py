@@ -124,7 +124,7 @@ class SoluzioniForOcc(serializers.ModelSerializer):
 
 class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     # segnalazione = SegnalazioniDisplaySerializer(read_only=True)
-    soluzioni =SoluzioniForOcc(many=True, read_only=True, required=False)
+    soluzioni = SoluzioniForOcc(many=True, read_only=True, required=False)
     soluzioni_id = serializers.SerializerMethodField('sol_if')
     descrizione = serializers.CharField(required=False, allow_blank=True)
     commessa_macchina = serializers.CharField(required=False, allow_blank=True)
@@ -138,7 +138,7 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Occorrenze
 
-        fields = ("id", "segnalazione","soluzioni",  "titolo", "descrizione", "commessa_macchina",
+        fields = ("id", "segnalazione", "soluzioni",  "titolo", "descrizione", "commessa_macchina",
                   "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "soluzioni_id", "stato_occorrenza", "id", "created_at", "updated_at", "rif_ticket")
 
     def sol_if(self, obj):
@@ -149,6 +149,8 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
             ids.append(id.id)
 
         return ids
+
+
 class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     id_stato_soluzione = StatiSoluzioneSerializer(required=False)
     occorrenze = OccorrenzeDisplaySerializer(required=False)
@@ -194,7 +196,7 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Occorrenze
 
-        fields = ("rif_ticket", "titolo", "descrizione", "commessa_macchina",
+        fields = ("rif_ticket", "titolo", "segnalazione", "descrizione", "commessa_macchina",
                   "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "stato_occorrenza")
 
     def create(self, validated_data):

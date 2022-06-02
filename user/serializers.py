@@ -59,7 +59,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-            username=validated_data['username'] if type(validated_data['username']) is str else validated_data['email'],
+            username=validated_data['username'] if type(
+                validated_data['username']) is str else validated_data['email'],
             name=validated_data['name'],
             email=validated_data['email'],
             is_admin=validated_data['is_admin']
@@ -73,7 +74,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class PermissionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Permission
-        fields = ('id','name', 'codename')
+        fields = ('id', 'name', 'codename')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -81,5 +82,5 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'created_at',
+        fields = ('id', 'name', 'username', 'email', 'created_at',
                   'updated_at', 'is_admin', 'is_active', 'is_superuser', 'permissions')

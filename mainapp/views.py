@@ -38,6 +38,14 @@ def __check_if_has_permission(request, permission):
         return False
 
 
+def __format_error_response(errors):
+    list_of_errors = []
+    for x in errors.keys():
+        val = str(x + ": " + str(errors[x][0]))
+        list_of_errors.append(val)
+    return list_of_errors
+
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 @parser_classes([MultiPartParser, FormParser])
@@ -67,7 +75,7 @@ def create_soluzioni(request):
             stati.save()
         occ = None
         if "occorrenze" in request.data:
-            occ = Occorrenze.objects.get(pk=request.data["occorrenze"])
+            occ = get_object_or_404(Occorrenze, pk=request.data["occorrenze"])
         serializer = SoluzioniSerializer(
             data=request.data)
         if serializer.is_valid():
@@ -89,8 +97,11 @@ def create_soluzioni(request):
 
             data["message"] = "Soluzioni Created successfully"
         else:
-            data = serializer.errors
-            raise ValidationError(data)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
         return Response(data)
     except KeyError as e:
         print(e)
@@ -149,8 +160,11 @@ def create_segnalazioni(request):
 
             data["message"] = "Segnalazioni Created successfully"
         else:
-            data = serializer.errors
-            raise ValidationError(data)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
 
         return Response(data)
     except KeyError as e:
@@ -192,7 +206,10 @@ def create_occorrenze(request):
                 user_id=request.user.id
             )
             if not "segnalazione" in request.data:
-                return JsonResponse({"status": 400, "message": "segnalazione_id is missing"})
+                res = {}
+                res['message'] = "segnalazione_id is missing"
+                res['code'] = 400
+                raise ValidationError(res)
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
             occorrenze.save()
@@ -201,8 +218,11 @@ def create_occorrenze(request):
                     occorrenze_id=occorrenze.id)
             data["message"] = "Occurrenze Created successfully"
         else:
-            data = serializer.errors
-            raise ValidationError(data)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
 
         return Response(data)
     except KeyError as e:
@@ -311,16 +331,20 @@ def update_segnalazioni(request, id):
     if not check_permission:
         raise PermissionDenied(
             {"message": "You do not have permission to update Segnalazioni"})
-    seg = Segnalazioni.objects.get(pk=id)
+    seg = get_object_or_404(Segnalazioni, pk=id)
 
     if(seg.user_id == request.user.id):
-        data = SegnalazioniDisplaySerializer(
+        serializer = SegnalazioniDisplaySerializer(
             instance=seg, data=request.data)
-        if data.is_valid():
-            data.save()
-            return JsonResponse(data.data, status=200)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
         else:
-            raise ValidationError(data.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
     raise NotFound("Segnalazioni not found")
 
 
@@ -405,19 +429,23 @@ def update_soluzioni(request, id):
     if not check_permission:
         raise PermissionDenied(
             {"message": "You do not have permission to Update Soluzioni"})
-    seg = Soluzioni.objects.get(pk=id)
+    seg = get_object_or_404(Soluzioni, pk=id)
 
     if "occorrenze" in request.data:
-        occ = Occorrenze.objects.get(pk=request.data["occorrenze"])
+        occ = get_object_or_404(Occorrenze, pk=request.data["occorrenze"])
         Soluzioni.objects.filter(pk=id).update(occorrenze=occ)
     if(seg.user_id == request.user.id):
-        data = SoluzioniDisplaySerializer(
+        serializer = SoluzioniDisplaySerializer(
             instance=seg, data=request.data)
-        if data.is_valid():
-            data.save()
-            return JsonResponse(data.data, status=200)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
         else:
-            raise ValidationError(data.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
     raise NotFound("Soluzioni not found")
 
 
@@ -522,49 +550,55 @@ def update_occurrenze(request, id):
         raise PermissionDenied(
             {"message": "You do not have permission to Update Occurrenze"})
 
-    occ = Occorrenze.objects.get(id=id)
+    occ = get_object_or_404(Occorrenze, id=id)
     copy_data = {**request.data}
     if 'soluzioni_id' not in copy_data:
         copy_data['soluzioni_id'] = occ.soluzioni_id
 
-    data = OccorrenzeDisplaySerializer(
+    serializer = OccorrenzeDisplaySerializer(
         instance=occ, data=request.data)
-    if data.is_valid():
-        data.save()
-        return JsonResponse(data.data, status=200)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse(serializer.data, status=200)
     else:
-        raise ValidationError(data.errors)
+        errors = __format_error_response(serializer.errors)
+        res = {}
+        res['message'] = errors
+        res['code'] = 400
+        raise ValidationError(res)
 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def connect_occorrenze_to_segnalazioni(request, id):
-    if id:
-        check_permission = __check_if_has_permission(request, "change_occorrenze")
+    check_permission = __check_if_has_permission(request, "change_occorrenze")
 
-        if not check_permission:
-            raise PermissionDenied(
-                {"message": "This user do not have permission to Update Occurrenze"})
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "This user do not have permission to Update Occurrenze"})
 
-        if 'segnalazioni_id' not in request.data:
-            raise ValidationError("segnalazioni_id is missing")
+    if 'segnalazioni_id' not in request.data:
+        res = {}
+        res["message"] = "segnalazioni_id is missing"
+        res['code'] = 400
+        raise ValidationError(res)
 
-        if not isinstance(request.data['segnalazioni_id'], int):
-            raise ValidationError(
-                "Field 'segnalazioni_id' expected a number but got String.")
+    if not isinstance(request.data['segnalazioni_id'], int):
+        res = {}
+        res["message"] = "Field 'segnalazioni_id' expected a number but got String."
+        res['code'] = 400
+        raise ValidationError(res)
 
-        occ = Occorrenze.objects.get(pk=id)
-        seg = Segnalazioni.objects.get(pk=request.data['segnalazioni_id'])
-        occ.segnalazione = seg
-        occ.save(update_fields=['segnalazione'])
-        data = OccorrenzeDisplaySerializer(
-            instance=occ, data=occ.__dict__)
-        if data.is_valid():
-            return JsonResponse(data.data, status=200, safe=False)
+    occ = get_object_or_404(Occorrenze, pk=id)
+    seg = get_object_or_404(Segnalazioni, pk=request.data['segnalazioni_id'])
 
-    else:
-        return JsonResponse({"message": "Occorrenze ID missing",
-                             "status": 400}, status=400, safe=False)
+    occ.segnalazione = seg
+    occ.save(update_fields=['segnalazione'])
+    data = OccorrenzeDisplaySerializer(
+        instance=occ, data=occ.__dict__)
+    if data.is_valid():
+        return JsonResponse(data.data, status=200, safe=False)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -578,22 +612,44 @@ def connect_soluzioni_to_occorrenze(request, id):
                 {"message": "You do not have permission to Update Soluzioni"})
 
         if 'occorrenze_id' not in request.data:
+            res = {}
+            res["message"] = "Field 'occorrenze_id' is missing."
+            res['code'] = 400
             raise ValidationError("occorrenze_id is missing")
 
         if not isinstance(request.data['occorrenze_id'], int):
-            raise ValidationError(
-                "Field 'occorrenze_id' expected a number but got String.")
+            res = {}
+            res["message"] = "Field 'occorrenze_id' expected a number but got String."
+            res['code'] = 400
+            raise ValidationError(res)
 
-        sol = Soluzioni.objects.get(pk=id)
-        occ = Occorrenze.objects.get(pk=request.data['occorrenze_id'])
-
+        sol = get_object_or_404(Soluzioni, pk=id)
+        occ = get_object_or_404(Occorrenze, pk=request.data['occorrenze_id'])
         sol.occorrenze = occ
         sol.save(update_fields=['occorrenze'])
-        return JsonResponse({"message": "Connected successfully",
-                             "status": 200}, status=200, safe=False)
-    else:
-        return JsonResponse({"message": "Soluzione ID missing",
-                             "status": 400}, status=400, safe=False)
+    return JsonResponse({"message": "Connected successfully",
+                         "status": 200}, status=200, safe=False)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def disconnect_soluzioni_to_occorrenze(request, id):
+    if id:
+        check_permission = __check_if_has_permission(
+            request, "change_soluzioni")
+
+        if not check_permission:
+            raise PermissionDenied(
+                {"message": "You do not have permission to Update Soluzioni"})
+
+        sol = get_object_or_404(Soluzioni, pk=id)
+        if sol.occorrenze_id == None:
+            return JsonResponse({"message": "This solution is not connected to any occorrenze", "status": 200}, safe=False)
+
+        sol.occorrenze = None
+        sol.save(update_fields=['occorrenze'])
+    return JsonResponse({"message": "Soluzioni disconnected successfully", "status": 200}, safe=False)
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -637,7 +693,11 @@ def create_stati_soluzione(request):
             )
             serializer.save()
         else:
-            raise ValidationError(serializer.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
         return JsonResponse(serializer)
     except KeyError as e:
         print(e)
@@ -647,15 +707,19 @@ def create_stati_soluzione(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def update_stati_soluzione(request, id):
-    seg = Stati_Soluzione.objects.get(pk=id)
+    seg = get_object_or_404(Stati_Soluzione, pk=id)
     if(seg.user_id == request.user.id):
-        data = StatiSoluzioneSerializer(
+        serializer = StatiSoluzioneSerializer(
             instance=seg, data=request.data)
-        if data.is_valid():
-            data.save()
+        if serializer.is_valid():
+            serializer.save()
             return JsonResponse(data.data, status=200)
         else:
-            raise ValidationError(data.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
     raise NotFound("Not found")
 
 
@@ -681,7 +745,11 @@ def create_stati_segnalazione(request):
             )
             serializer.save()
         else:
-            raise ValidationError(serializer.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
         return JsonResponse(serializer)
     except KeyError as e:
         print(e)
@@ -691,15 +759,19 @@ def create_stati_segnalazione(request):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def update_stati_segnalazione(request, id):
-    seg = Stati_Segnalazione.objects.get(pk=id)
+    seg = get_object_or_404(Stati_Segnalazione, pk=id)
     if(seg.user_id == request.user.id):
-        data = StatiSegnalazioneSerializer(
+        serializer = StatiSegnalazioneSerializer(
             instance=seg, data=request.data)
-        if data.is_valid():
-            data.save()
-            return JsonResponse(data.data, status=200)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
         else:
-            raise ValidationError(data.errors)
+            errors = __format_error_response(serializer.errors)
+            res = {}
+            res['message'] = errors
+            res['code'] = 400
+            raise ValidationError(res)
     raise NotFound("Not found")
 
 
