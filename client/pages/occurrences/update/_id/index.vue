@@ -367,7 +367,17 @@ export default {
           },
         })
         .then(() => {
-          this.connectNewSolutionID()
+          console.log(this.dataTable.soluzioni_id)
+          if (this.dataTable.soluzioni_id.length !== 0) {
+            this.connectNewSolutionID()
+          } else {
+            this.dataCreated = 'Occurrence Updated Succesfully'
+            this.toggleToaster()
+            setTimeout(() => {
+              this.$router.push('/occurrences')
+            }, 3000)
+          }
+
           // this.dataCreated = 'Occurrence Updated Succesfully'
           // this.toggleToaster()
 
