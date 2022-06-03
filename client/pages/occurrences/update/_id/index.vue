@@ -390,7 +390,7 @@ export default {
         .catch((error) => {
           this.show = false
           this.variant = 'danger'
-          this.dataCreated = 'Something went wrong!'
+          this.dataCreated = error.response.data.message[0]
           this.toggleToaster()
         })
     },
@@ -417,7 +417,7 @@ export default {
         .catch((error) => {
           this.show = false
           this.variant = 'danger'
-          this.dataCreated = 'Something went wrong!'
+          this.dataCreated = error.response.data.message[0]
           this.toggleToaster()
         })
     },
