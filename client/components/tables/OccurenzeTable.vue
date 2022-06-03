@@ -52,9 +52,10 @@
           <b-td v-if="statusOccurrenceDate === '1'">{{
             data.data_occorrenza
           }}</b-td>
-          <b-td v-if="statusOccurrenceStatus === '1'">{{
-            data.stato_occorrenza
-          }}</b-td>
+          <b-td v-if="statusOccurrenceStatus === '1'">
+            <span v-if="data.stato_occorrenza === '1'">On</span>
+            <span v-else>Off</span>
+          </b-td>
           <b-td v-if="statusCreationDate === '1'">{{
             formatDate(data.created_at)
           }}</b-td>
@@ -133,7 +134,10 @@
           </div>
           <div class="respo-after-tr" v-if="statusOccurrenceStatus === '1'">
             <b-td class="td-respo-title">Occurrence status</b-td>
-            <b-td class="td-respo-data">{{ data.stato_occorrenza }}</b-td>
+            <b-td class="td-respo-data">
+              <span v-if="data.stato_occorrenza === '1'">On</span>
+              <span v-else>Off</span></b-td
+            >
           </div>
           <div class="respo-after-tr" v-if="statusCreationDate === '1'">
             <b-td class="td-respo-title">Creation date</b-td>

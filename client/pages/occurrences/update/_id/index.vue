@@ -198,13 +198,10 @@
                   >Occurrence status</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="status-occorrenza"
+                  <b-form-select
                     v-model="dataTable.stato_occorrenza"
-                    placeholder="Occurrence status"
-                  />
+                    :options="stato_occorrenza_macchina_options"
+                  ></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -295,6 +292,11 @@ export default {
       variant: 'info',
       creationDate: '',
       updateDate: '',
+      stato_occorrenza_macchina_options: [
+        { value: null, text: 'Select' },
+        { value: 1, text: 'On' },
+        { value: 0, text: 'Off' },
+      ],
       form: {
         segnalazione: null,
         soluzione: null,
