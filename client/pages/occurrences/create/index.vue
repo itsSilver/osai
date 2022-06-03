@@ -198,17 +198,10 @@
                   >Occurrence status</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="version-2"
-                    v-model="form.stato_occorrenza"
-                    placeholder="Statos Occorrenza"
-                  />
-                  <!-- <b-form-select
+                  <b-form-select
                     v-model="form.stato_occorrenza"
                     :options="stato_occorrenza_macchina_options"
-                  ></b-form-select> -->
+                  ></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
