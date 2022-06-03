@@ -309,7 +309,16 @@ export default {
         data_occorrenza: '',
         rif_ticket: null,
         stato_occorrenza: null,
+        hasSoluzioniId: false,
       },
+    }
+  },
+  mounted() {
+    console.log(this.dataTable.soluzioni_id[0])
+    if (this.dataTable.soluzioni_id[0]) {
+      this.hasSoluzioniId = true
+    } else {
+      this.hasSoluzioniId = false
     }
   },
   methods: {
@@ -370,22 +379,16 @@ export default {
         })
         .then(() => {
           console.log(this.dataTable.soluzioni_id)
-          if (this.dataTable.soluzioni_id.length !== 0) {
+          console.log(this.dataTable.soluzioni_id[0])
+          if (this.dataTable.soluzioni_id[0] !== '') {
             this.connectNewSolutionID()
-          } else {
-            this.dataCreated = 'Occurrence Updated Succesfully'
-            this.toggleToaster()
-            setTimeout(() => {
-              this.$router.push('/occurrences')
-            }, 3000)
+            return
           }
-
-          // this.dataCreated = 'Occurrence Updated Succesfully'
-          // this.toggleToaster()
-
-          // setTimeout(() => {
-          //   this.$router.push('/occurrences')
-          // }, 3000)
+          this.dataCreated = 'Occurrence Updated Succesfully'
+          this.toggleToaster()
+          setTimeout(() => {
+            this.$router.push('/occurrences')
+          }, 3000)
         })
         .catch((error) => {
           this.show = false
