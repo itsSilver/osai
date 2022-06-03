@@ -187,7 +187,10 @@ def create_occorrenze(request):
     if not check_permission:
         raise PermissionDenied(
             {"message": "You do not have permission to Create Occurrenze"})
-
+    try:
+        check = Segnalazioni.objects.get(id=request.data['segnalazione'])
+    except Exception:
+        return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
     try:
         data = {}
         serializer = OccorrenzeSerializer(
@@ -210,10 +213,7 @@ def create_occorrenze(request):
                 res['message'] = "segnalazione_id is missing"
                 res['code'] = 400
                 raise ValidationError(res)
-            try:
-                check = Segnalazioni.objects.get(id=request.data['segnalazione'])
-            except Exception:
-                return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
+
 
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
