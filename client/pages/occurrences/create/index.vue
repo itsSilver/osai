@@ -343,7 +343,9 @@ export default {
       ) {
         this.form.stato_occorrenza = 0
       }
-
+      if (this.form.soluzione === '') {
+        this.form.soluzione = null
+      }
       this.$axios
         .post(`/api/occorrenze/create`, this.form, {
           headers: {
