@@ -380,7 +380,7 @@ export default {
         .then(() => {
           console.log(this.dataTable.soluzioni_id)
           console.log(this.dataTable.soluzioni_id[0])
-          if (this.dataTable.soluzioni_id[0] !== '') {
+          if (this.dataTable.soluzioni_id.length !== 0) {
             this.connectNewSolutionID()
             return
           }
@@ -393,7 +393,7 @@ export default {
         .catch((error) => {
           this.show = false
           this.variant = 'danger'
-          this.dataCreated = error.response.data.message[0]
+          this.dataCreated = error.response.data.message
           this.toggleToaster()
         })
     },

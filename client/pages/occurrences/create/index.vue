@@ -361,7 +361,7 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = error.response.data.message[0]
+          this.dataCreated = error.response.data.message
           this.variant = 'danger'
           this.toggleToaster()
         })
