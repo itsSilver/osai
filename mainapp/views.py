@@ -210,6 +210,11 @@ def create_occorrenze(request):
                 res['message'] = "segnalazione_id is missing"
                 res['code'] = 400
                 raise ValidationError(res)
+            try:
+                check = Segnalazioni.objects.get(id=request.data['segnalazione'])
+            except Exception:
+                return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
+
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
             occorrenze.save()
@@ -554,7 +559,10 @@ def update_occurrenze(request, id):
     copy_data = {**request.data}
     if 'soluzioni_id' not in copy_data:
         copy_data['soluzioni_id'] = occ.soluzioni_id
-
+    try:
+        check = Segnalazioni.objects.get(id=request.data['segnalazione'])
+    except Exception:
+        return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
     serializer = OccorrenzeDisplaySerializer(
         instance=occ, data=request.data)
     if serializer.is_valid():
