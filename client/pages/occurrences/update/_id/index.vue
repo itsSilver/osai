@@ -309,20 +309,24 @@ export default {
         data_occorrenza: '',
         rif_ticket: null,
         stato_occorrenza: null,
-        hasSoluzioniId: false,
+        tempIdSoluzioni: null,
       },
     }
   },
   mounted() {
     console.log(this.dataTable.soluzioni_id[0])
     if (this.dataTable.soluzioni_id[0]) {
-      this.hasSoluzioniId = true
+      this.tempIdSoluzioni = this.dataTable.soluzioni_id[0]
     } else {
-      this.hasSoluzioniId = false
+      this.tempIdSoluzioni = null
     }
+    console.log(this.tempIdSoluzioni)
   },
   methods: {
     onSubmit() {
+      console.log(this.dataTable.soluzioni_id[0])
+      console.log(this.tempIdSoluzioni)
+
       this.show = true
       if (
         this.dataTable.segnalazione === null ||
@@ -380,6 +384,9 @@ export default {
         .then(() => {
           console.log(this.dataTable.soluzioni_id)
           console.log(this.dataTable.soluzioni_id[0])
+          if (this.tempIdSoluzioni !== this.dataTable.soluzioni_id[0]) {
+            this.disconnectNewSolutionID()
+          }
           if (this.dataTable.soluzioni_id.length !== 0) {
             this.connectNewSolutionID()
             return
@@ -416,6 +423,26 @@ export default {
           setTimeout(() => {
             this.$router.push('/occurrences')
           }, 3000)
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.dataCreated = error.response.data.message[0]
+          this.toggleToaster()
+        })
+    },
+    disconnectNewSolutionID() {
+      const value = this.tempIdSoluzioni
+
+      this.$axios
+        .post(`/api/soluzioni/disconnect/${value}`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          // empty response to get
         })
         .catch((error) => {
           this.show = false
