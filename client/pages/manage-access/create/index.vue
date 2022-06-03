@@ -212,7 +212,7 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = 'Something went wrong!'
+          this.dataCreated = error.response.data.message[0]
           this.variant = 'danger'
           this.toggleToaster()
         })
@@ -231,6 +231,7 @@ export default {
           this.show = false
         })
         .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
           this.show = false
           this.variant = 'danger'
           this.toggleToaster()
@@ -260,7 +261,7 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = 'Something went wrong!'
+          this.dataCreated = error.response.data.message[0]
           this.variant = 'danger'
           this.toggleToaster()
         })

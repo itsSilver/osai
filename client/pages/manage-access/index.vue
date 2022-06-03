@@ -314,6 +314,7 @@ export default {
                   this.show = false
                   return
                 }
+                this.dataCreated = error.response.data.message[0]
                 this.show = false
                 this.variant = 'danger'
                 this.toggleToaster()
@@ -325,6 +326,7 @@ export default {
         })
         .catch((err) => {
           // An error occurred
+          this.dataCreated = err.response.data.message[0]
         })
     },
     toggleToaster() {

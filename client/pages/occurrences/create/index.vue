@@ -198,13 +198,10 @@
                   >Occurrence status</label
                 >
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="status-occorrenza"
+                  <b-form-select
                     v-model="form.stato_occorrenza"
-                    placeholder="Occurrence status"
-                  />
+                    :options="stato_occorrenza_macchina_options"
+                  ></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -289,6 +286,11 @@ export default {
   },
   data() {
     return {
+      stato_occorrenza_macchina_options: [
+        { value: null, text: 'Select' },
+        { value: 1, text: 'On' },
+        { value: 0, text: 'Off' },
+      ],
       show: false,
       editor: ClassicEditor,
       dataCreated: '',
@@ -359,7 +361,7 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = 'Something went wrong!'
+          this.dataCreated = error.response.data.message[0]
           this.variant = 'danger'
           this.toggleToaster()
         })

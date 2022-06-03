@@ -301,6 +301,7 @@ export default {
           this.show = false
         })
         .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
           this.show = false
           this.variant = 'danger'
           this.toggleToaster()
@@ -324,6 +325,7 @@ export default {
           this.show = false
         })
         .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
           this.show = false
           this.variant = 'danger'
           this.toggleToaster()
@@ -436,6 +438,7 @@ export default {
                 this.selectedId = []
               })
               .catch((error) => {
+                this.dataCreated = error.response.data.message[0]
                 this.show = false
                 this.variant = 'danger'
                 this.toggleToaster()
@@ -447,6 +450,7 @@ export default {
         })
         .catch((err) => {
           // An error occurred
+          this.dataCreated = err.response.data.message[0]
         })
     },
     toggleToaster() {
