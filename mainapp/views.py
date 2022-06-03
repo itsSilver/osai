@@ -190,7 +190,11 @@ def create_occorrenze(request):
     try:
         check = Segnalazioni.objects.get(id=request.data['segnalazione'])
     except Exception:
-        return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
+        res={}
+        res['message'] = "Segnalazioni Not Found"
+        res['code'] = 400
+        raise ValidationError(res)
+
     try:
         data = {}
         serializer = OccorrenzeSerializer(
@@ -562,7 +566,10 @@ def update_occurrenze(request, id):
     try:
         check = Segnalazioni.objects.get(id=request.data['segnalazione'])
     except Exception:
-        return JsonResponse({"status": 400, "message": "Segnalazioni Not Found"})
+        res = {}
+        res['message'] = "Segnalazioni  Not    Found "
+        res['code'] = 400
+        raise ValidationError(res)
     serializer = OccorrenzeDisplaySerializer(
         instance=occ, data=request.data)
     if serializer.is_valid():
