@@ -14,9 +14,5 @@ export default {
   components: {
     Nav,
   },
-  // user: {
-  //   email: 'admin@gmail.com',
-  //   password: 'admin123456',
-  // },
 }
 </script>

@@ -11101,7 +11101,8 @@ textarea {
   color: #e3342f;
   float: left !important;
 }
-#created, #deleted {
+#created,
+#deleted {
   display: block !important;
 }
 .table-filter-cols > button {
@@ -11154,7 +11155,7 @@ textarea {
   .find-create-occurrence {
     display: flex !important;
   }
-  .find-create-occurrence > button{
+  .find-create-occurrence > button {
     padding: 2px !important;
   }
 }

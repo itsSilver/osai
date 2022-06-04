@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'client',
+    title: 'OSAI',
     htmlAttrs: {
       lang: 'en',
     },
@@ -9,14 +9,6 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' },
-    ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
-      },
     ],
   },
 
@@ -39,6 +31,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@oruga-ui/oruga/nuxt',
+    'vue2-editor/nuxt',
+    'nuxtjs-mdi-font',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -61,7 +56,7 @@ export default {
         },
         endpoints: {
           login: {
-            url: 'auth/local',
+            url: '/user/login',
             method: 'post',
             propertyName: 'token',
           },

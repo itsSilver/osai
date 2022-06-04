@@ -190,7 +190,7 @@ def create_occorrenze(request):
     try:
         check = Segnalazioni.objects.get(id=request.data['segnalazione'])
     except Exception:
-        res={}
+        res = {}
         res['message'] = "Segnalazioni Not Found"
         res['code'] = 400
         raise ValidationError(res)
@@ -217,7 +217,6 @@ def create_occorrenze(request):
                 res['message'] = "segnalazione_id is missing"
                 res['code'] = 400
                 raise ValidationError(res)
-
 
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
@@ -418,6 +417,21 @@ def get_soluzioni_by_id(request, id):
     user_soluzioni = Soluzioni.objects.filter(
         pk=id).prefetch_related('id_stato_soluzione')
     serializer_class = SoluzioniDisplaySerializer(
+        user_soluzioni, many=True).data
+    print(serializer_class)
+    return JsonResponse(serializer_class, safe=False)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_occorrenze_by_se_id(request, id):
+    check_permission = __check_if_has_permission(request, "view_soluzioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to view Soluzioni"})
+    user_soluzioni = Occorrenze.objects.filter(
+        segnalazione=id)
+    serializer_class = OccorrenzeDisplaySerializer(
         user_soluzioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
