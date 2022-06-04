@@ -85,7 +85,6 @@ export default {
       showTitle: false,
       showTicket: false,
       showAlarm: false,
-      showReference: false,
       showFamily: false,
       showUnderFamily: false,
       showImage1: false,
@@ -176,11 +175,9 @@ export default {
             this.showTicket = JSON.parse(item.value);
           } else if (item.text === 'Alarm') {
             this.showAlarm = JSON.parse(item.value);
-          } else if (item.text === 'Reference') {
-            this.showReference = JSON.parse(item.value);
-          } else if (item.text === 'Family') {
+          } else if (item.text === 'Family machine') {
             this.showFamily = JSON.parse(item.value);
-          } else if (item.text === 'Under Family') {
+          } else if (item.text === 'Under Family machine') {
             this.showUnderFamily = JSON.parse(item.value);
           } else if (item.text === 'Image 1') {
             this.showImage1 = JSON.parse(item.value);

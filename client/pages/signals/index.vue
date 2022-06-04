@@ -102,10 +102,6 @@ export default {
           value: true,
         },
         {
-          text: 'Reference Sector',
-          value: true,
-        },
-        {
           text: 'Family machine',
           value: true,
         },
