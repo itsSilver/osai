@@ -11127,6 +11127,7 @@ textarea {
 .file-button {
   min-width: 81px !important;
 }
+
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;
