@@ -28,7 +28,7 @@
               >
                 <li class="nav-actions-color mx-2">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
-                  New Solution
+                  View Solution
                 </li>
               </ul>
             </div>
@@ -183,12 +183,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-sm-10">
-                  <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
-                    Save
-                  </b-button>
-                </div>
+                <div class="col-sm-10"></div>
               </div>
             </b-form>
           </b-overlay>

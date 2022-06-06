@@ -216,11 +216,11 @@ export default {
       this.showImage = false
     },
     pushRoute(route) {
-      this.$router.push(`/signals/${route}`)
+      this.$router.push(`/occurrences/${route}`)
     },
     deleteDocument(id) {
       this.$bvModal
-        .msgBoxConfirm('Are you sure you want to delete this Signal?', {
+        .msgBoxConfirm('Are you sure you want to delete this Occurrence?', {
           title: `Attention`,
           size: 'sm',
           buttonSize: 'sm',
@@ -235,7 +235,7 @@ export default {
           if (value === true) {
             this.show = true
             this.$axios
-              .post(`/api/segnalazioni/${id}/delete`, {
+              .post(`/api/occorrenze/${id}/delete`, {
                 headers: {
                   Authorization: `Token ${this.$auth.strategy.token.get()}`,
                   'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ export default {
               })
               .then(() => {
                 this.variant = 'danger'
-                this.dataCreated = 'Signal deleted Succesfully'
+                this.dataCreated = 'Occurrence deleted Succesfully'
                 this.toggleToaster()
                 this.$nuxt.refresh()
                 this.show = false

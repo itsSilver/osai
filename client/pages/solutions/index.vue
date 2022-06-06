@@ -28,7 +28,7 @@
                 style="list-style: none"
               >
                 <li class="nav-actions-color mx-2">
-                  <i class="fas fa-bars pr-2 fas-main-color"></i>
+                  <i class="mdi mdi-lightbulb mr-3"></i>
                   Solutions
                 </li>
               </ul>

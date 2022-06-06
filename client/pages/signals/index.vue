@@ -4,7 +4,8 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div class="
+          <div
+            class="
               nav-actions
               d-flex
               justify-content-between
@@ -12,36 +13,59 @@
               mb-2
               navtop
               respo-nav-top
-            ">
+            "
+          >
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul class="
+              <ul
+                class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                " style="list-style: none; padding-bottom: 10px">
+                "
+                style="list-style: none; padding-bottom: 10px"
+              >
                 <li class="nav-actions-color mx-2">
-                  <i class="mdi mdi-menu pr-2 fas-main-color"></i>
+                  <i class="mdi mdi-alarm-light mr-3"></i>
                   Signals
                 </li>
               </ul>
             </div>
-            <div class="d-flex justify-content-around
-                  align-content-center align-items-center">
-              <button role="button" class="mx-2 button-format" @click="redirectCreate()" style="height: 40px">
+            <div
+              class="
+                d-flex
+                justify-content-around
+                align-content-center align-items-center
+              "
+            >
+              <button
+                role="button"
+                class="mx-2 button-format"
+                @click="redirectCreate()"
+                style="height: 40px"
+              >
                 <i class="mdi mdi-plus pr-2"></i>
                 New Signal
               </button>
 
-              <b-dropdown class="m-2 table-filter-cols" id="dropdown-form" text="Select fields to display"
-                ref="dropdown">
+              <b-dropdown
+                class="m-2 table-filter-cols"
+                id="dropdown-form"
+                text="Select fields to display"
+                ref="dropdown"
+              >
                 <b-dropdown-form>
-                  <b-form-checkbox v-for="(drop, index) in dropdown" :key="index" class="table-checkbox mb-3"
-                    v-model="drop.value" value="true" unchecked-value="false" @change="dropDownChange(drop)">{{
-                        drop.text
-                    }}
+                  <b-form-checkbox
+                    v-for="(drop, index) in dropdown"
+                    :key="index"
+                    class="table-checkbox mb-3"
+                    v-model="drop.value"
+                    value="true"
+                    unchecked-value="false"
+                    @change="dropDownChange(drop)"
+                    >{{ drop.text }}
                   </b-form-checkbox>
                 </b-dropdown-form>
               </b-dropdown>
@@ -74,7 +98,7 @@ export default {
   name: 'signals',
   components: {
     Nav,
-    SignalsTable
+    SignalsTable,
   },
   data() {
     return {
@@ -129,7 +153,7 @@ export default {
           text: 'Update date',
           value: true,
         },
-      ]
+      ],
     }
   },
   methods: {
@@ -163,11 +187,10 @@ export default {
     },
 
     dropDownChange(val) {
-      const indexArray = this.dropdown.findIndex(e => e.text === val.text)
+      const indexArray = this.dropdown.findIndex((e) => e.text === val.text)
       this.dropdown[indexArray].value = val.value
       localStorage.setItem('signalTable', JSON.stringify(this.dropdown))
-    }
-
+    },
   },
   mounted() {
     if (process.client) {
