@@ -11137,12 +11137,15 @@ textarea {
 .o-input {
   border-radius: 8px !important;
 }
+.dropdown-toggle {
+  color: #ffffff !important;
+}
 /* Pagination CSS */
 .o-pag__link--current {
   pointer-events: none;
   background-color: #4373fb !important;
-  border-color: var(--oruga-pagination-link-current-border-color,#445e00);
-  color: var(--oruga-pagination-link-current-color,#fff);
+  border-color: var(--oruga-pagination-link-current-border-color, #445e00);
+  color: var(--oruga-pagination-link-current-color, #fff);
   color: #ffffff !important;
 }
 .o-pag__link {
@@ -11162,15 +11165,15 @@ textarea {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  line-height: var(--oruga-pagination-link-line-height,1.5);
-  border: var(--oruga-pagination-link-border,1px solid transparent);
-  border-radius: var(--oruga-pagination-link-border-radius,4px);
-  border-color: var(--oruga-pagination-link-border-color,#dbdbdb);
-  color: var(--oruga-pagination-link-color,#363636);
-  min-width: var(--oruga-pagination-link-min-width,2.25em);
-  height: var(--oruga-pagination-link-height,2.25em);
-  padding: var(--oruga-pagination-link-padding,.5em .5em);
-  margin: var(--oruga-pagination-link-margin,.25rem);
+  line-height: var(--oruga-pagination-link-line-height, 1.5);
+  border: var(--oruga-pagination-link-border, 1px solid transparent);
+  border-radius: var(--oruga-pagination-link-border-radius, 4px);
+  border-color: var(--oruga-pagination-link-border-color, #dbdbdb);
+  color: var(--oruga-pagination-link-color, #363636);
+  min-width: var(--oruga-pagination-link-min-width, 2.25em);
+  height: var(--oruga-pagination-link-height, 2.25em);
+  padding: var(--oruga-pagination-link-padding, 0.5em 0.5em);
+  margin: var(--oruga-pagination-link-margin, 0.25rem);
 }
 .o-pag {
   padding-top: 10px !important;
