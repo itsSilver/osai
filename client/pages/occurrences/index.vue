@@ -27,7 +27,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="mdi mdi-repeat mr-3"></i>
                   Occurrences
                 </li>
@@ -42,7 +42,7 @@
             >
               <button
                 role="button"
-                class="mx-2 button-format"
+                class="mx-2 button-format px-14-format"
                 @click="redirectCreate()"
                 style="height: 40px"
               >

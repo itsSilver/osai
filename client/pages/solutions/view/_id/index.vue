@@ -26,7 +26,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   View Solution
                 </li>
@@ -183,7 +183,17 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-sm-10"></div>
+                <div class="col-sm-10">
+                  <b-button
+                    class="mx-2 button-format"
+                    @click="
+                      $router.push(`/solutions/update/${$route.params.id}`)
+                    "
+                  >
+                    <i class="fas fa-edit pr-2"></i>
+                    Edit
+                  </b-button>
+                </div>
               </div>
             </b-form>
           </b-overlay>

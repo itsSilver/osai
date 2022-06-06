@@ -26,7 +26,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New Occurrence
                 </li>

@@ -26,8 +26,8 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-plus pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-plus pr-2 fas-main-color"></i>
                   New Occurrence
                 </li>
               </ul>
@@ -223,7 +223,7 @@
               <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
+                    <i class="mdi mdi-check pr-2"></i>
                     Save
                   </b-button>
                 </div>
