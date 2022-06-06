@@ -11140,7 +11140,7 @@ textarea {
 /* Pagination CSS */
 .o-pag__link--current {
   pointer-events: none;
-  background-color: var(--oruga-pagination-link-current-background-color,#445e00);
+  background-color: #4373fb !important;
   border-color: var(--oruga-pagination-link-current-border-color,#445e00);
   color: var(--oruga-pagination-link-current-color,#fff);
   color: #ffffff !important;
