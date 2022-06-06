@@ -11127,7 +11127,55 @@ textarea {
 .file-button {
   min-width: 81px !important;
 }
-
+.px-14-format {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+.o-table__td {
+  text-align: center !important;
+}
+.o-input {
+  border-radius: 8px !important;
+}
+/* Pagination CSS */
+.o-pag__link--current {
+  pointer-events: none;
+  background-color: var(--oruga-pagination-link-current-background-color,#445e00);
+  border-color: var(--oruga-pagination-link-current-border-color,#445e00);
+  color: var(--oruga-pagination-link-current-color,#fff);
+  color: #ffffff !important;
+}
+.o-pag__link {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+  box-shadow: none;
+  display: inline-flex;
+  position: relative;
+  vertical-align: top;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: var(--oruga-pagination-link-line-height,1.5);
+  border: var(--oruga-pagination-link-border,1px solid transparent);
+  border-radius: var(--oruga-pagination-link-border-radius,4px);
+  border-color: var(--oruga-pagination-link-border-color,#dbdbdb);
+  color: var(--oruga-pagination-link-color,#363636);
+  min-width: var(--oruga-pagination-link-min-width,2.25em);
+  height: var(--oruga-pagination-link-height,2.25em);
+  padding: var(--oruga-pagination-link-padding,.5em .5em);
+  margin: var(--oruga-pagination-link-margin,.25rem);
+}
+.o-pag {
+  padding-top: 10px !important;
+}
+/* End here */
 @media only screen and (max-width: 991.98px) {
   .respo-button {
     display: block;

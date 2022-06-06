@@ -192,7 +192,7 @@ export default {
       showImage: false,
       selected: {},
       currentPage: 1,
-      perPage: 5,
+      perPage: 10,
       showID: false,
       showIdSignal: false,
       showIdSolution: false,
