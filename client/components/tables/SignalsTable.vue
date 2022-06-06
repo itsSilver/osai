@@ -1,174 +1,184 @@
 <template>
   <div>
-    <o-table
-      :data="dataTable"
-      :bordered="true"
-      :striped="true"
-      mobile-cards
-      paginated
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      v-if="dataTable.length > 0"
-      default-sort="titolo"
-      :selected.sync="selected"
-    >
-      <o-table-column
-        field="id"
-        label="ID"
-        width="40"
-        numeric
-        v-slot="props"
-        :visible="showID"
+    <b-overlay :show="show" rounded="sm">
+      <o-table
+        :data="dataTable"
+        :bordered="true"
+        :striped="true"
+        mobile-cards
+        paginated
+        :per-page="perPage"
+        :current-page.sync="currentPage"
+        v-if="dataTable.length > 0"
+        default-sort="titolo"
+        :selected.sync="selected"
       >
-        {{ props.row.id }}
-      </o-table-column>
+        <o-table-column
+          field="id"
+          label="ID"
+          width="40"
+          numeric
+          v-slot="props"
+          :visible="showID"
+        >
+          {{ props.row.id }}
+        </o-table-column>
 
-      <o-table-column
-        field="titolo"
-        label="Title"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showTitle"
-      >
-        {{ props.row.titolo }}
-      </o-table-column>
-      <o-table-column
-        field="rif_ticket"
-        label="Ticket"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showTicket"
-      >
-        {{ props.row.rif_ticket }}
-      </o-table-column>
+        <o-table-column
+          field="titolo"
+          label="Title"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showTitle"
+        >
+          {{ props.row.titolo }}
+        </o-table-column>
+        <o-table-column
+          field="rif_ticket"
+          label="Ticket"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showTicket"
+        >
+          {{ props.row.rif_ticket }}
+        </o-table-column>
 
-      <o-table-column
-        field="id_allarme"
-        label="Id Alarm"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showAlarm"
-      >
-        {{ props.row.id_allarme }}
-      </o-table-column>
-      <o-table-column
-        field="famiglia_macchina"
-        label="Family machine"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showFamily"
-      >
-        {{ props.row.famiglia_macchina }}
-      </o-table-column>
-      <o-table-column
-        field="sottofamiglia_macchina"
-        label="Under Family machine"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showUnderFamily"
-      >
-        {{ props.row.sottofamiglia_macchina }}
-      </o-table-column>
-      <o-table-column
-        field="immagine_1"
-        label="Image 1"
-        v-slot="props"
-        position="centered"
-        :visible="showImage1"
-      >
-        <b-button
-          class="mx-2 button-format file-button-table"
-          @click="watchImage(props.row.immagine_1)"
-          >Image 1</b-button
+        <o-table-column
+          field="id_allarme"
+          label="Id Alarm"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showAlarm"
         >
-      </o-table-column>
-      <o-table-column
-        field="immagine_2"
-        label="Image 2"
-        v-slot="props"
-        position="centered"
-        :visible="showImage2"
-      >
-        <b-button
-          class="mx-2 button-format file-button-table"
-          @click="watchImage(props.row.immagine_2)"
-          >Image 2</b-button
+          {{ props.row.id_allarme }}
+        </o-table-column>
+        <o-table-column
+          field="famiglia_macchina"
+          label="Family machine"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showFamily"
         >
-      </o-table-column>
-      <o-table-column
-        field="immagine_3"
-        label="Image 3"
-        v-slot="props"
-        position="centered"
-        :visible="showImage3"
-      >
-        <b-button
-          class="mx-2 button-format file-button-table"
-          @click="watchImage(props.row.immagine_3)"
-          >Image 3</b-button
+          {{ props.row.famiglia_macchina }}
+        </o-table-column>
+        <o-table-column
+          field="sottofamiglia_macchina"
+          label="Under Family machine"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showUnderFamily"
         >
-      </o-table-column>
+          {{ props.row.sottofamiglia_macchina }}
+        </o-table-column>
+        <o-table-column
+          field="immagine_1"
+          label="Image 1"
+          v-slot="props"
+          position="centered"
+          :visible="showImage1"
+        >
+          <b-button
+            class="mx-2 button-format file-button-table"
+            @click="watchImage(props.row.immagine_1)"
+            >Image 1</b-button
+          >
+        </o-table-column>
+        <o-table-column
+          field="immagine_2"
+          label="Image 2"
+          v-slot="props"
+          position="centered"
+          :visible="showImage2"
+        >
+          <b-button
+            class="mx-2 button-format file-button-table"
+            @click="watchImage(props.row.immagine_2)"
+            >Image 2</b-button
+          >
+        </o-table-column>
+        <o-table-column
+          field="immagine_3"
+          label="Image 3"
+          v-slot="props"
+          position="centered"
+          :visible="showImage3"
+        >
+          <b-button
+            class="mx-2 button-format file-button-table"
+            @click="watchImage(props.row.immagine_3)"
+            >Image 3</b-button
+          >
+        </o-table-column>
 
-      <o-table-column
-        field="date"
-        label="Creation date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showCreationDate"
-      >
-        {{ new Date(props.row.created_at).toLocaleDateString() }}
-      </o-table-column>
-      <o-table-column
-        field="date"
-        label="Update date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showUpdateDate"
-      >
-        {{ new Date(props.row.updated_at).toLocaleDateString() }}
-      </o-table-column>
-      <o-table-column
-        field="action"
-        label="Action"
-        position="centered"
-        v-slot="props"
-        width="180px"
-      >
-        <b-button
-          class="mx-1 view-btn"
-          @click="pushRoute(`view/${props.row.id}`)"
+        <o-table-column
+          field="date"
+          label="Creation date"
+          position="centered"
+          v-slot="props"
+          searchable
+          sortable
+          :visible="showCreationDate"
         >
-          <i class="mdi mdi-eye"></i>
-        </b-button>
-        <b-button
-          class="mx-1 edit-btn"
-          @click="pushRoute(`update/${props.row.id}`)"
+          {{ new Date(props.row.created_at).toLocaleDateString() }}
+        </o-table-column>
+        <o-table-column
+          field="date"
+          label="Update date"
+          position="centered"
+          v-slot="props"
+          searchable
+          sortable
+          :visible="showUpdateDate"
         >
-          <i class="mdi mdi-pencil"></i>
-        </b-button>
-        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)">
-          <i class="mdi mdi-delete"></i>
-        </b-button>
-      </o-table-column>
-    </o-table>
-    <div v-else>
-      <NoSignalItems v-if="showNoItem" />
-    </div>
-    <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
+          {{ new Date(props.row.updated_at).toLocaleDateString() }}
+        </o-table-column>
+        <o-table-column
+          field="action"
+          label="Action"
+          position="centered"
+          v-slot="props"
+          width="180px"
+        >
+          <b-button
+            class="mx-1 view-btn"
+            @click="pushRoute(`view/${props.row.id}`)"
+          >
+            <i class="mdi mdi-eye"></i>
+          </b-button>
+          <b-button
+            class="mx-1 edit-btn"
+            @click="pushRoute(`update/${props.row.id}`)"
+          >
+            <i class="mdi mdi-pencil"></i>
+          </b-button>
+          <b-button
+            class="mx-1 delete-btn"
+            @click="deleteDocument(props.row.id)"
+          >
+            <i class="mdi mdi-delete"></i>
+          </b-button>
+        </o-table-column>
+      </o-table>
+
+      <div v-else>
+        <NoSignalItems v-if="showNoItem" />
+      </div>
+      <SeeImage
+        v-if="showImage"
+        :imageValue="imageValue"
+        @close="hideModal()"
+      />
+    </b-overlay>
   </div>
 </template>
 
@@ -242,6 +252,7 @@ export default {
                 this.$nuxt.refresh()
                 this.show = false
                 this.selectedId = []
+                this.$emit('value-deleted')
               })
               .catch((error) => {
                 this.dataCreated = error.response.data.message[0]

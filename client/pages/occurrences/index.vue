@@ -76,7 +76,11 @@
 
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <OccurenzeTable :dataTable="dataTable" :dropdown="dropdown" />
+              <OccurenzeTable
+                :dataTable="dataTable"
+                :dropdown="dropdown"
+                @value-deleted="valueDeleted"
+              />
             </b-overlay>
           </div>
         </div>
@@ -184,6 +188,15 @@ export default {
     }
   },
   methods: {
+    valueDeleted() {
+      this.show = true
+      this.variant = 'danger'
+      this.dataCreated = 'Occurrence deleted Succesfully'
+      this.toggleToaster()
+      this.$nuxt.refresh()
+      this.show = false
+      this.selectedId = []
+    },
     orderAscDesc() {
       this.statusAscDesc = !this.statusAscDesc
       if (this.statusAscDesc === true) {

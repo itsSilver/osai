@@ -74,7 +74,11 @@
           <div class="vertical-line"></div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <SignalsTable :dataTable="dataTable" :dropdown="dropdown" />
+              <SignalsTable
+                :dataTable="dataTable"
+                :dropdown="dropdown"
+                @value-deleted="valueDeleted"
+              />
             </b-overlay>
           </div>
         </div>
@@ -157,6 +161,15 @@ export default {
     }
   },
   methods: {
+    valueDeleted() {
+      this.show = true
+      this.variant = 'danger'
+      this.dataCreated = 'Signal deleted Succesfully'
+      this.toggleToaster()
+      this.$nuxt.refresh()
+      this.show = false
+      this.selectedId = []
+    },
     onSubmitSearch() {
       this.show = true
       this.$axios
@@ -185,7 +198,12 @@ export default {
     redirectCreate() {
       this.$router.push(`/signals/create`)
     },
-
+    toggleToaster() {
+      this.$bvToast.show('deleted')
+      setTimeout(() => {
+        this.$bvToast.hide('deleted')
+      }, 2000)
+    },
     dropDownChange(val) {
       const indexArray = this.dropdown.findIndex((e) => e.text === val.text)
       this.dropdown[indexArray].value = val.value

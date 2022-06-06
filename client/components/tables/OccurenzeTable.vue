@@ -1,181 +1,190 @@
 <template>
   <div>
-    <o-table
-      :data="dataTable"
-      :bordered="true"
-      :striped="true"
-      mobile-cards
-      paginated
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      v-if="dataTable.length > 0"
-      default-sort="titolo"
-      :selected.sync="selected"
-    >
-      <o-table-column
-        field="id"
-        label="ID"
-        width="40"
-        numeric
-        v-slot="props"
-        :visible="showID"
+    <b-overlay :show="show" rounded="sm">
+      <o-table
+        :data="dataTable"
+        :bordered="true"
+        :striped="true"
+        mobile-cards
+        paginated
+        :per-page="perPage"
+        :current-page.sync="currentPage"
+        v-if="dataTable.length > 0"
+        default-sort="titolo"
+        :selected.sync="selected"
       >
-        {{ props.row.id }}
-      </o-table-column>
-
-      <o-table-column
-        field="titolo"
-        label="Title"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showTitle"
-      >
-        {{ props.row.titolo }}
-      </o-table-column>
-      <o-table-column
-        field="segnalazione"
-        label="Id Signal"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showIdSignal"
-      >
-        {{ props.row.segnalazione }}
-      </o-table-column>
-
-      <o-table-column
-        field="soluzioni_id"
-        label="Id Solution"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showIdSolution"
-      >
-        {{ props.row.soluzioni_id[0] }}
-      </o-table-column>
-      <o-table-column
-        field="commessa_macchina"
-        label="Machine Order"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showMachineOrder"
-      >
-        {{ props.row.commessa_macchina }}
-      </o-table-column>
-      <o-table-column
-        field="rif_ticket"
-        label="Ticket"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showTicket"
-      >
-        {{ props.row.rif_ticket }}
-      </o-table-column>
-      <o-table-column
-        field="versione_sw_1"
-        label="Version sw 1"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showVersion1"
-      >
-        {{ props.row.versione_sw_1 }}
-      </o-table-column>
-      <o-table-column
-        field="versione_sw_2"
-        label="Version sw 2"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showVersion2"
-      >
-        {{ props.row.versione_sw_2 }}
-      </o-table-column>
-      <o-table-column
-        field="data_occorrenza"
-        label="Occurrence date"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showOccurrenceDate"
-      >
-        {{ props.row.data_occorrenza }}
-      </o-table-column>
-      <o-table-column
-        field="stato_occorrenza"
-        label="Occurrence status"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showOccurrenceStatus"
-      >
-        <span v-if="props.row.stato_occorrenza === '1'">On</span>
-        <span v-if="props.row.stato_occorrenza === '0'">Off</span>
-        <span></span>
-      </o-table-column>
-
-      <o-table-column
-        field="date"
-        label="Creation date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showCreationDate"
-      >
-        {{ new Date(props.row.created_at).toLocaleDateString() }}
-      </o-table-column>
-      <o-table-column
-        field="date"
-        label="Update date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showUpdateDate"
-      >
-        {{ new Date(props.row.updated_at).toLocaleDateString() }}
-      </o-table-column>
-      <o-table-column
-        field="action"
-        label="Action"
-        position="centered"
-        v-slot="props"
-        width="180px"
-      >
-        <b-button
-          class="mx-1 view-btn"
-          @click="pushRoute(`view/${props.row.id}`)"
+        <o-table-column
+          field="id"
+          label="ID"
+          width="40"
+          numeric
+          v-slot="props"
+          :visible="showID"
         >
-          <i class="mdi mdi-eye"></i>
-        </b-button>
-        <b-button
-          class="mx-1 edit-btn"
-          @click="pushRoute(`update/${props.row.id}`)"
+          {{ props.row.id }}
+        </o-table-column>
+
+        <o-table-column
+          field="titolo"
+          label="Title"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showTitle"
         >
-          <i class="mdi mdi-pencil"></i>
-        </b-button>
-        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)">
-          <i class="mdi mdi-delete"></i>
-        </b-button>
-      </o-table-column>
-    </o-table>
-    <div v-else>
-      <NoOccorrenzeItems v-if="showNoItem" />
-    </div>
-    <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
+          {{ props.row.titolo }}
+        </o-table-column>
+        <o-table-column
+          field="segnalazione"
+          label="Id Signal"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showIdSignal"
+        >
+          {{ props.row.segnalazione }}
+        </o-table-column>
+
+        <o-table-column
+          field="soluzioni_id"
+          label="Id Solution"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showIdSolution"
+        >
+          {{ props.row.soluzioni_id[0] }}
+        </o-table-column>
+        <o-table-column
+          field="commessa_macchina"
+          label="Machine Order"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showMachineOrder"
+        >
+          {{ props.row.commessa_macchina }}
+        </o-table-column>
+        <o-table-column
+          field="rif_ticket"
+          label="Ticket"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showTicket"
+        >
+          {{ props.row.rif_ticket }}
+        </o-table-column>
+        <o-table-column
+          field="versione_sw_1"
+          label="Version sw 1"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showVersion1"
+        >
+          {{ props.row.versione_sw_1 }}
+        </o-table-column>
+        <o-table-column
+          field="versione_sw_2"
+          label="Version sw 2"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showVersion2"
+        >
+          {{ props.row.versione_sw_2 }}
+        </o-table-column>
+        <o-table-column
+          field="data_occorrenza"
+          label="Occurrence date"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showOccurrenceDate"
+        >
+          {{ props.row.data_occorrenza }}
+        </o-table-column>
+        <o-table-column
+          field="stato_occorrenza"
+          label="Occurrence status"
+          v-slot="props"
+          searchable
+          position="centered"
+          sortable
+          :visible="showOccurrenceStatus"
+        >
+          <span v-if="props.row.stato_occorrenza === '1'">On</span>
+          <span v-if="props.row.stato_occorrenza === '0'">Off</span>
+          <span></span>
+        </o-table-column>
+
+        <o-table-column
+          field="date"
+          label="Creation date"
+          position="centered"
+          v-slot="props"
+          searchable
+          sortable
+          :visible="showCreationDate"
+        >
+          {{ new Date(props.row.created_at).toLocaleDateString() }}
+        </o-table-column>
+        <o-table-column
+          field="date"
+          label="Update date"
+          position="centered"
+          v-slot="props"
+          searchable
+          sortable
+          :visible="showUpdateDate"
+        >
+          {{ new Date(props.row.updated_at).toLocaleDateString() }}
+        </o-table-column>
+        <o-table-column
+          field="action"
+          label="Action"
+          position="centered"
+          v-slot="props"
+          width="180px"
+        >
+          <b-button
+            class="mx-1 view-btn"
+            @click="pushRoute(`view/${props.row.id}`)"
+          >
+            <i class="mdi mdi-eye"></i>
+          </b-button>
+          <b-button
+            class="mx-1 edit-btn"
+            @click="pushRoute(`update/${props.row.id}`)"
+          >
+            <i class="mdi mdi-pencil"></i>
+          </b-button>
+          <b-button
+            class="mx-1 delete-btn"
+            @click="deleteDocument(props.row.id)"
+          >
+            <i class="mdi mdi-delete"></i>
+          </b-button>
+        </o-table-column>
+      </o-table>
+      <div v-else>
+        <NoOccorrenzeItems v-if="showNoItem" />
+      </div>
+      <SeeImage
+        v-if="showImage"
+        :imageValue="imageValue"
+        @close="hideModal()"
+      />
+    </b-overlay>
   </div>
 </template>
 <script>
@@ -248,6 +257,7 @@ export default {
                 this.$nuxt.refresh()
                 this.show = false
                 this.selectedId = []
+                this.$emit('value-deleted')
               })
               .catch((error) => {
                 this.dataCreated = error.response.data.message[0]
