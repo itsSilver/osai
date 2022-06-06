@@ -2,9 +2,12 @@
   <b-container>
     <b-list-group v-for="data in dataTable" :key="data.id">
       <b-list-group-item>
-        <b-form-checkbox v-model="selected" :value="data.id">{{
-          data.name
-        }}</b-form-checkbox>
+        <b-form-checkbox
+          v-model="selected"
+          :value="data.id"
+          :disabled="viewMode"
+          >{{ data.name }}</b-form-checkbox
+        >
       </b-list-group-item>
     </b-list-group>
   </b-container>
@@ -52,6 +55,6 @@ export default {
         })
     },
   },
-  props: ['dataTable'],
+  props: ['dataTable', 'viewMode'],
 }
 </script>

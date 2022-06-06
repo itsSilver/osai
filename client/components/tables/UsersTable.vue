@@ -140,7 +140,7 @@ export default {
       this.showImage = false
     },
     pushRoute(route) {
-      this.$router.push(`/signals/${route}`)
+      this.$router.push(`/manage-access/${route}`)
     },
     deleteDocument(id) {
       this.$bvModal
