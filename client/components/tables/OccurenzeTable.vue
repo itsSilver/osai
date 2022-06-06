@@ -312,6 +312,20 @@ export default {
 </script>
 <style scoped>
 .view-btn {
+  background-color: unset !important;
+  color: #28a745 !important;
+}
+
+.edit-btn {
+  background-color: unset !important;
+  color: #ffc107 !important;
+}
+
+.delete-btn {
+  background-color: unset !important;
+  color: #dc3545 !important;
+}
+/* .view-btn {
   background-color: #28a745;
 }
 
@@ -321,7 +335,7 @@ export default {
 
 .delete-btn {
   background-color: #dc3545;
-}
+} */
 
 /deep/ .o-table__td {
   vertical-align: middle;

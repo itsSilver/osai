@@ -305,15 +305,18 @@ export default {
 
 <style scoped>
 .view-btn {
-  background-color: #28a745;
+  background-color: unset !important;
+  color: #28a745 !important;
 }
 
 .edit-btn {
-  background-color: #ffc107;
+  background-color: unset !important;
+  color: #ffc107 !important;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: unset !important;
+  color: #dc3545 !important;
 }
 
 /deep/ .o-table__td {
