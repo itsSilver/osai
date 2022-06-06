@@ -87,7 +87,7 @@
         :visible="showImage1"
       >
         <b-button
-          class="mx-2 button-format file-button"
+          class="mx-2 button-format file-button-table"
           @click="watchImage(props.row.immagine_1)"
           >Image 1</b-button
         >
@@ -100,7 +100,7 @@
         :visible="showImage2"
       >
         <b-button
-          class="mx-2 button-format file-button"
+          class="mx-2 button-format file-button-table"
           @click="watchImage(props.row.immagine_2)"
           >Image 2</b-button
         >
@@ -113,7 +113,7 @@
         :visible="showImage3"
       >
         <b-button
-          class="mx-2 button-format file-button"
+          class="mx-2 button-format file-button-table"
           @click="watchImage(props.row.immagine_3)"
           >Image 3</b-button
         >
