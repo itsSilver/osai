@@ -33,75 +33,23 @@
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            >
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="redirectCreate()"
-              >
-                <i class="fas fa-plus pr-2"></i>
-                New Solution
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="updateDocument()"
-              >
-                <i class="fas fa-edit pr-2"></i>
-                Update Solution
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="deleteDocument()"
-              >
-                <i class="fas fa-trash pr-2"></i>
-                Delete Solution
-              </li>
-            </ul>
-            <!-- End here -->
-          </div>
-          <div class="vertical-line"></div>
-          <div
-            class="
-              nav-actions
-              d-flex
-              justify-content-between
-              align-items-center
-              mb-2
-              navtop
-              second-nav-option
-            "
-          >
-            <!-- Second Nav -->
-            <div class="d-flex gap-4 second-d-flex-left">
-              <b-input-group class="mt-3">
-                <b-form-input
-                  class="input-search"
-                  v-model="filterName"
-                  placeholder="Search"
-                  style="height: 40px !important"
-                ></b-form-input>
-                <b-input-group-append>
-                  <b-button class="button-format" @click="onSubmitSearch()">
-                    <i class="fas fa-search pr-2"></i>Search</b-button
-                  >
-                </b-input-group-append>
-              </b-input-group>
-            </div>
             <div
               class="
                 d-flex
                 justify-content-around
-                align-content-center
-                m-0
-                p-0
-                second-d-flex-right
+                align-content-center align-items-center
               "
             >
+              <button
+                role="button"
+                class="mx-2 button-format"
+                @click="redirectCreate()"
+                style="height: 40px"
+              >
+                <i class="mdi mdi-plus pr-2"></i>
+                New Solution
+              </button>
+
               <b-dropdown
                 class="m-2 table-filter-cols"
                 id="dropdown-form"
@@ -110,102 +58,24 @@
               >
                 <b-dropdown-form>
                   <b-form-checkbox
+                    v-for="(drop, index) in dropdown"
+                    :key="index"
                     class="table-checkbox mb-3"
-                    v-model="statusIdsolution"
-                    value="1"
-                    unchecked-value="0"
-                    >Id Solution</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusTitle"
-                    value="1"
-                    unchecked-value="0"
-                    >Title</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusRank"
-                    value="1"
-                    unchecked-value="0"
-                    >Rank</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusSector"
-                    value="1"
-                    unchecked-value="0"
-                    >Reference Sector</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusIdStSolutions"
-                    value="1"
-                    unchecked-value="0"
-                    >Id Status Solutions</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage1"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 1</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage2"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 2</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage3"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 3</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusCreationDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Creation date</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusUpdateDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Update date</b-form-checkbox
-                  >
+                    v-model="drop.value"
+                    value="true"
+                    unchecked-value="false"
+                    @change="dropDownChange(drop)"
+                    >{{ drop.text }}
+                  </b-form-checkbox>
                 </b-dropdown-form>
               </b-dropdown>
-              <b-form-select
-                class="number-rows"
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
             </div>
             <!-- End here -->
           </div>
+          <div class="vertical-line"></div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <SolutionsTable
-                :dataTable="dataTable"
-                :statusIdsolution="statusIdsolution"
-                :statusTitle="statusTitle"
-                :statusRank="statusRank"
-                :statusSector="statusSector"
-                :statusIdStSolutions="statusIdStSolutions"
-                :statusCreationDate="statusCreationDate"
-                :statusUpdateDate="statusUpdateDate"
-                :statusImage1="statusImage1"
-                :statusImage2="statusImage2"
-                :statusImage3="statusImage3"
-                @get-new-delete-id="idToDelete"
-                @order-asc-desc="orderAscDesc"
-              />
+              <SolutionsTable :dataTable="dataTable" :dropdown="dropdown" />
             </b-overlay>
           </div>
         </div>
@@ -257,6 +127,48 @@ export default {
       filterName: null,
       idAscDesc: null,
       statusAscDesc: false,
+      dropdown: [
+        {
+          text: 'ID',
+          value: true,
+        },
+        {
+          text: 'Title',
+          value: true,
+        },
+        {
+          text: 'Rank',
+          value: true,
+        },
+        {
+          text: 'Reference sector',
+          value: true,
+        },
+        {
+          text: 'Id Status Solution',
+          value: true,
+        },
+        {
+          text: 'Image 1',
+          value: true,
+        },
+        {
+          text: 'Image 2',
+          value: true,
+        },
+        {
+          text: 'Image 3',
+          value: true,
+        },
+        {
+          text: 'Creation date',
+          value: true,
+        },
+        {
+          text: 'Update date',
+          value: true,
+        },
+      ],
     }
   },
   methods: {
@@ -445,6 +357,21 @@ export default {
         this.$bvToast.hide('deleted')
       }, 2000)
     },
+    dropDownChange(val) {
+      const indexArray = this.dropdown.findIndex((e) => e.text === val.text)
+      this.dropdown[indexArray].value = val.value
+      localStorage.setItem('solutionTable', JSON.stringify(this.dropdown))
+    },
+  },
+  mounted() {
+    if (process.client) {
+      let solutionTable = localStorage.getItem('solutionTable')
+      if (solutionTable) {
+        this.dropdown = JSON.parse(solutionTable)
+      } else {
+        localStorage.setItem('solutionTable', JSON.stringify(this.dropdown))
+      }
+    }
   },
   async asyncData({ store, $axios }) {
     let response = await $axios.get(`/api/soluzioni/retrive_soluzioni`)
