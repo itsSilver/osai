@@ -306,16 +306,19 @@ export default {
 .view-btn {
   background-color: unset !important;
   color: #28a745 !important;
+  border: unset;
 }
 
 .edit-btn {
   background-color: unset !important;
+  border: unset;
   color: #ffc107 !important;
 }
 
 .delete-btn {
   background-color: unset !important;
   color: #dc3545 !important;
+  border: unset;
 }
 
 /deep/ .o-table__td {
