@@ -1,165 +1,182 @@
 <template>
-  <b-overlay :show="show" rounded="sm">
-    <b-table-simple
-      class="table table-bordred table-striped text-center table-desktop"
+  <div>
+    <o-table
+      :data="dataTable"
+      :bordered="true"
+      :striped="true"
+      mobile-cards
+      paginated
+      :per-page="perPage"
+      :current-page.sync="currentPage"
+      v-if="dataTable.length > 0"
+      default-sort="titolo"
+      :selected.sync="selected"
     >
-      <b-thead>
-        <b-th>
-          <input type="checkbox" class="checkthis" id="checkall" />
-        </b-th>
-        <b-th v-if="statusIdoccurrence === '1'"
-          ><i
-            class="fa-solid fa-arrow-down-short-wide"
-            style="cursor: pointer"
-            @click="orderAscDesc()"
-          ></i
-          >Id occurrence
-        </b-th>
-        <b-th v-if="statusIdsignal === '1'">Id signal </b-th>
-        <b-th v-if="statusIdsolution === '1'">Id solution </b-th>
-        <b-th v-if="statusTitle === '1'">Title </b-th>
-        <b-th v-if="statusMachine === '1'">Machine order </b-th>
-        <b-th v-if="statusTicket === '1'">Ticket </b-th>
-        <b-th v-if="statusVersion1 === '1'">Version sw 1 </b-th>
-        <b-th v-if="statusVersion2 === '1'">Version sw 2 </b-th>
-        <b-th v-if="statusOccurrenceDate === '1'">Occurrence date </b-th>
-        <b-th v-if="statusOccurrenceStatus === '1'">Occurrence status </b-th>
-        <b-th v-if="statusCreationDate === '1'">Creation date </b-th>
-        <b-th v-if="statusUpdateDate === '1'">Update date </b-th>
-      </b-thead>
-      <b-tbody v-if="dataTable">
-        <b-tr v-for="data in dataTable" :key="data.id">
-          <b-td>
-            <input
-              type="checkbox"
-              class="checkthis"
-              v-model="selectedId"
-              :id="data.id"
-              :value="data.id"
-              @change="changeValue"
-            />
-          </b-td>
-          <b-td v-if="statusIdoccurrence === '1'">{{ data.id }}</b-td>
-          <b-td v-if="statusIdsignal === '1'">{{ data.segnalazione }}</b-td>
-          <b-td v-if="statusIdsolution === '1'">{{
-            data.soluzioni_id[0]
-          }}</b-td>
-          <b-td v-if="statusTitle === '1'">{{ data.titolo }}</b-td>
-          <b-td v-if="statusMachine === '1'">{{ data.commessa_macchina }}</b-td>
-          <b-td v-if="statusTicket === '1'">{{ data.rif_ticket }}</b-td>
-          <b-td v-if="statusVersion1 === '1'">{{ data.versione_sw_1 }}</b-td>
-          <b-td v-if="statusVersion2 === '1'">{{ data.versione_sw_2 }}</b-td>
-          <b-td v-if="statusOccurrenceDate === '1'">{{
-            data.data_occorrenza
-          }}</b-td>
-          <b-td v-if="statusOccurrenceStatus === '1'">
-            <span v-if="data.stato_occorrenza === '1'">On</span>
-            <span v-else>Off</span>
-          </b-td>
-          <b-td v-if="statusCreationDate === '1'">{{
-            formatDate(data.created_at)
-          }}</b-td>
-          <b-td v-if="statusUpdateDate === '1'">{{
-            formatDate(data.updated_at)
-          }}</b-td>
-        </b-tr>
-      </b-tbody>
-    </b-table-simple>
-    <b-table-simple
-      class="table table-bordred table-striped text-center table-respo"
-    >
-      <!-- <b-thead>
-        <b-th>
-          <input type="checkbox" class="checkthis" id="checkall" />
-        </b-th>
-        <b-th
-          >Id solution</b-th
-        >
+      <o-table-column
+        field="id"
+        label="ID"
+        width="40"
+        numeric
+        v-slot="props"
+        :visible="showID"
+      >
+        {{ props.row.id }}
+      </o-table-column>
 
-        <b-th>Rank</b-th>
-        <b-th>Settore riferimento</b-th>
-        <b-th>Id stato soluzione</b-th>
-        <b-th>Creation date</b-th>
-        <b-th>Update date</b-th>
-      </b-thead> -->
-      <b-tbody v-if="dataTable">
-        <b-tr class="respo-tr" v-for="data in dataTable" :key="data.id">
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title"></b-td>
-            <b-td class="td-respo-data">
-              <input
-                type="checkbox"
-                class="checkthis"
-                v-model="selectedId"
-                :id="data.id"
-                :value="data.id"
-                @change="changeValue"
-            /></b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusIdoccurrence === '1'">
-            <b-td class="td-respo-title">Id occurrence</b-td>
-            <b-td class="td-respo-data">{{ data.id }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusIdsignal === '1'">
-            <b-td class="td-respo-title">Id signal</b-td>
-            <b-td class="td-respo-data">{{ data.segnalazione }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusIdsolution === '1'">
-            <b-td class="td-respo-title">Id solution</b-td>
-            <b-td class="td-respo-data">{{ data.soluzioni_id[0] }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusTitle === '1'">
-            <b-td class="td-respo-title">Title</b-td>
-            <b-td class="td-respo-data">{{ data.titolo }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusMachine === '1'">
-            <b-td class="td-respo-title">Machine order</b-td>
-            <b-td class="td-respo-data">{{ data.commessa_macchina }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusTicket === '1'">
-            <b-td class="td-respo-title">Machine order</b-td>
-            <b-td class="td-respo-data">{{ data.rif_ticket }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusVersion1 === '1'">
-            <b-td class="td-respo-title">Version sw 1</b-td>
-            <b-td class="td-respo-data">{{ data.versione_sw_1 }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusVersion2 === '1'">
-            <b-td class="td-respo-title">Version sw 2</b-td>
-            <b-td class="td-respo-data">{{ data.versione_sw_2 }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusOccurrenceDate === '1'">
-            <b-td class="td-respo-title">Occurrence date</b-td>
-            <b-td class="td-respo-data">{{ data.data_occorrenza }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusOccurrenceStatus === '1'">
-            <b-td class="td-respo-title">Occurrence status</b-td>
-            <b-td class="td-respo-data">
-              <span v-if="data.stato_occorrenza === '1'">On</span>
-              <span v-else>Off</span></b-td
-            >
-          </div>
-          <div class="respo-after-tr" v-if="statusCreationDate === '1'">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">{{ formatDate(data.created_at) }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusUpdateDate === '1'">
-            <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">{{ formatDate(data.updated_at) }}</b-td>
-          </div>
-        </b-tr>
-        <b-tr>
-          <b-td style="width: 1000px !important">
-            <!-- <b-td style="float: left">test</b-td>
-            <b-td style="float: right">test</b-td> -->
-          </b-td>
-        </b-tr>
-      </b-tbody>
-    </b-table-simple>
-    <div class="no-data" v-if="dataTable.length === 0">
+      <o-table-column
+        field="titolo"
+        label="Title"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showTitle"
+      >
+        {{ props.row.titolo }}
+      </o-table-column>
+      <o-table-column
+        field="segnalazione"
+        label="Id Signal"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showIdSignal"
+      >
+        {{ props.row.segnalazione }}
+      </o-table-column>
+
+      <o-table-column
+        field="soluzioni_id"
+        label="Id Solution"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showIdSolution"
+      >
+        {{ props.row.soluzioni_id[0] }}
+      </o-table-column>
+      <o-table-column
+        field="commessa_macchina"
+        label="Machine Order"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showMachineOrder"
+      >
+        {{ props.row.commessa_macchina }}
+      </o-table-column>
+      <o-table-column
+        field="rif_ticket"
+        label="Ticket"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showTicket"
+      >
+        {{ props.row.rif_ticket }}
+      </o-table-column>
+      <o-table-column
+        field="versione_sw_1"
+        label="Version sw 1"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showVersion1"
+      >
+        {{ props.row.versione_sw_1 }}
+      </o-table-column>
+      <o-table-column
+        field="versione_sw_2"
+        label="Version sw 2"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showVersion2"
+      >
+        {{ props.row.versione_sw_2 }}
+      </o-table-column>
+      <o-table-column
+        field="data_occorrenza"
+        label="Occurrence date"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showOccurrenceDate"
+      >
+        {{ props.row.data_occorrenza }}
+      </o-table-column>
+      <o-table-column
+        field="stato_occorrenza"
+        label="Occurrence status"
+        v-slot="props"
+        searchable
+        position="centered"
+        sortable
+        :visible="showOccurrenceStatus"
+      >
+        <span v-if="props.row.stato_occorrenza === '1'">On</span>
+        <span v-if="props.row.stato_occorrenza === '0'">Off</span>
+        <span></span>
+      </o-table-column>
+
+      <o-table-column
+        field="date"
+        label="Creation date"
+        position="centered"
+        v-slot="props"
+        searchable
+        sortable
+        :visible="showCreationDate"
+      >
+        {{ new Date(props.row.created_at).toLocaleDateString() }}
+      </o-table-column>
+      <o-table-column
+        field="date"
+        label="Update date"
+        position="centered"
+        v-slot="props"
+        searchable
+        sortable
+        :visible="showUpdateDate"
+      >
+        {{ new Date(props.row.updated_at).toLocaleDateString() }}
+      </o-table-column>
+      <o-table-column
+        field="action"
+        label="Action"
+        position="centered"
+        v-slot="props"
+        width="180px"
+      >
+        <b-button
+          class="mx-1 view-btn"
+          @click="pushRoute(`view/${props.row.id}`)"
+        >
+          <i class="mdi mdi-eye"></i>
+        </b-button>
+        <b-button
+          class="mx-1 edit-btn"
+          @click="pushRoute(`update/${props.row.id}`)"
+        >
+          <i class="mdi mdi-pencil"></i>
+        </b-button>
+        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)">
+          <i class="mdi mdi-delete"></i>
+        </b-button>
+      </o-table-column>
+    </o-table>
+    <div v-else>
       <NoOccorrenzeItems v-if="showNoItem" />
     </div>
-  </b-overlay>
+    <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
+  </div>
 </template>
 <script>
 import NoOccorrenzeItems from '~/components/nodata/NoOccorrenzeItems'
@@ -172,45 +189,147 @@ export default {
     return {
       showNoItem: true,
       show: false,
-      selectedId: [],
+      showImage: false,
+      selected: {},
+      currentPage: 1,
+      perPage: 5,
+      showID: false,
+      showIdSignal: false,
+      showIdSolution: false,
+      showTitle: false,
+      showMachineOrder: false,
+      showTicket: false,
+      showVersion1: false,
+      showVersion2: false,
+      showOccurrenceDate: false,
+      showOccurrenceStatus: false,
+      showCreationDate: false,
+      showUpdateDate: false,
     }
   },
   methods: {
-    formatDate(val) {
-      if (val) {
-        return format(parseISO(val), 'dd-MM-yyyy')
-      }
+    watchImage(val) {
+      this.imageValue = 'http://localhost:8000' + val
+      this.showImage = true
     },
-    changeValue() {
-      this.$emit('get-new-delete-id', this.selectedId)
-      this.selectedId = []
+    hideModal() {
+      this.showImage = false
     },
-    orderAscDesc() {
-      this.$emit('order-asc-desc')
+    pushRoute(route) {
+      this.$router.push(`/signals/${route}`)
+    },
+    deleteDocument(id) {
+      this.$bvModal
+        .msgBoxConfirm('Are you sure you want to delete this Signal?', {
+          title: `Attention`,
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          okTitle: `Yes`,
+          cancelTitle: `No`,
+          footerClass: 'p-2',
+          hideHeaderClose: true,
+          centered: true,
+        })
+        .then((value) => {
+          if (value === true) {
+            this.show = true
+            this.$axios
+              .post(`/api/segnalazioni/${id}/delete`, {
+                headers: {
+                  Authorization: `Token ${this.$auth.strategy.token.get()}`,
+                  'Content-Type': 'application/json',
+                },
+              })
+              .then(() => {
+                this.variant = 'danger'
+                this.dataCreated = 'Signal deleted Succesfully'
+                this.toggleToaster()
+                this.$nuxt.refresh()
+                this.show = false
+                this.selectedId = []
+              })
+              .catch((error) => {
+                this.dataCreated = error.response.data.message[0]
+                this.show = false
+                this.variant = 'danger'
+                this.toggleToaster()
+                this.selectedId = []
+              })
+          } else {
+            // Empty do nothing
+          }
+        })
+        .catch((err) => {
+          // An error occurred
+          this.dataCreated = err.response.data.message[0]
+        })
+    },
+    toggleToaster() {
+      this.$bvToast.show('deleted')
+      setTimeout(() => {
+        this.$bvToast.hide('deleted')
+      }, 2000)
     },
   },
-  props: [
-    'dataTable',
-    'statusIdoccurrence',
-    'statusIdsignal',
-    'statusTitle',
-    'statusIdsolution',
-    'statusMachine',
-    'statusTicket',
-    'statusVersion1',
-    'statusVersion2',
-    'statusOccurrenceDate',
-    'statusOccurrenceStatus',
-    'statusCreationDate',
-    'statusUpdateDate',
-  ],
+  props: ['dataTable', 'dropdown'],
+  watch: {
+    dropdown: {
+      handler(newVal) {
+        newVal.forEach((item) => {
+          if (item.text === 'ID') {
+            this.showID = JSON.parse(item.value)
+          } else if (item.text === 'Id signal') {
+            this.showIdSignal = JSON.parse(item.value)
+          } else if (item.text === 'Id solution') {
+            this.showIdSolution = JSON.parse(item.value)
+          } else if (item.text === 'Title') {
+            this.showTitle = JSON.parse(item.value)
+          } else if (item.text === 'Machine order') {
+            this.showMachineOrder = JSON.parse(item.value)
+          } else if (item.text === 'Ticket') {
+            this.showTicket = JSON.parse(item.value)
+          } else if (item.text === 'Version sw 1') {
+            this.showVersion1 = JSON.parse(item.value)
+          } else if (item.text === 'Version sw 2') {
+            this.showVersion2 = JSON.parse(item.value)
+          } else if (item.text === 'Occurrence date') {
+            this.showOccurrenceDate = JSON.parse(item.value)
+          } else if (item.text === 'Occurrence status') {
+            this.showOccurrenceStatus = JSON.parse(item.value)
+          } else if (item.text === 'Creation date') {
+            this.showCreationDate = JSON.parse(item.value)
+          } else if (item.text === 'Update date') {
+            this.showUpdateDate = JSON.parse(item.value)
+          }
+        })
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
 }
 </script>
 <style scoped>
-.table > :not(caption) > * > * {
-  box-shadow: unset !important;
+.view-btn {
+  background-color: #28a745;
 }
-td {
-  border: unset !important;
+
+.edit-btn {
+  background-color: #ffc107;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+/deep/ .o-table__td {
+  vertical-align: middle;
+  text-align: left;
+}
+
+/deep/ .o-table__tr--selected {
+  background-color: #666;
+  color: #ffffff;
 }
 </style>
