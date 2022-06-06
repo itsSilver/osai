@@ -128,7 +128,7 @@
         </o-table-column>
 
         <o-table-column
-          field="date"
+          field="created_at"
           label="Creation date"
           position="centered"
           v-slot="props"
@@ -136,10 +136,10 @@
           sortable
           :visible="showCreationDate"
         >
-          {{ new Date(props.row.created_at).toLocaleDateString() }}
+          {{ formatDate(props.row.created_at) }}
         </o-table-column>
         <o-table-column
-          field="date"
+          field="updated_at"
           label="Update date"
           position="centered"
           v-slot="props"
@@ -147,7 +147,7 @@
           sortable
           :visible="showUpdateDate"
         >
-          {{ new Date(props.row.updated_at).toLocaleDateString() }}
+          {{ formatDate(props.row.updated_at) }}
         </o-table-column>
         <o-table-column
           field="action"
@@ -217,6 +217,11 @@ export default {
     }
   },
   methods: {
+    formatDate(val) {
+      if (val) {
+        return format(parseISO(val), 'yyyy-MM-dd')
+      }
+    },
     watchImage(val) {
       this.imageValue = 'http://localhost:8000' + val
       this.showImage = true
