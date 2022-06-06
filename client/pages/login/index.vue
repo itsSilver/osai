@@ -82,7 +82,7 @@ export default {
         .then((response) => {
           // this.token = response.data.token
           // this.$auth.strategy.token.set(this.token)
-          this.redirectPage()
+          this.$router.push('/signals')
         })
         // await this.$axios
         //   .post('/user/login', this.form)
@@ -95,21 +95,6 @@ export default {
           console.log('err', err);
         })
     },
-    redirectPage() {
-      console.log('push router')
-      this.$router.replace('/signals')
-    },
-    // await this.$axios
-    //     .post('/login', this.form)
-    //     .then((response) => {
-    //       this.token = response.data.token
-    //       this.$auth.strategy.token.set(this.token)
-    //       this.showModalCompany = true
-    //     })
-    //     .catch((err) => {
-    //       this.show = false
-    //       this.error_server = err.response.data.error
-    //     })
   },
 }
 </script>
