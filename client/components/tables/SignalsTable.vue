@@ -139,7 +139,9 @@
           sortable
           :visible="showTotalOccurrence"
         >
-          {{ props.row.total_occorrenze }}
+          <span class="view-table" @click="watchTable(props.row.id)">{{
+            props.row.total_occorrenze
+          }}</span>
         </o-table-column>
         <o-table-column
           field="created_at"
@@ -199,6 +201,11 @@
         :imageValue="imageValue"
         @close="hideModal()"
       />
+      <SeeOccurrences
+        v-if="showOccurrenceTable"
+        :tableValue="tableValue"
+        @close="hideModal()"
+      />
     </b-overlay>
   </div>
 </template>
@@ -206,17 +213,20 @@
 <script>
 import NoSignalItems from '~/components/nodata/NoSignalItems'
 import SeeImage from '~/components/popup/SeeImage'
+import SeeOccurrences from '~/components/popup/SeeOccurrences'
 import { format, parseISO } from 'date-fns'
 export default {
   components: {
     NoSignalItems,
     SeeImage,
+    SeeOccurrences,
   },
   data() {
     return {
       showNoItem: true,
       show: false,
       showImage: false,
+      showOccurrenceTable: false,
       selected: {},
       currentPage: 1,
       perPage: 10,
@@ -233,6 +243,7 @@ export default {
       showCreationDate: false,
       showUpdateDate: false,
       showOccorrences: false,
+      tableValue: null,
     }
   },
   methods: {
@@ -241,12 +252,17 @@ export default {
         return format(parseISO(val), 'yyyy-MM-dd')
       }
     },
+    watchTable(val) {
+      this.tableValue = val
+      this.showOccurrenceTable = true
+    },
     watchImage(val) {
       this.imageValue = 'http://localhost:8000' + val
       this.showImage = true
     },
     hideModal() {
       this.showImage = false
+      this.showOccurrenceTable = false
     },
     pushRoute(route) {
       this.$router.push(`/signals/${route}`)
