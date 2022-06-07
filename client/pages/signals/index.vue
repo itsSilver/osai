@@ -130,10 +130,6 @@ export default {
           value: true,
         },
         {
-          text: 'Occorrenzes',
-          value: true,
-        },
-        {
           text: 'Family machine',
           value: true,
         },
@@ -154,7 +150,7 @@ export default {
           value: true,
         },
         {
-          text: 'Total Occurrence',
+          text: 'Related Occurrence',
           value: true,
         },
         {

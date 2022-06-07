@@ -59,16 +59,6 @@
           {{ props.row.id_allarme }}
         </o-table-column>
         <o-table-column
-          field="total_occorrenze"
-          label="Related Occorrenzes"
-          v-slot="props"
-          position="centered"
-          sortable
-          :visible="showOccorrences"
-        >
-          {{ props.row.total_occorrenze }}
-        </o-table-column>
-        <o-table-column
           field="famiglia_macchina"
           label="Family machine"
           v-slot="props"
@@ -132,7 +122,7 @@
 
         <o-table-column
           field="total_occorrenze"
-          label="Total Occurrence"
+          label="Related Occurrence"
           position="centered"
           v-slot="props"
           searchable
@@ -335,8 +325,6 @@ export default {
             this.showTicket = JSON.parse(item.value)
           } else if (item.text === 'Alarm') {
             this.showAlarm = JSON.parse(item.value)
-          } else if (item.text === 'Occorrenzes') {
-            this.showOccorrences = JSON.parse(item.value)
           } else if (item.text === 'Family machine') {
             this.showFamily = JSON.parse(item.value)
           } else if (item.text === 'Under Family machine') {
@@ -347,7 +335,7 @@ export default {
             this.showImage2 = JSON.parse(item.value)
           } else if (item.text === 'Image 3') {
             this.showImage3 = JSON.parse(item.value)
-          } else if (item.text === 'Total Occurrence') {
+          } else if (item.text === 'Related Occurrence') {
             this.showTotalOccurrence = JSON.parse(item.value)
           } else if (item.text === 'Creation date') {
             this.showCreationDate = JSON.parse(item.value)
