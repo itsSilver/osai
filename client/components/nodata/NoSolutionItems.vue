@@ -5,7 +5,7 @@
       <h6 class="text-dark fw-bold">Could not find any items</h6>
       <p>Try changing the filters or add a new one</p>
       <b-button class="mx-2 button-format" @click="redirectCreate()">
-        <i class="fas fa-plus pr-2"></i>
+        <i class="mdi mdi-plus pr-2"></i>
         New Solution
       </b-button>
     </div>

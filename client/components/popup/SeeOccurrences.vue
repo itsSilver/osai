@@ -142,6 +142,9 @@
           </b-overlay>
           <div class="modal-footer mt-8">
             <slot name="footer">
+              <b-button class="mx-2 button-format" @click="redirectCreate()"
+                >New Occurrence</b-button
+              >
               <b-button class="mx-2 button-format" @click="cancel()"
                 >Close</b-button
               >
@@ -172,6 +175,9 @@ export default {
     this.getData()
   },
   methods: {
+    redirectCreate() {
+      this.$router.push(`/occurrences/create`)
+    },
     formatDate(val) {
       if (val) {
         return format(parseISO(val), 'yyyy-MM-dd')
