@@ -70,17 +70,6 @@
           {{ props.row.settore_riferimento }}
         </o-table-column>
         <o-table-column
-          field="id_stato_segnalazione"
-          label="Id Status Solution"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showStatusSolution"
-        >
-          {{ props.row.id_stato_segnalazione }}
-        </o-table-column>
-        <o-table-column
           field="immagine_1"
           label="Image 1"
           v-slot="props"

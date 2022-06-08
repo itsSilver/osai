@@ -149,10 +149,6 @@ export default {
           value: true,
         },
         {
-          text: 'Id Status Solution',
-          value: true,
-        },
-        {
           text: 'Image 1',
           value: true,
         },
