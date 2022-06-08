@@ -54,15 +54,6 @@
               </o-table-column>
 
               <o-table-column
-                field="id_allarme"
-                label="Id Alarm"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.id_allarme }}
-              </o-table-column>
-              <o-table-column
                 field="settore_riferimento"
                 label="Reference sector"
                 v-slot="props"
@@ -72,7 +63,7 @@
                 {{ props.row.settore_riferimento }}
               </o-table-column>
               <o-table-column
-                label="Add Signal"
+                label="Add Solution"
                 v-slot="props"
                 position="centered"
               >
@@ -86,14 +77,7 @@
             </div>
           </b-overlay>
           <div class="modal-footer mt-8">
-            <slot name="footer">
-              <b-button class="mx-2 button-format" @click="redirectCreate()"
-                >Add Signal</b-button
-              >
-              <b-button class="mx-2 button-format" @click="cancel()"
-                >Close</b-button
-              >
-            </slot>
+            <slot name="footer"> </slot>
           </div>
         </div>
       </div>

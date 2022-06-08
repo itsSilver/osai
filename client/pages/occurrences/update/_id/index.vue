@@ -55,6 +55,7 @@
                     id="id-segnalazione"
                     v-model="dataTable.segnalazione"
                     placeholder="Id signal"
+                    readonly
                     @click="showTableSignals()"
                   />
                 </div>
@@ -72,6 +73,7 @@
                     id="id-soluzione"
                     v-model="dataTable.soluzioni_id[0]"
                     placeholder="Id solution"
+                    readonly
                     @click="showTableSolutions()"
                   />
                 </div>

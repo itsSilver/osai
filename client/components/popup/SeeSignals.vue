@@ -95,14 +95,7 @@
             </div>
           </b-overlay>
           <div class="modal-footer mt-8">
-            <slot name="footer">
-              <b-button class="mx-2 button-format" @click="redirectCreate()"
-                >Add Signal</b-button
-              >
-              <b-button class="mx-2 button-format" @click="cancel()"
-                >Close</b-button
-              >
-            </slot>
+            <slot name="footer"> </slot>
           </div>
         </div>
       </div>
