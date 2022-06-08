@@ -21,7 +21,6 @@
               :current-page.sync="currentPage"
               v-if="dataTable.length > 0"
               :selected.sync="selected"
-              checkable
               :checked-rows.sync="checkedRows"
               :hoverable="isHoverable"
             >
@@ -45,34 +44,6 @@
                 {{ props.row.titolo }}
               </o-table-column>
               <o-table-column
-                field="segnalazione"
-                label="Id Signal"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.segnalazione }}
-              </o-table-column>
-
-              <o-table-column
-                field="soluzioni_id"
-                label="Id Solution"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.soluzioni_id[0] }}
-              </o-table-column>
-              <o-table-column
-                field="commessa_macchina"
-                label="Machine Order"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.commessa_macchina }}
-              </o-table-column>
-              <o-table-column
                 field="rif_ticket"
                 label="Ticket"
                 v-slot="props"
@@ -81,72 +52,52 @@
               >
                 {{ props.row.rif_ticket }}
               </o-table-column>
-              <o-table-column
-                field="versione_sw_1"
-                label="Version sw 1"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.versione_sw_1 }}
-              </o-table-column>
-              <o-table-column
-                field="versione_sw_2"
-                label="Version sw 2"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.versione_sw_2 }}
-              </o-table-column>
-              <o-table-column
-                field="data_occorrenza"
-                label="Occurrence date"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                {{ props.row.data_occorrenza }}
-              </o-table-column>
-              <o-table-column
-                field="stato_occorrenza"
-                label="Occurrence status"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
-                <span v-if="props.row.stato_occorrenza === '1'">On</span>
-                <span v-if="props.row.stato_occorrenza === '0'">Off</span>
-                <span></span>
-              </o-table-column>
 
               <o-table-column
-                field="created_at"
-                label="Creation date"
-                position="centered"
+                field="id_allarme"
+                label="Id Alarm"
                 v-slot="props"
+                position="centered"
                 sortable
               >
-                {{ formatDate(props.row.created_at) }}
+                {{ props.row.id_allarme }}
               </o-table-column>
               <o-table-column
-                field="updated_at"
-                label="Update date"
-                position="centered"
+                field="famiglia_macchina"
+                label="Family machine"
                 v-slot="props"
+                position="centered"
                 sortable
               >
-                {{ formatDate(props.row.updated_at) }}
+                {{ props.row.famiglia_macchina }}
+              </o-table-column>
+              <o-table-column
+                field="sottofamiglia_macchina"
+                label="Under Family machine"
+                v-slot="props"
+                position="centered"
+                sortable
+              >
+                {{ props.row.sottofamiglia_macchina }}
+              </o-table-column>
+              <o-table-column
+                label="Add Signal"
+                v-slot="props"
+                position="centered"
+              >
+                <b-button class="mx-1 plus-btn" @click="pushId(props.row.id)">
+                  <i class="mdi mdi-plus"></i>
+                </b-button>
               </o-table-column>
             </o-table>
             <div style="text-align: center !important" v-else>
-              <NoOccorrenzeItems v-if="dataTable.length === 0" />
+              <NoSignalItems v-if="dataTable.length === 0" />
             </div>
           </b-overlay>
           <div class="modal-footer mt-8">
             <slot name="footer">
               <b-button class="mx-2 button-format" @click="redirectCreate()"
-                >New Occurrence</b-button
+                >Add Signal</b-button
               >
               <b-button class="mx-2 button-format" @click="cancel()"
                 >Close</b-button
@@ -160,10 +111,10 @@
 </template>
 <script>
 import CloseIcon from '~/components/icons/close'
-import NoOccorrenzeItems from '~/components/nodata/NoOccorrenzeItems'
+import NoSignalItems from '~/components/nodata/NoSignalItems'
 import { format, parseISO } from 'date-fns'
 export default {
-  components: { CloseIcon, NoOccorrenzeItems },
+  components: { CloseIcon, NoSignalItems },
   data() {
     return {
       showNoItem: false,
@@ -182,53 +133,14 @@ export default {
     console.log(this.tableValue)
   },
   methods: {
+    pushId(val) {
+      this.$emit('data-add-signal', val)
+      this.cancel()
+    },
     redirectCreate() {
-      console.log(this.dataTable.length)
-      if (this.dataTable.length !== 0) {
-        if (this.checkedRows.length === 0) {
-          this.$bvModal.msgBoxOk(
-            `Please select one of the Occurrences for creating!`,
-            {
-              title: `Attention`,
-              size: 'md',
-              buttonSize: 'md',
-              okVariant: 'danger',
-              okTitle: `Ok`,
-              headerClass: 'p-2 border-bottom-0',
-              footerClass: 'p-2 border-top-0',
-              centered: true,
-            }
-          )
-          return
-        }
-        if (this.checkedRows.length > 1) {
-          this.$bvModal.msgBoxOk(
-            `Please select only one of the Occurrences for creating!`,
-            {
-              title: `Attention`,
-              size: 'md',
-              buttonSize: 'md',
-              okVariant: 'danger',
-              okTitle: `Ok`,
-              headerClass: 'p-2 border-bottom-0',
-              footerClass: 'p-2 border-top-0',
-              centered: true,
-            }
-          )
-          return
-        }
-
-        this.$router.push({
-          path: '/occurrences/create',
-          query: {
-            id_occurrence: this.checkedRows[0].id,
-          },
-        })
-      } else {
-        this.$router.push({
-          path: '/occurrences/create',
-        })
-      }
+      this.$router.push({
+        path: '/signals/create',
+      })
     },
     formatDate(val) {
       if (val) {
@@ -238,15 +150,12 @@ export default {
     getData() {
       this.show = true
       this.$axios
-        .get(
-          `/api/segnalazioni/retrive_segnalazioni/${this.tableValue}/occorrenze`,
-          {
-            headers: {
-              Authorization: `Token ${this.$auth.strategy.token.get()}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        )
+        .get(`/api/segnalazioni/retrive_segnalazioni`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
         .then((response) => {
           this.dataTable = response.data
           this.show = false
@@ -265,6 +174,11 @@ export default {
 }
 </script>
 <style scoped>
+.plus-btn {
+  background-color: unset !important;
+  color: #28a745 !important;
+  border: unset;
+}
 .modal-mask {
   position: fixed;
   z-index: 1;

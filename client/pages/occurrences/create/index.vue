@@ -55,6 +55,7 @@
                     id="id-segnalazione"
                     v-model="form.segnalazione"
                     placeholder="Id signal"
+                    @click="showTableSignals()"
                   />
                 </div>
               </div>
@@ -71,6 +72,7 @@
                     id="id-soluzione"
                     v-model="form.soluzione"
                     placeholder="Id solution"
+                    @click="showTableSolutions()"
                   />
                 </div>
               </div>
@@ -234,6 +236,16 @@
         </div>
       </div>
     </client-only>
+    <SeeSignals
+      v-if="showModalSignals"
+      @data-add-signal="dataAddSignal"
+      @close="hideModal()"
+    />
+    <SeeSolutions
+      v-if="showModalSolutions"
+      @data-add-solution="dataAddSolution"
+      @close="hideModal()"
+    />
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
         <div class="d-flex flex-grow-1 align-items-baseline">
@@ -247,6 +259,8 @@
 
 <script>
 import Nav from '~/components/Nav'
+import SeeSignals from '~/components/popup/SeeSignals'
+import SeeSolutions from '~/components/popup/SeeSolutions'
 let ClassicEditor
 let CKEditor
 if (process.client) {
@@ -259,6 +273,8 @@ export default {
   components: {
     Nav,
     ckeditor: CKEditor.component,
+    SeeSignals,
+    SeeSolutions,
   },
   props: {
     value: {
@@ -310,6 +326,8 @@ export default {
         rif_ticket: '',
         stato_occorrenza: null,
       },
+      showModalSignals: false,
+      showModalSolutions: false,
     }
   },
   mounted() {
@@ -320,6 +338,18 @@ export default {
     }
   },
   methods: {
+    dataAddSignal(val) {
+      this.form.segnalazione = val
+    },
+    dataAddSolution(val) {
+      this.form.soluzione = val
+    },
+    showTableSignals() {
+      this.showModalSignals = true
+    },
+    showTableSolutions() {
+      this.showModalSolutions = true
+    },
     onSubmit() {
       this.show = true
       if (this.form.segnalazione === null || this.form.segnalazione === '') {
@@ -401,6 +431,10 @@ export default {
         this.$bvToast.hide('created')
         this.variant = 'info'
       }, 2000)
+    },
+    hideModal() {
+      this.showModalSignals = false
+      this.showModalSolutions = false
     },
   },
 }
