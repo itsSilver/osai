@@ -21,6 +21,9 @@
               :current-page.sync="currentPage"
               v-if="dataTable.length > 0"
               :selected.sync="selected"
+              checkable
+              :checked-rows.sync="checkedRows"
+              :hoverable="isHoverable"
             >
               <o-table-column
                 class="test"
@@ -167,16 +170,26 @@ export default {
       show: false,
       variant: 'info',
       dataTable: [],
+      checkedRows: [],
       currentPage: 1,
       perPage: 10,
+      selected: {},
+      isHoverable: true,
     }
   },
   mounted() {
     this.getData()
+    console.log(this.tableValue)
   },
   methods: {
-    redirectCreate() {
-      this.$router.push(`/occurrences/create`)
+    redirectCreate(val) {
+      // this.$router.push(`/occurrences/create`)
+      this.$router.push({
+        path: '/occurrences/create',
+        query: {
+          id_signal: this.tableValue,
+        },
+      })
     },
     formatDate(val) {
       if (val) {

@@ -11167,6 +11167,14 @@ td {
 .create-label {
   font-size: 14px !important;
 }
+.o-chk__check {
+  border: 1px solid #575454 !important;
+  position: relative;
+  top: 3px;
+}
+.o-table__th-checkbox:nth-child(1) > .o-chk {
+  display: none !important;
+}
 /* end here */
 /* Pagination CSS */
 .o-pag__link--current {
