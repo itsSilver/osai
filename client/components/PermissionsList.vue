@@ -51,12 +51,6 @@ export default {
         }
         if (this.dataTable.length != 0) {
           this.selected = selected
-          this.selectedData = { ids: this.selected }
-          // this.$emit('selectedItems', this.selectedData)
-          // this.$emit("selectedItems", this.selected);
-          if (this.dataTable.lenght == null) {
-            // this.$emit('emptyDatalist')
-          }
         }
       },
     },
