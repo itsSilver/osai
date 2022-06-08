@@ -144,6 +144,7 @@ def update_user(request, id):
 @permission_classes([IsAuthenticated])
 def add_permission_to_user(request, id):
     user = get_object_or_404(User, pk=id)
+    user.permissions.clear()
     permissions = request.data["permission_id"]
     for per in permissions:
         user.permissions.add(per)
