@@ -312,6 +312,13 @@ export default {
       },
     }
   },
+  mounted() {
+    if (this.$route.query.id_occurrence) {
+      this.duplicateId = this.$route.query.id_occurrence
+      console.log('value here:', this.duplicateId)
+      this.getOcurrenceDuplicate()
+    }
+  },
   methods: {
     onSubmit() {
       this.show = true
@@ -364,6 +371,26 @@ export default {
         .catch((error) => {
           this.show = false
           this.dataCreated = error.response.data.message
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    getOcurrenceDuplicate() {
+      this.show = true
+      this.$axios
+        .get(`/api/occorrenze/retrive_occorrenze/${this.duplicateId}`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          this.form = response.data[0]
+          console.log(response.data[0])
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
           this.variant = 'danger'
           this.toggleToaster()
         })

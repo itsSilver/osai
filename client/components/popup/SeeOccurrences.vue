@@ -182,12 +182,44 @@ export default {
     console.log(this.tableValue)
   },
   methods: {
-    redirectCreate(val) {
-      // this.$router.push(`/occurrences/create`)
+    redirectCreate() {
+      if (this.checkedRows.length === 0) {
+        this.$bvModal.msgBoxOk(
+          `Please select one of the Occurrences for creating!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+      if (this.checkedRows.length > 1) {
+        this.$bvModal.msgBoxOk(
+          `Please select only one of the Occurrences for creating!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
+      }
+
       this.$router.push({
         path: '/occurrences/create',
         query: {
-          id_signal: this.tableValue,
+          id_occurrence: this.checkedRows[0].id,
         },
       })
     },
@@ -228,7 +260,7 @@ export default {
 <style scoped>
 .modal-mask {
   position: fixed;
-  z-index: 9998;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
