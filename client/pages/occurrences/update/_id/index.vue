@@ -60,24 +60,7 @@
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <label
-                  for="id-soluzione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id solution</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-soluzione"
-                    v-model="dataTable.soluzioni_id[0]"
-                    placeholder="Id solution"
-                    readonly
-                    @click="showTableSolutions()"
-                  />
-                </div>
-              </div>
+
               <div class="form-group row">
                 <label for="tittle" class="col-sm-2 col-form-label create-label"
                   >Title</label
@@ -221,6 +204,24 @@
                     :disabled="disabled"
                     @input="(event) => $emit('input', event)"
                     v-model="dataTable.note"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id solution</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control input-create"
+                    id="id-soluzione"
+                    v-model="dataTable.soluzioni_id[0]"
+                    placeholder="Id solution"
+                    readonly
+                    @click="showTableSolutions()"
                   />
                 </div>
               </div>
