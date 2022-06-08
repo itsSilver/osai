@@ -37,8 +37,8 @@
               <div class="form-group row">
                 <label for="id-segnalazione" class="col-sm-2 col-form-label create-label">Alarm ID</label>
                 <div class="col-sm-10">
-                  <input type="number" class="form-control input-create" id="id-segnalazione" v-model="alarmID"
-                    placeholder="Please select an signal" readonly @click="showTableSignals()" :disabled="alarmID" />
+                  <input type="number" class="form-control input-create" id="id-segnalazione" v-model="alarmId"
+                    placeholder="Alarm ID" readonly @click="showTableSignals()" :disabled="alarmId" />
                 </div>
               </div>
               <div class="form-group row">
@@ -107,10 +107,10 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution Title</label>
+                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution </label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-create" v-model="solutionTitle"
-                    placeholder="Please select an solution" readonly @click="showTableSolutions()" />
+                    placeholder="Select an solution" readonly @click="showTableSolutions()" />
                 </div>
               </div>
               <div class="form-group row">
@@ -211,8 +211,8 @@ export default {
       },
       showModalSignals: false,
       showModalSolutions: false,
-      alarmID: null,
       solutionTitle: null,
+      alarmId: null
     }
   },
   mounted() {
@@ -221,14 +221,11 @@ export default {
       console.log('value here:', this.duplicateId)
       this.getOcurrenceDuplicate()
     }
-    if (this.$route.query.id_signal) {
-      this.form.segnalazione = this.$route.query.id_signal
-    }
+    this.alarmId = this.$route.query.id_alarm
   },
   methods: {
     dataAddSignal(val) {
-      this.alarmID = val.id_allarme
-      this.form.segnalazione = val.id
+      this.form.segnalazione = val
     },
     dataAddSolution(val) {
       this.solutionTitle = val.titolo

@@ -10,82 +10,33 @@
         </div> -->
         <div class="">
           <b-overlay :show="show" rounded="sm">
-            <o-table
-              class="occurrence-table-seg"
-              :data="dataTable"
-              :bordered="true"
-              :striped="true"
-              mobile-cards
-              paginated
-              :per-page="perPage"
-              :current-page.sync="currentPage"
-              v-if="dataTable.length > 0"
-              :selected.sync="selected"
-              :checked-rows.sync="checkedRows"
-              :hoverable="isHoverable"
-            >
-              <o-table-column
-                class="test"
-                field="id"
-                label="ID"
-                width="40"
-                numeric
-                v-slot="props"
-              >
+            <o-table class="occurrence-table-seg" :data="dataTable" :bordered="true" :striped="true" mobile-cards
+              paginated :per-page="perPage" :current-page.sync="currentPage" v-if="dataTable.length > 0"
+              :selected.sync="selected" :checked-rows.sync="checkedRows" :hoverable="isHoverable">
+              <o-table-column class="test" field="id" label="ID" width="40" numeric v-slot="props">
                 {{ props.row.id }}
               </o-table-column>
 
-              <o-table-column
-                field="titolo"
-                label="Title"
-                v-slot="props"
-                position="centered"
-              >
+              <o-table-column field="titolo" label="Title" v-slot="props" position="centered">
                 {{ props.row.titolo }}
               </o-table-column>
-              <o-table-column
-                field="rif_ticket"
-                label="Ticket"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="rif_ticket" label="Ticket" v-slot="props" position="centered" sortable>
                 {{ props.row.rif_ticket }}
               </o-table-column>
 
-              <o-table-column
-                field="id_allarme"
-                label="Id Alarm"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="id_allarme" label="Id Alarm" v-slot="props" position="centered" sortable>
                 {{ props.row.id_allarme }}
               </o-table-column>
-              <o-table-column
-                field="famiglia_macchina"
-                label="Family machine"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="famiglia_macchina" label="Family machine" v-slot="props" position="centered"
+                sortable>
                 {{ props.row.famiglia_macchina }}
               </o-table-column>
-              <o-table-column
-                field="sottofamiglia_macchina"
-                label="Under Family machine"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="sottofamiglia_macchina" label="Under Family machine" v-slot="props"
+                position="centered" sortable>
                 {{ props.row.sottofamiglia_macchina }}
               </o-table-column>
-              <o-table-column
-                label="Add Signal"
-                v-slot="props"
-                position="centered"
-              >
-                <b-button class="mx-1 plus-btn" @click="pushId(props.row.id)">
+              <o-table-column label="Add Signal" v-slot="props" position="centered">
+                <b-button class="mx-1 plus-btn" @click="pushId(props.row)">
                   <i class="mdi mdi-plus"></i>
                 </b-button>
               </o-table-column>
@@ -172,6 +123,7 @@ export default {
   color: #28a745 !important;
   border: unset;
 }
+
 .modal-mask {
   position: fixed;
   z-index: 1;
@@ -213,6 +165,7 @@ export default {
 .modal-default-button {
   float: right;
 }
+
 .modal-enter {
   opacity: 0;
 }
@@ -239,6 +192,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .salva {
   width: 140px;
   color: #fff;
@@ -251,6 +205,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .modal-body-custom {
   padding: 0 1rem;
   background-color: #f5f6fa;
@@ -258,12 +213,14 @@ export default {
   border-radius: 0px;
   padding-top: 0.75rem;
 }
+
 .modal-footer {
   padding-left: 0;
   padding-right: 0;
   padding-top: 50px !important;
   border-top: unset !important;
 }
+
 .modal-header {
   text-align: center;
   font-size: 28px;
@@ -277,31 +234,38 @@ export default {
   display: block;
   text-transform: uppercase;
 }
+
 .modal-body-custom label {
   display: block;
 }
+
 .error {
   color: red;
   font-weight: 500;
   font-size: 14px;
 }
+
 .forma {
   width: 50%;
 }
+
 .forma input {
   width: 100%;
   border-radius: 4px;
   height: 35px;
 }
+
 @media (max-width: 400px) {
   .anulla {
     width: 50%;
     max-width: 100px;
   }
+
   .salva {
     width: 50%;
     max-width: 100px;
   }
+
   .modal-header {
     font-size: 22px;
     line-height: 28px;

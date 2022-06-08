@@ -10,132 +10,51 @@
         </div> -->
         <div class="">
           <b-overlay :show="show" rounded="sm">
-            <o-table
-              class="occurrence-table-seg"
-              :data="dataTable"
-              :bordered="true"
-              :striped="true"
-              mobile-cards
-              paginated
-              :per-page="perPage"
-              :current-page.sync="currentPage"
-              v-if="dataTable.length > 0"
-              :selected.sync="selected"
-              checkable
-              :checked-rows.sync="checkedRows"
-              :hoverable="isHoverable"
-            >
-              <o-table-column
-                class="test"
-                field="id"
-                label="ID"
-                width="40"
-                numeric
-                v-slot="props"
-              >
+            <o-table class="occurrence-table-seg" :data="dataTable" :bordered="true" :striped="true" mobile-cards
+              paginated :per-page="perPage" :current-page.sync="currentPage" v-if="dataTable.length > 0"
+              :selected.sync="selected" checkable :checked-rows.sync="checkedRows" :hoverable="isHoverable">
+              <o-table-column class="test" field="id" label="ID" width="40" numeric v-slot="props">
                 {{ props.row.id }}
               </o-table-column>
 
-              <o-table-column
-                field="titolo"
-                label="Title"
-                v-slot="props"
-                position="centered"
-              >
+              <o-table-column field="titolo" label="Title" v-slot="props" position="centered">
                 {{ props.row.titolo }}
               </o-table-column>
-              <o-table-column
-                field="segnalazione"
-                label="Id Signal"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="segnalazione" label="Id Signal" v-slot="props" position="centered" sortable>
                 {{ props.row.segnalazione }}
               </o-table-column>
 
-              <o-table-column
-                field="soluzioni_id"
-                label="Id Solution"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="soluzioni_id" label="Id Solution" v-slot="props" position="centered" sortable>
                 {{ props.row.soluzioni_id[0] }}
               </o-table-column>
-              <o-table-column
-                field="commessa_macchina"
-                label="Machine Order"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="commessa_macchina" label="Machine Order" v-slot="props" position="centered"
+                sortable>
                 {{ props.row.commessa_macchina }}
               </o-table-column>
-              <o-table-column
-                field="rif_ticket"
-                label="Ticket"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="rif_ticket" label="Ticket" v-slot="props" position="centered" sortable>
                 {{ props.row.rif_ticket }}
               </o-table-column>
-              <o-table-column
-                field="versione_sw_1"
-                label="Version sw 1"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="versione_sw_1" label="Version sw 1" v-slot="props" position="centered" sortable>
                 {{ props.row.versione_sw_1 }}
               </o-table-column>
-              <o-table-column
-                field="versione_sw_2"
-                label="Version sw 2"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="versione_sw_2" label="Version sw 2" v-slot="props" position="centered" sortable>
                 {{ props.row.versione_sw_2 }}
               </o-table-column>
-              <o-table-column
-                field="data_occorrenza"
-                label="Occurrence date"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="data_occorrenza" label="Occurrence date" v-slot="props" position="centered"
+                sortable>
                 {{ props.row.data_occorrenza }}
               </o-table-column>
-              <o-table-column
-                field="stato_occorrenza"
-                label="Occurrence status"
-                v-slot="props"
-                position="centered"
-                sortable
-              >
+              <o-table-column field="stato_occorrenza" label="Occurrence status" v-slot="props" position="centered"
+                sortable>
                 <span v-if="props.row.stato_occorrenza === '1'">On</span>
                 <span v-if="props.row.stato_occorrenza === '0'">Off</span>
                 <span></span>
               </o-table-column>
 
-              <o-table-column
-                field="created_at"
-                label="Creation date"
-                position="centered"
-                v-slot="props"
-                sortable
-              >
+              <o-table-column field="created_at" label="Creation date" position="centered" v-slot="props" sortable>
                 {{ formatDate(props.row.created_at) }}
               </o-table-column>
-              <o-table-column
-                field="updated_at"
-                label="Update date"
-                position="centered"
-                v-slot="props"
-                sortable
-              >
+              <o-table-column field="updated_at" label="Update date" position="centered" v-slot="props" sortable>
                 {{ formatDate(props.row.updated_at) }}
               </o-table-column>
             </o-table>
@@ -145,12 +64,8 @@
           </b-overlay>
           <div class="modal-footer mt-8">
             <slot name="footer">
-              <b-button class="mx-2 button-format" @click="redirectCreate()"
-                >New Occurrence</b-button
-              >
-              <b-button class="mx-2 button-format" @click="cancel()"
-                >Close</b-button
-              >
+              <b-button class="mx-2 button-format" @click="redirectCreate()">New Occurrence</b-button>
+              <b-button class="mx-2 button-format" @click="cancel()">Close</b-button>
             </slot>
           </div>
         </div>
@@ -179,59 +94,45 @@ export default {
   },
   mounted() {
     this.getData()
-    console.log(this.tableValue)
   },
   methods: {
     redirectCreate() {
-      console.log(this.dataTable.length)
-      if (this.dataTable.length !== 0) {
-        if (this.checkedRows.length === 0) {
-          this.$bvModal.msgBoxOk(
-            `Please select one of the Occurrences for creating!`,
-            {
-              title: `Attention`,
-              size: 'md',
-              buttonSize: 'md',
-              okVariant: 'danger',
-              okTitle: `Ok`,
-              headerClass: 'p-2 border-bottom-0',
-              footerClass: 'p-2 border-top-0',
-              centered: true,
-            }
-          )
-          return
-        }
-        if (this.checkedRows.length > 1) {
-          this.$bvModal.msgBoxOk(
-            `Please select only one of the Occurrences for creating!`,
-            {
-              title: `Attention`,
-              size: 'md',
-              buttonSize: 'md',
-              okVariant: 'danger',
-              okTitle: `Ok`,
-              headerClass: 'p-2 border-bottom-0',
-              footerClass: 'p-2 border-top-0',
-              centered: true,
-            }
-          )
-          return
-        }
-
-        this.$router.push({
-          path: '/occurrences/create',
-          query: {
-            id_occurrence: this.checkedRows[0].id,
-          },
-        })
-      } else {
-        this.$router.push({
-          path: '/occurrences/create',
-          query: {
-            id_signal: this.tableValue,
-          },
-        })
+      if (this.checkedRows.length > 1) {
+        this.$bvModal.msgBoxOk(
+          `Please select only one of the Occurrences for creating!`,
+          {
+            title: `Attention`,
+            size: 'md',
+            buttonSize: 'md',
+            okVariant: 'danger',
+            okTitle: `Ok`,
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true,
+          }
+        )
+        return
       }
+      let query = {}
+
+      if (this.checkedRows.length === 1) {
+        query = {
+          id_occurrence: this.checkedRows[0].id,
+          id_signal: this.tableValue,
+          id_alarm: this.alarmId,
+        }
+      } else {
+        query = {
+          id_signal: this.tableValue,
+          id_alarm: this.alarmId,
+        }
+      }
+
+
+      this.$router.push({
+        path: '/occurrences/create-related',
+        query: query
+      })
     },
     formatDate(val) {
       if (val) {
@@ -264,7 +165,7 @@ export default {
       this.$emit('close')
     },
   },
-  props: ['tableValue'],
+  props: ['tableValue', 'alarmId'],
 }
 </script>
 <style scoped>
@@ -309,6 +210,7 @@ export default {
 .modal-default-button {
   float: right;
 }
+
 .modal-enter {
   opacity: 0;
 }
@@ -335,6 +237,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .salva {
   width: 140px;
   color: #fff;
@@ -347,6 +250,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .modal-body-custom {
   padding: 0 1rem;
   background-color: #f5f6fa;
@@ -354,12 +258,14 @@ export default {
   border-radius: 0px;
   padding-top: 0.75rem;
 }
+
 .modal-footer {
   padding-left: 0;
   padding-right: 0;
   padding-top: 50px !important;
   border-top: unset !important;
 }
+
 .modal-header {
   text-align: center;
   font-size: 28px;
@@ -373,31 +279,38 @@ export default {
   display: block;
   text-transform: uppercase;
 }
+
 .modal-body-custom label {
   display: block;
 }
+
 .error {
   color: red;
   font-weight: 500;
   font-size: 14px;
 }
+
 .forma {
   width: 50%;
 }
+
 .forma input {
   width: 100%;
   border-radius: 4px;
   height: 35px;
 }
+
 @media (max-width: 400px) {
   .anulla {
     width: 50%;
     max-width: 100px;
   }
+
   .salva {
     width: 50%;
     max-width: 100px;
   }
+
   .modal-header {
     font-size: 22px;
     line-height: 28px;
