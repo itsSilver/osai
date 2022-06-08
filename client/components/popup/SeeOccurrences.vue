@@ -227,6 +227,9 @@ export default {
       } else {
         this.$router.push({
           path: '/occurrences/create',
+          query: {
+            id_signal: this.tableValue,
+          },
         })
       }
     },

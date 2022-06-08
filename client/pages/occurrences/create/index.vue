@@ -339,6 +339,9 @@ export default {
       console.log('value here:', this.duplicateId)
       this.getOcurrenceDuplicate()
     }
+    if (this.$route.query.id_signal) {
+      this.form.segnalazione = this.$route.query.id_signal
+    }
   },
   methods: {
     dataAddSignal(val) {
