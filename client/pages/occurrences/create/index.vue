@@ -57,6 +57,7 @@
                     placeholder="Id signal"
                     readonly
                     @click="showTableSignals()"
+                    :disabled="form.segnalazione"
                   />
                 </div>
               </div>
