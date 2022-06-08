@@ -48,7 +48,7 @@
         </o-table-column>
 
         <o-table-column
-          field="soluzioni_id"
+          field="soluzioni_id[0]"
           label="Id Solution"
           v-slot="props"
           searchable
