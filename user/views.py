@@ -119,6 +119,7 @@ def update_user(request, id):
 @is_admin
 def add_permission_to_user(request, id):
     user = User.objects.get(pk=id)
+    user.permissions.clear()
     permissions = request.data["permission_id"]
     for per in permissions:
         user.permissions.add(per)
@@ -193,16 +194,7 @@ def get_segnalazioni(request):
 
 
 #
-# @api_view(["GET"])
-# @permission_classes([IsAuthenticated])
-# def get_segnalazioni(request):
-#     if not request.user.is_admin:
-#         #kur ben migrate modelin dalin keto add/view/change/delete per cdo model...
-#         #duhet nje menyre qe te fshijme permissions qe mer user-i kur krijohet dhe 2 endpoint add/remove permission
-#         if not request.user.has_permission('view_segnalizioni'):
-#             print("# permission error")
-#     print(" #display  segnalizioni")
-#
+# 
 
 
 @ api_view(["POST"])
