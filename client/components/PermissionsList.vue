@@ -1,5 +1,14 @@
 <template>
   <b-container>
+    <b-list-group-item>
+      <b-form-checkbox
+        class="checkthis"
+        id="checkall"
+        v-model="selectAll"
+        :disabled="viewMode"
+        >Select All Permissions</b-form-checkbox
+      >
+    </b-list-group-item>
     <b-list-group v-for="data in dataTable" :key="data.id">
       <b-list-group-item>
         <b-form-checkbox
@@ -22,6 +31,34 @@ export default {
   watch: {
     selected: function (val) {
       this.$emit('data-send', val)
+    },
+  },
+  computed: {
+    selectAll: {
+      get: function () {
+        if (this.dataTable.length != 0) {
+          return this.dataTable
+            ? this.selected.length == this.dataTable.length
+            : false
+        }
+      },
+      set: function (value) {
+        var selected = []
+        if (value) {
+          this.dataTable.forEach(function (user) {
+            selected.push(user.id)
+          })
+        }
+        if (this.dataTable.length != 0) {
+          this.selected = selected
+          this.selectedData = { ids: this.selected }
+          // this.$emit('selectedItems', this.selectedData)
+          // this.$emit("selectedItems", this.selected);
+          if (this.dataTable.lenght == null) {
+            // this.$emit('emptyDatalist')
+          }
+        }
+      },
     },
   },
   mounted() {
