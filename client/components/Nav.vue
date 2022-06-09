@@ -19,15 +19,14 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link tag="a" to="/solutions" class="text-white px-14-format">
-          <i class="mdi mdi-lightbulb mr-3"></i> Solutions
-        </nuxt-link>
-      </li>
-
-      <li>
         <nuxt-link tag="a" to="/occurrences" class="text-white px-14-format">
           <i class="mdi mdi-repeat mr-3"></i>
           Occurrences
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link tag="a" to="/solutions" class="text-white px-14-format">
+          <i class="mdi mdi-lightbulb mr-3"></i> Solutions
         </nuxt-link>
       </li>
       <!-- <li>
