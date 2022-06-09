@@ -4,48 +4,34 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
-                <li
-                  class="nav-actions-color mx-2"
-                  v-if="showPermissionList === false"
-                >
+                " style="list-style: none">
+                <li class="nav-actions-color mx-2" v-if="showPermissionList === false">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New User
                 </li>
-                <li
-                  class="nav-actions-color mx-2"
-                  v-if="showPermissionList === true"
-                >
+                <li class="nav-actions-color mx-2" v-if="showPermissionList === true">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   Add the permissions to User
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -53,51 +39,27 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Name</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Name</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="form.name"
-                    placeholder="Name"
-                    :disabled="showPermissionList === true"
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="form.name"
+                    placeholder="Name" :disabled="showPermissionList === true" />
                   <div class="error-show" v-if="showTitleSignalError">
                     Please enter the Title Signal!
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Email</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Email</label>
                 <div class="col-sm-10">
-                  <input
-                    type="email"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="form.email"
-                    placeholder="Email"
-                    :disabled="showPermissionList === true"
-                  />
+                  <input type="email" class="form-control input-create" id="ticket" v-model="form.email"
+                    placeholder="Email" :disabled="showPermissionList === true" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Password</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Password</label>
                 <div class="col-sm-10">
-                  <input
-                    type="password"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="form.password"
-                    placeholder="Password"
-                    :disabled="showPermissionList === true"
-                  />
+                  <input type="password" class="form-control input-create" id="ticket" v-model="form.password"
+                    placeholder="Password" :disabled="showPermissionList === true" />
                 </div>
               </div>
               <div class="form-group row" v-if="showPermissionList === false">
@@ -109,17 +71,11 @@
                 </div>
               </div>
             </b-form>
-            <b-form
-              @submit.prevent="onSubmitPermission"
-              class="create-solution-form"
-              v-if="showPermissionList === true"
-            >
+            <b-form @submit.prevent="onSubmitPermission" class="create-solution-form"
+              v-if="showPermissionList === true">
               <h5 class="text-center">Check the permissions for this user!</h5>
-              <div class="form-group row">
-                <PermissionsList
-                  :dataTable="dataPermission"
-                  @data-send="dataSend"
-                />
+              <div class="form-group">
+                <PermissionsList :dataTable="dataPermission" @data-send="dataSend" />
               </div>
 
               <div class="form-group row">
