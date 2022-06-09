@@ -96,14 +96,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -198,14 +193,9 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.note"
+                    placeholder="Please enter Note"
                   />
                 </div>
               </div>
@@ -265,44 +255,11 @@
 import Nav from '~/components/Nav'
 import SeeSignals from '~/components/popup/SeeSignals'
 import SeeSolutions from '~/components/popup/SeeSolutions'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
     SeeSignals,
     SeeSolutions,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
@@ -312,7 +269,6 @@ export default {
         { value: 0, text: 'Off' },
       ],
       show: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       creationDate: '',
