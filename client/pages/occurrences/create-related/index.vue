@@ -97,7 +97,7 @@
                 >
                 <div class="col-sm-10">
                   <VueEditor
-                    v-model="dataTable.descrizione"
+                    v-model="form.descrizione"
                     placeholder="Please enter Description"
                   />
                 </div>
@@ -194,7 +194,7 @@
                 >
                 <div class="col-sm-10">
                   <VueEditor
-                    v-model="dataTable.note"
+                    v-model="form.note"
                     placeholder="Please enter Note"
                   />
                 </div>
