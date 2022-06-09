@@ -40,6 +40,7 @@
                 label="Title"
                 v-slot="props"
                 position="centered"
+                searchable
               >
                 {{ props.row.titolo }}
               </o-table-column>
@@ -48,6 +49,7 @@
                 label="Rank"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.rank }}
@@ -58,6 +60,7 @@
                 label="Reference sector"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.settore_riferimento }}
