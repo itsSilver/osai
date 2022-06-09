@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title Signal"
+                    placeholder="Please enter Title Signal"
                   />
                   <div class="error-show" v-if="showTitleSignalError">
                     Please enter the Title Signal!
@@ -69,7 +69,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -80,7 +80,10 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="dataTable.descrizione" />
+                  <VueEditor
+                    v-model="dataTable.descrizione"
+                    placeholder="Please enter Description"
+                  />
                 </div>
               </div>
 
@@ -96,7 +99,7 @@
                     class="form-control input-create"
                     id="id_alarme"
                     v-model="dataTable.id_allarme"
-                    placeholder="Id alarm"
+                    placeholder="Please enter Id alarm"
                   />
                 </div>
               </div>
@@ -107,7 +110,10 @@
                   >Description Alarm</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="dataTable.descrizione_allarme" />
+                  <VueEditor
+                    v-model="dataTable.descrizione_allarme"
+                    placeholder="Please enter Description Alarm"
+                  />
                 </div>
               </div>
               <div class="form-group row">
@@ -179,7 +185,10 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="dataTable.note" />
+                  <VueEditor
+                    v-model="dataTable.note"
+                    placeholder="Please enter Note"
+                  />
                 </div>
               </div>
               <div class="form-group row">

@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title Solution"
+                    placeholder="Please enter Title Solution"
                   />
                 </div>
               </div>
@@ -161,7 +161,7 @@
                     class="form-control input-create"
                     id="sector"
                     v-model="dataTable.settore_riferimento"
-                    placeholder="Reference sector"
+                    placeholder="Please enter Reference sector"
                   />
                 </div>
               </div>

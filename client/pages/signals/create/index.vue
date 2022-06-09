@@ -52,11 +52,8 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="form.titolo"
-                    placeholder="Title Signal"
+                    placeholder="Please enter Title Signal"
                   />
-                  <div class="error-show" v-if="showTitleSignalError">
-                    Please enter the Title Signal!
-                  </div>
                 </div>
               </div>
               <div class="form-group row">
@@ -69,7 +66,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="form.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -80,7 +77,10 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="form.descrizione" />
+                  <VueEditor
+                    v-model="form.descrizione"
+                    placeholder="Please enter Description"
+                  />
                 </div>
               </div>
 
@@ -96,7 +96,7 @@
                     class="form-control input-create"
                     id="id_alarme"
                     v-model="form.id_allarme"
-                    placeholder="Id alarm"
+                    placeholder="Please enter Id alarm"
                   />
                 </div>
               </div>
@@ -107,7 +107,10 @@
                   >Description Alarm</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="form.descrizione_allarme" />
+                  <VueEditor
+                    v-model="form.descrizione_allarme"
+                    placeholder="Please enter Description Alarm"
+                  />
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -172,7 +175,10 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <VueEditor v-model="form.note" />
+                  <VueEditor
+                    v-model="form.note"
+                    placeholder="Please enter Note"
+                  />
                 </div>
               </div>
               <div class="form-group row">

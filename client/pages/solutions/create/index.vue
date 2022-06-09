@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="form.titolo"
-                    placeholder="Title Solution"
+                    placeholder="Please enter Title Solution"
                   />
                 </div>
               </div>
@@ -151,7 +151,7 @@
                     class="form-control input-create"
                     id="sector"
                     v-model="form.settore_riferimento"
-                    placeholder="Reference sector"
+                    placeholder="Please enter Reference sector"
                   />
                 </div>
               </div>

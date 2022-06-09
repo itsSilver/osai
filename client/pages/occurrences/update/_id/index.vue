@@ -54,7 +54,7 @@
                     class="form-control input-create"
                     id="id-segnalazione"
                     v-model="dataTable.segnalazione"
-                    placeholder="Id signal"
+                    placeholder="Please select Id signal"
                     readonly
                     @click="showTableSignals()"
                     :disabled="dataTable.segnalazione"
@@ -72,7 +72,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title"
+                    placeholder="Please enter Title"
                   />
                 </div>
               </div>
@@ -86,7 +86,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -120,7 +120,7 @@
                     class="form-control input-create"
                     id="machine"
                     v-model="dataTable.commessa_macchina"
-                    placeholder="Machine order"
+                    placeholder="Please enter Machine order"
                   />
                 </div>
               </div>
@@ -136,7 +136,7 @@
                     class="form-control input-create"
                     id="version-1"
                     v-model="dataTable.versione_sw_1"
-                    placeholder="Version sw 1"
+                    placeholder="Please enter Version sw 1"
                   />
                 </div>
               </div>
@@ -152,7 +152,7 @@
                     class="form-control input-create"
                     id="version-2"
                     v-model="dataTable.versione_sw_2"
-                    placeholder="Version sw 2"
+                    placeholder="Please enter Version sw 2"
                   />
                 </div>
               </div>
@@ -220,7 +220,7 @@
                     class="form-control input-create"
                     id="id-soluzione"
                     v-model="dataTable.soluzioni_id[0]"
-                    placeholder="Id solution"
+                    placeholder="Please select Id solution"
                     readonly
                     @click="showTableSolutions()"
                   />
