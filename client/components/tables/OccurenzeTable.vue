@@ -2,7 +2,7 @@
   <div>
     <b-overlay :show="show" rounded="sm">
       <o-table :data="dataTable" :bordered="true" :striped="true" mobile-cards paginated :per-page="perPage"
-        :current-page.sync="currentPage" v-if="dataTable.length > 0" default-sort="id" :selected.sync="selected">
+        :current-page.sync="currentPage" v-if="dataTable.length > 0" default-sort="id" default-sort-direction="desc">
         <o-table-column field="id" label="ID" width="40" numeric sortable v-slot="props" :visible="showID">
           {{ props.row.id }}
         </o-table-column>
@@ -86,7 +86,6 @@ export default {
       showNoItem: true,
       show: false,
       showImage: false,
-      selected: {},
       currentPage: 1,
       perPage: 10,
       showID: false,
@@ -246,10 +245,5 @@ export default {
 /deep/ .o-table__td {
   vertical-align: middle;
   text-align: left;
-}
-
-/deep/ .o-table__tr--selected {
-  background-color: #666;
-  color: #ffffff;
 }
 </style>

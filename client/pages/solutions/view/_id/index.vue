@@ -4,38 +4,30 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
+                " style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   View Solution
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -43,18 +35,10 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title Solution</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title Solution</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                    placeholder="Title Solution"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="dataTable.titolo"
+                    placeholder="Title Solution" disabled />
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -73,84 +57,43 @@
                 </div>
               </div> -->
               <div class="form-group row">
-                <label for="rank" class="col-sm-2 col-form-label create-label"
-                  >Rank</label
-                >
+                <label for="rank" class="col-sm-2 col-form-label create-label">Rank</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.rank"
-                    :options="rank_options"
-                    disabled
-                  ></b-form-select>
+                  <b-form-select v-model="dataTable.rank" :options="rank_options" disabled></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    @input="(event) => $emit('input', event)"
-                    v-model="dataTable.descrizione"
-                    disabled
-                  />
+                  <VueEditor v-model="dataTable.descrizione" placeholder="Please enter a description" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag1" class="col-sm-2 col-form-label create-label"
-                  >Image 1</label
-                >
+                <label for="immag1" class="col-sm-2 col-form-label create-label">Image 1</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_1)"
-                    >Image 1</b-button
-                  >
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_1)">Image 1
+                  </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag2" class="col-sm-2 col-form-label create-label"
-                  >Image 2</label
-                >
+                <label for="immag2" class="col-sm-2 col-form-label create-label">Image 2</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_2)"
-                    >Image 2</b-button
-                  >
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">Image 2
+                  </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag3" class="col-sm-2 col-form-label create-label"
-                  >Image 3</label
-                >
+                <label for="immag3" class="col-sm-2 col-form-label create-label">Image 3</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_3)"
-                    >Image 3</b-button
-                  >
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">Image 3
+                  </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="sector" class="col-sm-2 col-form-label create-label"
-                  >Reference sector</label
-                >
+                <label for="sector" class="col-sm-2 col-form-label create-label">Reference sector</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="sector"
-                    v-model="dataTable.settore_riferimento"
-                    placeholder="Reference sector"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="sector"
+                    v-model="dataTable.settore_riferimento" placeholder="Reference sector" disabled />
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -167,29 +110,16 @@
               </div>
             </div> -->
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    @input="(event) => $emit('input', event)"
-                    v-model="dataTable.note"
-                    disabled
-                  />
+                  <VueEditor v-model="dataTable.note" placeholder="Please enter a note" />
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <b-button
-                    class="mx-2 button-format"
-                    @click="
-                      $router.push(`/solutions/update/${$route.params.id}`)
-                    "
-                  >
+                  <b-button class="mx-2 button-format" @click="
+                    $router.push(`/solutions/update/${$route.params.id}`)
+                  ">
                     <i class="fas fa-edit pr-2"></i>
                     Edit
                   </b-button>
@@ -200,11 +130,7 @@
           <!-- End here -->
         </div>
       </div>
-      <SeeImage
-        v-if="showImage"
-        :imageValue="imageValue"
-        @close="hideModal()"
-      />
+      <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -220,49 +146,15 @@
 <script>
 import Nav from '~/components/Nav'
 import SeeImage from '~/components/popup/SeeImage'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
     SeeImage,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
       show: false,
       showImage: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,

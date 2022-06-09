@@ -10,66 +10,25 @@
         </div> -->
         <div class="">
           <b-overlay :show="show" rounded="sm">
-            <o-table
-              class="occurrence-table-seg"
-              :data="dataTable"
-              :bordered="true"
-              :striped="true"
-              mobile-cards
-              paginated
-              :per-page="perPage"
-              :current-page.sync="currentPage"
-              v-if="dataTable.length > 0"
-              :selected.sync="selected"
-              :checked-rows.sync="checkedRows"
-              :hoverable="isHoverable"
-            >
-              <o-table-column
-                class="test"
-                field="id"
-                label="ID"
-                width="40"
-                numeric
-                v-slot="props"
-              >
+            <o-table class="occurrence-table-seg" :data="dataTable" :bordered="true" :striped="true" mobile-cards
+              paginated :per-page="perPage" :current-page.sync="currentPage" v-if="dataTable.length > 0"
+              :checked-rows.sync="checkedRows" :hoverable="isHoverable">
+              <o-table-column class="test" field="id" label="ID" width="40" numeric v-slot="props">
                 {{ props.row.id }}
               </o-table-column>
 
-              <o-table-column
-                field="titolo"
-                label="Title"
-                v-slot="props"
-                position="centered"
-                searchable
-              >
+              <o-table-column field="titolo" label="Title" v-slot="props" position="centered" searchable>
                 {{ props.row.titolo }}
               </o-table-column>
-              <o-table-column
-                field="rank"
-                label="Rank"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="rank" label="Rank" v-slot="props" position="centered" searchable sortable>
                 {{ props.row.rank }}
               </o-table-column>
 
-              <o-table-column
-                field="settore_riferimento"
-                label="Reference sector"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="settore_riferimento" label="Reference sector" v-slot="props" position="centered"
+                searchable sortable>
                 {{ props.row.settore_riferimento }}
               </o-table-column>
-              <o-table-column
-                label="Add Solution"
-                v-slot="props"
-                position="centered"
-              >
+              <o-table-column label="Add Solution" v-slot="props" position="centered">
                 <b-button class="mx-1 plus-btn" @click="pushId(props.row)">
                   <i class="mdi mdi-plus"></i>
                 </b-button>
@@ -102,7 +61,6 @@ export default {
       checkedRows: [],
       currentPage: 1,
       perPage: 10,
-      selected: {},
       isHoverable: true,
     }
   },

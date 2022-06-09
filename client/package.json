@@ -9,8 +9,6 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
-    "@ckeditor/ckeditor5-vue2": "^3.0.0",
     "@nuxtjs/auth-next": "^5.0.0-1612791489.a5d8c28",
     "@nuxtjs/axios": "^5.13.6",
     "@oruga-ui/oruga": "^0.5.5",

@@ -10,143 +10,57 @@
         </div> -->
         <div class="">
           <b-overlay :show="show" rounded="sm">
-            <o-table
-              class="occurrence-table-seg"
-              :data="dataTable"
-              :bordered="true"
-              :striped="true"
-              mobile-cards
-              paginated
-              :per-page="perPage"
-              :current-page.sync="currentPage"
-              v-if="dataTable.length > 0"
-              :selected.sync="selected"
-              checkable
-              :checked-rows.sync="checkedRows"
-              :hoverable="isHoverable"
-            >
-              <o-table-column
-                class="test"
-                field="id"
-                label="ID"
-                width="40"
-                numeric
-                v-slot="props"
-              >
+            <o-table class="occurrence-table-seg" :data="dataTable" :bordered="true" :striped="true" mobile-cards
+              paginated :per-page="perPage" :current-page.sync="currentPage" v-if="dataTable.length > 0" checkable
+              :checked-rows.sync="checkedRows" :hoverable="isHoverable">
+              <o-table-column class="test" field="id" label="ID" width="40" numeric v-slot="props">
                 {{ props.row.id }}
               </o-table-column>
 
-              <o-table-column
-                field="titolo"
-                label="Title"
-                v-slot="props"
-                position="centered"
-                searchable
-              >
+              <o-table-column field="titolo" label="Title" v-slot="props" position="centered" searchable>
                 {{ props.row.titolo }}
               </o-table-column>
-              <o-table-column
-                field="segnalazione"
-                label="Id Signal"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="segnalazione" label="Id Signal" v-slot="props" position="centered" searchable
+                sortable>
                 {{ props.row.segnalazione }}
               </o-table-column>
 
-              <o-table-column
-                field="soluzioni_id"
-                label="Id Solution"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="soluzioni_id" label="Id Solution" v-slot="props" position="centered" searchable
+                sortable>
                 {{ props.row.soluzioni_id[0] }}
               </o-table-column>
-              <o-table-column
-                field="commessa_macchina"
-                label="Machine Order"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="commessa_macchina" label="Machine Order" v-slot="props" position="centered"
+                searchable sortable>
                 {{ props.row.commessa_macchina }}
               </o-table-column>
-              <o-table-column
-                field="rif_ticket"
-                label="Ticket"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="rif_ticket" label="Ticket" v-slot="props" position="centered" searchable sortable>
                 {{ props.row.rif_ticket }}
               </o-table-column>
-              <o-table-column
-                field="versione_sw_1"
-                label="Version sw 1"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="versione_sw_1" label="Version sw 1" v-slot="props" position="centered" searchable
+                sortable>
                 {{ props.row.versione_sw_1 }}
               </o-table-column>
-              <o-table-column
-                field="versione_sw_2"
-                label="Version sw 2"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="versione_sw_2" label="Version sw 2" v-slot="props" position="centered" searchable
+                sortable>
                 {{ props.row.versione_sw_2 }}
               </o-table-column>
-              <o-table-column
-                field="data_occorrenza"
-                label="Occurrence date"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="data_occorrenza" label="Occurrence date" v-slot="props" position="centered"
+                searchable sortable>
                 {{ props.row.data_occorrenza }}
               </o-table-column>
-              <o-table-column
-                field="stato_occorrenza"
-                label="Occurrence status"
-                v-slot="props"
-                position="centered"
-                searchable
-                sortable
-              >
+              <o-table-column field="stato_occorrenza" label="Occurrence status" v-slot="props" position="centered"
+                searchable sortable>
                 <span v-if="props.row.stato_occorrenza === '1'">On</span>
                 <span v-if="props.row.stato_occorrenza === '0'">Off</span>
                 <span></span>
               </o-table-column>
 
-              <o-table-column
-                field="created_at"
-                label="Creation date"
-                position="centered"
-                searchable
-                v-slot="props"
-                sortable
-              >
+              <o-table-column field="created_at" label="Creation date" position="centered" searchable v-slot="props"
+                sortable>
                 {{ formatDate(props.row.created_at) }}
               </o-table-column>
-              <o-table-column
-                field="updated_at"
-                label="Update date"
-                position="centered"
-                searchable
-                v-slot="props"
-                sortable
-              >
+              <o-table-column field="updated_at" label="Update date" position="centered" searchable v-slot="props"
+                sortable>
                 {{ formatDate(props.row.updated_at) }}
               </o-table-column>
             </o-table>
@@ -156,12 +70,8 @@
           </b-overlay>
           <div class="modal-footer mt-8">
             <slot name="footer">
-              <b-button class="mx-2 button-format" @click="redirectCreate()"
-                >New Occurrence</b-button
-              >
-              <b-button class="mx-2 button-format" @click="cancel()"
-                >Close</b-button
-              >
+              <b-button class="mx-2 button-format" @click="redirectCreate()">New Occurrence</b-button>
+              <b-button class="mx-2 button-format" @click="cancel()">Close</b-button>
             </slot>
           </div>
         </div>
@@ -184,7 +94,6 @@ export default {
       checkedRows: [],
       currentPage: 1,
       perPage: 10,
-      selected: {},
       isHoverable: true,
     }
   },

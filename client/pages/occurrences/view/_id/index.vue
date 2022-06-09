@@ -4,38 +4,30 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
+                " style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   View Occurrence
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -43,200 +35,87 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label
-                  for="id-segnalazione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id signal</label
-                >
+                <label for="id-segnalazione" class="col-sm-2 col-form-label create-label">Id signal</label>
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-segnalazione"
-                    v-model="dataTable.segnalazione"
-                    placeholder="Id signal"
-                    disabled
-                  />
+                  <input type="number" class="form-control input-create" id="id-segnalazione"
+                    v-model="dataTable.segnalazione" placeholder="Id signal" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                    placeholder="Title"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="dataTable.titolo"
+                    placeholder="Title" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Ticket</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Ticket</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="ticket" v-model="dataTable.rif_ticket"
+                    placeholder="Ticket" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="textarea-small"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="textarea-small" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    @input="(event) => $emit('input', event)"
-                    v-model="dataTable.descrizione"
-                    disabled
-                  />
+                  <VueEditor v-model="dataTable.descrizione" placeholder="Please enter Description" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="machine"
-                  class="col-sm-2 col-form-label create-label"
-                  >Machine order</label
-                >
+                <label for="machine" class="col-sm-2 col-form-label create-label">Machine order</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="machine"
-                    v-model="dataTable.commessa_macchina"
-                    placeholder="Machine order"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="machine"
+                    v-model="dataTable.commessa_macchina" placeholder="Machine order" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="version-1"
-                  class="col-sm-2 col-form-label create-label"
-                  >Version sw 1</label
-                >
+                <label for="version-1" class="col-sm-2 col-form-label create-label">Version sw 1</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="version-1"
-                    v-model="dataTable.versione_sw_1"
-                    placeholder="Version sw 1"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="version-1" v-model="dataTable.versione_sw_1"
+                    placeholder="Version sw 1" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="version-2"
-                  class="col-sm-2 col-form-label create-label"
-                  >Version sw 2</label
-                >
+                <label for="version-2" class="col-sm-2 col-form-label create-label">Version sw 2</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="version-2"
-                    v-model="dataTable.versione_sw_2"
-                    placeholder="Version sw 2"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="version-2" v-model="dataTable.versione_sw_2"
+                    placeholder="Version sw 2" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="data-occorrenza"
-                  class="col-sm-2 col-form-label create-label"
-                  >Occurrence date</label
-                >
+                <label for="data-occorrenza" class="col-sm-2 col-form-label create-label">Occurrence date</label>
                 <div class="col-sm-10">
-                  <b-form-datepicker
-                    id="example-datepicker"
-                    v-model="dataTable.data_occorrenza"
-                    class="mb-2 date-choose"
-                    today-button
-                    reset-button
-                    close-button
-                    selected-variant="primary"
-                    today-variant="primary"
-                    hide-header
-                    label-close-button="Close"
-                    label-today-button="Today"
-                    label-reset-button="Reset"
-                    disabled
-                  ></b-form-datepicker>
+                  <b-form-datepicker id="example-datepicker" v-model="dataTable.data_occorrenza"
+                    class="mb-2 date-choose" today-button reset-button close-button selected-variant="primary"
+                    today-variant="primary" hide-header label-close-button="Close" label-today-button="Today"
+                    label-reset-button="Reset" disabled></b-form-datepicker>
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="status-occorrenza"
-                  class="col-sm-2 col-form-label create-label"
-                  >Occurrence status</label
-                >
+                <label for="status-occorrenza" class="col-sm-2 col-form-label create-label">Occurrence status</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.stato_occorrenza"
-                    :options="stato_occorrenza_macchina_options"
-                    disabled
-                  ></b-form-select>
+                  <b-form-select v-model="dataTable.stato_occorrenza" :options="stato_occorrenza_macchina_options"
+                    disabled></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    @input="(event) => $emit('input', event)"
-                    v-model="dataTable.note"
-                    disabled
-                  />
+                  <VueEditor v-model="dataTable.note" placeholder="Please enter a note" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="id-soluzione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id solution</label
-                >
+                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Id solution</label>
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-soluzione"
-                    v-model="dataTable.soluzioni_id[0]"
-                    placeholder="Id solution"
-                    disabled
-                  />
+                  <input type="number" class="form-control input-create" id="id-soluzione"
+                    v-model="dataTable.soluzioni_id[0]" placeholder="Id solution" disabled />
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <b-button
-                    class="mx-2 button-format"
-                    @click="
-                      $router.push(`/occurrences/update/${$route.params.id}`)
-                    "
-                  >
+                  <b-button class="mx-2 button-format" @click="
+                    $router.push(`/occurrences/update/${$route.params.id}`)
+                  ">
                     <i class="fas fa-edit pr-2"></i>
                     Edit
                   </b-button>
@@ -261,47 +140,13 @@
 
 <script>
 import Nav from '~/components/Nav'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
       show: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       creationDate: '',
