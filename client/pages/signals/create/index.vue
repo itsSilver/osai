@@ -26,8 +26,8 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-plus pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-plus pr-2 fas-main-color"></i>
                   New Signal
                 </li>
               </ul>
@@ -52,11 +52,8 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="form.titolo"
-                    placeholder="Title Signal"
+                    placeholder="Please enter Title Signal"
                   />
-                  <div class="error-show" v-if="showTitleSignalError">
-                    Please enter the Title Signal!
-                  </div>
                 </div>
               </div>
               <div class="form-group row">
@@ -69,7 +66,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="form.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -80,14 +77,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -104,7 +96,7 @@
                     class="form-control input-create"
                     id="id_alarme"
                     v-model="form.id_allarme"
-                    placeholder="Id alarm"
+                    placeholder="Please enter Id alarm"
                   />
                 </div>
               </div>
@@ -115,14 +107,9 @@
                   >Description Alarm</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.descrizione_allarme"
+                    placeholder="Please enter Description Alarm"
                   />
                 </div>
               </div>
@@ -188,14 +175,9 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.note"
+                    placeholder="Please enter Note"
                   />
                 </div>
               </div>
@@ -218,13 +200,14 @@
                   <b-form-select
                     v-model="form.sottofamiglia_macchina"
                     :options="sottofamiglia_macchina_options"
-                  ></b-form-select>
+                  >
+                  </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
+                    <i class="mdi mdi-check pr-2"></i>
                     Save
                   </b-button>
                 </div>
@@ -250,43 +233,10 @@
 <script>
 import Nav from '~/components/Nav'
 import FindOccurrence from '~/components/popup/FindOccurrence'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
     FindOccurrence,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
@@ -295,7 +245,6 @@ export default {
       file2: null,
       file3: null,
       showFindOccurrence: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,
@@ -315,9 +264,53 @@ export default {
       tempimmagine_3: null,
       famiglia_macchina_options: [
         { value: null, text: 'Select' },
-        { value: 'Modula', text: 'Modula' },
-        { value: 'Easy2', text: 'Easy2' },
-        { value: 'Twin Shape 3', text: 'Twin Shape 3' },
+        { value: 'std_npm:Neo Place Modula', text: 'std_npm:Neo Place Modula' },
+        { value: 'std_nmt:Neo Mark Twin', text: 'std_nmt:Neo Mark Twin' },
+        { value: 'std_npl:Neo Place', text: 'std_npl:Neo Place' },
+        { value: 'std_ncx:Neo Cut', text: 'std_ncx:Neo Cut' },
+        { value: 'std_fnw:FineWeld', text: 'std_fnw:FineWeld' },
+        { value: 'std_fnx:FineCut', text: 'std_fnx:FineCut' },
+        { value: 'std_dm1:Dm1', text: 'std_dm1:Dm1' },
+        { value: 'std_dm2:Dm2', text: 'std_dm2:Dm2' },
+        { value: 'std_shp:Neo Cut Shape', text: 'std_shp:Neo Cut Shape' },
+        { value: 'std_nme:Neo Mark Easy', text: 'std_nme:Neo Mark Easy' },
+        {
+          value: 'std_npt:Neo place Sold Top',
+          text: 'std_npt:Neo place Sold Top',
+        },
+        { value: 'std_nth:Neo Thermostep', text: 'std_nth:Neo Thermostep' },
+        {
+          value: 'std_nrm:Neo Router Modula',
+          text: 'std_nrm:Neo Router Modula',
+        },
+        {
+          value: 'std_nhm:Neo Handler Modula',
+          text: 'std_nhm:Neo Handler Modula',
+        },
+        { value: 'std_alt:Altro Standard', text: 'std_alt:Altro Standard' },
+        {
+          value: 'spl_galt:Sistema Generico Speciale',
+          text: 'spl_galt:Sistema Generico Speciale',
+        },
+        { value: 'spl_nef:Neo Feeder', text: 'spl_nef:Neo Feeder' },
+        { value: 'spl_nol:Neo Inline', text: 'spl_nol:Neo Inline' },
+        { value: 'spl_nin:Neo Inwork', text: 'spl_nin:Neo Inwork' },
+        {
+          value: 'spl_nlu:Neo Loader/Unloader',
+          text: 'spl_nlu:Neo Loader/Unloader',
+        },
+        { value: 'spl_nfo:Neo Flip Over', text: 'spl_nfo:Neo Flip Over' },
+        { value: 'spl_nll:Neo Line Lifter', text: 'spl_nll:Neo Line Lifter' },
+        { value: 'spl_ntu:Neo Turn', text: 'spl_ntu:Neo Turn' },
+        { value: 'spl_alt:Altro Speciale', text: 'spl_alt:Altro Speciale' },
+        { value: 'R_LASER:LASER', text: 'R_LASER:LASER' },
+        { value: 'R_SC:Semiconduttori', text: 'R_SC:Semiconduttori' },
+        { value: 'R_STD: Standard', text: 'R_STD: Standard' },
+        { value: 'R_Linea: Linee/Speciale', text: 'R_Linea: Linee/Speciale' },
+        {
+          value: 'R_altro: Non Identificabile',
+          text: 'R_altro: Non Identificabile',
+        },
       ],
       sottofamiglia_macchina_options: [
         { value: null, text: 'Select' },

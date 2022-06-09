@@ -26,7 +26,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New Solution
                 </li>
@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title Solution"
+                    placeholder="Please enter Title Solution"
                   />
                 </div>
               </div>
@@ -89,14 +89,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -161,7 +156,7 @@
                     class="form-control input-create"
                     id="sector"
                     v-model="dataTable.settore_riferimento"
-                    placeholder="Reference sector"
+                    placeholder="Please enter Reference sector"
                   />
                 </div>
               </div>
@@ -183,14 +178,9 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.note"
+                    placeholder="Please enter Note"
                   />
                 </div>
               </div>
@@ -227,49 +217,15 @@
 <script>
 import Nav from '~/components/Nav'
 import SeeImage from '~/components/popup/SeeImage'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
     SeeImage,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
       show: false,
       showImage: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,

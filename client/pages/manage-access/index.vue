@@ -27,67 +27,29 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-bars pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-account-group mr-3"></i>
                   Manage Access
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            >
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="redirectCreate()"
-              >
-                <i class="fas fa-plus pr-2"></i>
-                New User
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="updateDocument()"
-              >
-                <i class="fas fa-edit pr-2"></i>
-                Update User
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="deleteDocument()"
-              >
-                <i class="fas fa-trash pr-2"></i>
-                Delete User
-              </li>
-            </ul>
-            <!-- End here -->
-          </div>
-          <div class="vertical-line"></div>
-          <div
-            class="
-              nav-actions
-              d-flex
-              justify-content-between
-              align-items-center
-              mb-2
-              navtop
-              second-nav-option
-            "
-          >
-            <!-- Second Nav -->
-            <div class="d-flex gap-4 second-d-flex-left"></div>
             <div
               class="
                 d-flex
                 justify-content-around
-                align-content-center
-                m-0
-                p-0
-                second-d-flex-right
+                align-content-center align-items-center
               "
             >
+              <button
+                role="button"
+                class="mx-2 button-format px-14-format"
+                @click="redirectCreate()"
+                style="height: 40px"
+              >
+                <i class="mdi mdi-plus pr-2"></i>
+                New User
+              </button>
+
               <b-dropdown
                 class="m-2 table-filter-cols"
                 id="dropdown-form"
@@ -96,60 +58,27 @@
               >
                 <b-dropdown-form>
                   <b-form-checkbox
+                    v-for="(drop, index) in dropdown"
+                    :key="index"
                     class="table-checkbox mb-3"
-                    v-model="statusUserId"
-                    value="1"
-                    unchecked-value="0"
-                    >Id User</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusName"
-                    value="1"
-                    unchecked-value="0"
-                    >Name</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusEmail"
-                    value="1"
-                    unchecked-value="0"
-                    >Email</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusCreationDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Creation date</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusUpdateDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Update date</b-form-checkbox
-                  >
+                    v-model="drop.value"
+                    value="true"
+                    unchecked-value="false"
+                    @change="dropDownChange(drop)"
+                    >{{ drop.text }}
+                  </b-form-checkbox>
                 </b-dropdown-form>
               </b-dropdown>
-              <b-form-select
-                class="number-rows"
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
             </div>
             <!-- End here -->
           </div>
+          <div class="vertical-line"></div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
               <UsersTable
                 :dataTable="dataTable"
-                :statusUserId="statusUserId"
-                :statusName="statusName"
-                :statusEmail="statusEmail"
-                :statusCreationDate="statusCreationDate"
-                :statusUpdateDate="statusUpdateDate"
-                @get-new-delete-id="idToDelete"
+                :dropdown="dropdown"
+                @reload-data="reloadTable()"
               />
             </b-overlay>
           </div>
@@ -194,9 +123,34 @@ export default {
       statusEmail: '1',
       statusCreationDate: '1',
       statusUpdateDate: '0',
+      dropdown: [
+        {
+          text: 'ID',
+          value: true,
+        },
+        {
+          text: 'Name',
+          value: true,
+        },
+        {
+          text: 'Email',
+          value: true,
+        },
+        {
+          text: 'Creation date',
+          value: true,
+        },
+        {
+          text: 'Update date',
+          value: true,
+        },
+      ],
     }
   },
   methods: {
+    reloadTable() {
+      this.$nuxt.refresh()
+    },
     idToDelete(val) {
       this.selectedId = val
     },
@@ -335,6 +289,21 @@ export default {
         this.$bvToast.hide('deleted')
       }, 2000)
     },
+    dropDownChange(val) {
+      const indexArray = this.dropdown.findIndex((e) => e.text === val.text)
+      this.dropdown[indexArray].value = val.value
+      localStorage.setItem('usersTable', JSON.stringify(this.dropdown))
+    },
+  },
+  mounted() {
+    if (process.client) {
+      let usersTable = localStorage.getItem('usersTable')
+      if (usersTable) {
+        this.dropdown = JSON.parse(usersTable)
+      } else {
+        localStorage.setItem('usersTable', JSON.stringify(this.dropdown))
+      }
+    }
   },
   async asyncData({ store, $axios }) {
     let response = await $axios.get(`/user/users-list`)

@@ -27,85 +27,29 @@
                 "
                 style="list-style: none; padding-bottom: 10px"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-bars pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-alarm-light mr-3"></i>
                   Signals
                 </li>
               </ul>
-            </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            >
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="redirectCreate()"
-              >
-                <i class="fas fa-plus pr-2"></i>
-                New Signal
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="updateDocument()"
-              >
-                <i class="fas fa-edit pr-2"></i>
-                Update Signal
-              </li>
-              <li
-                role="button"
-                class="mx-2 button-format"
-                @click="deleteDocument()"
-              >
-                <i class="fas fa-trash pr-2"></i>
-                Delete Signal
-              </li>
-            </ul>
-            <!-- End here -->
-          </div>
-          <div class="vertical-line"></div>
-          <div
-            class="
-              nav-actions
-              d-flex
-              justify-content-between
-              align-items-center
-              mb-2
-              navtop
-              second-nav-option
-            "
-          >
-            <!-- Second Nav -->
-            <div class="d-flex gap-4 second-d-flex-left">
-              <b-input-group class="mt-3">
-                <b-form-input
-                  class="input-search"
-                  v-model="filterName"
-                  placeholder="Search"
-                  style="height: 40px !important"
-                ></b-form-input>
-                <b-input-group-append>
-                  <b-button
-                    type="submit"
-                    class="button-format"
-                    @click="onSubmitSearch()"
-                  >
-                    <i class="fas fa-search pr-2"></i>Search</b-button
-                  >
-                </b-input-group-append>
-              </b-input-group>
             </div>
             <div
               class="
                 d-flex
                 justify-content-around
-                align-content-center
-                m-0
-                p-0
-                second-d-flex-right
+                align-content-center align-items-center
               "
             >
+              <button
+                role="button"
+                class="mx-2 button-format px-14-format"
+                @click="redirectCreate()"
+                style="height: 40px"
+              >
+                <i class="mdi mdi-plus pr-2"></i>
+                New Signal
+              </button>
+
               <b-dropdown
                 class="m-2 table-filter-cols"
                 id="dropdown-form"
@@ -114,109 +58,26 @@
               >
                 <b-dropdown-form>
                   <b-form-checkbox
+                    v-for="(drop, index) in dropdown"
+                    :key="index"
                     class="table-checkbox mb-3"
-                    v-model="statusIdsignal"
-                    value="1"
-                    unchecked-value="0"
-                    >Id Signal</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusTicket"
-                    value="1"
-                    unchecked-value="0"
-                    >Ticket</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusAlarm"
-                    value="1"
-                    unchecked-value="0"
-                    >Id Alarm</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusSector"
-                    value="1"
-                    unchecked-value="0"
-                    >Reference Sector</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusMachine"
-                    value="1"
-                    unchecked-value="0"
-                    >Family machine</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusUnderMachine"
-                    value="1"
-                    unchecked-value="0"
-                    >Under Family machine</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage1"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 1</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage2"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 2</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusImage3"
-                    value="1"
-                    unchecked-value="0"
-                    >Image 3</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusCreationDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Creation date</b-form-checkbox
-                  >
-                  <b-form-checkbox
-                    class="table-checkbox mb-3"
-                    v-model="statusUpdateDate"
-                    value="1"
-                    unchecked-value="0"
-                    >Update date</b-form-checkbox
-                  >
+                    v-model="drop.value"
+                    value="true"
+                    unchecked-value="false"
+                    @change="dropDownChange(drop)"
+                    >{{ drop.text }}
+                  </b-form-checkbox>
                 </b-dropdown-form>
               </b-dropdown>
-              <b-form-select
-                class="number-rows"
-                v-model="selected"
-                :options="options"
-              ></b-form-select>
             </div>
-            <!-- End here -->
           </div>
+          <div class="vertical-line"></div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
               <SignalsTable
                 :dataTable="dataTable"
-                :statusTicket="statusTicket"
-                :statusIdsignal="statusIdsignal"
-                :statusAlarm="statusAlarm"
-                :statusMachine="statusMachine"
-                :statusSector="statusSector"
-                :statusUnderMachine="statusUnderMachine"
-                :statusCreationDate="statusCreationDate"
-                :statusUpdateDate="statusUpdateDate"
-                :statusImage1="statusImage1"
-                :statusImage2="statusImage2"
-                :statusImage3="statusImage3"
-                @get-new-delete-id="idToDelete"
-                @order-asc-desc="orderAscDesc"
+                :dropdown="dropdown"
+                @value-deleted="valueDeleted"
               />
             </b-overlay>
           </div>
@@ -238,6 +99,7 @@
 import Nav from '~/components/Nav'
 import SignalsTable from '~/components/tables/SignalsTable.vue'
 export default {
+  name: 'signals',
   components: {
     Nav,
     SignalsTable,
@@ -250,38 +112,67 @@ export default {
       dataCreated: '',
       variant: '',
       show: false,
-      options: [
-        { value: null, text: '10' },
-        { value: '15', text: '15' },
-        { value: '20', text: '20' },
-        { value: '25', text: '25' },
-        { value: '30', text: '30', disabled: true },
+      dropdown: [
+        {
+          text: 'ID',
+          value: true,
+        },
+        {
+          text: 'Title',
+          value: true,
+        },
+        {
+          text: 'Ticket',
+          value: true,
+        },
+        {
+          text: 'Alarm',
+          value: true,
+        },
+        {
+          text: 'Family machine',
+          value: true,
+        },
+        {
+          text: 'Under Family machine',
+          value: true,
+        },
+        {
+          text: 'Image 1',
+          value: true,
+        },
+        {
+          text: 'Image 2',
+          value: true,
+        },
+        {
+          text: 'Image 3',
+          value: true,
+        },
+        {
+          text: 'Related Occurrence',
+          value: true,
+        },
+        {
+          text: 'Creation date',
+          value: true,
+        },
+        {
+          text: 'Update date',
+          value: true,
+        },
       ],
-      statusIdsignal: '1',
-      statusTicket: '1',
-      statusAlarm: '0',
-      statusMachine: '0',
-      statusSector: '1',
-      statusUnderMachine: '0',
-      statusCreationDate: '1',
-      statusUpdateDate: '1',
-      statusImage1: '0',
-      statusImage2: '0',
-      statusImage3: '0',
-      filterName: null,
-      idAscDesc: null,
-      statusAscDesc: false,
     }
   },
   methods: {
-    orderAscDesc() {
-      this.statusAscDesc = !this.statusAscDesc
-      if (this.statusAscDesc === true) {
-        this.idAscDesc = '-id'
-      } else {
-        this.idAscDesc = 'id'
-      }
-      this.onSubmitAscDesc()
+    valueDeleted() {
+      this.show = true
+      this.variant = 'danger'
+      this.dataCreated = 'Signal deleted Succesfully'
+      this.toggleToaster()
+      this.$nuxt.refresh()
+      this.show = false
+      this.selectedId = []
     },
     onSubmitSearch() {
       this.show = true
@@ -307,151 +198,9 @@ export default {
           this.toggleToaster()
         })
     },
-    onSubmitAscDesc() {
-      this.show = true
-      this.$axios
-        .get('/api/segnalazioni/filter', {
-          params: {
-            ordering: this.idAscDesc,
-          },
-          headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-        })
-        .then((response) => {
-          this.dataTable = response.data
-          this.show = false
-        })
-        .catch((error) => {
-          this.dataCreated = error.response.data.message[0]
-          this.show = false
-          this.variant = 'danger'
-          this.toggleToaster()
-        })
-    },
-    idToDelete(val) {
-      this.selectedId = val
-    },
+
     redirectCreate() {
       this.$router.push(`/signals/create`)
-    },
-    updateDocument() {
-      // this.$router.push(`/signals/update/2`)
-      if (this.selectedId.length === 0) {
-        this.$bvModal.msgBoxOk(
-          `Please select one of the Signals for updating!`,
-          {
-            title: `Attention`,
-            size: 'md',
-            buttonSize: 'md',
-            okVariant: 'danger',
-            okTitle: `Ok`,
-            headerClass: 'p-2 border-bottom-0',
-            footerClass: 'p-2 border-top-0',
-            centered: true,
-          }
-        )
-        return
-      }
-      if (this.selectedId.length > 1) {
-        this.$bvModal.msgBoxOk(
-          `Please select only one of the Signals for updating!`,
-          {
-            title: `Attention`,
-            size: 'md',
-            buttonSize: 'md',
-            okVariant: 'danger',
-            okTitle: `Ok`,
-            headerClass: 'p-2 border-bottom-0',
-            footerClass: 'p-2 border-top-0',
-            centered: true,
-          }
-        )
-        return
-      }
-      this.$router.push(`/signals/update/${this.selectedId[0]}`)
-    },
-    deleteDocument() {
-      if (this.selectedId.length === 0) {
-        this.$bvModal.msgBoxOk(
-          `Please select one of the Signals for deleting!`,
-          {
-            title: `Attention`,
-            size: 'md',
-            buttonSize: 'md',
-            okVariant: 'danger',
-            okTitle: `Ok`,
-            headerClass: 'p-2 border-bottom-0',
-            footerClass: 'p-2 border-top-0',
-            centered: true,
-          }
-        )
-        return
-      }
-      if (this.selectedId.length > 1) {
-        this.$bvModal.msgBoxOk(
-          `Please select only one of the Signals for deleting!`,
-          {
-            title: `Attention`,
-            size: 'md',
-            buttonSize: 'md',
-            okVariant: 'danger',
-            okTitle: `Ok`,
-            headerClass: 'p-2 border-bottom-0',
-            footerClass: 'p-2 border-top-0',
-            centered: true,
-          }
-        )
-        return
-      }
-
-      this.$bvModal
-        .msgBoxConfirm('Are you sure you want to delete this Signal?', {
-          title: `Attention`,
-          size: 'sm',
-          buttonSize: 'sm',
-          okVariant: 'danger',
-          okTitle: `Yes`,
-          cancelTitle: `No`,
-          footerClass: 'p-2',
-          hideHeaderClose: true,
-          centered: true,
-        })
-        .then((value) => {
-          if (value === true) {
-            this.show = true
-            this.$axios
-              .post(`/api/segnalazioni/${this.selectedId[0]}/delete`, {
-                headers: {
-                  Authorization: `Token ${this.$auth.strategy.token.get()}`,
-                  'Content-Type': 'application/json',
-                },
-              })
-              .then(() => {
-                this.variant = 'danger'
-                this.dataCreated = 'Signal deleted Succesfully'
-                this.toggleToaster()
-                this.$nuxt.refresh()
-                this.show = false
-                this.selectedId = []
-              })
-              .catch((error) => {
-                this.dataCreated = error.response.data.message[0]
-                this.show = false
-                this.variant = 'danger'
-                this.toggleToaster()
-                this.selectedId = []
-              })
-          } else {
-            // Empty do nothing
-          }
-        })
-        .catch((err) => {
-          // An error occurred
-          this.dataCreated = err.response.data.message[0]
-        })
     },
     toggleToaster() {
       this.$bvToast.show('deleted')
@@ -459,6 +208,21 @@ export default {
         this.$bvToast.hide('deleted')
       }, 2000)
     },
+    dropDownChange(val) {
+      const indexArray = this.dropdown.findIndex((e) => e.text === val.text)
+      this.dropdown[indexArray].value = val.value
+      localStorage.setItem('signalTable', JSON.stringify(this.dropdown))
+    },
+  },
+  mounted() {
+    if (process.client) {
+      let signalTable = localStorage.getItem('signalTable')
+      if (signalTable) {
+        this.dropdown = JSON.parse(signalTable)
+      } else {
+        localStorage.setItem('signalTable', JSON.stringify(this.dropdown))
+      }
+    }
   },
   async asyncData({ store, $axios }) {
     let response = await $axios.get(`/api/segnalazioni/retrive_segnalazioni`)

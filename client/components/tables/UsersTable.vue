@@ -1,105 +1,51 @@
 <template>
-  <b-overlay :show="show" rounded="sm">
-    <b-table-simple
-      class="table table-bordred table-striped text-center table-desktop"
-    >
-      <b-thead>
-        <b-th>
-          <input type="checkbox" class="checkthis" id="checkall" />
-        </b-th>
-        <b-th v-if="statusUserId === '1'">Id User</b-th>
-        <b-th v-if="statusName === '1'">Name</b-th>
-        <b-th v-if="statusEmail === '1'">Email</b-th>
-        <b-th v-if="statusCreationDate === '1'">Creation date</b-th>
-        <b-th v-if="statusUpdateDate === '1'">Update date</b-th>
-      </b-thead>
-      <b-tbody v-if="dataTable">
-        <b-tr v-for="data in dataTable" :key="data.id">
-          <b-td>
-            <input
-              type="checkbox"
-              class="checkthis"
-              v-model="selectedId"
-              :id="data.id"
-              :value="data.id"
-              @change="changeValue"
-            />
-          </b-td>
-          <b-td v-if="statusUserId === '1'">{{ data.id }}</b-td>
-          <b-td v-if="statusName === '1'">{{ data.name }}</b-td>
-          <b-td v-if="statusEmail === '1'">{{ data.email }}</b-td>
-          <b-td v-if="statusCreationDate === '1'">{{
-            formatDate(data.created_at)
-          }}</b-td>
-          <b-td v-if="statusUpdateDate === '1'">{{
-            formatDate(data.updated_at)
-          }}</b-td>
-        </b-tr>
-      </b-tbody>
-    </b-table-simple>
-    <b-table-simple
-      class="table table-bordred table-striped text-center table-respo"
-    >
-      <!-- <b-thead>
-        <b-th>
-          <input type="checkbox" class="checkthis" id="checkall" />
-        </b-th>
-        <b-th
-          ><i class="fa-solid fa-arrow-down-short-wide"></i>Id Solution</b-th
-        >
+  <div>
+    <o-table :data="dataTable" :bordered="true" :striped="true" mobile-cards paginated :per-page="perPage"
+      :current-page.sync="currentPage" v-if="dataTable.length > 0" default-sort="id" default-sort-direction="desc">
+      <o-table-column field="id" label="ID" width="40" numeric v-slot="props" :visible="showID" sortable>
+        {{ props.row.id }}
+      </o-table-column>
 
-        <b-th>Ticket</b-th>
-        <b-th>Reference sector</b-th>
-        <b-th>Id status solution</b-th>
-        <b-th>Creation date</b-th>
-        <b-th>Update date</b-th>
-      </b-thead> -->
-      <b-tbody v-if="dataTable">
-        <b-tr class="respo-tr" v-for="data in dataTable" :key="data.id">
-          <div class="respo-after-tr">
-            <b-td class="td-respo-title"></b-td>
-            <b-td class="td-respo-data">
-              <input
-                type="checkbox"
-                class="checkthis"
-                v-model="selectedId"
-                :id="data.id"
-                :value="data.id"
-                @change="changeValue"
-            /></b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusUserId === '1'">
-            <b-td class="td-respo-title" v-if="statusUserId === '1'"
-              >Id User</b-td
-            >
-            <b-td class="td-respo-data">{{ data.id }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusName === '1'">
-            <b-td class="td-respo-title">Name</b-td>
-            <b-td class="td-respo-data">{{ data.name }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusEmail === '1'">
-            <b-td class="td-respo-title">Email</b-td>
-            <b-td class="td-respo-data">{{ data.email }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusCreationDate === '1'">
-            <b-td class="td-respo-title">Creation date</b-td>
-            <b-td class="td-respo-data">{{ formatDate(data.created_at) }}</b-td>
-          </div>
-          <div class="respo-after-tr" v-if="statusUpdateDate === '1'">
-            <b-td class="td-respo-title">Update date</b-td>
-            <b-td class="td-respo-data">{{ formatDate(data.updated_at) }}</b-td>
-          </div>
-        </b-tr>
-        <b-tr>
-          <b-td style="width: 1000px !important"> </b-td>
-        </b-tr>
-      </b-tbody>
-    </b-table-simple>
-    <div class="no-data" v-if="dataTable.length === 0">
+      <o-table-column field="name" label="Name" v-slot="props" searchable position="centered" sortable
+        :visible="showName">
+        {{ props.row.name }}
+      </o-table-column>
+      <o-table-column field="email" label="Email" v-slot="props" searchable position="centered" sortable
+        :visible="showEmail">
+        {{ props.row.email }}
+      </o-table-column>
+      <o-table-column field="date" label="Creation date" position="centered" v-slot="props" searchable sortable
+        :visible="showCreationDate">
+        {{ formatDate(props.row.created_at) }}
+      </o-table-column>
+      <o-table-column field="date" label="Update date" position="centered" v-slot="props" searchable sortable
+        :visible="showUpdateDate">
+        {{ formatDate(props.row.updated_at) }}
+      </o-table-column>
+      <o-table-column field="action" label="Action" position="centered" v-slot="props" width="180px">
+        <b-button class="mx-1 view-btn" @click="pushRoute(`view/${props.row.id}`)">
+          <i class="mdi mdi-eye"></i>
+        </b-button>
+        <b-button class="mx-1 edit-btn" @click="pushRoute(`update/${props.row.id}`)">
+          <i class="mdi mdi-pencil"></i>
+        </b-button>
+        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)">
+          <i class="mdi mdi-delete"></i>
+        </b-button>
+      </o-table-column>
+    </o-table>
+    <div v-else>
       <NoUserItem v-if="showNoItem" />
     </div>
-  </b-overlay>
+    <b-toast id="deleted-value" :variant="variant" solid>
+      <template #toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">Notification!</strong>
+        </div>
+      </template>
+      {{ dataCreated }}
+    </b-toast>
+  </div>
 </template>
 <script>
 import NoUserItem from '~/components/nodata/NoUserItem'
@@ -110,37 +56,145 @@ export default {
   },
   data() {
     return {
+      dataCreated: '',
+      variant: '',
+      currentPage: 1,
       showNoItem: true,
       show: false,
       selectedId: [],
+      perPage: 10,
+      showID: false,
+      showName: false,
+      showEmail: false,
     }
   },
   methods: {
     formatDate(val) {
       if (val) {
-        return format(parseISO(val), 'dd-MM-yyyy')
+        return format(parseISO(val), 'yyyy-MM-dd')
       }
     },
-    changeValue() {
-      this.$emit('get-new-delete-id', this.selectedId)
-      this.selectedId = []
+    watchImage(val) {
+      this.imageValue = 'http://localhost:8000' + val
+      this.showImage = true
+    },
+    hideModal() {
+      this.showImage = false
+    },
+    pushRoute(route) {
+      this.$router.push(`/manage-access/${route}`)
+    },
+    deleteDocument(id) {
+      this.$bvModal
+        .msgBoxConfirm('Are you sure you want to delete this User?', {
+          title: `Attention`,
+          size: 'sm',
+          buttonSize: 'sm',
+          okVariant: 'danger',
+          okTitle: `Yes`,
+          cancelTitle: `No`,
+          footerClass: 'p-2',
+          hideHeaderClose: true,
+          centered: true,
+        })
+        .then((value) => {
+          if (value === true) {
+            this.show = true
+            this.$axios
+              .post(`/user/remove/${id}`, {
+                headers: {
+                  Authorization: `Token ${this.$auth.strategy.token.get()}`,
+                  'Content-Type': 'application/json',
+                },
+              })
+              .then((response) => {
+                if (response.data.status === 403) {
+                  this.variant = 'danger'
+                  this.dataCreated = 'The super admin user cannot be deleted!'
+                  this.toggleToaster()
+                  this.show = false
+                  return
+                }
+                this.variant = 'danger'
+                this.dataCreated = 'User deleted Succesfully'
+                this.toggleToaster()
+                this.show = false
+                this.selectedId = []
+                this.$emit('reload-data')
+              })
+              .catch((error) => {
+                this.dataCreated = error.response.data.message[0]
+                this.show = false
+                this.variant = 'danger'
+                this.toggleToaster()
+                this.selectedId = []
+              })
+          } else {
+            // Empty do nothing
+          }
+        })
+        .catch((err) => {
+          // An error occurred
+          this.dataCreated = err.response.data.message[0]
+        })
+    },
+    toggleToaster() {
+      this.$bvToast.show('deleted-value')
+      setTimeout(() => {
+        this.$bvToast.hide('deleted-value')
+      }, 2000)
     },
   },
-  props: [
-    'dataTable',
-    'statusUserId',
-    'statusName',
-    'statusEmail',
-    'statusCreationDate',
-    'statusUpdateDate',
-  ],
+  props: ['dataTable', 'dropdown'],
+  watch: {
+    dropdown: {
+      handler(newVal) {
+        newVal.forEach((item) => {
+          if (item.text === 'ID') {
+            this.showID = JSON.parse(item.value)
+          } else if (item.text === 'Name') {
+            this.showName = JSON.parse(item.value)
+          } else if (item.text === 'Email') {
+            this.showEmail = JSON.parse(item.value)
+          } else if (item.text === 'Creation date') {
+            this.showCreationDate = JSON.parse(item.value)
+          } else if (item.text === 'Update date') {
+            this.showUpdateDate = JSON.parse(item.value)
+          }
+        })
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
 }
 </script>
 <style scoped>
-.table > :not(caption) > * > * {
-  box-shadow: unset !important;
+.view-btn {
+  background-color: unset !important;
+  color: #28a745 !important;
+  border: unset;
 }
-td {
-  border: unset !important;
+
+.edit-btn {
+  background-color: unset !important;
+  border: unset;
+  color: #ffc107 !important;
+}
+
+.delete-btn {
+  background-color: unset !important;
+  color: #dc3545 !important;
+  border: unset;
+}
+
+/deep/ .o-table__td {
+  vertical-align: middle;
+  text-align: left;
+}
+
+/deep/ .o-table__tr--selected {
+  background-color: #666;
+  color: #ffffff;
 }
 </style>

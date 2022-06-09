@@ -26,7 +26,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New Occurrence
                 </li>
@@ -54,26 +54,14 @@
                     class="form-control input-create"
                     id="id-segnalazione"
                     v-model="dataTable.segnalazione"
-                    placeholder="Id signal"
+                    placeholder="Please select Id signal"
+                    readonly
+                    @click="showTableSignals()"
+                    :disabled="dataTable.segnalazione"
                   />
                 </div>
               </div>
-              <div class="form-group row">
-                <label
-                  for="id-soluzione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id solution</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-soluzione"
-                    v-model="dataTable.soluzioni_id[0]"
-                    placeholder="Id solution"
-                  />
-                </div>
-              </div>
+
               <div class="form-group row">
                 <label for="tittle" class="col-sm-2 col-form-label create-label"
                   >Title</label
@@ -84,7 +72,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title"
+                    placeholder="Please enter Title"
                   />
                 </div>
               </div>
@@ -98,7 +86,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -109,14 +97,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -132,7 +115,7 @@
                     class="form-control input-create"
                     id="machine"
                     v-model="dataTable.commessa_macchina"
-                    placeholder="Machine order"
+                    placeholder="Please enter Machine order"
                   />
                 </div>
               </div>
@@ -148,7 +131,7 @@
                     class="form-control input-create"
                     id="version-1"
                     v-model="dataTable.versione_sw_1"
-                    placeholder="Version sw 1"
+                    placeholder="Please enter Version sw 1"
                   />
                 </div>
               </div>
@@ -164,7 +147,7 @@
                     class="form-control input-create"
                     id="version-2"
                     v-model="dataTable.versione_sw_2"
-                    placeholder="Version sw 2"
+                    placeholder="Please enter Version sw 2"
                   />
                 </div>
               </div>
@@ -209,14 +192,27 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.note"
+                    placeholder="Please enter Note"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Id solution</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control input-create"
+                    id="id-soluzione"
+                    v-model="dataTable.soluzioni_id[0]"
+                    placeholder="Please select Id solution"
+                    readonly
+                    @click="showTableSolutions()"
                   />
                 </div>
               </div>
@@ -234,6 +230,16 @@
         </div>
       </div>
     </client-only>
+    <SeeSignals
+      v-if="showModalSignals"
+      @data-add-signal="dataAddSignal"
+      @close="hideModal()"
+    />
+    <SeeSolutions
+      v-if="showModalSolutions"
+      @data-add-solution="dataAddSolution"
+      @close="hideModal()"
+    />
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
         <div class="d-flex flex-grow-1 align-items-baseline">
@@ -247,47 +253,17 @@
 
 <script>
 import Nav from '~/components/Nav'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
+import SeeSignals from '~/components/popup/SeeSignals'
+import SeeSolutions from '~/components/popup/SeeSolutions'
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
+    SeeSignals,
+    SeeSolutions,
   },
   data() {
     return {
       show: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       creationDate: '',
@@ -309,19 +285,32 @@ export default {
         data_occorrenza: '',
         rif_ticket: null,
         stato_occorrenza: null,
-        hasSoluzioniId: false,
+        tempIdSoluzioni: null,
       },
+      showModalSignals: false,
+      showModalSolutions: false,
     }
   },
   mounted() {
-    console.log(this.dataTable.soluzioni_id[0])
     if (this.dataTable.soluzioni_id[0]) {
-      this.hasSoluzioniId = true
+      this.tempIdSoluzioni = this.dataTable.soluzioni_id[0]
     } else {
-      this.hasSoluzioniId = false
+      this.tempIdSoluzioni = null
     }
   },
   methods: {
+    dataAddSignal(val) {
+      this.dataTable.segnalazione = val
+    },
+    dataAddSolution(val) {
+      this.dataTable.soluzioni_id[0] = val
+    },
+    showTableSignals() {
+      this.showModalSignals = true
+    },
+    showTableSolutions() {
+      this.showModalSolutions = true
+    },
     onSubmit() {
       this.show = true
       if (
@@ -378,9 +367,10 @@ export default {
           },
         })
         .then(() => {
-          console.log(this.dataTable.soluzioni_id)
-          console.log(this.dataTable.soluzioni_id[0])
-          if (this.dataTable.soluzioni_id[0] !== '') {
+          if (this.tempIdSoluzioni !== this.dataTable.soluzioni_id[0]) {
+            this.disconnectNewSolutionID()
+          }
+          if (this.dataTable.soluzioni_id.length !== 0) {
             this.connectNewSolutionID()
             return
           }
@@ -393,7 +383,7 @@ export default {
         .catch((error) => {
           this.show = false
           this.variant = 'danger'
-          this.dataCreated = error.response.data.message[0]
+          this.dataCreated = error.response.data.message
           this.toggleToaster()
         })
     },
@@ -424,12 +414,36 @@ export default {
           this.toggleToaster()
         })
     },
+    disconnectNewSolutionID() {
+      const value = this.tempIdSoluzioni
+
+      this.$axios
+        .post(`/api/soluzioni/disconnect/${value}`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          // empty response to get
+        })
+        .catch((error) => {
+          this.show = false
+          this.variant = 'danger'
+          this.dataCreated = error.response.data.message[0]
+          this.toggleToaster()
+        })
+    },
     toggleToaster() {
       this.$bvToast.show('created')
       setTimeout(() => {
         this.$bvToast.hide('created')
         this.variant = 'info'
       }, 2000)
+    },
+    hideModal() {
+      this.showModalSignals = false
+      this.showModalSolutions = false
     },
   },
   async asyncData({ store, $axios, params }) {

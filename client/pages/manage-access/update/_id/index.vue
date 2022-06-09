@@ -4,63 +4,43 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
-                <li
-                  class="nav-actions-color mx-2"
-                  v-if="showPermissionList === false"
-                >
+                " style="list-style: none">
+                <li class="nav-actions-color mx-2" v-if="showPermissionList === false">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   Update User
                 </li>
-                <li
-                  class="nav-actions-color mx-2"
-                  v-if="showPermissionList === true"
-                >
+                <li class="nav-actions-color mx-2" v-if="showPermissionList === true">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   Add the permissions to User
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
           <!-- Form start here -->
           <b-overlay :show="show" rounded="sm">
-            <b-form
-              @submit.prevent="onSubmitPermission"
-              class="create-solution-form"
-            >
+            <b-form @submit.prevent="onSubmitPermission" class="create-solution-form">
               <h5 class="text-center">Check the permissions for this user!</h5>
-              <div class="form-group row">
-                <PermissionsList
-                  :dataTable="dataPermission"
-                  @data-send="dataSend"
-                />
+              <div class="form-group">
+                <PermissionsList :dataTable="dataPermission" @data-send="dataSend" />
               </div>
 
               <div class="form-group row">

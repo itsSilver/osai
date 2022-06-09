@@ -14,20 +14,20 @@
     <p class="side-menu-title">CONTENT</p>
     <ul class="list-unstyled components">
       <li class="active">
-        <nuxt-link tag="a" to="/signals" class="text-white"
-          ><i class="fa-regular fa-gem mr-3"></i> Signals</nuxt-link
-        >
+        <nuxt-link tag="a" to="/signals" class="text-white px-14-format">
+          <i class="mdi mdi-alarm-light mr-3"></i> Signals
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link tag="a" to="/solutions" class="text-white"
-          ><i class="fa fa-ghost mr-3"></i> Solutions</nuxt-link
-        >
+        <nuxt-link tag="a" to="/occurrences" class="text-white px-14-format">
+          <i class="mdi mdi-repeat mr-3"></i>
+          Occurrences
+        </nuxt-link>
       </li>
-
       <li>
-        <nuxt-link tag="a" to="/occurrences" class="text-white"
-          ><i class="fa-regular fa-gem mr-3"></i> Occurrences</nuxt-link
-        >
+        <nuxt-link tag="a" to="/solutions" class="text-white px-14-format">
+          <i class="mdi mdi-lightbulb mr-3"></i> Solutions
+        </nuxt-link>
       </li>
       <!-- <li>
         <a class="text-white" href="#"
@@ -43,9 +43,10 @@
     <p class="side-menu-title">SETTINGS</p>
     <ul class="list-unstyled components">
       <li>
-        <nuxt-link tag="a" to="/manage-access" class="text-white"
-          ><i class="fa fa-ghost mr-3"></i> Manage access</nuxt-link
-        >
+        <nuxt-link tag="a" to="/manage-access" class="text-white px-14-format">
+          <i class="mdi mdi-account-group mr-3"></i>
+          Manage access
+        </nuxt-link>
       </li>
       <!-- <li>
         <a class="text-white" href="#"
@@ -72,6 +73,7 @@
         href="/logout"
         class="text-white text-uppercase font-weight-bold logout-btn"
       >
+        <i class="mdi mdi-logout mr-1"></i>
         Logout</a
       >
     </div>
@@ -96,6 +98,7 @@ export default {
 .logout-row {
   background-color: #485679 !important;
 }
+
 .logout-row > a {
   background-color: #4373fb !important;
   border-radius: 0.25rem !important;

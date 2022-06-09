@@ -151,6 +151,16 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
         return ids
 
 
+class OccorrenzeSignalSerializer(serializers.ModelSerializer):
+    # segnalazione = SegnalazioniDisplaySerializer(read_only=True)
+    total = serializers.SerializerMethodField('total')
+
+    class Meta:
+        model = Occorrenze
+
+        fields = ("total")
+
+
 class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     id_stato_soluzione = StatiSoluzioneSerializer(required=False)
     occorrenze = OccorrenzeDisplaySerializer(required=False)

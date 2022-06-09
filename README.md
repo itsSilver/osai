@@ -21,9 +21,6 @@ In your shell:
 Application will be running at:
 http://localhost:8000 <br>
 
-http://localhost:8000/user/register <br>
-http://localhost:8000/user/login <br>
-http://localhost:8000/user/logout <br>
 
 ### Run frontend locally
 
@@ -34,6 +31,18 @@ cd to client folder and Install node dependencies and run dev:
 `cd client && npm install`
 
 `npm run dev`
+
+Application will be running at:
+http://localhost:3000 <br>
+
+
+### Build frontend for production
+
+`cd client && npm install`
+
+`npm run build`
+
+`npm run start`
 
 Application will be running at:
 http://localhost:3000 <br>

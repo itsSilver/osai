@@ -26,7 +26,7 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
+                <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   Update Signal
                 </li>
@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="dataTable.titolo"
-                    placeholder="Title Signal"
+                    placeholder="Please enter Title Signal"
                   />
                   <div class="error-show" v-if="showTitleSignalError">
                     Please enter the Title Signal!
@@ -69,7 +69,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -80,14 +80,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -104,7 +99,7 @@
                     class="form-control input-create"
                     id="id_alarme"
                     v-model="dataTable.id_allarme"
-                    placeholder="Id alarm"
+                    placeholder="Please enter Id alarm"
                   />
                 </div>
               </div>
@@ -115,14 +110,9 @@
                   >Description Alarm</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.descrizione_allarme"
+                    placeholder="Please enter Description Alarm"
                   />
                 </div>
               </div>
@@ -134,8 +124,8 @@
                   <b-button
                     class="mx-2 button-format file-button"
                     @click="watchImage(dataTable.immagine_1)"
-                    >Image 1</b-button
-                  >
+                    >Image 1
+                  </b-button>
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
@@ -151,8 +141,8 @@
                   <b-button
                     class="mx-2 button-format file-button"
                     @click="watchImage(dataTable.immagine_2)"
-                    >Image 2</b-button
-                  >
+                    >Image 2
+                  </b-button>
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
@@ -168,8 +158,8 @@
                   <b-button
                     class="mx-2 button-format file-button"
                     @click="watchImage(dataTable.immagine_3)"
-                    >Image 3</b-button
-                  >
+                    >Image 3
+                  </b-button>
                   <b-form-file
                     placeholder="Add new Image or drop it here..."
                     drop-placeholder="Drop file here..."
@@ -195,14 +185,9 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="dataTable.note"
+                    placeholder="Please enter Note"
                   />
                 </div>
               </div>
@@ -214,7 +199,8 @@
                   <b-form-select
                     v-model="dataTable.famiglia_macchina"
                     :options="famiglia_macchina_options"
-                  ></b-form-select>
+                  >
+                  </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -225,7 +211,8 @@
                   <b-form-select
                     v-model="dataTable.sottofamiglia_macchina"
                     :options="sottofamiglia_macchina_options"
-                  ></b-form-select>
+                  >
+                  </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -261,49 +248,15 @@
 <script>
 import Nav from '~/components/Nav'
 import SeeImage from '~/components/popup/SeeImage'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
     SeeImage,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
       show: false,
       showImage: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,

@@ -26,8 +26,8 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-plus pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-plus pr-2 fas-main-color"></i>
                   New Occurrence
                 </li>
               </ul>
@@ -46,31 +46,18 @@
                 <label
                   for="id-segnalazione"
                   class="col-sm-2 col-form-label create-label"
-                  >Id signal</label
+                  >Alarm ID</label
                 >
                 <div class="col-sm-10">
                   <input
                     type="number"
                     class="form-control input-create"
                     id="id-segnalazione"
-                    v-model="form.segnalazione"
-                    placeholder="Id signal"
-                  />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label
-                  for="id-soluzione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id solution</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-soluzione"
-                    v-model="form.soluzione"
-                    placeholder="Id solution"
+                    v-model="alarmID"
+                    placeholder="Please select an signal"
+                    readonly
+                    @click="showTableSignals()"
+                    :disabled="alarmID"
                   />
                 </div>
               </div>
@@ -84,7 +71,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="form.titolo"
-                    placeholder="Title"
+                    placeholder="Please enter Title"
                   />
                 </div>
               </div>
@@ -98,7 +85,7 @@
                     class="form-control input-create"
                     id="ticket"
                     v-model="form.rif_ticket"
-                    placeholder="Ticket"
+                    placeholder="Please enter Ticket"
                   />
                 </div>
               </div>
@@ -109,14 +96,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -132,7 +114,7 @@
                     class="form-control input-create"
                     id="machine"
                     v-model="form.commessa_macchina"
-                    placeholder="Machine order"
+                    placeholder="Please enter Machine order"
                   />
                 </div>
               </div>
@@ -148,7 +130,7 @@
                     class="form-control input-create"
                     id="version-1"
                     v-model="form.versione_sw_1"
-                    placeholder="Version sw 1"
+                    placeholder="Please enter Version sw 1"
                   />
                 </div>
               </div>
@@ -164,7 +146,7 @@
                     class="form-control input-create"
                     id="version-2"
                     v-model="form.versione_sw_2"
-                    placeholder="Version sw 2"
+                    placeholder="Please enter Version sw 2"
                   />
                 </div>
               </div>
@@ -188,7 +170,8 @@
                     label-close-button="Close"
                     label-today-button="Today"
                     label-reset-button="Reset"
-                  ></b-form-datepicker>
+                  >
+                  </b-form-datepicker>
                 </div>
               </div>
               <div class="form-group row">
@@ -201,7 +184,8 @@
                   <b-form-select
                     v-model="form.stato_occorrenza"
                     :options="stato_occorrenza_macchina_options"
-                  ></b-form-select>
+                  >
+                  </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
@@ -209,21 +193,33 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.note"
+                    placeholder="Please enter Note"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Solution Title</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    v-model="solutionTitle"
+                    placeholder="Please select solution"
+                    readonly
+                    @click="showTableSolutions()"
                   />
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
+                    <i class="mdi mdi-check pr-2"></i>
                     Save
                   </b-button>
                 </div>
@@ -234,6 +230,16 @@
         </div>
       </div>
     </client-only>
+    <SeeSignals
+      v-if="showModalSignals"
+      @data-add-signal="dataAddSignal"
+      @close="hideModal()"
+    />
+    <SeeSolutions
+      v-if="showModalSolutions"
+      @data-add-solution="dataAddSolution"
+      @close="hideModal()"
+    />
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
         <div class="d-flex flex-grow-1 align-items-baseline">
@@ -247,42 +253,13 @@
 
 <script>
 import Nav from '~/components/Nav'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
+import SeeSignals from '~/components/popup/SeeSignals'
+import SeeSolutions from '~/components/popup/SeeSolutions'
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
+    SeeSignals,
+    SeeSolutions,
   },
   data() {
     return {
@@ -292,7 +269,6 @@ export default {
         { value: 0, text: 'Off' },
       ],
       show: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       creationDate: '',
@@ -310,9 +286,36 @@ export default {
         rif_ticket: '',
         stato_occorrenza: null,
       },
+      showModalSignals: false,
+      showModalSolutions: false,
+      alarmID: null,
+      solutionTitle: null,
+    }
+  },
+  mounted() {
+    if (this.$route.query.id_occurrence) {
+      this.duplicateId = this.$route.query.id_occurrence
+      this.getOcurrenceDuplicate()
+    }
+    if (this.$route.query.id_signal) {
+      this.form.segnalazione = this.$route.query.id_signal
     }
   },
   methods: {
+    dataAddSignal(val) {
+      this.alarmID = val.id_allarme
+      this.form.segnalazione = val.id
+    },
+    dataAddSolution(val) {
+      this.solutionTitle = val.titolo
+      this.form.soluzione = val.id
+    },
+    showTableSignals() {
+      this.showModalSignals = true
+    },
+    showTableSolutions() {
+      this.showModalSolutions = true
+    },
     onSubmit() {
       this.show = true
       if (this.form.segnalazione === null || this.form.segnalazione === '') {
@@ -343,7 +346,9 @@ export default {
       ) {
         this.form.stato_occorrenza = 0
       }
-
+      if (this.form.soluzione === '') {
+        this.form.soluzione = null
+      }
       this.$axios
         .post(`/api/occorrenze/create`, this.form, {
           headers: {
@@ -361,7 +366,26 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.dataCreated = error.response.data.message[0]
+          this.dataCreated = error.response.data.message
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    getOcurrenceDuplicate() {
+      this.show = true
+      this.$axios
+        .get(`/api/occorrenze/retrive_occorrenze/${this.duplicateId}`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          this.form = response.data[0]
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
           this.variant = 'danger'
           this.toggleToaster()
         })
@@ -372,6 +396,10 @@ export default {
         this.$bvToast.hide('created')
         this.variant = 'info'
       }, 2000)
+    },
+    hideModal() {
+      this.showModalSignals = false
+      this.showModalSolutions = false
     },
   },
 }

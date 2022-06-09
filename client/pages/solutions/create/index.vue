@@ -26,8 +26,8 @@
                 "
                 style="list-style: none"
               >
-                <li class="nav-actions-color mx-2">
-                  <i class="fas fa-plus pr-2 fas-main-color"></i>
+                <li class="nav-actions-color mx-2 px-14-format">
+                  <i class="mdi mdi-plus pr-2 fas-main-color"></i>
                   New Solution
                 </li>
               </ul>
@@ -52,7 +52,7 @@
                     class="form-control input-create"
                     id="tittle"
                     v-model="form.titolo"
-                    placeholder="Title Solution"
+                    placeholder="Please enter Title Solution"
                   />
                 </div>
               </div>
@@ -94,14 +94,9 @@
                   >Description</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.descrizione"
+                    placeholder="Please enter Description"
                   />
                 </div>
               </div>
@@ -151,7 +146,7 @@
                     class="form-control input-create"
                     id="sector"
                     v-model="form.settore_riferimento"
-                    placeholder="Reference sector"
+                    placeholder="Please enter Reference sector"
                   />
                 </div>
               </div>
@@ -173,21 +168,16 @@
                   >Note</label
                 >
                 <div class="col-sm-10">
-                  <ckeditor
-                    :editor="editor"
-                    :value="value"
-                    :config="config"
-                    :tagName="tagName"
-                    :disabled="disabled"
-                    @input="(event) => $emit('input', event)"
+                  <VueEditor
                     v-model="form.note"
+                    placeholder="Please enter Note"
                   />
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
                   <b-button type="submit" class="mx-2 button-format">
-                    <i class="fas fa-download pr-2"></i>
+                    <i class="mdi mdi-check pr-2"></i>
                     Save
                   </b-button>
                 </div>
@@ -211,47 +201,13 @@
 
 <script>
 import Nav from '~/components/Nav'
-let ClassicEditor
-let CKEditor
-if (process.client) {
-  ClassicEditor = require('@ckeditor/ckeditor5-build-classic')
-  CKEditor = require('@ckeditor/ckeditor5-vue2')
-} else {
-  CKEditor = { component: { template: '<div></div>' } }
-}
 export default {
   components: {
     Nav,
-    ckeditor: CKEditor.component,
-  },
-  props: {
-    value: {
-      type: String,
-      required: false,
-    },
-    tagName: {
-      type: String,
-      required: false,
-      default: 'div',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-    },
-    uploadUrl: {
-      type: String,
-      required: false,
-    },
-    config: {
-      type: Object,
-      required: false,
-      default: function () {},
-    },
   },
   data() {
     return {
       show: false,
-      editor: ClassicEditor,
       dataCreated: '',
       variant: 'info',
       showTitleSignalError: null,

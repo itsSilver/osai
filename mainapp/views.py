@@ -15,7 +15,6 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
-import json
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
@@ -24,7 +23,7 @@ from rest_framework.exceptions import NotFound, ValidationError, ParseError, Per
 from mainapp.decorators.is_admin import is_admin
 from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Segnalazione, Stati_Soluzione
 
-from mainapp.serializers import OccorrenzeDisplaySerializer, SegnalazioniDisplaySerializer,  \
+from mainapp.serializers import OccorrenzeDisplaySerializer, OccorrenzeSignalSerializer, SegnalazioniDisplaySerializer,  \
     SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer,  \
     StatiSegnalazioneSerializer, StatiSoluzioneSerializer
 
@@ -190,7 +189,7 @@ def create_occorrenze(request):
     try:
         check = Segnalazioni.objects.get(id=request.data['segnalazione'])
     except Exception:
-        res={}
+        res = {}
         res['message'] = "Segnalazioni Not Found"
         res['code'] = 400
         raise ValidationError(res)
@@ -217,7 +216,6 @@ def create_occorrenze(request):
                 res['message'] = "segnalazione_id is missing"
                 res['code'] = 400
                 raise ValidationError(res)
-
 
             occorrenze.segnalazione_id = request.data["segnalazione"]
 
@@ -259,7 +257,16 @@ def retrive_user_segnalazioni(request):
         user=user_id).prefetch_related('id_stato_segnalazione')
     serializer_class = SegnalazioniDisplaySerializer(
         user_segnalazioni, many=True).data
-    return JsonResponse(serializer_class, safe=False)
+    newResponse = []
+    for segnal in serializer_class:
+        total = Occorrenze.objects.raw(
+            'SELECT COUNT(*) as id FROM defaultdb.occorrenze WHERE segnalazione_id = %s', [segnal['id']])[:][0].id
+        segnal['total_occorrenze'] = total
+        newResponse.append(segnal)
+        # for t in total:
+        #     print('t', t)
+
+    return JsonResponse(newResponse, safe=False)
 
 
 @api_view(["GET"])
@@ -418,6 +425,21 @@ def get_soluzioni_by_id(request, id):
     user_soluzioni = Soluzioni.objects.filter(
         pk=id).prefetch_related('id_stato_soluzione')
     serializer_class = SoluzioniDisplaySerializer(
+        user_soluzioni, many=True).data
+    print(serializer_class)
+    return JsonResponse(serializer_class, safe=False)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_occorrenze_by_se_id(request, id):
+    check_permission = __check_if_has_permission(request, "view_soluzioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to view Soluzioni"})
+    user_soluzioni = Occorrenze.objects.filter(
+        segnalazione=id)
+    serializer_class = OccorrenzeDisplaySerializer(
         user_soluzioni, many=True).data
     return JsonResponse(serializer_class, safe=False)
 
