@@ -215,7 +215,6 @@ export default {
     },
   },
   mounted() {
-    console.log('this.dataTable', this.dataTable)
     if (process.client) {
       let signalTable = localStorage.getItem('signalTable')
       if (signalTable) {

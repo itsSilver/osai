@@ -179,10 +179,8 @@ export default {
                 this.show = false
                 this.selectedId = []
                 this.$emit('reload-data')
-                console.log('Passed successfully!')
               })
               .catch((error) => {
-                console.log('Cought Error1', error.response.data)
                 this.dataCreated = error.response.data.message[0]
                 this.show = false
                 this.variant = 'danger'

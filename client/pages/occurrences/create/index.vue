@@ -295,7 +295,6 @@ export default {
   mounted() {
     if (this.$route.query.id_occurrence) {
       this.duplicateId = this.$route.query.id_occurrence
-      console.log('value here:', this.duplicateId)
       this.getOcurrenceDuplicate()
     }
     if (this.$route.query.id_signal) {
@@ -383,7 +382,6 @@ export default {
         })
         .then((response) => {
           this.form = response.data[0]
-          console.log(response.data[0])
           this.show = false
         })
         .catch((error) => {

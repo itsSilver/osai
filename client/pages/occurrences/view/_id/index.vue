@@ -328,19 +328,14 @@ export default {
     }
   },
   mounted() {
-    console.log(this.dataTable.soluzioni_id[0])
     if (this.dataTable.soluzioni_id[0]) {
       this.tempIdSoluzioni = this.dataTable.soluzioni_id[0]
     } else {
       this.tempIdSoluzioni = null
     }
-    console.log(this.tempIdSoluzioni)
   },
   methods: {
     onSubmit() {
-      console.log(this.dataTable.soluzioni_id[0])
-      console.log(this.tempIdSoluzioni)
-
       this.show = true
       if (
         this.dataTable.segnalazione === null ||
@@ -396,8 +391,6 @@ export default {
           },
         })
         .then(() => {
-          console.log(this.dataTable.soluzioni_id)
-          console.log(this.dataTable.soluzioni_id[0])
           if (this.tempIdSoluzioni !== this.dataTable.soluzioni_id[0]) {
             this.disconnectNewSolutionID()
           }

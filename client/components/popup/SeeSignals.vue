@@ -10,32 +10,81 @@
         </div> -->
         <div class="">
           <b-overlay :show="show" rounded="sm">
-            <o-table class="occurrence-table-seg" :data="dataTable" :bordered="true" :striped="true" mobile-cards
-              paginated :per-page="perPage" :current-page.sync="currentPage" v-if="dataTable.length > 0"
-              :selected.sync="selected" :checked-rows.sync="checkedRows" :hoverable="isHoverable">
-              <o-table-column class="test" field="id" label="ID" width="40" numeric v-slot="props">
+            <o-table
+              class="occurrence-table-seg"
+              :data="dataTable"
+              :bordered="true"
+              :striped="true"
+              mobile-cards
+              paginated
+              :per-page="perPage"
+              :current-page.sync="currentPage"
+              v-if="dataTable.length > 0"
+              :selected.sync="selected"
+              :checked-rows.sync="checkedRows"
+              :hoverable="isHoverable"
+            >
+              <o-table-column
+                class="test"
+                field="id"
+                label="ID"
+                width="40"
+                numeric
+                v-slot="props"
+              >
                 {{ props.row.id }}
               </o-table-column>
 
-              <o-table-column field="titolo" label="Title" v-slot="props" position="centered">
+              <o-table-column
+                field="titolo"
+                label="Title"
+                v-slot="props"
+                position="centered"
+              >
                 {{ props.row.titolo }}
               </o-table-column>
-              <o-table-column field="rif_ticket" label="Ticket" v-slot="props" position="centered" sortable>
+              <o-table-column
+                field="rif_ticket"
+                label="Ticket"
+                v-slot="props"
+                position="centered"
+                sortable
+              >
                 {{ props.row.rif_ticket }}
               </o-table-column>
 
-              <o-table-column field="id_allarme" label="Id Alarm" v-slot="props" position="centered" sortable>
+              <o-table-column
+                field="id_allarme"
+                label="Id Alarm"
+                v-slot="props"
+                position="centered"
+                sortable
+              >
                 {{ props.row.id_allarme }}
               </o-table-column>
-              <o-table-column field="famiglia_macchina" label="Family machine" v-slot="props" position="centered"
-                sortable>
+              <o-table-column
+                field="famiglia_macchina"
+                label="Family machine"
+                v-slot="props"
+                position="centered"
+                sortable
+              >
                 {{ props.row.famiglia_macchina }}
               </o-table-column>
-              <o-table-column field="sottofamiglia_macchina" label="Under Family machine" v-slot="props"
-                position="centered" sortable>
+              <o-table-column
+                field="sottofamiglia_macchina"
+                label="Under Family machine"
+                v-slot="props"
+                position="centered"
+                sortable
+              >
                 {{ props.row.sottofamiglia_macchina }}
               </o-table-column>
-              <o-table-column label="Add Signal" v-slot="props" position="centered">
+              <o-table-column
+                label="Add Signal"
+                v-slot="props"
+                position="centered"
+              >
                 <b-button class="mx-1 plus-btn" @click="pushId(props.row)">
                   <i class="mdi mdi-plus"></i>
                 </b-button>
@@ -74,7 +123,6 @@ export default {
   },
   mounted() {
     this.getData()
-    console.log(this.tableValue)
   },
   methods: {
     pushId(val) {

@@ -4,30 +4,38 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div class="
+          <div
+            class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            ">
+            "
+          >
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul class="
+              <ul
+                class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                " style="list-style: none">
+                "
+                style="list-style: none"
+              >
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="mdi mdi-plus pr-2 fas-main-color"></i>
                   New Occurrence
                 </li>
               </ul>
             </div>
-            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
+            <ul
+              class="d-flex justify-content-around align-content-center m-0 p-0"
+              style="list-style: none"
+            ></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -35,82 +43,187 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label for="id-segnalazione" class="col-sm-2 col-form-label create-label">Alarm ID</label>
+                <label
+                  for="id-segnalazione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Alarm ID</label
+                >
                 <div class="col-sm-10">
-                  <input type="number" class="form-control input-create" id="id-segnalazione" v-model="alarmId"
-                    placeholder="Alarm ID" readonly @click="showTableSignals()" :disabled="alarmId" />
+                  <input
+                    type="number"
+                    class="form-control input-create"
+                    id="id-segnalazione"
+                    v-model="alarmId"
+                    placeholder="Alarm ID"
+                    readonly
+                    @click="showTableSignals()"
+                    :disabled="alarmId"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label">Title</label>
+                <label for="tittle" class="col-sm-2 col-form-label create-label"
+                  >Title</label
+                >
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="tittle" v-model="form.titolo"
-                    placeholder="Title" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="tittle"
+                    v-model="form.titolo"
+                    placeholder="Title"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label">Ticket</label>
+                <label for="ticket" class="col-sm-2 col-form-label create-label"
+                  >Ticket</label
+                >
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="ticket" v-model="form.rif_ticket"
-                    placeholder="Ticket" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="ticket"
+                    v-model="form.rif_ticket"
+                    placeholder="Ticket"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="textarea-small" class="col-sm-2 col-form-label create-label">Description</label>
+                <label
+                  for="textarea-small"
+                  class="col-sm-2 col-form-label create-label"
+                  >Description</label
+                >
                 <div class="col-sm-10">
-                  <ckeditor :editor="editor" :value="value" :config="config" :tagName="tagName" :disabled="disabled"
-                    @input="(event) => $emit('input', event)" v-model="form.descrizione" />
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.descrizione"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="machine" class="col-sm-2 col-form-label create-label">Machine order</label>
+                <label
+                  for="machine"
+                  class="col-sm-2 col-form-label create-label"
+                  >Machine order</label
+                >
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="machine" v-model="form.commessa_macchina"
-                    placeholder="Machine order" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="machine"
+                    v-model="form.commessa_macchina"
+                    placeholder="Machine order"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="version-1" class="col-sm-2 col-form-label create-label">Version sw 1</label>
+                <label
+                  for="version-1"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 1</label
+                >
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="version-1" v-model="form.versione_sw_1"
-                    placeholder="Version sw 1" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-1"
+                    v-model="form.versione_sw_1"
+                    placeholder="Version sw 1"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="version-2" class="col-sm-2 col-form-label create-label">Version sw 2</label>
+                <label
+                  for="version-2"
+                  class="col-sm-2 col-form-label create-label"
+                  >Version sw 2</label
+                >
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="version-2" v-model="form.versione_sw_2"
-                    placeholder="Version sw 2" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    id="version-2"
+                    v-model="form.versione_sw_2"
+                    placeholder="Version sw 2"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="data-occorrenza" class="col-sm-2 col-form-label create-label">Occurrence date</label>
+                <label
+                  for="data-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence date</label
+                >
                 <div class="col-sm-10">
-                  <b-form-datepicker id="example-datepicker" v-model="form.data_occorrenza" class="mb-2 date-choose"
-                    today-button reset-button close-button selected-variant="primary" today-variant="primary"
-                    hide-header label-close-button="Close" label-today-button="Today" label-reset-button="Reset">
+                  <b-form-datepicker
+                    id="example-datepicker"
+                    v-model="form.data_occorrenza"
+                    class="mb-2 date-choose"
+                    today-button
+                    reset-button
+                    close-button
+                    selected-variant="primary"
+                    today-variant="primary"
+                    hide-header
+                    label-close-button="Close"
+                    label-today-button="Today"
+                    label-reset-button="Reset"
+                  >
                   </b-form-datepicker>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="status-occorrenza" class="col-sm-2 col-form-label create-label">Occurrence status</label>
+                <label
+                  for="status-occorrenza"
+                  class="col-sm-2 col-form-label create-label"
+                  >Occurrence status</label
+                >
                 <div class="col-sm-10">
-                  <b-form-select v-model="form.stato_occorrenza" :options="stato_occorrenza_macchina_options">
+                  <b-form-select
+                    v-model="form.stato_occorrenza"
+                    :options="stato_occorrenza_macchina_options"
+                  >
                   </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
+                <label for="note" class="col-sm-2 col-form-label create-label"
+                  >Note</label
+                >
                 <div class="col-sm-10">
-                  <ckeditor :editor="editor" :value="value" :config="config" :tagName="tagName" :disabled="disabled"
-                    @input="(event) => $emit('input', event)" v-model="form.note" />
+                  <ckeditor
+                    :editor="editor"
+                    :value="value"
+                    :config="config"
+                    :tagName="tagName"
+                    :disabled="disabled"
+                    @input="(event) => $emit('input', event)"
+                    v-model="form.note"
+                  />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution </label>
+                <label
+                  for="id-soluzione"
+                  class="col-sm-2 col-form-label create-label"
+                  >Solution
+                </label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" v-model="solutionTitle"
-                    placeholder="Select an solution" readonly @click="showTableSolutions()" />
+                  <input
+                    type="text"
+                    class="form-control input-create"
+                    v-model="solutionTitle"
+                    placeholder="Select an solution"
+                    readonly
+                    @click="showTableSolutions()"
+                  />
                 </div>
               </div>
               <div class="form-group row">
@@ -127,8 +240,16 @@
         </div>
       </div>
     </client-only>
-    <SeeSignals v-if="showModalSignals" @data-add-signal="dataAddSignal" @close="hideModal()" />
-    <SeeSolutions v-if="showModalSolutions" @data-add-solution="dataAddSolution" @close="hideModal()" />
+    <SeeSignals
+      v-if="showModalSignals"
+      @data-add-signal="dataAddSignal"
+      @close="hideModal()"
+    />
+    <SeeSolutions
+      v-if="showModalSolutions"
+      @data-add-solution="dataAddSolution"
+      @close="hideModal()"
+    />
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
         <div class="d-flex flex-grow-1 align-items-baseline">
@@ -180,7 +301,7 @@ export default {
     config: {
       type: Object,
       required: false,
-      default: function () { },
+      default: function () {},
     },
   },
   data() {
@@ -212,13 +333,12 @@ export default {
       showModalSignals: false,
       showModalSolutions: false,
       solutionTitle: null,
-      alarmId: null
+      alarmId: null,
     }
   },
   mounted() {
     if (this.$route.query.id_occurrence) {
       this.duplicateId = this.$route.query.id_occurrence
-      console.log('value here:', this.duplicateId)
       this.getOcurrenceDuplicate()
     }
     this.alarmId = this.$route.query.id_alarm
@@ -303,7 +423,6 @@ export default {
         })
         .then((response) => {
           this.form = response.data[0]
-          console.log(response.data[0])
           this.show = false
         })
         .catch((error) => {
