@@ -265,8 +265,8 @@ export default {
     return {
       stato_occorrenza_macchina_options: [
         { value: null, text: 'Select' },
-        { value: 1, text: 'On' },
-        { value: 0, text: 'Off' },
+        { value: 1, text: 'Open' },
+        { value: 0, text: 'Close' },
       ],
       show: false,
       dataCreated: '',
