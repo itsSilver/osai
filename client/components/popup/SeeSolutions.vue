@@ -73,7 +73,7 @@
               </o-table-column>
             </o-table>
             <div style="text-align: center !important" v-else>
-              <NoSignalItems v-if="dataTable.length === 0" />
+              <NoDataItems v-if="dataTable.length === 0" />
             </div>
           </b-overlay>
           <div class="modal-footer mt-8">
@@ -86,10 +86,10 @@
 </template>
 <script>
 import CloseIcon from '~/components/icons/close'
-import NoSignalItems from '~/components/nodata/NoSignalItems'
+import NoDataItems from '~/components/nodata/NoDataItems'
 import { format, parseISO } from 'date-fns'
 export default {
-  components: { CloseIcon, NoSignalItems },
+  components: { CloseIcon, NoDataItems },
   data() {
     return {
       showNoItem: false,
