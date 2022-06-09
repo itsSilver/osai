@@ -40,6 +40,7 @@
                 label="Title"
                 v-slot="props"
                 position="centered"
+                searchable
               >
                 {{ props.row.titolo }}
               </o-table-column>
@@ -48,6 +49,7 @@
                 label="Ticket"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.rif_ticket }}
@@ -58,6 +60,7 @@
                 label="Id Alarm"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.id_allarme }}
@@ -67,6 +70,7 @@
                 label="Family machine"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.famiglia_macchina }}
@@ -76,6 +80,7 @@
                 label="Under Family machine"
                 v-slot="props"
                 position="centered"
+                searchable
                 sortable
               >
                 {{ props.row.sottofamiglia_macchina }}
