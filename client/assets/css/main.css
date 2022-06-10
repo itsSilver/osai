@@ -10965,10 +10965,18 @@ a[data-toggle='collapse'] {
   top: -10px;
   left: -14px !important;
 }
-.fa-bars {
+.fa-bars  {
   color: white !important;
   padding: 5px !important;
   max-width: unset !important;
+}
+.mdi-menu {
+  color: white !important;
+  max-width: unset !important;
+  font-size: 20px !important;
+  font-size: 20px;
+position: relative;
+right: -11px;
 }
 .closedsidebar {
   margin-left: unset !important;

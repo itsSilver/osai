@@ -7,7 +7,7 @@
         class="btn respo-button"
         @click="openSideMenu()"
       >
-        <i class="fa fa-bars"></i>
+        <i class="mdi mdi-menu mr-3"></i>
         <!-- <span class="sr-only">Toggle Menu</span> -->
       </button>
     </div>
