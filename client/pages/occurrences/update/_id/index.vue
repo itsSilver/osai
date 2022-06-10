@@ -303,7 +303,7 @@ export default {
       this.dataTable.segnalazione = val
     },
     dataAddSolution(val) {
-      this.dataTable.soluzioni_id[0] = val
+      this.dataTable.soluzioni_id[0] = val.id
     },
     showTableSignals() {
       this.showModalSignals = true
