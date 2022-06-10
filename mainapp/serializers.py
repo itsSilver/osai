@@ -139,7 +139,7 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
         model = Occorrenze
 
         fields = ("id", "segnalazione", "soluzioni",  "titolo", "descrizione", "commessa_macchina",
-                  "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "soluzioni_id", "stato_occorrenza", "id", "created_at", "updated_at", "rif_ticket")
+                  "versione_sw_1", "versione_sw_2", "data_occorrenza", "note", "soluzioni_id", "stato_occorrenza", "id", "created_at", "updated_at", "rif_ticket", "user_id")
 
     def sol_if(self, obj):
 
