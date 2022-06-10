@@ -11167,7 +11167,10 @@ textarea {
   text-align: center !important;
 }
 .occurrence-table-seg > .o-table__wrapper > table > tbody > tr:nth-of-type(2n + 1){
-  background-color: #e3e3e3 !important;
+  background-color: #f0eeee !important;
+}
+tbody > tr:nth-of-type(2n + 1){
+  background-color: #f0eeee !important;
 }
 td {
   font-size: 12px !important;
