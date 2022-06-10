@@ -11254,4 +11254,7 @@ td {
   .find-create-occurrence > button {
     padding: 2px !important;
   }
+  .respo-menu-button {
+    display: block !important; 
+  }
 }

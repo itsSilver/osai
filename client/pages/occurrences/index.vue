@@ -38,6 +38,7 @@
                 d-flex
                 justify-content-around
                 align-content-center align-items-center
+                respo-menu-button
               "
             >
               <button
