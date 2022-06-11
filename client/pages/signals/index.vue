@@ -155,6 +155,10 @@ export default {
           value: true,
         },
         {
+          text: 'User Id',
+          value: true,
+        },
+        {
           text: 'Creation date',
           value: true,
         },
