@@ -73,7 +73,7 @@ class SegnalazioniSerializer(serializers.ModelSerializer):
         model = Segnalazioni
 
         fields = ("titolo", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "note", "id_stato_segnalazione", "id", "created_at", "updated_at", "rif_ticket")
+                  "famiglia_macchina", "sottofamiglia_macchina", "note", "id_stato_segnalazione", "id", "created_at", "updated_at", "rif_ticket", "user_id")
 
     def create(self, validated_data):
         """
@@ -103,7 +103,7 @@ class SoluzioniSerializer(serializers.ModelSerializer):
         model = Soluzioni
 
         fields = ("rif_ticket", "occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "id", "created_at", "updated_at", "rif_ticket")
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "id", "created_at", "updated_at", "rif_ticket", "user_id")
 
     # def create(self, validated_data):
     #     """
