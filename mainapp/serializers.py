@@ -48,7 +48,7 @@ class SegnalazioniDisplaySerializer(serializers.ModelSerializer):
         model = Segnalazioni
 
         fields = ("id", "created_at", "updated_at", "titolo", "note", "descrizione", "id_allarme", "descrizione_allarme",
-                  "famiglia_macchina", "sottofamiglia_macchina", "rif_ticket", "id_stato_segnalazione", "immagine_1", "immagine_2", "immagine_3")
+                  "famiglia_macchina", "sottofamiglia_macchina", "rif_ticket", "id_stato_segnalazione", "immagine_1", "immagine_2", "immagine_3", "user_id")
 
 
 class SegnalazioniSerializer(serializers.ModelSerializer):
@@ -183,7 +183,7 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
         model = Soluzioni
 
         fields = ("id", "occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at")
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at", "user_id")
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):
