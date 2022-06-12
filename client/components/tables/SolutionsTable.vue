@@ -219,7 +219,7 @@ export default {
       }
     },
     watchImage(val) {
-      this.imageValue = 'http://localhost:8000' + val
+      this.imageValue = 'http://api.apexroyale.com' + val
       this.showImage = true
     },
     hideModal() {

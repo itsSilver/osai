@@ -46,3 +46,10 @@ http://localhost:3000 <br>
 
 Application will be running at:
 http://localhost:3000 <br>
+
+### Install node & pm2
+
+Docs to install node v16 (https://www.vultr.com/docs/how-to-install-node-js--npm-on-debian-11/)
+
+install pm2 globally : `npm install pm2 -g`
+
