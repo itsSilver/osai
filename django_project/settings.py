@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-@3=od+!el%yz%y$&jr%ynrb#(0y!*y#m5qr08$z3z$pg@)81mo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.apexroyale.com']
 
 # Application definition
 
@@ -104,7 +104,8 @@ DATABASES = {
 CORS_ALLOW_HEADERS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'apexroyale.com'
 ]
 AUTH_PASSWORD_VALIDATORS = [
     {
