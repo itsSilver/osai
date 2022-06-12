@@ -3,10 +3,13 @@ module.exports = {
     {
       name: "django-backend",
       script: "manage.py",
-      args: ["runserver 8000"],
-      exec_mode: "cluster",
-      instances: "max",
-      interpreter: "python3",
+      args: ["runserver", "127.0.0.1:8000"],
+      exec_mode: "fork",
+      instances: "1",
+      wait_ready: true,
+      autorestart: false,
+      max_restarts: 5,
+      interpreter: "python",
     },
   ],
 };
