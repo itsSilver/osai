@@ -4,7 +4,7 @@ module.exports = {
       name: "django-backend",
       script: "manage.py",
       args: ["runserver", "127.0.0.1:8000"],
-      exec_mode: "cluster",
+      exec_mode: "fork",
       instances: "1",
       wait_ready: true,
       autorestart: false,
