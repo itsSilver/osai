@@ -243,7 +243,7 @@ export default {
       this.tempimmagine_3 = event.target.files[0]
     },
     watchImage(val) {
-      this.imageValue = $config.baseURL + val
+      this.imageValue = this.$config.baseURL + val
       this.showImage = true
     },
     onSubmit() {

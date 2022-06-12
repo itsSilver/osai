@@ -235,7 +235,7 @@ export default {
   },
   methods: {
     watchImage(val) {
-      this.imageValue = $config.baseURL + val
+      this.imageValue = this.$config.baseURL + val
       this.showImage = true
     },
     hideModal() {
