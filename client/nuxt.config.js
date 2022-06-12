@@ -74,4 +74,7 @@ export default {
     },
   },
   build: {},
+  publicRuntimeConfig: {
+    baseURL: 'http://api.apexroyale.com',
+  },
 }

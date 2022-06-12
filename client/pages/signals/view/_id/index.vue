@@ -235,7 +235,7 @@ export default {
   },
   methods: {
     watchImage(val) {
-      this.imageValue = 'http://api.apexroyale.com' + val
+      this.imageValue = $config.baseURL + val
       this.showImage = true
     },
     hideModal() {

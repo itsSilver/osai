@@ -243,7 +243,7 @@ export default {
       this.tempimmagine_3 = event.target.files[0]
     },
     watchImage(val) {
-      this.imageValue = 'http://api.apexroyale.com' + val
+      this.imageValue = $config.baseURL + val
       this.showImage = true
     },
     onSubmit() {
