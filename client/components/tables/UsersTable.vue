@@ -48,7 +48,7 @@
   </div>
 </template>
 <script>
-import NoUserItem from '~/components/nodata/NoUserItem'
+import NoUserItem from '~/components/nodata/noUserItem'
 import { format, parseISO } from 'date-fns'
 export default {
   components: {
