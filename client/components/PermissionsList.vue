@@ -11,18 +11,18 @@
     </b-list-group-item>
 
     <div class="permissions-list">
-      <!-- <b-card v-for="(list, index) in formatedArray" :key="index"> -->
-      <b-list-group v-for="data in dataTable" :key="data.id">
-        <b-list-group-item>
-          <b-form-checkbox
-            v-model="selected"
-            :value="data.id"
-            :disabled="viewMode"
-            >{{ data.name }}</b-form-checkbox
-          >
-        </b-list-group-item>
-      </b-list-group>
-      <!-- </b-card> -->
+      <b-card v-for="(list, index) in formatedArray" :key="index">
+        <b-list-group v-for="data in list" :key="data.id">
+          <b-list-group-item>
+            <b-form-checkbox
+              v-model="selected"
+              :value="data.id"
+              :disabled="viewMode"
+              >{{ data.name }}</b-form-checkbox
+            >
+          </b-list-group-item>
+        </b-list-group>
+      </b-card>
     </div>
   </div>
 </template>
@@ -38,50 +38,18 @@ export default {
     selected: function (val) {
       this.$emit('data-send', val)
     },
-    // dataTable: {
-    //   handler(newVal) {
-    //     const dataPermissions = []
-    //     newVal.forEach((e) => {
-    //       dataPermissions.push(e.id)
-    //     })
-    //     this.selected = dataPermissions
-    //     this.formatedArray = this.lodash.chunk(newVal, 4)
-    //     console.log('🚀 ~ handler ~ this.formatedArray', this.formatedArray)
-    //   },
-    //   immediate: true,
-    //   deep: true,
-    // },
-  },
-  mounted() {
-    this.getDataPermissions()
-  },
-  methods: {
-    getDataPermissions() {
-      this.show = true
-      this.$axios
-        .get(`/user/id/${this.$route.params.id}`, {
-          headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
-          },
+    dataTable: {
+      handler(newVal) {
+        const dataPermissions = []
+        newVal.forEach((e) => {
+          dataPermissions.push(e.id)
         })
-        .then((response) => {
-          if (response) {
-            const permissions = response.data.permissions
-            const dataPermissions = []
-            permissions.forEach((e) => {
-              dataPermissions.push(e.id)
-            })
-            this.selected = dataPermissions
-            // this.formatedArray = this.lodash.chunk(newVal, 4)
-          }
-          this.show = false
-        })
-        .catch((error) => {
-          this.show = false
-          this.variant = 'danger'
-          this.toggleToaster()
-        })
+        this.selected = dataPermissions
+        this.formatedArray = this.lodash.chunk(newVal, 4)
+        console.log('🚀 ~ handler ~ this.formatedArray', this.formatedArray)
+      },
+      immediate: true,
+      deep: true,
     },
   },
   computed: {
