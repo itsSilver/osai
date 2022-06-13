@@ -92,10 +92,9 @@
                 >
                 <div class="col-sm-10">
                   <input
-                    type="number"
                     class="form-control input-create"
                     id="id_alarme"
-                    v-model="form.id_allarme"
+                    v-model.number="form.id_allarme"
                     placeholder="Please enter Id alarm"
                   />
                 </div>
@@ -314,7 +313,7 @@ export default {
       ],
       sottofamiglia_macchina_options: [
         { value: null, text: 'Select' },
-        { value: 'NULL', text: 'NULL' }
+        { value: 'NULL', text: 'NULL' },
       ],
     }
   },
@@ -341,6 +340,13 @@ export default {
         this.show = false
         this.variant = 'danger'
         this.dataCreated = 'Please enter Alarm Id!'
+        this.toggleToaster()
+        return
+      }
+      if (typeof this.form.id_allarme === 'string') {
+        this.show = false
+        this.variant = 'danger'
+        this.dataCreated = 'Please make sure the Allarm Id is a number!'
         this.toggleToaster()
         return
       }
