@@ -41,7 +41,6 @@ export default {
         .then((response) => {
           this.userName = response.data.name
           this.userEmail = response.data.email
-          console.log(response.data)
           this.show = false
         })
         .catch((error) => {
