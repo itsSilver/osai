@@ -135,17 +135,6 @@
           }}</span>
         </o-table-column>
         <o-table-column
-          field="created_at"
-          label="Creation date"
-          position="centered"
-          v-slot="props"
-          searchable
-          sortable
-          :visible="showCreationDate"
-        >
-          {{ formatDate(props.row.created_at) }}
-        </o-table-column>
-        <o-table-column
           field="user_id"
           label="User Id"
           position="centered"
@@ -155,6 +144,17 @@
           :visible="showUserId"
         >
           {{ props.row.user_id }}
+        </o-table-column>
+        <o-table-column
+          field="created_at"
+          label="Creation date"
+          position="centered"
+          v-slot="props"
+          searchable
+          sortable
+          :visible="showCreationDate"
+        >
+          {{ formatDate(props.row.created_at) }}
         </o-table-column>
         <o-table-column
           field="updated_at"
