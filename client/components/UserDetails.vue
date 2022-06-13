@@ -1,0 +1,85 @@
+<template>
+  <div>
+    <p class="side-menu-title">User Details</p>
+    <div class="profile-pic">
+      <div class="count-indicator">
+        <img
+          class="img-xs rounded-circle"
+          src="@/assets/images/avatar.png"
+          alt=""
+        />
+        <!-- <span class="count bg-success"></span> -->
+      </div>
+      <div class="profile-name">
+        <h5 class="mb-0 font-weight-normal user-name">{{ userName }}</h5>
+        <span class="user-email">{{ userEmail }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      userName: null,
+      userEmail: null,
+    }
+  },
+  mounted() {
+    this.getUserDetails()
+  },
+  methods: {
+    getUserDetails() {
+      this.show = true
+      this.$axios
+        .get(`/user/detail`, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          this.userName = response.data.name
+          this.userEmail = response.data.email
+          console.log(response.data)
+          this.show = false
+        })
+        .catch((error) => {
+          this.show = false
+        })
+    },
+  },
+}
+</script>
+<style scoped>
+.img-xs {
+  width: 35px !important;
+  height: 35px !important;
+}
+.profile-pic {
+  display: flex !important;
+  align-items: center !important;
+  position: relative;
+  bottom: 5px;
+}
+.profile-name {
+  margin-left: 1rem !important;
+  line-height: 1 !important;
+}
+.user-name {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  white-space: nowrap;
+  margin-bottom: 0 !important;
+  color: #ffffff !important;
+}
+.user-email {
+  font-size: 12px !important;
+  color: #6c7293 !important;
+  white-space: nowrap !important;
+}
+.count-indicator {
+  position: relative;
+  left: 10px;
+}
+</style>

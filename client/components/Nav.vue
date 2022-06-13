@@ -11,6 +11,7 @@
         <!-- <span class="sr-only">Toggle Menu</span> -->
       </button>
     </div>
+    <UserDetails />
     <p class="side-menu-title">CONTENT</p>
     <ul class="list-unstyled components">
       <li class="active">
@@ -80,8 +81,10 @@
   </nav>
 </template>
 <script>
+import UserDetails from '~/components/UserDetails'
 export default {
   name: 'Nav',
+  components: { UserDetails },
   data() {
     return {
       isClosedOpened: false,
