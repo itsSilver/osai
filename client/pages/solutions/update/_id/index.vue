@@ -5,12 +5,25 @@
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
           <div
-            class="nav-actions d-flex justify-content-between align-items-center mb-2 navtop"
+            class="
+              nav-actions
+              d-flex
+              justify-content-between
+              align-items-center
+              mb-2
+              navtop
+            "
           >
             <!-- First Nav -->
             <div class="d-flex gap-4">
               <ul
-                class="d-flex justify-content-around align-content-center m-0 p-0"
+                class="
+                  d-flex
+                  justify-content-around
+                  align-content-center
+                  m-0
+                  p-0
+                "
                 style="list-style: none"
               >
                 <li class="nav-actions-color mx-2 px-14-format">
@@ -235,7 +248,7 @@ export default {
         { value: '1', text: '1' },
         { value: '2', text: '2' },
         { value: '3', text: '3' },
-        { value: '2', text: '4  },
+        { value: '2', text: '4' },
         { value: '3', text: '5' },
       ],
     }
