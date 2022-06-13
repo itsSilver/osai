@@ -67,14 +67,14 @@ export default {
 }
 .user-name {
   font-size: 14px !important;
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   white-space: nowrap;
   margin-bottom: 0 !important;
   color: #ffffff !important;
 }
 .user-email {
   font-size: 12px !important;
-  color: #6c7293 !important;
+  color: #e2e5f0 !important;
   white-space: nowrap !important;
 }
 .count-indicator {
