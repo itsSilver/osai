@@ -42,6 +42,7 @@ class Users(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
     permissions = models.ManyToManyField(
         Permission, 'user_permissions')
 
@@ -54,41 +55,10 @@ class Users(AbstractBaseUser):
     class Meta:
         db_table = "users"
 
+
     def __str__(self):
         return str(self.email)
 
     def has_perm(self, perm, obj=None): return self.is_superuser
 
     def has_module_perms(self, app_label): return self.is_superuser
-
-# class Roles(models.Model):
-#     id = models.BigAutoField(primary_key=True)
-#     name = models.CharField(max_length=255)
-#     guard_name = models.CharField(max_length=255)
-#     created_at = models.DateTimeField(blank=True, null=True)
-#     updated_at = models.DateTimeField(blank=True, null=True)
-
-#     class Meta:
-#         db_table = 'roles'
-
-
-# class ModelHasRoles(models.Model):
-#     role = models.OneToOneField('Roles', models.DO_NOTHING, primary_key=True)
-#     model_type = models.CharField(max_length=255)
-#     model_id = models.PositiveBigIntegerField()
-
-#     class Meta:
-#         managed = False
-#         db_table = 'model_has_roles'
-#         unique_together = (('role', 'model_id', 'model_type'),)
-
-
-# class RoleHasPermissions(models.Model):
-#     permission = models.OneToOneField(
-#         Permissions, models.DO_NOTHING, primary_key=True)
-#     role = models.ForeignKey('Roles', models.DO_NOTHING)
-
-#     class Meta:
-#         managed = False
-#         db_table = 'role_has_permissions'
-#         unique_together = (('permission', 'role'),)
