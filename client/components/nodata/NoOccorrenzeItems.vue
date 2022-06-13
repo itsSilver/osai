@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-center">
     <i class="mdi mdi-file-document-box-search mr-3"></i>
     <div style="padding-top: 20px">
       <h6 class="text-dark fw-bold">Could not find any items</h6>
