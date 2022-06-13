@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     getDataPermissions() {
-      this.show = true
+      // this.show = true
       this.$axios
         .get(`/user/id/${this.$route.params.id}`, {
           headers: {
@@ -73,7 +73,7 @@ export default {
               dataPerm.push(e.id)
             })
             this.selected = dataPerm
-            this.show = false
+            // this.show = false
           }
         })
         .catch((error) => {})
