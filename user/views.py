@@ -143,7 +143,11 @@ def update_user(request, id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_permission_to_user(request, id):
+<<<<<<< HEAD
     user = get_object_or_404(User, pk=id)
+=======
+    user = User.objects.get(pk=id)
+>>>>>>> 33e99599e4e54307a62f99528bb7728121e97e2c
     user.permissions.clear()
     permissions = request.data["permission_id"]
     for per in permissions:
@@ -232,6 +236,12 @@ def get_segnalazioni(request):
     return Response({"200": f'Show info'})
 
 
+<<<<<<< HEAD
+=======
+#
+# 
+
+>>>>>>> 33e99599e4e54307a62f99528bb7728121e97e2c
 
 @ api_view(["POST"])
 @ permission_classes([IsAuthenticated])
