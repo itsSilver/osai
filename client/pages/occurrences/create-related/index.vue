@@ -298,6 +298,8 @@ export default {
       this.getOcurrenceDuplicate()
     }
     this.alarmId = this.$route.query.id_alarm
+    this.form.segnalazione = this.$route.query.id_signal
+    // this.form.segnalazione = this.alarmId
   },
   methods: {
     dataAddSignal(val) {
