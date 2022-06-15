@@ -23,6 +23,7 @@ from user.serializers import RegistrationSerializer, UserSerializer, Permissions
 
 User = get_user_model()
 
+
 def __check_if_has_permission(request, permission):
     if request.user.is_admin:
         return True
@@ -114,7 +115,7 @@ def user_delete(request, id):
     user = get_object_or_404(User, pk=id)
     if user.is_admin:
         raise PermissionDenied(
-                    {"message": "You do not have permission to admin"})
+            {"message": "You do not have permission to admin"})
     else:
         user.delete()
 
@@ -127,7 +128,7 @@ def update_user(request, id):
     check_permission = __check_if_has_permission(request, "update_users")
     if not check_permission:
         raise PermissionDenied(
-                    {"message": "You do not have permission to update_users"})
+            {"message": "You do not have permission to update_users"})
     seg = get_object_or_404(User, pk=id)
     if(seg.id == request.user.id):
         data = UserSerializer(
@@ -143,11 +144,7 @@ def update_user(request, id):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def add_permission_to_user(request, id):
-<<<<<<< HEAD
     user = get_object_or_404(User, pk=id)
-=======
-    user = User.objects.get(pk=id)
->>>>>>> 33e99599e4e54307a62f99528bb7728121e97e2c
     user.permissions.clear()
     permissions = request.data["permission_id"]
     for per in permissions:
@@ -165,7 +162,7 @@ def get_users(request):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
         raise PermissionDenied(
-                    {"message": "You do not have permission to view_users"})
+            {"message": "You do not have permission to view_users"})
     queryset = Users.objects.all()
     serializer_class = UserSerializer(queryset, many=True).data
     return JsonResponse(serializer_class, safe=False)
@@ -177,7 +174,7 @@ def user_detail(request):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
         raise PermissionDenied(
-                    {"message": "You do not have permission to view_users"})
+            {"message": "You do not have permission to view_users"})
     user = User.objects.get(pk=request.user.pk)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
@@ -185,14 +182,15 @@ def user_detail(request):
 
 @ api_view(['GET'])
 @ permission_classes([IsAuthenticated])
-def user_by_id(request,id):
+def user_by_id(request, id):
     check_permission = __check_if_has_permission(request, "view_users")
     if not check_permission:
         raise PermissionDenied(
-                    {"message": "You do not have permission to view_users"})
+            {"message": "You do not have permission to view_users"})
     user = User.objects.get(id=id)
     user_serializer = UserSerializer(user)
     return JsonResponse(user_serializer.data)
+
 
 @ api_view(['GET'])
 @ permission_classes([AllowAny])
@@ -235,13 +233,6 @@ def get_segnalazioni(request):
             return Response({"400": f'Missing Permission'})
     return Response({"200": f'Show info'})
 
-
-<<<<<<< HEAD
-=======
-#
-# 
-
->>>>>>> 33e99599e4e54307a62f99528bb7728121e97e2c
 
 @ api_view(["POST"])
 @ permission_classes([IsAuthenticated])
