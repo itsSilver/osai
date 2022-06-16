@@ -46,7 +46,7 @@
                 <label
                   for="id-segnalazione"
                   class="col-sm-2 col-form-label create-label"
-                  >Id signal</label
+                  >Alarm ID</label
                 >
                 <div class="col-sm-10">
                   <input
@@ -54,7 +54,7 @@
                     class="form-control input-create"
                     id="id-segnalazione"
                     v-model="dataTable.segnalazione"
-                    placeholder="Please select Id signal"
+                    placeholder="Please select Alarm ID"
                     readonly
                     @click="showTableSignals()"
                     :disabled="dataTable.segnalazione"
@@ -202,7 +202,7 @@
                 <label
                   for="id-soluzione"
                   class="col-sm-2 col-form-label create-label"
-                  >Id solution</label
+                  >Solution Title</label
                 >
                 <div class="col-sm-10">
                   <input
@@ -210,7 +210,7 @@
                     class="form-control input-create"
                     id="id-soluzione"
                     v-model="dataTable.soluzioni_id[0]"
-                    placeholder="Please select Id solution"
+                    placeholder="Please select Solution Title"
                     readonly
                     @click="showTableSolutions()"
                   />
@@ -319,7 +319,7 @@ export default {
       ) {
         this.show = false
         this.variant = 'danger'
-        this.dataCreated = 'Please enter Id signal!'
+        this.dataCreated = 'Please enter Alarm ID!'
         this.toggleToaster()
         return
       }
