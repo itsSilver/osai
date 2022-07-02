@@ -26,6 +26,9 @@ from mainapp.models import Segnalazioni, Soluzioni, Occorrenze, Stati_Segnalazio
 from mainapp.serializers import OccorrenzeDisplaySerializer, OccorrenzeSignalSerializer, SegnalazioniDisplaySerializer,  \
     SegnalazioniSerializer, SoluzioniDisplaySerializer, SoluzioniSerializer, OccorrenzeSerializer,  \
     StatiSegnalazioneSerializer, StatiSoluzioneSerializer
+from user.models import Users
+
+import json
 
 
 def __check_if_has_permission(request, permission):
@@ -252,9 +255,8 @@ def retrive_user_segnalazioni(request):
         raise PermissionDenied(
             {"message": "You do not have permission to view Segnalazioni"})
 
-    user_id = request.user.id
-    user_segnalazioni = Segnalazioni.objects.filter(
-        user=user_id).prefetch_related('id_stato_segnalazione')
+    user_segnalazioni = Segnalazioni.objects.all(
+    ).prefetch_related('id_stato_segnalazione')
     serializer_class = SegnalazioniDisplaySerializer(
         user_segnalazioni, many=True).data
     newResponse = []
@@ -262,9 +264,11 @@ def retrive_user_segnalazioni(request):
         total = Occorrenze.objects.raw(
             'SELECT COUNT(*) as id FROM defaultdb.occorrenze WHERE segnalazione_id = %s', [segnal['id']])[:][0].id
         segnal['total_occorrenze'] = total
+        name = Users.objects.get(pk=segnal['user_id'])
+        user = str(name)
+        print('username', name)
+        segnal['username'] = user
         newResponse.append(segnal)
-        # for t in total:
-        #     print('t', t)
 
     return JsonResponse(newResponse, safe=False)
 
@@ -541,7 +545,6 @@ def retrive_user_occurrenze(request):
         raise PermissionDenied(
             {"message": "You do not have permission to View Occurrenze"})
 
-    user_id = request.user.id
     user_occurrenze = Occorrenze.objects.all().prefetch_related('soluzioni_id')
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data

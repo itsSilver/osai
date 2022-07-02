@@ -144,9 +144,10 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     def sol_if(self, obj):
 
         prof_obj = Soluzioni.objects.filter(occorrenze_id=obj.id)
-        ids = []
+        ids = {}
         for id in prof_obj:
-            ids.append(id.id)
+            ids['id'] = id.id
+            ids['titolo'] = id.titolo
 
         return ids
 

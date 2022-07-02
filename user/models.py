@@ -55,9 +55,8 @@ class Users(AbstractBaseUser):
     class Meta:
         db_table = "users"
 
-
     def __str__(self):
-        return str(self.email)
+        return str(self.name)
 
     def has_perm(self, perm, obj=None): return self.is_superuser
 

@@ -49,7 +49,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://api.apexroyale.com',
+    // baseURL: 'http://api.apexroyale.com',
+    baseURL: 'http://localhost:8000',
   },
   // Authentication logic here
   auth: {
@@ -82,6 +83,7 @@ export default {
   },
   build: {},
   publicRuntimeConfig: {
-    baseURL: 'http://api.apexroyale.com',
+    // baseURL: 'http://api.apexroyale.com',
+    baseURL: 'http://localhost:8000',
   },
 }
