@@ -173,10 +173,10 @@ export default {
           text: 'Occurrence date',
           value: true,
         },
-        {
-          text: 'Occurrence status',
-          value: true,
-        },
+        // {
+        //   text: 'Occurrence status',
+        //   value: true,
+        // },
         {
           text: 'User Id',
           value: true,

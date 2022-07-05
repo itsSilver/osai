@@ -174,7 +174,7 @@
                   </b-form-datepicker>
                 </div>
               </div>
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label
                   for="status-occorrenza"
                   class="col-sm-2 col-form-label create-label"
@@ -187,7 +187,7 @@
                   >
                   </b-form-select>
                 </div>
-              </div>
+              </div> -->
               <div class="form-group row">
                 <label for="note" class="col-sm-2 col-form-label create-label"
                   >Note</label

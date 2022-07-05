@@ -4,7 +4,8 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div class="
+          <div
+            class="
               nav-actions
               d-flex
               justify-content-between
@@ -12,41 +13,60 @@
               mb-2
               navtop
               respo-nav-top
-            ">
+            "
+          >
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul class="
+              <ul
+                class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                " style="list-style: none; padding-bottom: 10px">
+                "
+                style="list-style: none; padding-bottom: 10px"
+              >
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="mdi mdi-alarm-light mr-3"></i>
                   Signals
                 </li>
               </ul>
             </div>
-            <div class="
+            <div
+              class="
                 d-flex
                 justify-content-around
                 align-content-center align-items-center
                 respo-menu-button
-              ">
-              <button role="button" class="mx-2 button-format px-14-format" @click="redirectCreate()"
-                style="height: 40px">
+              "
+            >
+              <button
+                role="button"
+                class="mx-2 button-format px-14-format"
+                @click="redirectCreate()"
+                style="height: 40px"
+              >
                 <i class="mdi mdi-plus pr-2"></i>
                 New Signal
               </button>
 
-              <b-dropdown class="m-2 table-filter-cols" id="dropdown-form" text="Select fields to display"
-                ref="dropdown">
+              <b-dropdown
+                class="m-2 table-filter-cols"
+                id="dropdown-form"
+                text="Select fields to display"
+                ref="dropdown"
+              >
                 <b-dropdown-form>
-                  <b-form-checkbox v-for="(drop, index) in dropdown" :key="index" class="table-checkbox mb-3"
-                    v-model="drop.value" value="true" unchecked-value="false" @change="dropDownChange(drop)">{{
-                        drop.text
-                    }}
+                  <b-form-checkbox
+                    v-for="(drop, index) in dropdown"
+                    :key="index"
+                    class="table-checkbox mb-3"
+                    v-model="drop.value"
+                    value="true"
+                    unchecked-value="false"
+                    @change="dropDownChange(drop)"
+                    >{{ drop.text }}
                   </b-form-checkbox>
                 </b-dropdown-form>
               </b-dropdown>
@@ -55,7 +75,11 @@
           <div class="vertical-line"></div>
           <div class="table-space">
             <b-overlay :show="show" rounded="sm">
-              <SignalsTable :dataTable="dataTable" :dropdown="dropdown" @value-deleted="valueDeleted" />
+              <SignalsTable
+                :dataTable="dataTable"
+                :dropdown="dropdown"
+                @value-deleted="valueDeleted"
+              />
             </b-overlay>
           </div>
         </div>
@@ -131,7 +155,7 @@ export default {
           value: true,
         },
         {
-          text: 'User Name',
+          text: 'User Id',
           value: true,
         },
         {
