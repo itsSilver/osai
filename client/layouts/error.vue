@@ -5,7 +5,7 @@
         <div></div>
         <h1>404</h1>
       </div>
-      <h2>Page not Found!</h2>
+      <h3>Error Page!</h3>
       <p>
         The page you are trying to reach does not exist or you do not have
         permissions!
