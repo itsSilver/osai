@@ -94,10 +94,12 @@ export default {
         password: false,
       },
       token: null,
+      permissionsData: [],
     }
   },
   methods: {
     async submitForm() {
+      this.permissionsData = []
       this.$auth
         .loginWith('local', { data: this.form })
         .then((response) => {
@@ -105,8 +107,10 @@ export default {
           // this.$auth.strategy.token.set(this.token)
 
           if (this.$auth.user) {
-            this.$gates.setPermissions(this.$auth.user.permissions)
-            console.log('Worked!')
+            this.$auth.user.permissions.forEach((element) => {
+              this.permissionsData.push(element.name)
+            })
+            this.$gates.setPermissions(this.permissionsData)
           }
           this.$router.push('/signals')
         })
