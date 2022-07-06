@@ -46,6 +46,7 @@
                 class="mx-2 button-format px-14-format"
                 @click="redirectCreate()"
                 style="height: 40px"
+                v-permission="'Can add users'"
               >
                 <i class="mdi mdi-plus pr-2"></i>
                 New User

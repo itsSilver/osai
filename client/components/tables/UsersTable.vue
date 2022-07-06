@@ -78,16 +78,22 @@
         <b-button
           class="mx-1 view-btn"
           @click="pushRoute(`view/${props.row.id}`)"
+          v-permission="'Can view users'"
         >
           <i class="mdi mdi-eye"></i>
         </b-button>
         <b-button
           class="mx-1 edit-btn"
           @click="pushRoute(`update/${props.row.id}`)"
+          v-permission="'Can change users'"
         >
           <i class="mdi mdi-pencil"></i>
         </b-button>
-        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)">
+        <b-button
+          class="mx-1 delete-btn"
+          @click="deleteDocument(props.row.id)"
+          v-permission="'Can delete users'"
+        >
           <i class="mdi mdi-delete"></i>
         </b-button>
       </o-table-column>
