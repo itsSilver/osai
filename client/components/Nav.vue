@@ -14,18 +14,18 @@
     <UserDetails />
     <p class="side-menu-title">CONTENT</p>
     <ul class="list-unstyled components">
-      <li class="active">
+      <li class="active" v-permission="'Can view segnalazioni'">
         <nuxt-link tag="a" to="/signals" class="text-white px-14-format">
           <i class="mdi mdi-alarm-light mr-3"></i> Signals
         </nuxt-link>
       </li>
-      <li>
+      <li v-permission="'Can view occorrenze'">
         <nuxt-link tag="a" to="/occurrences" class="text-white px-14-format">
           <i class="mdi mdi-repeat mr-3"></i>
           Occurrences
         </nuxt-link>
       </li>
-      <li>
+      <li v-permission="'Can view soluzioni'">
         <nuxt-link tag="a" to="/solutions" class="text-white px-14-format">
           <i class="mdi mdi-lightbulb mr-3"></i> Solutions
         </nuxt-link>
@@ -41,9 +41,9 @@
         >
       </li> -->
     </ul>
-    <p class="side-menu-title">SETTINGS</p>
+    <p class="side-menu-title" v-permission="'Can view users'">SETTINGS</p>
     <ul class="list-unstyled components">
-      <li>
+      <li v-permission="'Can view users'">
         <nuxt-link tag="a" to="/manage-access" class="text-white px-14-format">
           <i class="mdi mdi-account-group mr-3"></i>
           Manage access
