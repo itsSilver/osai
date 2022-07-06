@@ -179,6 +179,7 @@
                     @click="
                       $router.push(`/solutions/update/${$route.params.id}`)
                     "
+                    v-permission="'Can change soluzioni'"
                   >
                     <i class="fas fa-edit pr-2"></i>
                     Edit

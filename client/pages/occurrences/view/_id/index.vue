@@ -226,6 +226,7 @@
                     @click="
                       $router.push(`/occurrences/update/${$route.params.id}`)
                     "
+                    v-permission="'Can change occorrenze'"
                   >
                     <i class="fas fa-edit pr-2"></i>
                     Edit
