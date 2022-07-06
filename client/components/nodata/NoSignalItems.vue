@@ -4,7 +4,11 @@
     <div style="padding-top: 20px">
       <h6 class="text-dark fw-bold">Could not find any items</h6>
       <p>Try changing the filters or add a new one</p>
-      <b-button class="mx-2 button-format" @click="redirectCreate()">
+      <b-button
+        class="mx-2 button-format"
+        @click="redirectCreate()"
+        v-permission="'Can add segnalazioni'"
+      >
         <i class="mdi mdi-plus pr-2"></i>
         New Signal
       </b-button>
