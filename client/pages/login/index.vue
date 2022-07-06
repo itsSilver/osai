@@ -103,6 +103,11 @@ export default {
         .then((response) => {
           // this.token = response.data.token
           // this.$auth.strategy.token.set(this.token)
+
+          if (this.$auth.user) {
+            this.$gates.setPermissions(this.$auth.user.permissions)
+            console.log('Worked!')
+          }
           this.$router.push('/signals')
         })
         // await this.$axios

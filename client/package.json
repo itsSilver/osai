@@ -19,6 +19,7 @@
     "lodash": "^4.17.21",
     "nuxt": "^2.15.7",
     "nuxtjs-mdi-font": "^1.0.2",
+    "vue-gates": "^2.1.2",
     "vue-lodash": "^2.1.2",
     "vue2-editor": "^2.10.3"
   },
