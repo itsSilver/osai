@@ -177,18 +177,21 @@
           <b-button
             class="mx-1 view-btn"
             @click="pushRoute(`view/${props.row.id}`)"
+            v-permission="'Can view segnalazioni'"
           >
             <i class="mdi mdi-eye"></i>
           </b-button>
           <b-button
             class="mx-1 edit-btn"
             @click="pushRoute(`update/${props.row.id}`)"
+            v-permission="'Can change segnalazioni'"
           >
             <i class="mdi mdi-pencil"></i>
           </b-button>
           <b-button
             class="mx-1 delete-btn"
             @click="deleteDocument(props.row.id)"
+            v-permission="'Can delete segnalazioni'"
           >
             <i class="mdi mdi-delete"></i>
           </b-button>
