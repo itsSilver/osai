@@ -2,3 +2,26 @@
 2022-07-12 15:43:10 [WARNING ] (log.log_response) Bad Request: /user/login
 2022-07-12 15:43:25 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\django_project\settings.py changed, reloading.
 2022-07-12 15:43:26 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:51:37 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:51:39 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:52:30 [WARNING ] (log.log_response) Not Found: /api/segnalazioni/4/delete
+2022-07-12 15:53:52 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:53:53 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:54:00 [WARNING ] (log.log_response) Not Found: /api/segnalazioni/4/delete
+2022-07-12 15:54:10 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:54:11 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:54:16 [WARNING ] (log.log_response) Not Found: /api/segnalazioni/4/delete
+2022-07-12 15:54:41 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:54:43 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:55:03 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:55:04 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:55:30 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:55:31 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:55:39 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:55:40 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:57:46 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:57:47 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:57:52 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:57:53 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:58:00 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-12 15:58:01 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader

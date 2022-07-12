@@ -328,7 +328,8 @@ def remove_segnalazioni(request, id):
             {"message": "You do not have permission to remove Segnalazioni"})
 
     segnalazioni = get_object_or_404(Segnalazioni, pk=id)
-    if(segnalazioni.user_id == request.user.id):
+    print('request.user:', request.user.is_admin)
+    if(segnalazioni.user_id == request.user.id or request.user.is_superuser == True):
         segnalazioni.delete()
         return JsonResponse({"status": 200, "message": "Segnalazioni Removed successfully"})
     raise NotFound("Segnalazioni not found")
@@ -390,7 +391,7 @@ def remove_soluzioni(request, id):
             {"message": "You do not have permission to remove Soluzioni"})
 
     soluzioni = get_object_or_404(Soluzioni, pk=id)
-    if(soluzioni.user_id == request.user.id):
+    if(soluzioni.user_id == request.user.id or request.user.is_superuser == True):
         soluzioni.delete()
         return JsonResponse({"status": 200, "message": "Soluzioni Removed successfully"})
     raise NotFound("Soluzioni not found")
@@ -767,7 +768,7 @@ def update_stati_soluzione(request, id):
 @permission_classes([IsAuthenticated])
 def remove_stati_soluzione(request, id):
     stati = get_object_or_404(Stati_Soluzione, pk=id)
-    if(stati.user_id == request.user.id):
+    if(stati.user_id == request.user.id or request.user.is_superuser == True):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Soluzione Removed successfully"})
     raise NotFound("Not found")
@@ -828,7 +829,7 @@ def retrieve_all_stati_segnalazione(request):
 @permission_classes([IsAuthenticated])
 def remove_stati_segnalazione(request, id):
     stati = get_object_or_404(Stati_Segnalazione, pk=id)
-    if(stati.user_id == request.user.id):
+    if(stati.user_id == request.user.id or request.user.is_superuser == True):
         stati.delete()
         return JsonResponse({"status": 200, "message": "Stati_Segnalazione Removed successfully"})
     raise NotFound("Not found")
