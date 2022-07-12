@@ -9,7 +9,19 @@
           <slot name="header"> Attention </slot>
         </div> -->
         <div class="">
-          <img class="img-fluid img-100" :src="this.imageValue" alt="" />
+          <img
+            class="img-fluid img-100"
+            :src="this.imageValue"
+            alt=""
+            v-if="!noImageDisplay"
+          />
+          <img
+            v-if="noImageDisplay"
+            class="img-fluid img-100"
+            src="@/assets/images/noimage.jpg"
+            alt=""
+            style="max-height: 500px !important"
+          />
           <div class="modal-footer mt-8">
             <slot name="footer">
               <b-button class="mx-2 button-format" @click="cancel()"
@@ -40,7 +52,7 @@ export default {
       this.$emit('close')
     },
   },
-  props: ['imageValue'],
+  props: ['imageValue', 'noImageDisplay'],
 }
 </script>
 <style scoped>

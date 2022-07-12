@@ -204,6 +204,7 @@
       <SeeImage
         v-if="showImage"
         :imageValue="imageValue"
+        :noImageDisplay="noImageDisplay"
         @close="hideModal()"
       />
       <SeeOccurrences
@@ -251,6 +252,7 @@ export default {
       showUserId: false,
       tableValue: null,
       alarmId: null,
+      noImageDisplay: false,
     }
   },
   methods: {
@@ -265,8 +267,12 @@ export default {
       this.showOccurrenceTable = true
     },
     watchImage(val) {
+      this.noImageDisplay = false
       this.imageValue = this.$config.baseURL + val
       this.showImage = true
+      if (val === '/media/null') {
+        this.noImageDisplay = true
+      }
     },
     hideModal() {
       this.showImage = false

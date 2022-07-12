@@ -180,6 +180,7 @@
       <SeeImage
         v-if="showImage"
         :imageValue="imageValue"
+        :noImageDisplay="noImageDisplay"
         @close="hideModal()"
       />
     </b-overlay>
@@ -213,6 +214,7 @@ export default {
       showImage3: false,
       showCreationDate: false,
       showUpdateDate: false,
+      noImageDisplay: false,
     }
   },
   methods: {
@@ -222,8 +224,12 @@ export default {
       }
     },
     watchImage(val) {
+      this.noImageDisplay = false
       this.imageValue = this.$config.baseURL + val
       this.showImage = true
+      if (val === null) {
+        this.noImageDisplay = true
+      }
     },
     hideModal() {
       this.showImage = false
