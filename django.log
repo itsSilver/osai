@@ -1,0 +1,4 @@
+2022-07-12 15:42:39 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:43:10 [WARNING ] (log.log_response) Bad Request: /user/login
+2022-07-12 15:43:25 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\django_project\settings.py changed, reloading.
+2022-07-12 15:43:26 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
