@@ -25,3 +25,4 @@
 2022-07-12 15:57:53 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
 2022-07-12 15:58:00 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
 2022-07-12 15:58:01 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-12 15:58:32 [WARNING ] (log.log_response) Forbidden: /user/remove/4
