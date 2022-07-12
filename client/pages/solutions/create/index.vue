@@ -260,10 +260,10 @@ export default {
       if (this.tempimmagine_1 !== null) {
         data.append('immagine_1', this.tempimmagine_1)
       }
-      if (this.tempimmagine_1 !== null) {
+      if (this.tempimmagine_2 !== null) {
         data.append('immagine_2', this.tempimmagine_2)
       }
-      if (this.tempimmagine_1 !== null) {
+      if (this.tempimmagine_3 !== null) {
         data.append('immagine_3', this.tempimmagine_3)
       }
       if (this.form.rank !== null) {
