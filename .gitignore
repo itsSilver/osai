@@ -4,3 +4,16 @@
 /__pycache__/
 __pycache__
 __pycache__/
+
+
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__
+media/
+.idea/
+mainapp/__pycache__/
+django_project/__pycache__/
+mail/__pycache__/
+user/__pycache__/

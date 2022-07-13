@@ -4,38 +4,30 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
+                " style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-eye pr-2 fas-main-color"></i>
                   View Signal
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -43,150 +35,94 @@
           <b-overlay :show="show" rounded="sm">
             <b-form class="create-solution-form">
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title Signal</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title Signal</label>
                 <div class="col-sm-10">
-                  <input
-                    disabled
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                  />
+                  <input disabled type="text" class="form-control input-create" id="tittle"
+                    v-model="dataTable.titolo" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Ticket</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Ticket</label>
                 <div class="col-sm-10">
-                  <input
-                    disabled
-                    type="text"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.rif_ticket"
-                  />
+                  <input disabled type="text" class="form-control input-create" id="ticket"
+                    v-model="dataTable.rif_ticket" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
                   <VueEditor :disabled="true" v-model="dataTable.descrizione" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label
-                  for="id_alarme"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id alarm</label
-                >
+                <label for="id_alarme" class="col-sm-2 col-form-label create-label">Id alarm</label>
                 <div class="col-sm-10">
-                  <input
-                    disabled
-                    type="number"
-                    class="form-control input-create"
-                    id="id_alarme"
-                    v-model="dataTable.id_allarme"
-                  />
+                  <input disabled type="number" class="form-control input-create" id="id_alarme"
+                    v-model="dataTable.id_allarme" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description Alarm</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description Alarm</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    :disabled="true"
-                    v-model="dataTable.descrizione_allarme"
-                  />
+                  <VueEditor :disabled="true" v-model="dataTable.descrizione_allarme" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag1" class="col-sm-2 col-form-label create-label"
-                  >Image 1</label
-                >
+                <label for="immag1" class="col-sm-2 col-form-label create-label">Image 1</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_1)"
-                    >Image 1
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_1)">
+                    <img :src="$config.baseURL + dataTable.immagine_1" class="button-image"
+                      v-if="dataTable.immagine_1 !== '/media/null'">
+                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
                   </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag2" class="col-sm-2 col-form-label create-label"
-                  >Image 2</label
-                >
+                <label for="immag2" class="col-sm-2 col-form-label create-label">Image 2</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_2)"
-                    >Image 2
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">
+                    <img :src="$config.baseURL + dataTable.immagine_2" class="button-image"
+                      v-if="dataTable.immagine_2 !== '/media/null'">
+                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image">
                   </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag3" class="col-sm-2 col-form-label create-label"
-                  >Image 3</label
-                >
+                <label for="immag3" class="col-sm-2 col-form-label create-label">Image 3</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_3)"
-                    >Image 3
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">
+                    <img :src="$config.baseURL + dataTable.immagine_3" class="button-image"
+                      v-if="dataTable.immagine_3 !== '/media/null'">
+                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
                   </b-button>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
                   <VueEditor :disabled="true" v-model="dataTable.note" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Family machine</label
-                >
+                <label class="col-sm-2 col-form-label create-label">Family machine</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    disabled
-                    v-model="dataTable.famiglia_macchina"
-                    :options="famiglia_macchina_options"
-                  >
+                  <b-form-select disabled v-model="dataTable.famiglia_macchina" :options="famiglia_macchina_options">
                   </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Under Family machine</label
-                >
+                <label class="col-sm-2 col-form-label create-label">Under Family machine</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    disabled
-                    v-model="dataTable.sottofamiglia_macchina"
-                    :options="sottofamiglia_macchina_options"
-                  >
+                  <b-form-select disabled v-model="dataTable.sottofamiglia_macchina"
+                    :options="sottofamiglia_macchina_options">
                   </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <b-button
-                    class="mx-2 button-format"
-                    @click="$router.push(`/signals/update/${$route.params.id}`)"
-                    v-permission="'Can change segnalazioni'"
-                  >
+                  <b-button class="mx-2 button-format" @click="$router.push(`/signals/update/${$route.params.id}`)"
+                    v-permission="'Can change segnalazioni'">
                     <i class="fas fa-edit pr-2"></i>
                     Edit
                   </b-button>
@@ -197,11 +133,7 @@
           <!-- End here -->
         </div>
       </div>
-      <SeeImage
-        v-if="showImage"
-        :imageValue="imageValue"
-        @close="hideModal()"
-      />
+      <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -249,7 +181,7 @@ export default {
   },
   methods: {
     watchImage(val) {
-      this.imageValue = this.$config.baseURL + val
+      this.imageValue = val
       this.showImage = true
     },
     hideModal() {
@@ -272,4 +204,11 @@ export default {
 /* .form-group {
   width: 100% !important;
 } */
+.button-image {
+  max-width: 100px;
+  max-height: 100px;
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+}
 </style>

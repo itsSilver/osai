@@ -1,99 +1,35 @@
 <template>
   <div>
-    <o-table
-      :data="dataTable"
-      :bordered="true"
-      :striped="true"
-      mobile-cards
-      paginated
-      :per-page="perPage"
-      :current-page.sync="currentPage"
-      v-if="dataTable.length > 0"
-      default-sort="id"
-      default-sort-direction="desc"
-    >
-      <o-table-column
-        field="id"
-        label="ID"
-        width="40"
-        numeric
-        v-slot="props"
-        :visible="showID"
-        sortable
-      >
+    <o-table :data="dataTable" :bordered="true" :striped="true" mobile-cards paginated :per-page="perPage"
+      :current-page.sync="currentPage" v-if="dataTable.length > 0" default-sort="id" default-sort-direction="desc">
+      <o-table-column field="id" label="ID" width="40" numeric v-slot="props" :visible="showID" sortable>
         {{ props.row.id }}
       </o-table-column>
 
-      <o-table-column
-        field="name"
-        label="Name"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showName"
-      >
+      <o-table-column field="name" label="Name" v-slot="props" searchable position="centered" sortable
+        :visible="showName">
         {{ props.row.name }}
       </o-table-column>
-      <o-table-column
-        field="email"
-        label="Email"
-        v-slot="props"
-        searchable
-        position="centered"
-        sortable
-        :visible="showEmail"
-      >
+      <o-table-column field="email" label="Email" v-slot="props" searchable position="centered" sortable
+        :visible="showEmail">
         {{ props.row.email }}
       </o-table-column>
-      <o-table-column
-        field="date"
-        label="Creation date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showCreationDate"
-      >
+      <o-table-column field="date" label="Creation date" position="centered" v-slot="props" searchable sortable
+        :visible="showCreationDate">
         {{ formatDate(props.row.created_at) }}
       </o-table-column>
-      <o-table-column
-        field="date"
-        label="Update date"
-        position="centered"
-        v-slot="props"
-        searchable
-        sortable
-        :visible="showUpdateDate"
-      >
+      <o-table-column field="date" label="Update date" position="centered" v-slot="props" searchable sortable
+        :visible="showUpdateDate">
         {{ formatDate(props.row.updated_at) }}
       </o-table-column>
-      <o-table-column
-        field="action"
-        label="Action"
-        position="centered"
-        v-slot="props"
-        width="180px"
-      >
-        <b-button
-          class="mx-1 view-btn"
-          @click="pushRoute(`view/${props.row.id}`)"
-          v-permission="'Can view users'"
-        >
+      <o-table-column field="action" label="Action" position="centered" v-slot="props" width="180px">
+        <b-button class="mx-1 view-btn" @click="pushRoute(`view/${props.row.id}`)" v-permission="'Can view users'">
           <i class="mdi mdi-eye"></i>
         </b-button>
-        <b-button
-          class="mx-1 edit-btn"
-          @click="pushRoute(`update/${props.row.id}`)"
-          v-permission="'Can change users'"
-        >
+        <b-button class="mx-1 edit-btn" @click="pushRoute(`update/${props.row.id}`)" v-permission="'Can change users'">
           <i class="mdi mdi-pencil"></i>
         </b-button>
-        <b-button
-          class="mx-1 delete-btn"
-          @click="deleteDocument(props.row.id)"
-          v-permission="'Can delete users'"
-        >
+        <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)" v-permission="'Can delete users'">
           <i class="mdi mdi-delete"></i>
         </b-button>
       </o-table-column>
@@ -139,7 +75,7 @@ export default {
       }
     },
     watchImage(val) {
-      this.imageValue = this.$config.baseURL + val
+      this.imageValue = val
       this.showImage = true
     },
     hideModal() {

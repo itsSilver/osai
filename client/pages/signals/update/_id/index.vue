@@ -4,25 +4,17 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="nav-actions d-flex justify-content-between align-items-center mb-2 navtop"
-          >
+          <div class="nav-actions d-flex justify-content-between align-items-center mb-2 navtop">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="d-flex justify-content-around align-content-center m-0 p-0"
-                style="list-style: none"
-              >
+              <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   Update Signal
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -30,128 +22,83 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title Signal</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title Signal</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                    placeholder="Please enter Title Signal"
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="dataTable.titolo"
+                    placeholder="Please enter Title Signal" />
                   <div class="error-show" v-if="showTitleSignalError">
                     Please enter the Title Signal!
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Ticket</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Ticket</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.rif_ticket"
-                    placeholder="Please enter Ticket"
-                  />
+                  <input type="text" class="form-control input-create" id="ticket" v-model="dataTable.rif_ticket"
+                    placeholder="Please enter Ticket" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.descrizione"
-                    placeholder="Please enter Description"
-                  />
+                  <VueEditor v-model="dataTable.descrizione" placeholder="Please enter Description" />
                 </div>
               </div>
 
               <div class="form-group row">
-                <label
-                  for="id_alarme"
-                  class="col-sm-2 col-form-label create-label"
-                  >Id alarm</label
-                >
+                <label for="id_alarme" class="col-sm-2 col-form-label create-label">Id alarm</label>
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id_alarme"
-                    v-model="dataTable.id_allarme"
-                    placeholder="Please enter Id alarm"
-                  />
+                  <input type="number" class="form-control input-create" id="id_alarme" v-model="dataTable.id_allarme"
+                    placeholder="Please enter Id alarm" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description Alarm</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description Alarm</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.descrizione_allarme"
-                    placeholder="Please enter Description Alarm"
-                  />
+                  <VueEditor v-model="dataTable.descrizione_allarme" placeholder="Please enter Description Alarm" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag1" class="col-sm-2 col-form-label create-label"
-                  >Image 1</label
-                >
-                <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_1)"
-                    >Image 1
-                  </b-button>
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange"
-                  ></b-form-file>
+                <label for="immag1" class="col-sm-2 col-form-label create-label">Image 1</label>
+                <div class="col-sm-10 d-flex">
+                  <div class="buttons-image ">
+
+                    <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_1)">
+                      <img :src="$config.baseURL + dataTable.immagine_1" class="button-image"
+                        v-if="dataTable.immagine_1 !== '/media/null'">
+                      <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
+                    </b-button>
+                    <b-button class="mx-2 button-remove" @click="removeImage1(dataTable.immagine_1)"
+                      v-if="dataTable.immagine_1 !== '/media/null'">
+                      Remove
+                    </b-button>
+                  </div>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange"></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag2" class="col-sm-2 col-form-label create-label"
-                  >Image 2</label
-                >
+                <label for="immag2" class="col-sm-2 col-form-label create-label">Image 2</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_2)"
-                    >Image 2
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">
+                    <img :src="$config.baseURL + dataTable.immagine_2" class="button-image"
+                      v-if="dataTable.immagine_2 !== '/media/null'">
+                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
                   </b-button>
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange2"
-                  ></b-form-file>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange2"></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag3" class="col-sm-2 col-form-label create-label"
-                  >Image 3</label
-                >
+                <label for="immag3" class="col-sm-2 col-form-label create-label">Image 3</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_3)"
-                    >Image 3
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">
+                    <img :src="$config.baseURL + dataTable.immagine_3" class="button-image"
+                      v-if="dataTable.immagine_3 !== '/media/null'">
+                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
                   </b-button>
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange3"
-                  ></b-form-file>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange3"></b-form-file>
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -168,37 +115,22 @@
                 </div>
               </div> -->
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.note"
-                    placeholder="Please enter Note"
-                  />
+                  <VueEditor v-model="dataTable.note" placeholder="Please enter Note" />
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Family machine</label
-                >
+                <label class="col-sm-2 col-form-label create-label">Family machine</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.famiglia_macchina"
-                    :options="famiglia_macchina_options"
-                  >
+                  <b-form-select v-model="dataTable.famiglia_macchina" :options="famiglia_macchina_options">
                   </b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label create-label"
-                  >Under Family machine</label
-                >
+                <label class="col-sm-2 col-form-label create-label">Under Family machine</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.sottofamiglia_macchina"
-                    :options="sottofamiglia_macchina_options"
-                  >
+                  <b-form-select v-model="dataTable.sottofamiglia_macchina" :options="sottofamiglia_macchina_options">
                   </b-form-select>
                 </div>
               </div>
@@ -215,11 +147,7 @@
           <!-- End here -->
         </div>
       </div>
-      <SeeImage
-        v-if="showImage"
-        :imageValue="imageValue"
-        @close="hideModal()"
-      />
+      <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -318,8 +246,11 @@ export default {
       this.tempimmagine_3 = event.target.files[0]
     },
     watchImage(val) {
-      this.imageValue = this.$config.baseURL + val
+      this.imageValue = val
       this.showImage = true
+    },
+    removeImage1(val) {
+      console.log('remnove image here:', val)
     },
     onSubmit() {
       // this.show = true
@@ -408,7 +339,22 @@ export default {
 }
 </script>
 <style scoped>
-/* .form-group {
-  width: 100% !important;
-} */
+.button-image {
+  max-width: 100px;
+  max-height: 100px;
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+}
+
+.buttons-image {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button-remove {
+  background: #ca0900;
+  border: none;
+}
 </style>

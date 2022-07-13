@@ -4,38 +4,30 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
+                " style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   New Solution
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -43,17 +35,10 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title Solution</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title Solution</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                    placeholder="Please enter Title Solution"
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="dataTable.titolo"
+                    placeholder="Please enter Title Solution" />
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -72,92 +57,49 @@
                 </div>
               </div> -->
               <div class="form-group row">
-                <label for="rank" class="col-sm-2 col-form-label create-label"
-                  >Rank</label
-                >
+                <label for="rank" class="col-sm-2 col-form-label create-label">Rank</label>
                 <div class="col-sm-10">
-                  <b-form-select
-                    v-model="dataTable.rank"
-                    :options="rank_options"
-                  ></b-form-select>
+                  <b-form-select v-model="dataTable.rank" :options="rank_options"></b-form-select>
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="description"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="description" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.descrizione"
-                    placeholder="Please enter Description"
-                  />
+                  <VueEditor v-model="dataTable.descrizione" placeholder="Please enter Description" />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag1" class="col-sm-2 col-form-label create-label"
-                  >Image 1</label
-                >
+                <label for="immag1" class="col-sm-2 col-form-label create-label">Image 1</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_1)"
-                    >Image 1</b-button
-                  >
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange"
-                  ></b-form-file>
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_1)">Image 1
+                  </b-button>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange"></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag2" class="col-sm-2 col-form-label create-label"
-                  >Image 2</label
-                >
+                <label for="immag2" class="col-sm-2 col-form-label create-label">Image 2</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_2)"
-                    >Image 2</b-button
-                  >
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange2"
-                  ></b-form-file>
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">Image 2
+                  </b-button>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange2"></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="immag3" class="col-sm-2 col-form-label create-label"
-                  >Image 3</label
-                >
+                <label for="immag3" class="col-sm-2 col-form-label create-label">Image 3</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button
-                    class="mx-2 button-format file-button"
-                    @click="watchImage(dataTable.immagine_3)"
-                    >Image 3</b-button
-                  >
-                  <b-form-file
-                    placeholder="Add new Image or drop it here..."
-                    drop-placeholder="Drop file here..."
-                    @change="fileChange3"
-                  ></b-form-file>
+                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">Image 3
+                  </b-button>
+                  <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
+                    @change="fileChange3"></b-form-file>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="sector" class="col-sm-2 col-form-label create-label"
-                  >Reference sector</label
-                >
+                <label for="sector" class="col-sm-2 col-form-label create-label">Reference sector</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="sector"
-                    v-model="dataTable.settore_riferimento"
-                    placeholder="Please enter Reference sector"
-                  />
+                  <input type="text" class="form-control input-create" id="sector"
+                    v-model="dataTable.settore_riferimento" placeholder="Please enter Reference sector" />
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -174,14 +116,9 @@
               </div>
             </div> -->
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.note"
-                    placeholder="Please enter Note"
-                  />
+                  <VueEditor v-model="dataTable.note" placeholder="Please enter Note" />
                 </div>
               </div>
               <div class="form-group row">
@@ -197,11 +134,7 @@
           <!-- End here -->
         </div>
       </div>
-      <SeeImage
-        v-if="showImage"
-        :imageValue="imageValue"
-        @close="hideModal()"
-      />
+      <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
     </client-only>
     <b-toast id="created" :variant="variant" solid>
       <template #toast-title>
@@ -264,7 +197,7 @@ export default {
       this.tempimmagine_3 = event.target.files[0]
     },
     watchImage(val) {
-      this.imageValue = this.$config.baseURL + val
+      this.imageValue = val
       this.showImage = true
     },
     onSubmit() {

@@ -8,25 +8,14 @@
         <!-- <div class="modal-header">
           <slot name="header"> Attention </slot>
         </div> -->
-        <div class="">
-          <img
-            class="img-fluid img-100"
-            :src="this.imageValue"
-            alt=""
-            v-if="!noImageDisplay"
-          />
-          <img
-            v-if="noImageDisplay"
-            class="img-fluid img-100"
-            src="@/assets/images/noimage.jpg"
-            alt=""
-            style="max-height: 500px !important"
-          />
+        <div class="modal-box">
+          <img class="img-fluid img-100" :src="$config.baseURL + imageValue" alt=""
+            v-if="imageValue !== '/media/null'" />
+          <img v-else class="img-fluid img-100" src="~/assets/images/noimage.jpg" alt=""
+            style="max-height: 500px !important" />
           <div class="modal-footer mt-8">
             <slot name="footer">
-              <b-button class="mx-2 button-format" @click="cancel()"
-                >Close</b-button
-              >
+              <b-button class="mx-2 button-format" @click="cancel()">Close</b-button>
             </slot>
           </div>
         </div>
@@ -46,7 +35,7 @@ export default {
       dataTable: [],
     }
   },
-  mounted() {},
+  mounted() { },
   methods: {
     cancel() {
       this.$emit('close')
@@ -97,6 +86,7 @@ export default {
 .modal-default-button {
   float: right;
 }
+
 .modal-enter {
   opacity: 0;
 }
@@ -123,6 +113,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .salva {
   width: 140px;
   color: #fff;
@@ -135,6 +126,7 @@ export default {
   line-height: 1.6;
   border-radius: 0.25rem;
 }
+
 .modal-body-custom {
   padding: 0 1rem;
   background-color: #f5f6fa;
@@ -142,12 +134,14 @@ export default {
   border-radius: 0px;
   padding-top: 0.75rem;
 }
+
 .modal-footer {
   padding-left: 0;
   padding-right: 0;
   padding-top: 50px !important;
   border-top: unset !important;
 }
+
 .modal-header {
   text-align: center;
   font-size: 28px;
@@ -161,31 +155,38 @@ export default {
   display: block;
   text-transform: uppercase;
 }
+
 .modal-body-custom label {
   display: block;
 }
+
 .error {
   color: red;
   font-weight: 500;
   font-size: 14px;
 }
+
 .forma {
   width: 50%;
 }
+
 .forma input {
   width: 100%;
   border-radius: 4px;
   height: 35px;
 }
+
 @media (max-width: 400px) {
   .anulla {
     width: 50%;
     max-width: 100px;
   }
+
   .salva {
     width: 50%;
     max-width: 100px;
   }
+
   .modal-header {
     font-size: 22px;
     line-height: 28px;

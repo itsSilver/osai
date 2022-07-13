@@ -10,20 +10,12 @@
         The page you are trying to reach does not exist or you do not have
         permissions!
       </p>
-      <a href="" @click="goHomepage">Home Page</a>
+      <nuxt-link tag="a" to="/">Home Page</nuxt-link>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {}
-  },
-  methods: {
-    goHomepage() {
-      this.$router.push(`/`)
-    },
-  },
 }
 </script>
 <style scoped>
@@ -65,7 +57,7 @@ body {
   margin: 0px auto 50px;
 }
 
-.notfound .notfound-404 > div:first-child {
+.notfound .notfound-404>div:first-child {
   position: absolute;
   left: 0;
   right: 0;
@@ -79,7 +71,7 @@ body {
   border-radius: 5px;
 }
 
-.notfound .notfound-404 > div:first-child:before {
+.notfound .notfound-404>div:first-child:before {
   content: '';
   position: absolute;
   left: -5px;

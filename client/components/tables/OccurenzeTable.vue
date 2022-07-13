@@ -1,202 +1,78 @@
 <template>
   <div>
     <b-overlay :show="show" rounded="sm">
-      <o-table
-        :data="dataTable"
-        :bordered="true"
-        :striped="true"
-        mobile-cards
-        paginated
-        :per-page="perPage"
-        :current-page.sync="currentPage"
-        v-if="dataTable.length > 0"
-        default-sort="id"
-        default-sort-direction="desc"
-      >
-        <o-table-column
-          field="id"
-          label="ID"
-          width="40"
-          numeric
-          sortable
-          v-slot="props"
-          :visible="showID"
-        >
+      <o-table :data="dataTable" :bordered="true" :striped="true" mobile-cards paginated :per-page="perPage"
+        :current-page.sync="currentPage" v-if="dataTable.length > 0" default-sort="id" default-sort-direction="desc">
+        <o-table-column field="id" label="ID" width="40" numeric sortable v-slot="props" :visible="showID">
           {{ props.row.id }}
         </o-table-column>
 
-        <o-table-column
-          field="titolo"
-          label="Title"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showTitle"
-        >
+        <o-table-column field="titolo" label="Title" v-slot="props" searchable position="centered" sortable
+          :visible="showTitle">
           {{ props.row.titolo }}
         </o-table-column>
-        <o-table-column
-          field="segnalazione"
-          label="Id Signal"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showIdSignal"
-        >
+        <o-table-column field="segnalazione" label="Id Signal" v-slot="props" searchable position="centered" sortable
+          :visible="showIdSignal">
           {{ props.row.segnalazione }}
         </o-table-column>
 
-        <o-table-column
-          field="soluzioni_id[0]"
-          label="Id Solution"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showIdSolution"
-        >
+        <o-table-column field="soluzioni_id[0]" label="Id Solution" v-slot="props" searchable position="centered"
+          sortable :visible="showIdSolution">
           {{ props.row.soluzioni_id[0] }}
         </o-table-column>
-        <o-table-column
-          field="commessa_macchina"
-          label="Machine Order"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showMachineOrder"
-        >
+        <o-table-column field="commessa_macchina" label="Machine Order" v-slot="props" searchable position="centered"
+          sortable :visible="showMachineOrder">
           {{ props.row.commessa_macchina }}
         </o-table-column>
-        <o-table-column
-          field="rif_ticket"
-          label="Ticket"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showTicket"
-        >
+        <o-table-column field="rif_ticket" label="Ticket" v-slot="props" searchable position="centered" sortable
+          :visible="showTicket">
           {{ props.row.rif_ticket }}
         </o-table-column>
-        <o-table-column
-          field="versione_sw_1"
-          label="Version sw 1"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showVersion1"
-        >
+        <o-table-column field="versione_sw_1" label="Version sw 1" v-slot="props" searchable position="centered"
+          sortable :visible="showVersion1">
           {{ props.row.versione_sw_1 }}
         </o-table-column>
-        <o-table-column
-          field="versione_sw_2"
-          label="Version sw 2"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showVersion2"
-        >
+        <o-table-column field="versione_sw_2" label="Version sw 2" v-slot="props" searchable position="centered"
+          sortable :visible="showVersion2">
           {{ props.row.versione_sw_2 }}
         </o-table-column>
-        <o-table-column
-          field="data_occorrenza"
-          label="Occurrence date"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showOccurrenceDate"
-        >
+        <o-table-column field="data_occorrenza" label="Occurrence date" v-slot="props" searchable position="centered"
+          sortable :visible="showOccurrenceDate">
           {{ props.row.data_occorrenza }}
         </o-table-column>
-        <o-table-column
-          field="stato_occorrenza"
-          label="Occurrence status"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showOccurrenceStatus"
-        >
+        <o-table-column field="stato_occorrenza" label="Occurrence status" v-slot="props" searchable position="centered"
+          sortable :visible="showOccurrenceStatus">
           <span v-if="props.row.stato_occorrenza === '1'">Open</span>
           <span v-if="props.row.stato_occorrenza === '0'">Close</span>
           <span></span>
         </o-table-column>
-        <o-table-column
-          field="data_occorrenza"
-          label="Occurrence date"
-          v-slot="props"
-          searchable
-          position="centered"
-          sortable
-          :visible="showOccurrenceDate"
-        >
+        <o-table-column field="data_occorrenza" label="Occurrence date" v-slot="props" searchable position="centered"
+          sortable :visible="showOccurrenceDate">
           {{ props.row.data_occorrenza }}
         </o-table-column>
-        <o-table-column
-          field="user_id"
-          label="User Id"
-          position="centered"
-          v-slot="props"
-          searchable
-          sortable
-          :visible="showUserId"
-        >
+        <o-table-column field="user_id" label="User Id" position="centered" v-slot="props" searchable sortable
+          :visible="showUserId">
           {{ props.row.user_id }}
         </o-table-column>
-        <o-table-column
-          field="created_at"
-          label="Creation date"
-          position="centered"
-          v-slot="props"
-          searchable
-          sortable
-          :visible="showCreationDate"
-        >
+        <o-table-column field="created_at" label="Creation date" position="centered" v-slot="props" searchable sortable
+          :visible="showCreationDate">
           {{ formatDate(props.row.created_at) }}
         </o-table-column>
-        <o-table-column
-          field="updated_at"
-          label="Update date"
-          position="centered"
-          v-slot="props"
-          searchable
-          sortable
-          :visible="showUpdateDate"
-        >
+        <o-table-column field="updated_at" label="Update date" position="centered" v-slot="props" searchable sortable
+          :visible="showUpdateDate">
           {{ formatDate(props.row.updated_at) }}
         </o-table-column>
-        <o-table-column
-          field="action"
-          label="Action"
-          position="centered"
-          v-slot="props"
-          width="180px"
-        >
-          <b-button
-            class="mx-1 view-btn"
-            @click="pushRoute(`view/${props.row.id}`)"
-            v-permission="'Can view occorrenze'"
-          >
+        <o-table-column field="action" label="Action" position="centered" v-slot="props" width="180px">
+          <b-button class="mx-1 view-btn" @click="pushRoute(`view/${props.row.id}`)"
+            v-permission="'Can view occorrenze'">
             <i class="mdi mdi-eye"></i>
           </b-button>
-          <b-button
-            class="mx-1 edit-btn"
-            @click="pushRoute(`update/${props.row.id}`)"
-            v-permission="'Can change occorrenze'"
-          >
+          <b-button class="mx-1 edit-btn" @click="pushRoute(`update/${props.row.id}`)"
+            v-permission="'Can change occorrenze'">
             <i class="mdi mdi-pencil"></i>
           </b-button>
-          <b-button
-            class="mx-1 delete-btn"
-            @click="deleteDocument(props.row.id)"
-            v-permission="'Can delete occorrenze'"
-          >
+          <b-button class="mx-1 delete-btn" @click="deleteDocument(props.row.id)"
+            v-permission="'Can delete occorrenze'">
             <i class="mdi mdi-delete"></i>
           </b-button>
         </o-table-column>
@@ -204,11 +80,7 @@
       <div v-else>
         <NoOccorrenzeItems v-if="showNoItem" />
       </div>
-      <SeeImage
-        v-if="showImage"
-        :imageValue="imageValue"
-        @close="hideModal()"
-      />
+      <SeeImage v-if="showImage" :imageValue="imageValue" @close="hideModal()" />
     </b-overlay>
   </div>
 </template>
@@ -248,7 +120,7 @@ export default {
       }
     },
     watchImage(val) {
-      this.imageValue = this.$config.baseURL + val
+      this.imageValue = val
       this.showImage = true
     },
     hideModal() {
