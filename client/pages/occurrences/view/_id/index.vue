@@ -213,7 +213,7 @@
                     type="number"
                     class="form-control input-create"
                     id="id-soluzione"
-                    v-model="dataTable.soluzioni_id[0]"
+                    v-model="dataTable.soluzioni_id.titolo"
                     placeholder="Solution Title"
                     disabled
                   />
