@@ -492,3 +492,240 @@ django.db.utils.OperationalError: (2005, "Unknown server host 'db-osai-do-user-1
 2022-07-13 21:14:26 [WARNING ] (log.log_response) Not Found: /media/null
 2022-07-13 21:15:05 [WARNING ] (log.log_response) Not Found: /media/null
 2022-07-13 21:15:11 [WARNING ] (log.log_response) Not Found: /media/null
+2022-07-13 21:35:53 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:35:54 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:00 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:36:01 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:04 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:36:05 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:07 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:36:07 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:32 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:36:33 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:34 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:36:35 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:36:38 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 21:36:39 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:07 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:08 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:12 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:13 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:25 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:25 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:33 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:33 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:35 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:36 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:48 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:49 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:37:52 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:37:53 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 21:38:43 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 21:38:44 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:16:00 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:16:01 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:16:03 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:16:04 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:24:00 [WARNING ] (log.log_response) Bad Request: /api/segnalazioni/18/delete-image-1
+2022-07-13 22:27:11 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\serializers.py changed, reloading.
+2022-07-13 22:27:12 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:27:16 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\serializers.py changed, reloading.
+2022-07-13 22:27:17 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:27:22 [WARNING ] (log.log_response) Bad Request: /api/segnalazioni/18/delete-image-1
+2022-07-13 22:34:17 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:34:17 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:34:21 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 511, in dispatch
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 423, in finalize_response
+    assert isinstance(response, HttpResponseBase), (
+AssertionError: Expected a `Response`, `HttpResponse` or `HttpStreamingResponse` to be returned from the view, but received a `<class 'NoneType'>`
+2022-07-13 22:35:25 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:35:25 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:36:04 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:36:05 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:38:51 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:38:51 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:39:03 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 350, in remove_segnalazioni_image_1
+    if os.path.exists(old_img):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\genericpath.py", line 19, in exists
+    os.stat(path)
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not ImageFieldFile
+2022-07-13 22:39:46 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:39:47 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:39:52 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 350, in remove_segnalazioni_image_1
+    if os.path.exists(old_img):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\genericpath.py", line 19, in exists
+    os.stat(path)
+TypeError: stat: path should be string, bytes, os.PathLike or integer, not ImageFieldFile
+2022-07-13 22:41:56 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:41:57 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:42:02 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:42:02 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:42:04 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:42:05 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:42:08 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 351, in remove_segnalazioni_image_1
+    'media/'+old_img)):
+TypeError: can only concatenate str (not "ImageFieldFile") to str
+2022-07-13 22:42:31 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:42:32 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 22:42:37 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 356, in remove_segnalazioni_image_1
+    return JsonResponse('Image deleted succesfully', status=200)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\response.py", line 646, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-07-13 22:44:09 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 22:44:09 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:21:34 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 356, in remove_segnalazioni_image_1
+    return JsonResponse('Image deleted succesfully', status=200)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\response.py", line 646, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-07-13 23:21:48 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:21:50 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:23:39 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/18/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 356, in remove_segnalazioni_image_1
+    return JsonResponse(seg, status=200)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\http\response.py", line 646, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+2022-07-13 23:24:10 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:24:13 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:24:18 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:24:20 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:24:23 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:24:25 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:24:37 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:24:40 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:26:12 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py changed, reloading.
+2022-07-13 23:26:14 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:26:30 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
+2022-07-13 23:26:32 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader

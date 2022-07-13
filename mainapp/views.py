@@ -1,5 +1,6 @@
 from email import message
 import re
+import os
 from django.shortcuts import get_object_or_404, render
 from rest_framework.renderers import JSONRenderer
 from rest_framework import filters
@@ -328,11 +329,71 @@ def remove_segnalazioni(request, id):
             {"message": "You do not have permission to remove Segnalazioni"})
 
     segnalazioni = get_object_or_404(Segnalazioni, pk=id)
-    print('request.user:', request.user.is_admin)
     if(segnalazioni.user_id == request.user.id or request.user.is_superuser == True):
         segnalazioni.delete()
         return JsonResponse({"status": 200, "message": "Segnalazioni Removed successfully"})
     raise NotFound("Segnalazioni not found")
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def remove_segnalazioni_image_1(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_segnalazioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Segnalazioni"})
+    seg = get_object_or_404(Segnalazioni, pk=id)
+
+    old_img = seg.immagine_1
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
+
+    return JsonResponse('Image 1 removed succesfully', status=200, safe=False)
+@api_view(["POST"])
+
+@permission_classes([IsAuthenticated])
+def remove_segnalazioni_image_2(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_segnalazioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Segnalazioni"})
+    seg = get_object_or_404(Segnalazioni, pk=id)
+
+    old_img = seg.immagine_2
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
+
+    return JsonResponse('Image 2 removed succesfully', status=200, safe=False)
+@api_view(["POST"])
+
+@permission_classes([IsAuthenticated])
+def remove_segnalazioni_image_3(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_segnalazioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Segnalazioni"})
+    seg = get_object_or_404(Segnalazioni, pk=id)
+
+    old_img = seg.immagine_3
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
+
+    return JsonResponse('Image 3 removed succesfully', status=200, safe=False)
 
 
 @api_view(['POST'])

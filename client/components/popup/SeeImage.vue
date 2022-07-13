@@ -5,12 +5,9 @@
         <span @click="cancel()">
           <CloseIcon class="closeicon" />
         </span>
-        <!-- <div class="modal-header">
-          <slot name="header"> Attention </slot>
-        </div> -->
         <div class="modal-box">
           <img class="img-fluid img-100" :src="$config.baseURL + imageValue" alt=""
-            v-if="imageValue !== '/media/null'" />
+            v-if="imageValue !== '/media/null' && imageValue" />
           <img v-else class="img-fluid img-100" src="~/assets/images/noimage.jpg" alt=""
             style="max-height: 500px !important" />
           <div class="modal-footer mt-8">
@@ -35,7 +32,6 @@ export default {
       dataTable: [],
     }
   },
-  mounted() { },
   methods: {
     cancel() {
       this.$emit('close')

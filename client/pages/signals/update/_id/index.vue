@@ -62,14 +62,13 @@
                 <label for="immag1" class="col-sm-2 col-form-label create-label">Image 1</label>
                 <div class="col-sm-10 d-flex">
                   <div class="buttons-image ">
-
                     <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_1)">
                       <img :src="$config.baseURL + dataTable.immagine_1" class="button-image"
-                        v-if="dataTable.immagine_1 !== '/media/null'">
+                        v-if="dataTable.immagine_1 !== '/media/null' && dataTable.immagine_1">
                       <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
                     </b-button>
                     <b-button class="mx-2 button-remove" @click="removeImage1(dataTable.immagine_1)"
-                      v-if="dataTable.immagine_1 !== '/media/null'">
+                      v-if="dataTable.immagine_1 !== '/media/null' && dataTable.immagine_1">
                       Remove
                     </b-button>
                   </div>
@@ -79,12 +78,18 @@
               </div>
               <div class="form-group row">
                 <label for="immag2" class="col-sm-2 col-form-label create-label">Image 2</label>
-                <div class="col-sm-10" style="display: flex !important">
-                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">
-                    <img :src="$config.baseURL + dataTable.immagine_2" class="button-image"
-                      v-if="dataTable.immagine_2 !== '/media/null'">
-                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
-                  </b-button>
+                <div class="col-sm-10 d-flex">
+                  <div class="buttons-image ">
+                    <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_2)">
+                      <img :src="$config.baseURL + dataTable.immagine_2" class="button-image"
+                        v-if="dataTable.immagine_2 !== '/media/null' && dataTable.immagine_2">
+                      <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
+                    </b-button>
+                    <b-button class="mx-2 button-remove" @click="removeImage2(dataTable.immagine_2)"
+                      v-if="dataTable.immagine_2 !== '/media/null' && dataTable.immagine_2">
+                      Remove
+                    </b-button>
+                  </div>
                   <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
                     @change="fileChange2"></b-form-file>
                 </div>
@@ -92,28 +97,21 @@
               <div class="form-group row">
                 <label for="immag3" class="col-sm-2 col-form-label create-label">Image 3</label>
                 <div class="col-sm-10" style="display: flex !important">
-                  <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">
-                    <img :src="$config.baseURL + dataTable.immagine_3" class="button-image"
-                      v-if="dataTable.immagine_3 !== '/media/null'">
-                    <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
-                  </b-button>
+                  <div class="buttons-image ">
+                    <b-button class="mx-2 button-format file-button" @click="watchImage(dataTable.immagine_3)">
+                      <img :src="$config.baseURL + dataTable.immagine_3" class="button-image"
+                        v-if="dataTable.immagine_3 !== '/media/null' && dataTable.immagine_3">
+                      <img v-else src="~/assets/images/noimage.jpg" alt="no image" class="button-image" />
+                    </b-button>
+                    <b-button class="mx-2 button-remove" @click="removeImage3(dataTable.immagine_3)"
+                      v-if="dataTable.immagine_3 !== '/media/null' && dataTable.immagine_3">
+                      Remove
+                    </b-button>
+                  </div>
                   <b-form-file placeholder="Add new Image or drop it here..." drop-placeholder="Drop file here..."
                     @change="fileChange3"></b-form-file>
                 </div>
               </div>
-              <!-- <div class="form-group row">
-                <label for="sector" class="col-sm-2 col-form-label create-label"
-                  >Reference sector</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="sector"
-                    placeholder="Reference sector"
-                  />
-                </div>
-              </div> -->
               <div class="form-group row">
                 <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
@@ -250,7 +248,76 @@ export default {
       this.showImage = true
     },
     removeImage1(val) {
-      console.log('remnove image here:', val)
+      const data = new FormData()
+
+      data.append('immagine_1', null)
+
+      this.$axios
+        .post(`/api/segnalazioni/${this.$route.params.id}/delete-image-1`, data, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'Signal Updated Succesfully'
+          this.toggleToaster()
+          this.dataTable.immagine_1 = '/media/null'
+        })
+        .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    removeImage2(val) {
+      const data = new FormData()
+
+      data.append('immagine_2', null)
+
+      this.$axios
+        .post(`/api/segnalazioni/${this.$route.params.id}/delete-image-2`, data, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'Signal Updated Succesfully'
+          this.toggleToaster()
+          this.dataTable.immagine_2 = '/media/null'
+        })
+        .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
+    },
+    removeImage3(val) {
+      const data = new FormData()
+
+      data.append('immagine_3', null)
+
+      this.$axios
+        .post(`/api/segnalazioni/${this.$route.params.id}/delete-image-3`, data, {
+          headers: {
+            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {
+          this.dataCreated = 'Signal Updated Succesfully'
+          this.toggleToaster()
+          this.dataTable.immagine_3 = '/media/null'
+        })
+        .catch((error) => {
+          this.dataCreated = error.response.data.message[0]
+          this.show = false
+          this.variant = 'danger'
+          this.toggleToaster()
+        })
     },
     onSubmit() {
       // this.show = true
@@ -297,7 +364,7 @@ export default {
       this.$axios
         .post(`/api/segnalazioni/update/${this.$route.params.id}`, data, {
           headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            Authorization: `${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
           },
         })
@@ -306,7 +373,7 @@ export default {
           this.toggleToaster()
           setTimeout(() => {
             this.$router.push('/signals')
-          }, 3000)
+          }, 1200)
         })
         .catch((error) => {
           this.dataCreated = error.response.data.message[0]
@@ -325,6 +392,9 @@ export default {
     hideModal() {
       this.showImage = false
     },
+  },
+  mounted() {
+    console.log('delete-image-1', this.$auth.strategy.token.get())
   },
 
   async asyncData({ store, $axios, params }) {
