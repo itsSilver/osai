@@ -741,3 +741,49 @@ TypeError: In order to allow non-dict objects to be serialized set the safe para
 2022-07-13 23:45:18 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
 2022-07-13 23:45:30 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\urls.py changed, reloading.
 2022-07-13 23:45:31 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 23:50:50 [ERROR   ] (log.log_response) Internal Server Error: /api/soluzioni/15/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 414, in remove_soluzioni_image_1
+    os.remove(os.path.join(
+PermissionError: [WinError 5] Access is denied: 'media/'
+2022-07-13 23:51:17 [ERROR   ] (log.log_response) Internal Server Error: /api/soluzioni/15/delete-image-1
+Traceback (most recent call last):
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\rabbi\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\views.py", line 414, in remove_soluzioni_image_1
+    os.remove(os.path.join(
+PermissionError: [WinError 5] Access is denied: 'media/'
