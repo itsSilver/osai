@@ -209,7 +209,7 @@
                     type="number"
                     class="form-control input-create"
                     id="id-soluzione"
-                    v-model="dataTable.soluzioni_id.id"
+                    v-model="solutionTitle"
                     placeholder="Please select Solution Title"
                     readonly
                     @click="showTableSolutions()"
@@ -289,6 +289,7 @@ export default {
       },
       showModalSignals: false,
       showModalSolutions: false,
+      solutionTitle: null,
     }
   },
   mounted() {
@@ -297,12 +298,15 @@ export default {
     } else {
       this.tempIdSoluzioni = null
     }
+    this.solutionTitle = this.dataTable.soluzioni_id.titolo
   },
   methods: {
     dataAddSignal(val) {
       this.dataTable.segnalazione = val
     },
     dataAddSolution(val) {
+      // this.dataTable.soluzioni_id.id = val.id
+      this.solutionTitle = val.titolo
       this.dataTable.soluzioni_id.id = val.id
     },
     showTableSignals() {
@@ -367,7 +371,15 @@ export default {
           },
         })
         .then(() => {
-          if (this.tempIdSoluzioni !== this.dataTable.soluzioni_id[0]) {
+          console.log(
+            'Data here: ',
+            this.tempIdSoluzioni,
+            this.dataTable.soluzioni_id.id
+          )
+          if (
+            this.tempIdSoluzioni !== this.dataTable.soluzioni_id.id &&
+            this.tempIdSoluzioni !== null
+          ) {
             this.disconnectNewSolutionID()
           }
           if (this.dataTable.soluzioni_id.length !== 0) {
