@@ -209,7 +209,7 @@
                     type="number"
                     class="form-control input-create"
                     id="id-soluzione"
-                    v-model="dataTable.soluzioni_id[0]"
+                    v-model="dataTable.soluzioni_id.id"
                     placeholder="Please select Solution Title"
                     readonly
                     @click="showTableSolutions()"
@@ -292,8 +292,8 @@ export default {
     }
   },
   mounted() {
-    if (this.dataTable.soluzioni_id[0]) {
-      this.tempIdSoluzioni = this.dataTable.soluzioni_id[0]
+    if (this.dataTable.soluzioni_id.id) {
+      this.tempIdSoluzioni = this.dataTable.soluzioni_id.id
     } else {
       this.tempIdSoluzioni = null
     }
@@ -303,7 +303,7 @@ export default {
       this.dataTable.segnalazione = val
     },
     dataAddSolution(val) {
-      this.dataTable.soluzioni_id[0] = val.id
+      this.dataTable.soluzioni_id.id = val.id
     },
     showTableSignals() {
       this.showModalSignals = true
@@ -388,7 +388,7 @@ export default {
         })
     },
     connectNewSolutionID() {
-      const value = this.dataTable.soluzioni_id[0]
+      const value = this.dataTable.soluzioni_id.id
       const id = parseInt(this.$route.params.id)
       const payload = {
         occorrenze_id: id,
@@ -429,9 +429,9 @@ export default {
         })
         .catch((error) => {
           this.show = false
-          this.variant = 'danger'
-          this.dataCreated = error.response.data.message[0]
-          this.toggleToaster()
+          // this.variant = 'danger'
+          // this.dataCreated = error.response.data.message[0]
+          // this.toggleToaster()
         })
     },
     toggleToaster() {

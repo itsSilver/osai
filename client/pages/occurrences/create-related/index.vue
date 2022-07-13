@@ -203,7 +203,7 @@
                 <label
                   for="id-soluzione"
                   class="col-sm-2 col-form-label create-label"
-                  >Solution
+                  >Solution Title
                 </label>
                 <div class="col-sm-10">
                   <input

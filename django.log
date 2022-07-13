@@ -26,3 +26,18 @@
 2022-07-12 15:58:00 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
 2022-07-12 15:58:01 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
 2022-07-12 15:58:32 [WARNING ] (log.log_response) Forbidden: /user/remove/4
+2022-07-13 09:49:42 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 09:53:25 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 09:54:41 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:07:51 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-13 10:08:10 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-13 10:08:10 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-13 10:08:12 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-13 10:11:23 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:11:45 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:11:50 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:11:51 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/connect/10
+2022-07-13 10:13:59 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:33:15 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
+2022-07-13 10:37:16 [WARNING ] (log.log_response) Not Found: /api/soluzioni/connect/undefined
+2022-07-13 10:37:42 [WARNING ] (log.log_response) Not Found: /api/soluzioni/disconnect/null
