@@ -115,8 +115,9 @@
               <div class="form-group row">
                 <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution Title</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="id-soluzione" v-model="solutionTitle"
-                    placeholder="Please select Solution Title" readonly @click="showTableSolutions()" />
+                  <input type="text" class="form-control input-create" id="id-soluzione"
+                    v-model="dataTable.soluzioni_id.id" placeholder="Please select Solution Title" readonly
+                    @click="showTableSolutions()" />
                 </div>
               </div>
               <div class="form-group row">
