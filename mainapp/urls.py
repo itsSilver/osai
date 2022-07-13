@@ -1,7 +1,7 @@
 from django.urls import path
 
 from mainapp.views import create_segnalazioni, create_soluzioni, \
-    create_occorrenze, remove_segnalazioni, remove_segnalazioni_image_1, remove_segnalazioni_image_2, remove_segnalazioni_image_3, remove_soluzioni, remove_occorrenze, \
+    create_occorrenze, remove_segnalazioni, remove_segnalazioni_image_1, remove_segnalazioni_image_2, remove_segnalazioni_image_3, remove_soluzioni, remove_occorrenze, remove_soluzioni_image_1, remove_soluzioni_image_2, remove_soluzioni_image_3, \
     retrive_all_occurrenze, retrive_all_soluzioni, retrive_user_occurrenze, \
     retrive_user_segnalazioni, retrive_all_segnalazioni, retrive_user_soluzioni, \
     update_occurrenze, update_segnalazioni, update_soluzioni, create_stati_soluzione, \
@@ -32,6 +32,9 @@ urlpatterns = [
     path("soluzioni/connect/<int:id>", connect_soluzioni_to_occorrenze),
     path("soluzioni/disconnect/<int:id>", disconnect_soluzioni_to_occorrenze),
     path("soluzioni/<int:id>/delete", remove_soluzioni),
+    path("soluzioni/<int:id>/delete-image-1", remove_soluzioni_image_1),
+    path("soluzioni/<int:id>/delete-image-2", remove_soluzioni_image_2),
+    path("soluzioni/<int:id>/delete-image-3", remove_soluzioni_image_3),
     path("soluzioni/filter/", SoluzioniListView.as_view()),
 
 

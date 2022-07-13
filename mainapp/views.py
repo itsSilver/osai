@@ -267,7 +267,6 @@ def retrive_user_segnalazioni(request):
         segnal['total_occorrenze'] = total
         name = Users.objects.get(pk=segnal['user_id'])
         user = str(name)
-        print('username', name)
         segnal['username'] = user
         newResponse.append(segnal)
 
@@ -354,8 +353,9 @@ def remove_segnalazioni_image_1(request, id):
         Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
 
     return JsonResponse('Image 1 removed succesfully', status=200, safe=False)
-@api_view(["POST"])
 
+
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def remove_segnalazioni_image_2(request, id):
     check_permission = __check_if_has_permission(
@@ -371,11 +371,12 @@ def remove_segnalazioni_image_2(request, id):
             'media/' + str(old_img))):
         os.remove(os.path.join(
             'media/' + str(old_img)))
-        Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
+        Segnalazioni.objects.filter(pk=id).update(immagine_2=None)
 
     return JsonResponse('Image 2 removed succesfully', status=200, safe=False)
-@api_view(["POST"])
 
+
+@api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def remove_segnalazioni_image_3(request, id):
     check_permission = __check_if_has_permission(
@@ -391,7 +392,70 @@ def remove_segnalazioni_image_3(request, id):
             'media/' + str(old_img))):
         os.remove(os.path.join(
             'media/' + str(old_img)))
-        Segnalazioni.objects.filter(pk=id).update(immagine_1=None)
+        Segnalazioni.objects.filter(pk=id).update(immagine_3=None)
+
+    return JsonResponse('Image 3 removed succesfully', status=200, safe=False)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def remove_soluzioni_image_1(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_soluzioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Soluzioni"})
+    seg = get_object_or_404(Soluzioni, pk=id)
+
+    old_img = seg.immagine_1
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Soluzioni.objects.filter(pk=id).update(immagine_1=None)
+
+    return JsonResponse('Image 1 removed succesfully', status=200, safe=False)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def remove_soluzioni_image_2(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_soluzioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Soluzioni"})
+    seg = get_object_or_404(Soluzioni, pk=id)
+
+    old_img = seg.immagine_2
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Soluzioni.objects.filter(pk=id).update(immagine_2=None)
+
+    return JsonResponse('Image 2 removed succesfully', status=200, safe=False)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def remove_soluzioni_image_3(request, id):
+    check_permission = __check_if_has_permission(
+        request, "change_soluzioni")
+    if not check_permission:
+        raise PermissionDenied(
+            {"message": "You do not have permission to update Soluzioni"})
+    seg = get_object_or_404(Soluzioni, pk=id)
+
+    old_img = seg.immagine_3
+    print('old_img', old_img)
+    if os.path.exists(os.path.join(
+            'media/' + str(old_img))):
+        os.remove(os.path.join(
+            'media/' + str(old_img)))
+        Soluzioni.objects.filter(pk=id).update(immagine_3=None)
 
     return JsonResponse('Image 3 removed succesfully', status=200, safe=False)
 
