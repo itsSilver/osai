@@ -113,10 +113,10 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution Title</label>
+                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution id</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control input-create" id="id-soluzione"
-                    v-model="dataTable.soluzioni_id.id" placeholder="Please select Solution Title" readonly
+                    v-model="dataTable.soluzioni_id.id" placeholder="Please select Solution id" readonly
                     @click="showTableSolutions()" />
                 </div>
               </div>
