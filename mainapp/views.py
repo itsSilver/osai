@@ -203,6 +203,17 @@ def create_occorrenze(request):
         serializer = OccorrenzeSerializer(
             data=request.data)
         if serializer.is_valid():
+
+            if not "segnalazione" in request.data:
+                res = {}
+                res['message'] = "segnalazione_id is missing"
+                res['code'] = 400
+                raise ValidationError(res)
+
+            if "soluzione" in request.data:
+                sol = Soluzioni.objects.filter(pk=request.data['soluzione']).values(
+                    'id')
+            data["message"] = "Occurrenze Created successfully"
             occorrenze = Occorrenze(
                 titolo=serializer.data["titolo"],
                 descrizione=serializer.data["descrizione"] if 'descrizione' in serializer.data else '',
@@ -213,21 +224,11 @@ def create_occorrenze(request):
                 data_occorrenza=serializer.data["data_occorrenza"],
                 stato_occorrenza=serializer.data["stato_occorrenza"] if 'stato_occorrenza' in serializer.data else 0,
                 note=serializer.data["note"] if 'note' in serializer.data else '',
-                user_id=request.user.id
+                user_id=request.user.id,
+                soluzione=sol if sol else None
             )
-            if not "segnalazione" in request.data:
-                res = {}
-                res['message'] = "segnalazione_id is missing"
-                res['code'] = 400
-                raise ValidationError(res)
-
             occorrenze.segnalazione_id = request.data["segnalazione"]
-
             occorrenze.save()
-            if "soluzione" in request.data:
-                Soluzioni.objects.filter(pk=request.data['soluzione']).update(
-                    occorrenze_id=occorrenze.id)
-            data["message"] = "Occurrenze Created successfully"
         else:
             errors = __format_error_response(serializer.errors)
             res = {}
@@ -671,7 +672,7 @@ def retrive_user_occurrenze(request):
         raise PermissionDenied(
             {"message": "You do not have permission to View Occurrenze"})
 
-    user_occurrenze = Occorrenze.objects.all().prefetch_related('soluzioni_id')
+    user_occurrenze = Occorrenze.objects.all()
     serializer_class = OccorrenzeDisplaySerializer(
         user_occurrenze, many=True).data
     return JsonResponse(serializer_class, safe=False)
@@ -711,16 +712,16 @@ def update_occurrenze(request, id):
             {"message": "You do not have permission to Update Occurrenze"})
 
     occ = get_object_or_404(Occorrenze, id=id)
-    copy_data = {**request.data}
-    if 'soluzioni_id' not in copy_data:
-        copy_data['soluzioni_id'] = occ.soluzioni_id
-    try:
-        check = Segnalazioni.objects.get(id=request.data['segnalazione'])
-    except Exception:
-        res = {}
-        res['message'] = "Segnalazioni  Not    Found "
-        res['code'] = 400
-        raise ValidationError(res)
+    # copy_data = {**request.data}
+    # if 'soluzioni_id' not in copy_data:
+    #     copy_data['soluzioni_id'] = occ.soluzioni_id
+    # try:
+    #     check = Segnalazioni.objects.get(id=request.data['segnalazione'])
+    # except Exception:
+    #     res = {}
+    #     res['message'] = "Segnalazioni  Not    Found "
+    #     res['code'] = 400
+    #     raise ValidationError(res)
     serializer = OccorrenzeDisplaySerializer(
         instance=occ, data=request.data)
     if serializer.is_valid():

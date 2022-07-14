@@ -67,8 +67,8 @@ class Soluzioni(models.Model):
     immagine_3 = models.ImageField(upload_to=upload_to, blank=True, null=True)
     settore_riferimento = models.CharField(max_length=255)
     note = models.TextField()
-    occorrenze = models.ForeignKey(
-        "Occorrenze", related_name='soluzioni_id', on_delete=models.CASCADE, blank=True, null=True)
+    # occorrenze = models.ForeignKey(
+    #     "Occorrenze", related_name='soluzioni_id', on_delete=models.CASCADE, blank=True, null=True)
 
     user = models.ForeignKey(Users, models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -96,7 +96,7 @@ class Occorrenze(models.Model):
     user = models.ForeignKey(Users, models.DO_NOTHING)
     segnalazione = models.ForeignKey(
         "Segnalazioni", on_delete=models.CASCADE, blank=True, default=None, null=False)
-
+    soluzione = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)

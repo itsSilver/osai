@@ -16,9 +16,9 @@
           {{ props.row.segnalazione }}
         </o-table-column>
 
-        <o-table-column field="soluzioni_id.id" label="Id Solution" v-slot="props" searchable position="centered"
-          sortable :visible="showIdSolution">
-          {{ props.row.soluzioni_id.id }}
+        <o-table-column field="soluzione" label="Id Solution" v-slot="props" searchable position="centered" sortable
+          :visible="showIdSolution">
+          {{ props.row.soluzione }}
         </o-table-column>
         <o-table-column field="commessa_macchina" label="Machine Order" v-slot="props" searchable position="centered"
           sortable :visible="showMachineOrder">

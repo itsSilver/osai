@@ -115,9 +115,8 @@
               <div class="form-group row">
                 <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution id</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control input-create" id="id-soluzione"
-                    v-model="dataTable.soluzioni_id.id" placeholder="Please select Solution id" readonly
-                    @click="showTableSolutions()" />
+                  <input type="text" class="form-control input-create" id="id-soluzione" v-model="dataTable.soluzione"
+                    placeholder="Please select Solution id" readonly @click="showTableSolutions()" />
                 </div>
               </div>
               <div class="form-group row">
@@ -189,12 +188,12 @@ export default {
     }
   },
   mounted() {
-    if (this.dataTable.soluzioni_id.id) {
-      this.tempIdSoluzioni = this.dataTable.soluzioni_id.id
+    if (this.dataTable.soluzione) {
+      this.tempIdSoluzioni = this.dataTable.soluzione
     } else {
       this.tempIdSoluzioni = null
     }
-    this.solutionTitle = this.dataTable.soluzioni_id.titolo
+    this.solutionTitle = this.dataTable.soluzione.titolo
   },
   methods: {
     dataAddSignal(val) {
@@ -202,9 +201,9 @@ export default {
     },
     dataAddSolution(val) {
       console.log("🚀 ~ dataAddSolution ~ val", val)
-      // this.dataTable.soluzioni_id.id = val.id
+      // this.dataTable.soluzione = val.id
       this.solutionTitle = val.titolo
-      this.dataTable.soluzioni_id.id = val.id
+      this.dataTable.soluzione = val.id
     },
     showTableSignals() {
       this.showModalSignals = true
@@ -271,18 +270,18 @@ export default {
           console.log(
             'Data here: ',
             this.tempIdSoluzioni,
-            this.dataTable.soluzioni_id.id
+            this.dataTable.soluzione
           )
-          if (
-            this.tempIdSoluzioni !== this.dataTable.soluzioni_id.id &&
-            this.tempIdSoluzioni !== null
-          ) {
-            this.disconnectNewSolutionID()
-          }
-          if (this.dataTable.soluzioni_id.length !== 0) {
-            this.connectNewSolutionID()
-            return
-          }
+          // if (
+          //   this.tempIdSoluzioni !== this.dataTable.soluzione &&
+          //   this.tempIdSoluzioni !== null
+          // ) {
+          //   this.disconnectNewSolutionID()
+          // }
+          // if (this.dataTable.soluzione.length !== 0) {
+          //   this.connectNewSolutionID()
+          //   return
+          // }
           this.dataCreated = 'Occurrence Updated Succesfully'
           this.toggleToaster()
           setTimeout(() => {
@@ -296,53 +295,53 @@ export default {
           this.toggleToaster()
         })
     },
-    connectNewSolutionID() {
-      const value = this.dataTable.soluzioni_id.id
-      const id = parseInt(this.$route.params.id)
-      const payload = {
-        occorrenze_id: id,
-      }
-      this.$axios
-        .post(`/api/soluzioni/connect/${value}`, payload, {
-          headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {
-          this.dataCreated = 'Occurrence Updated Succesfully'
-          this.toggleToaster()
-          setTimeout(() => {
-            this.$router.push('/occurrences')
-          }, 3000)
-        })
-        .catch((error) => {
-          this.show = false
-          this.variant = 'danger'
-          this.dataCreated = error.response.data.message[0]
-          this.toggleToaster()
-        })
-    },
-    disconnectNewSolutionID() {
-      const value = this.tempIdSoluzioni
+    // connectNewSolutionID() {
+    //   const value = this.dataTable.soluzione
+    //   const id = parseInt(this.$route.params.id)
+    //   const payload = {
+    //     occorrenze_id: id,
+    //   }
+    //   this.$axios
+    //     .post(`/api/soluzioni/connect/${value}`, payload, {
+    //       headers: {
+    //         Authorization: `Token ${this.$auth.strategy.token.get()}`,
+    //         'Content-Type': 'application/json',
+    //       },
+    //     })
+    //     .then(() => {
+    //       this.dataCreated = 'Occurrence Updated Succesfully'
+    //       this.toggleToaster()
+    //       setTimeout(() => {
+    //         this.$router.push('/occurrences')
+    //       }, 3000)
+    //     })
+    //     .catch((error) => {
+    //       this.show = false
+    //       this.variant = 'danger'
+    //       this.dataCreated = error.response.data.message[0]
+    //       this.toggleToaster()
+    //     })
+    // },
+    // disconnectNewSolutionID() {
+    //   const value = this.tempIdSoluzioni
 
-      this.$axios
-        .post(`/api/soluzioni/disconnect/${value}`, {
-          headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {
-          // empty response to get
-        })
-        .catch((error) => {
-          this.show = false
-          // this.variant = 'danger'
-          // this.dataCreated = error.response.data.message[0]
-          // this.toggleToaster()
-        })
-    },
+    //   this.$axios
+    //     .post(`/api/soluzioni/disconnect/${value}`, {
+    //       headers: {
+    //         Authorization: `Token ${this.$auth.strategy.token.get()}`,
+    //         'Content-Type': 'application/json',
+    //       },
+    //     })
+    //     .then(() => {
+    //       // empty response to get
+    //     })
+    //     .catch((error) => {
+    //       this.show = false
+    //       // this.variant = 'danger'
+    //       // this.dataCreated = error.response.data.message[0]
+    //       // this.toggleToaster()
+    //     })
+    // },
     toggleToaster() {
       this.$bvToast.show('created')
       setTimeout(() => {

@@ -4,38 +4,30 @@
       <Nav />
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="wrapped-content">
-          <div
-            class="
+          <div class="
               nav-actions
               d-flex
               justify-content-between
               align-items-center
               mb-2
               navtop
-            "
-          >
+            ">
             <!-- First Nav -->
             <div class="d-flex gap-4">
-              <ul
-                class="
+              <ul class="
                   d-flex
                   justify-content-around
                   align-content-center
                   m-0
                   p-0
-                "
-                style="list-style: none"
-              >
+                " style="list-style: none">
                 <li class="nav-actions-color mx-2 px-14-format">
                   <i class="fas fa-plus pr-2 fas-main-color"></i>
                   View Occurrence
                 </li>
               </ul>
             </div>
-            <ul
-              class="d-flex justify-content-around align-content-center m-0 p-0"
-              style="list-style: none"
-            ></ul>
+            <ul class="d-flex justify-content-around align-content-center m-0 p-0" style="list-style: none"></ul>
             <!-- End here -->
           </div>
           <div class="vertical-line"></div>
@@ -43,138 +35,60 @@
           <b-overlay :show="show" rounded="sm">
             <b-form @submit.prevent="onSubmit" class="create-solution-form">
               <div class="form-group row">
-                <label
-                  for="id-segnalazione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Alarm ID</label
-                >
+                <label for="id-segnalazione" class="col-sm-2 col-form-label create-label">Alarm ID</label>
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-segnalazione"
-                    v-model="dataTable.segnalazione"
-                    placeholder="Alarm ID"
-                    disabled
-                  />
+                  <input type="number" class="form-control input-create" id="id-segnalazione"
+                    v-model="dataTable.segnalazione" placeholder="Alarm ID" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="tittle" class="col-sm-2 col-form-label create-label"
-                  >Title</label
-                >
+                <label for="tittle" class="col-sm-2 col-form-label create-label">Title</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="tittle"
-                    v-model="dataTable.titolo"
-                    placeholder="Title"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="tittle" v-model="dataTable.titolo"
+                    placeholder="Title" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label for="ticket" class="col-sm-2 col-form-label create-label"
-                  >Ticket</label
-                >
+                <label for="ticket" class="col-sm-2 col-form-label create-label">Ticket</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="ticket"
-                    v-model="dataTable.rif_ticket"
-                    placeholder="Ticket"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="ticket" v-model="dataTable.rif_ticket"
+                    placeholder="Ticket" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="textarea-small"
-                  class="col-sm-2 col-form-label create-label"
-                  >Description</label
-                >
+                <label for="textarea-small" class="col-sm-2 col-form-label create-label">Description</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.descrizione"
-                    placeholder="Please enter Description"
-                  />
+                  <VueEditor v-model="dataTable.descrizione" placeholder="Please enter Description" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="machine"
-                  class="col-sm-2 col-form-label create-label"
-                  >Machine order</label
-                >
+                <label for="machine" class="col-sm-2 col-form-label create-label">Machine order</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="machine"
-                    v-model="dataTable.commessa_macchina"
-                    placeholder="Machine order"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="machine"
+                    v-model="dataTable.commessa_macchina" placeholder="Machine order" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="version-1"
-                  class="col-sm-2 col-form-label create-label"
-                  >Version sw 1</label
-                >
+                <label for="version-1" class="col-sm-2 col-form-label create-label">Version sw 1</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="version-1"
-                    v-model="dataTable.versione_sw_1"
-                    placeholder="Version sw 1"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="version-1" v-model="dataTable.versione_sw_1"
+                    placeholder="Version sw 1" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="version-2"
-                  class="col-sm-2 col-form-label create-label"
-                  >Version sw 2</label
-                >
+                <label for="version-2" class="col-sm-2 col-form-label create-label">Version sw 2</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control input-create"
-                    id="version-2"
-                    v-model="dataTable.versione_sw_2"
-                    placeholder="Version sw 2"
-                    disabled
-                  />
+                  <input type="text" class="form-control input-create" id="version-2" v-model="dataTable.versione_sw_2"
+                    placeholder="Version sw 2" disabled />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="data-occorrenza"
-                  class="col-sm-2 col-form-label create-label"
-                  >Occurrence date</label
-                >
+                <label for="data-occorrenza" class="col-sm-2 col-form-label create-label">Occurrence date</label>
                 <div class="col-sm-10">
-                  <b-form-datepicker
-                    id="example-datepicker"
-                    v-model="dataTable.data_occorrenza"
-                    class="mb-2 date-choose"
-                    today-button
-                    reset-button
-                    close-button
-                    selected-variant="primary"
-                    today-variant="primary"
-                    hide-header
-                    label-close-button="Close"
-                    label-today-button="Today"
-                    label-reset-button="Reset"
-                    disabled
-                  ></b-form-datepicker>
+                  <b-form-datepicker id="example-datepicker" v-model="dataTable.data_occorrenza"
+                    class="mb-2 date-choose" today-button reset-button close-button selected-variant="primary"
+                    today-variant="primary" hide-header label-close-button="Close" label-today-button="Today"
+                    label-reset-button="Reset" disabled></b-form-datepicker>
                 </div>
               </div>
               <!-- <div class="form-group row">
@@ -192,42 +106,23 @@
                 </div>
               </div> -->
               <div class="form-group row">
-                <label for="note" class="col-sm-2 col-form-label create-label"
-                  >Note</label
-                >
+                <label for="note" class="col-sm-2 col-form-label create-label">Note</label>
                 <div class="col-sm-10">
-                  <VueEditor
-                    v-model="dataTable.note"
-                    placeholder="Please enter a note"
-                  />
+                  <VueEditor v-model="dataTable.note" placeholder="Please enter a note" />
                 </div>
               </div>
               <div class="form-group row">
-                <label
-                  for="id-soluzione"
-                  class="col-sm-2 col-form-label create-label"
-                  >Solution Title</label
-                >
+                <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution Title</label>
                 <div class="col-sm-10">
-                  <input
-                    type="number"
-                    class="form-control input-create"
-                    id="id-soluzione"
-                    v-model="dataTable.soluzioni_id.titolo"
-                    placeholder="Solution Title"
-                    disabled
-                  />
+                  <input type="number" class="form-control input-create" id="id-soluzione"
+                    v-model="dataTable.soluzione.titolo" placeholder="Solution Title" disabled />
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-10">
-                  <b-button
-                    class="mx-2 button-format"
-                    @click="
-                      $router.push(`/occurrences/update/${$route.params.id}`)
-                    "
-                    v-permission="'Can change occorrenze'"
-                  >
+                  <b-button class="mx-2 button-format" @click="
+                    $router.push(`/occurrences/update/${$route.params.id}`)
+                  " v-permission="'Can change occorrenze'">
                     <i class="fas fa-edit pr-2"></i>
                     Edit
                   </b-button>
@@ -285,8 +180,8 @@ export default {
     }
   },
   mounted() {
-    if (this.dataTable.soluzioni_id[0]) {
-      this.tempIdSoluzioni = this.dataTable.soluzioni_id[0]
+    if (this.dataTable.soluzione) {
+      this.tempIdSoluzioni = this.dataTable.soluzione
     } else {
       this.tempIdSoluzioni = null
     }
@@ -348,10 +243,10 @@ export default {
           },
         })
         .then(() => {
-          if (this.tempIdSoluzioni !== this.dataTable.soluzioni_id[0]) {
+          if (this.tempIdSoluzioni !== this.dataTable.soluzione) {
             this.disconnectNewSolutionID()
           }
-          if (this.dataTable.soluzioni_id.length !== 0) {
+          if (this.dataTable.soluzione.length !== 0) {
             this.connectNewSolutionID()
             return
           }
@@ -369,7 +264,7 @@ export default {
         })
     },
     connectNewSolutionID() {
-      const value = this.dataTable.soluzioni_id[0]
+      const value = this.dataTable.soluzione
       const id = parseInt(this.$route.params.id)
       const payload = {
         occorrenze_id: id,
