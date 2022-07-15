@@ -2556,3 +2556,4 @@ django.core.exceptions.ImproperlyConfigured: Field name `occorrenze` is not vali
 2022-07-15 10:55:23 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
 2022-07-15 10:55:47 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
 2022-07-15 10:55:58 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 14:07:46 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
