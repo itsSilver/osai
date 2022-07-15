@@ -2422,3 +2422,137 @@ ValueError: The following fields do not exist in this model, are m2m fields, or 
 2022-07-15 00:37:31 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/download_8mmKf2A.jpg
 2022-07-15 00:37:41 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/tree-736885__480_uCD4Jyw.jpg
 2022-07-15 00:37:41 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/download_5UJefxG.jpg
+2022-07-15 10:39:25 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:42:22 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:42:34 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:43:12 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:43:35 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:43:51 [ERROR   ] (log.log_response) Internal Server Error: /api/soluzioni/create
+Traceback (most recent call last):
+  File "C:\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\Silver Turku\Desktop\osai\mainapp\views.py", line 84, in create_soluzioni
+    if serializer.is_valid():
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 426, in run_validation
+    value = self.to_internal_value(data)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 479, in to_internal_value
+    for field in fields:
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 362, in _writable_fields
+    for field in self.fields.values():
+  File "C:\Python310\lib\site-packages\django\utils\functional.py", line 49, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `occorrenze` is not valid for model `Soluzioni`.
+2022-07-15 10:44:29 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:44:30 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:44:54 [ERROR   ] (log.log_response) Internal Server Error: /api/soluzioni/create
+Traceback (most recent call last):
+  File "C:\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Python310\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Python310\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\Silver Turku\Desktop\osai\mainapp\views.py", line 84, in create_soluzioni
+    if serializer.is_valid():
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 227, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 426, in run_validation
+    value = self.to_internal_value(data)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 479, in to_internal_value
+    for field in fields:
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 362, in _writable_fields
+    for field in self.fields.values():
+  File "C:\Python310\lib\site-packages\django\utils\functional.py", line 49, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 356, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1076, in get_fields
+    field_class, field_kwargs = self.build_field(
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1222, in build_field
+    return self.build_unknown_field(field_name, model_class)
+  File "C:\Python310\lib\site-packages\rest_framework\serializers.py", line 1340, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `occorrenze` is not valid for model `Soluzioni`.
+2022-07-15 10:45:08 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:45:09 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:45:27 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:45:28 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:45:37 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:45:38 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:45:42 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:45:43 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:46:03 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:46:06 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:46:25 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:46:26 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:46:41 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:46:54 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:48:04 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:48:06 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:48:27 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:48:45 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:48:55 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:50:08 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:50:09 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:50:20 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:50:21 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:50:27 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/16
+2022-07-15 10:51:52 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:51:54 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:51:59 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:52:00 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:52:02 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\views.py changed, reloading.
+2022-07-15 10:52:04 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:52:15 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:52:23 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:52:37 [WARNING ] (log.log_response) Bad Request: /api/soluzioni/update/18
+2022-07-15 10:54:07 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/tree-736885__480_uCD4Jyw.jpg
+2022-07-15 10:54:07 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/download_YC2sSgy.jpg
+2022-07-15 10:54:16 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/tree-736885__480_uCD4Jyw.jpg
+2022-07-15 10:54:16 [WARNING ] (log.log_response) Not Found: /media/images/segnalazioni/download_YC2sSgy.jpg
+2022-07-15 10:55:08 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:55:09 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:55:19 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:55:20 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:55:22 [INFO    ] (autoreload.trigger_reload) C:\Users\Silver Turku\Desktop\osai\mainapp\serializers.py changed, reloading.
+2022-07-15 10:55:23 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 10:55:47 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg
+2022-07-15 10:55:58 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/tree-736885__480_G1nv0zr.jpg

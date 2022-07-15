@@ -102,14 +102,14 @@ class SoluzioniSerializer(serializers.ModelSerializer):
     class Meta:
         model = Soluzioni
 
-        fields = ("rif_ticket", "occorrenze", "titolo", "rank", "descrizione", "immagine_1",
+        fields = ("rif_ticket", "titolo", "rank", "descrizione", "immagine_1",
                   "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "id", "created_at", "updated_at", "rif_ticket", "user_id")
 
-    # def create(self, validated_data):
-    #     """
-    #     Create and return a new `Soluzioni` instance, given the validated data.
-    #     """
-    #     return SoluzioniSerializer.objects.create(**validated_data)
+    def create(self, validated_data):
+        """
+        Create and return a new `Soluzioni` instance, given the validated data.
+        """
+        return SoluzioniSerializer.objects.create(**validated_data)
 
 
 class SoluzioniForOcc(serializers.ModelSerializer):
@@ -165,7 +165,7 @@ class OccorrenzeSignalSerializer(serializers.ModelSerializer):
 
 class SoluzioniDisplaySerializer(serializers.ModelSerializer):
     id_stato_soluzione = StatiSoluzioneSerializer(required=False)
-    occorrenze = OccorrenzeDisplaySerializer(required=False)
+    # occorrenze = OccorrenzeDisplaySerializer(required=False)
 
     immagine_1 = serializers.ImageField(
         max_length=None, required=False, allow_null=True)
@@ -183,10 +183,10 @@ class SoluzioniDisplaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Soluzioni
-        fields = '__all__'
+        # fields = '__all__'
 
-        # fields = ("id", "occorrenze", "titolo", "rank", "descrizione", "immagine_1",
-        #           "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at", "user_id")
+        fields = ("id", "titolo", "rank", "descrizione", "immagine_1",
+                  "immagine_2", "immagine_3", "settore_riferimento", "note", "id_stato_soluzione", "created_at", "updated_at", "user_id")
 
 
 class OccorrenzeSerializer(serializers.ModelSerializer):

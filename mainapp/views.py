@@ -77,8 +77,6 @@ def create_soluzioni(request):
             )
             stati.save()
         occ = None
-        if "occorrenze" in request.data:
-            occ = get_object_or_404(Occorrenze, pk=request.data["occorrenze"])
         serializer = SoluzioniSerializer(
             data=request.data)
         if serializer.is_valid():
@@ -91,7 +89,6 @@ def create_soluzioni(request):
                 immagine_3=request.data["immagine_3"] if "immagine_3" in request.data else "",
                 settore_riferimento=serializer.data["settore_riferimento"] if "settore_riferimento" in serializer.data else '',
                 note=serializer.data["note"] if "note" in serializer.data else '',
-                occorrenze=occ,
                 id_stato_soluzione=stati,
                 user_id=request.user.id
             )
@@ -592,11 +589,7 @@ def update_soluzioni(request, id):
         raise PermissionDenied(
             {"message": "You do not have permission to Update Soluzioni"})
     seg = get_object_or_404(Soluzioni, pk=id)
-
-    if "occorrenze" in request.data:
-        occ = get_object_or_404(Occorrenze, pk=request.data["occorrenze"])
-        Soluzioni.objects.filter(pk=id).update(occorrenze=occ)
-    if(seg.user_id == request.user.id):
+    if(seg.user_id == request.user.id or request.user.is_superuser == True):
         serializer = SoluzioniDisplaySerializer(
             instance=seg, data=request.data)
         if serializer.is_valid():

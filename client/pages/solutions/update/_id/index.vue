@@ -329,7 +329,7 @@ export default {
       this.$axios
         .post(`/api/soluzioni/update/${this.$route.params.id}`, data, {
           headers: {
-            Authorization: `Token ${this.$auth.strategy.token.get()}`,
+            Authorization: `${this.$auth.strategy.token.get()}`,
             'Content-Type': 'application/json',
           },
         })
