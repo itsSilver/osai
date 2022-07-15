@@ -56,7 +56,7 @@ export default {
           property: 'token',
           global: true,
           // required: true,
-          // type: 'Token',
+          type: 'Token',
           maxAge: 60 * 60 * 24 * 30
         },
         user: {
