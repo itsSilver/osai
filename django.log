@@ -2568,3 +2568,458 @@ django.core.exceptions.ImproperlyConfigured: Field name `occorrenze` is not vali
 2022-07-15 19:41:37 [WARNING ] (log.log_response) Unauthorized: /user/detail
 2022-07-15 19:42:58 [WARNING ] (log.log_response) Unauthorized: /user/detail
 >>>>>>> 0c75c1fe49f03bd6c16dc76c17b6bd835c05c590
+2022-07-15 20:15:22 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-15 20:16:29 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-15 20:30:32 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/retrive_segnalazioni
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (1159, 'Got timeout reading communication packets')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 196, in authenticate
+    return self.authenticate_credentials(token)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 201, in authenticate_credentials
+    token = model.objects.select_related('user').get(key=key)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 492, in get
+    num = len(clone)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 284, in cursor
+    return self._cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (1159, 'Got timeout reading communication packets')
+2022-07-15 20:30:59 [ERROR   ] (log.log_response) Internal Server Error: /api/segnalazioni/retrive_segnalazioni
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 196, in authenticate
+    return self.authenticate_credentials(token)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 201, in authenticate_credentials
+    token = model.objects.select_related('user').get(key=key)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 492, in get
+    num = len(clone)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 284, in cursor
+    return self._cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+2022-07-15 20:30:59 [ERROR   ] (log.log_response) Internal Server Error: /api/occorrenze/retrive_occorrenze
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (2002, "Can't connect to server on 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (10060)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 196, in authenticate
+    return self.authenticate_credentials(token)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 201, in authenticate_credentials
+    token = model.objects.select_related('user').get(key=key)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 492, in get
+    num = len(clone)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 284, in cursor
+    return self._cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2002, "Can't connect to server on 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (10060)")
+2022-07-15 20:31:10 [ERROR   ] (log.log_response) Internal Server Error: /user/detail
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 196, in authenticate
+    return self.authenticate_credentials(token)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 201, in authenticate_credentials
+    token = model.objects.select_related('user').get(key=key)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 492, in get
+    num = len(clone)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 284, in cursor
+    return self._cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+2022-07-15 20:31:11 [ERROR   ] (log.log_response) Internal Server Error: /user/detail
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+MySQLdb._exceptions.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\views\generic\base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 414, in initial
+    self.perform_authentication(request)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\views.py", line 324, in perform_authentication
+    request.user
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 227, in user
+    self._authenticate()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\request.py", line 380, in _authenticate
+    user_auth_tuple = authenticator.authenticate(self)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 196, in authenticate
+    return self.authenticate_credentials(token)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\rest_framework\authentication.py", line 201, in authenticate_credentials
+    token = model.objects.select_related('user').get(key=key)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 492, in get
+    num = len(clone)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 302, in __len__
+    self._fetch_all()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 1507, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\models\sql\compiler.py", line 1359, in execute_sql
+    cursor = self.connection.cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 284, in cursor
+    return self._cursor()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 260, in _cursor
+    self.ensure_connection()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 243, in ensure_connection
+    with self.wrap_database_errors:
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 244, in ensure_connection
+    self.connect()
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\base\base.py", line 225, in connect
+    self.connection = self.get_new_connection(conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\utils\asyncio.py", line 26, in inner
+    return func(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\django\db\backends\mysql\base.py", line 244, in get_new_connection
+    connection = Database.connect(**conn_params)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\__init__.py", line 123, in Connect
+    return Connection(*args, **kwargs)
+  File "C:\Users\Utente\AppData\Local\Programs\Python\Python310\lib\site-packages\MySQLdb\connections.py", line 185, in __init__
+    super().__init__(*args, **kwargs2)
+django.db.utils.OperationalError: (2005, "Unknown server host 'db-osai-do-user-11496462-0.b.db.ondigitalocean.com' (11001)")
+2022-07-15 20:31:32 [WARNING ] (log.log_response) Bad Request: /user/login
+2022-07-15 20:46:51 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/no-image.jpg
+2022-07-15 20:48:08 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/no-image.jpg
+2022-07-15 20:48:16 [WARNING ] (log.log_response) Not Found: /media/images/soluzioni/no-image.jpg
+2022-07-15 20:51:38 [WARNING ] (log.log_response) Forbidden: /user/remove/12
+2022-07-15 20:51:58 [WARNING ] (log.log_response) Forbidden: /user/remove/12
+2022-07-15 20:52:38 [WARNING ] (log.log_response) Forbidden: /user/remove/12
+2022-07-15 20:55:17 [WARNING ] (log.log_response) Forbidden: /user/remove/12
+2022-07-15 20:55:39 [WARNING ] (log.log_response) Forbidden: /user/remove/4
+2022-07-15 20:57:32 [WARNING ] (log.log_response) Forbidden: /user/remove/12
+2022-07-16 21:37:05 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-16 21:46:45 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-16 21:51:07 [WARNING ] (log.log_response) Not Found: /user/id/undefined
+2022-07-17 18:29:07 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-17 18:29:16 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-17 18:29:54 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-17 18:32:16 [INFO    ] (autoreload.trigger_reload) C:\Users\Utente\OSAI_SVI\osai\mainapp\serializers.py changed, reloading.
+2022-07-17 18:32:21 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-17 18:33:05 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-17 18:36:21 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-17 18:37:52 [INFO    ] (autoreload.trigger_reload) C:\Users\Utente\OSAI_SVI\osai\mainapp\serializers.py changed, reloading.
+2022-07-17 18:37:54 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-17 18:45:27 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader

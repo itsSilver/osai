@@ -193,7 +193,7 @@ export default {
     } else {
       this.tempIdSoluzioni = null
     }
-    this.solutionTitle = this.dataTable.soluzione.titolo
+    this.solutionTitle = this.dataTable.soluzione
   },
   methods: {
     dataAddSignal(val) {

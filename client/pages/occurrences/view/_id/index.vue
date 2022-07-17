@@ -115,7 +115,7 @@
                 <label for="id-soluzione" class="col-sm-2 col-form-label create-label">Solution Title</label>
                 <div class="col-sm-10">
                   <input type="number" class="form-control input-create" id="id-soluzione"
-                    v-model="dataTable.soluzione.titolo" placeholder="Solution Title" disabled />
+                    v-model="dataTable.soluzione" placeholder="Solution Title" disabled />
                 </div>
               </div>
               <div class="form-group row">
