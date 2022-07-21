@@ -134,7 +134,8 @@ class OccorrenzeDisplaySerializer(serializers.ModelSerializer):
     note = serializers.CharField(required=False, allow_blank=True)
     data_occorrenza = serializers.CharField(required=False, allow_blank=True)
     stato_occorrenza = serializers.CharField(required=False, allow_blank=True)
-    soluzione = serializers.IntegerField(required=False)
+    soluzione = serializers.IntegerField(
+        required=False, allow_null=True)
 
     class Meta:
         model = Occorrenze
@@ -205,7 +206,8 @@ class OccorrenzeSerializer(serializers.ModelSerializer):
         required=False, allow_blank=True, allow_null=True)
     rif_ticket = serializers.CharField(
         max_length=255, required=False, allow_blank=True, allow_null=True)
-    soluzione = serializers.IntegerField(required=False)
+    soluzione = serializers.IntegerField(
+        required=False, allow_null=True)
 
     class Meta:
         model = Occorrenze

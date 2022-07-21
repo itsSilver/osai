@@ -96,7 +96,7 @@ class Occorrenze(models.Model):
     user = models.ForeignKey(Users, models.DO_NOTHING)
     segnalazione = models.ForeignKey(
         "Segnalazioni", on_delete=models.CASCADE, blank=True, default=None, null=False)
-    soluzione = models.IntegerField(null=True)
+    soluzione = models.IntegerField(blank=True, default=None, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(blank=True, null=True)

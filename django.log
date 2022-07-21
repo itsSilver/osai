@@ -3023,3 +3023,26 @@ django.db.utils.OperationalError: (2005, "Unknown server host 'db-osai-do-user-1
 2022-07-17 18:37:52 [INFO    ] (autoreload.trigger_reload) C:\Users\Utente\OSAI_SVI\osai\mainapp\serializers.py changed, reloading.
 2022-07-17 18:37:54 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
 2022-07-17 18:45:27 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-21 23:53:56 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-21 23:55:07 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-21 23:55:08 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-21 23:55:11 [WARNING ] (log.log_response) Unauthorized: /user/detail
+2022-07-22 00:06:00 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-22 00:07:39 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\models.py changed, reloading.
+2022-07-22 00:07:40 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:08:01 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-22 00:08:29 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:08:35 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-22 00:08:50 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\models.py changed, reloading.
+2022-07-22 00:08:51 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:09:10 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\models.py changed, reloading.
+2022-07-22 00:09:10 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:09:21 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/create
+2022-07-22 00:09:44 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\serializers.py changed, reloading.
+2022-07-22 00:09:44 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:10:10 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:11:22 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/update/50
+2022-07-22 00:11:44 [WARNING ] (log.log_response) Bad Request: /api/occorrenze/update/50
+2022-07-22 00:12:43 [INFO    ] (autoreload.trigger_reload) C:\Users\rabbi\OneDrive\Desktop\OSAI\mainapp\serializers.py changed, reloading.
+2022-07-22 00:12:44 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
+2022-07-22 00:13:23 [INFO    ] (autoreload.run_with_reloader) Watching for file changes with StatReloader
