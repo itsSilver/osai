@@ -281,7 +281,7 @@ export default {
           },
         })
         .then(() => {
-          this.dataCreated = 'Signal created Succesfully'
+          this.dataCreated = 'Solution created Succesfully'
           this.toggleToaster()
           setTimeout(() => {
             this.$router.push('/solutions')
